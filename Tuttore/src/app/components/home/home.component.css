@@ -1,0 +1,52 @@
+.hero {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    background-image: url("../../../assets/img/main/landing20.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    text-align: center;
+}
+
+.form-control-borderless {
+    border: none;
+}
+
+.form-control-borderless:hover,
+.form-control-borderless:active,
+.form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.search {
+    top: 60vh;
+    height: 50px;
+    width: 100vw;
+    margin: 0 auto;
+}
+
+.search button {
+    margin: 0;
+    background-color: #00BBF0;
+}
+
+.search input {
+    width: 100%;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.search h1 {
+    color: #fff;
+    position: relative;
+    top: -25px;
+}
+
+.search input:focus {
+    background: #fff;
+    border-color: #fff;
+}
