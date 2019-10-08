@@ -1,6 +1,6 @@
 <header class="header" id="site-header">
 
-    <div class="page-title">
+    <div class="page-title" routerLink="home">
         <h6>Tuttore</h6>
     </div>
 
@@ -11,9 +11,9 @@
 
 
 
-            <div class="control-icon more has-items">
+            <div routerLink="search" class="control-icon more has-items">
                 <svg class="olymp-thunder-icon">
-            <use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-thunder-icon"></use>
+            <use  xlink:href="assets/svg-icons/sprites/icons.svg#olymp-thunder-icon"></use>
           </svg>
 
                 <div class="label-avatar bg-primary">8</div>
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="author-page author vcard inline-items more">
+            <div class="author-page author vcard inline-items more" routerLink="profile">
                 <div class="author-thumb">
                     <img alt="author" src="assets/img/author-page.jpg" class="avatar">
                     <span class="icon-status online"></span>

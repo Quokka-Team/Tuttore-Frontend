@@ -8,6 +8,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { NoimagePipe } from './pipes/noimage.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     FooterComponent,
     NavbarComponent,
     NoimagePipe,
-    ProfileComponent
+    ProfileComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
