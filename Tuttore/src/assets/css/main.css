@@ -1801,9 +1801,6 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
 }
 
 @media (max-width: 1150px) {
-    .author-page .author-name {
-        display: none;
-    }
     .author-page .more-dropdown {
         right: -8px;
         top: calc(100% + 10px);
@@ -1821,9 +1818,6 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
     }
     .control-icon .notification-list.friend-requests .accepted .notification-icon {
         float: right;
-    }
-    .header .page-title {
-        display: none;
     }
     .page-has-left-panels .header {
         padding-left: 70px;
@@ -1975,7 +1969,7 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
         display: inline-block;
     }
     .control-block .author-title {
-        color: #515365;
+        color: #fff;
     }
     .control-block .author-thumb {
         position: relative;

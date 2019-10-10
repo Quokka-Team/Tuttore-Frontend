@@ -1,0 +1,11 @@
+.container {
+    margin-top: 100px;
+}
+
+.bar {
+    display: inline-grid;
+}
+
+.button-form {
+    text-align: center;
+}

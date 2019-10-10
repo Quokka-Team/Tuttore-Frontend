@@ -1,36 +1,43 @@
-<div class="container mt-5">
+<div class="container">
     <div class="row">
+        <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="ui-block mx-auto">
+                <div class="ui-block-title bar">
+                    <form (ngSubmit)="getTutors()">
+
+                        <input type="text" class=" form-control my-auto" name="subject" placeholder="Search your Subject" [(ngModel)]="subjectSearched.subject">
+                        <div class="button-form">
+                            <button data-toggle="modal" data-target="#create-photo-album" class="btn btn-primary btn-md-2 mt-3" type="submit">Buscar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 col-12">
             <div class="ui-block">
                 <div class="ui-block-title">
-                    <h6 class="title">Friend Suggestions</h6>
+                    <h6 class="title">Algunos Tutores Nuevos</h6>
                     <a href="#" class="more"><svg class="olymp-three-dots-icon">
               <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
             </svg></a>
                 </div>
-
-
-
                 <!-- W-Action -->
 
                 <ul class="widget w-friend-pages-added notification-list friend-requests">
-                    <li *ngFor="let item of [1,1,1,1,1]" class="inline-items">
+                    <li *ngFor="let tutor of recommendedTutors" class="inline-items">
                         <div class="author-thumb">
                             <img src="assets/img/avatar62-sm.jpg" alt="author">
                         </div>
                         <div class="notification-event">
-                            <a href="#" class="h6 notification-friend">Francine Smith</a>
+                            <a href="#" class="h6 notification-friend">{{tutor.name}}</a>
                             <span class="chat-message-item">8 Friends in Common</span>
                         </div>
                         <span class="notification-icon">
               <a href="#" class="accept-request">
-                <span class="icon-add without-text">
-                  <svg class="olymp-happy-face-icon">
-                    <use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use>
-                  </svg>
-                </span>
-                        </a>
-                        </span>
+
+                  <i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i>
+              </a>
+            </span>
                     </li>
 
 
@@ -40,137 +47,77 @@
             </div>
         </div>
         <div class="col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
-            <div class="container">
-                <div class="row">
-                    <div *ngFor="let item of [1,1,1,1,1] " class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div class="ui-block">
 
-                            <!-- Friend Item -->
-
-                            <div class="friend-item">
-                                <div class="friend-header-thumb">
-                                    <img src="assets/img/friend1.jpg" alt="friend">
-                                </div>
-
-                                <div class="friend-item-content">
-
-                                    <div class="more">
-                                        <svg class="olymp-three-dots-icon">
-                      <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
-                    </svg>
-                                        <ul class="more-dropdown">
-                                            <li>
-                                                <a href="#">Report Profile</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Block Profile</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Turn Off Notifications</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="friend-avatar">
-                                        <div class="author-thumb">
-                                            <img src="assets/img/avatar1.jpg" alt="author">
-                                        </div>
-                                        <div class="author-content">
-                                            <a href="#" class="h5 author-name">Nicholas Grissom</a>
-                                            <div class="country">San Francisco, CA</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="swiper-container" data-slide="fade">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <div class="friend-count" data-swiper-parallax="-500">
-                                                    <a href="#" class="friend-count-item">
-                                                        <div class="h6">52</div>
-                                                        <div class="title">Friends</div>
-                                                    </a>
-                                                    <a href="#" class="friend-count-item">
-                                                        <div class="h6">240</div>
-                                                        <div class="title">Photos</div>
-                                                    </a>
-                                                    <a href="#" class="friend-count-item">
-                                                        <div class="h6">16</div>
-                                                        <div class="title">Videos</div>
-                                                    </a>
-                                                </div>
-                                                <div class="control-block-button" data-swiper-parallax="-100">
-                                                    <a href="#" class="btn btn-control bg-blue">
-                                                        <svg class="olymp-happy-face-icon">
-                              <use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use>
-                            </svg>
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-control bg-purple">
-                                                        <svg class="olymp-chat---messages-icon">
-                              <use xlink:href="svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use>
-                            </svg>
-                                                    </a>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="swiper-slide">
-                                                <p class="friend-about" data-swiper-parallax="-500">
-                                                    Hi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.
-                                                </p>
-
-                                                <div class="friend-since" data-swiper-parallax="-100">
-                                                    <span>Friends Since:</span>
-                                                    <div class="h6">December 2014</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- If we need pagination -->
-                                        <div class="swiper-pagination"></div>
-                                    </div>
-                                </div>
+            <div class="row">
+                <div *ngFor="let tutor of tutors" class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="ui-block">
+                        <!-- Friend Item -->
+                        <div class="friend-item">
+                            <div class="friend-header-thumb">
+                                <img src="assets/img/friend1.jpg" alt="friend">
                             </div>
 
-                            <!-- ... end Friend Item -->
+                            <div class="friend-item-content">
+
+                                <div class="more">
+                                    <svg class="olymp-three-dots-icon">
+                    <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
+                  </svg>
+
+                                </div>
+                                <div class="friend-avatar">
+                                    <div class="author-thumb">
+                                        <img src="assets/img/avatar1.jpg" alt="author">
+                                    </div>
+                                    <div class="author-content">
+                                        <a href="#" class="h5 author-name">{{tutor.name}}</a>
+                                        <div class="country">San Francisco, CA</div>
+                                    </div>
+                                </div>
+
+                                <div class="swiper-container mp-0" data-slide="fade">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <div class="friend-count" data-swiper-parallax="-500">
+                                                <a href="#" class="friend-count-item">
+                                                    <div class="h6">52</div>
+                                                    <div class="title">Friends</div>
+                                                </a>
+                                                <a href="#" class="friend-count-item">
+                                                    <div class="h6">240</div>
+                                                    <div class="title">Photos</div>
+                                                </a>
+                                                <a href="#" class="friend-count-item">
+                                                    <div class="h6">16</div>
+                                                    <div class="title">Videos</div>
+                                                </a>
+                                            </div>
+                                            <div class="control-block-button d-inline-flex" data-swiper-parallax="-100">
+                                                <div class="my-auto mx-3">
+                                                    <h2>4.8</h2>
+                                                </div>
+                                                <a href="#" class="btn btn-control bg-yellow">
+                                                    <i class="fas fa-star"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- If we need pagination -->
+                                    <div class="swiper-pagination"></div>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- ... end Friend Item -->
                     </div>
                 </div>
             </div>
+
         </div>
 
-        <div class="stunning-header bg-primary-opacity">
-            <div class="content-bg-wrap stunning-header-bg1"></div>
-        </div>
-        <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="ui-block responsive-flex1200">
-                <div class="ui-block-title">
-
-                    <div class="w-select">
-                        <div class="title">Filter By:</div>
-                        <fieldset class="form-group">
-                            <select class="selectpicker form-control">
-                <option value="NU">All Categories</option>
-                <option value="NU">Favourite</option>
-                <option value="NU">Likes</option>
-              </select>
-                        </fieldset>
-                    </div>
-
-                    <div class="w-select">
-                        <fieldset class="form-group">
-                            <select class="selectpicker form-control">
-                <option value="NU">Date (Descending)</option>
-                <option value="NU">Date (Ascending)</option>
-              </select>
-                        </fieldset>
-                    </div>
-
-                    <a href="#" data-toggle="modal" data-target="#create-photo-album" class="btn btn-primary btn-md-2">Filter</a>
 
 
-                </div>
-            </div>
-        </div>
+
     </div>
 
 </div>
