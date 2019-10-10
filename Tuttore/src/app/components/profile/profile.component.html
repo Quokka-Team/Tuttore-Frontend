@@ -1,0 +1,205 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="ui-block">
+                <div class="top-header">
+                    <div class="top-header-thumb">
+                        <img src="assets/img/top-header1.jpg" alt="nature">
+                    </div>
+                    <div class="profile-section">
+                    </div>
+                    <div class="top-header-author">
+                        <a href="02-ProfilePage.html" class="author-thumb">
+                            <img src="img/author-main1.jpg" alt="author">
+                        </a>
+                        <div class="author-content">
+                            <a href="02-ProfilePage.html" class="h4 author-name">James Spiegel</a>
+                            <div class="country">San Francisco, CA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ... end Top Header-Profile -->
+
+<div class="container">
+    <div class="row">
+        <div class="col col-xl-4 order-xl-1 col-lg-4 order-lg-1 col-md-12 order-md-1 col-sm-12 col-12">
+            <div class="ui-block">
+                <div class="ui-block-title">
+                    <h6 class="title">Informacion Personal</h6>
+                    <a href="#" class="more"><svg class="olymp-three-dots-icon">
+              <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
+            </svg></a>
+                </div>
+                <div class="ui-block-content">
+
+
+                    <!-- W-Personal-Info -->
+
+                    <ul class="widget w-personal-info">
+                        <li>
+                            <span class="title">Descripcion:</span>
+                            <span class="text">Hi, I’m James, I’m 36 and I work as a Digital Designer for the
+                “Daydreams” Agency in Pier 56
+              </span>
+                        </li>
+                        <li>
+                            <span class="title">Email:</span>
+                            <span class="text">jmedinan@unal.edu.co</span>
+                        </li>
+                        <li>
+                            <span class="title">Carrera:</span>
+                            <span class="text">Ingenieria de Sistemas</span>
+                        </li>
+                        <li>
+                            <span class="title">LPromedio</span>
+                            <span class="text">4.4</span>
+                        </li>
+                        <li>
+                            <span class="title">Telefono</span>
+                            <span class="text">321 654 9999</span>
+                        </li>
+
+                    </ul>
+
+                    <div class="widget w-socials">
+                        <a href="#" class="social-item bg-blue">
+                            <i class="fas fa-address-book" aria-hidden="true"></i> Historial
+                        </a>
+                        <a href="#" class="social-item bg-blue">
+                            <i class="fas fa-edit" aria-hidden="true"></i> Editar Informacion
+                        </a>
+                        <a href="#" class="social-item bg-blue">
+                            <i class="fas fa-plus-circle" aria-hidden="true"></i> Añadir Materia
+                        </a>
+                    </div>
+
+
+                    <!-- ... end W-Socials -->
+                </div>
+            </div>
+            <div class="ui-block">
+                <div class="ui-block-title">
+                    <h6 class="title">Tutores Similares</h6>
+                    <a href="#" class="more"><svg class="olymp-three-dots-icon">
+              <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
+            </svg></a>
+                </div>
+
+
+
+                <!-- W-Action -->
+
+                <ul class="widget w-friend-pages-added notification-list friend-requests">
+                    <li *ngFor="let item of [1,1,1,1,1]" class="inline-items">
+                        <div class="author-thumb">
+                            <img src="img/avatar1.jpg" alt="author">
+                        </div>
+                        <div class="notification-event">
+                            <a href="#" class="h6 notification-friend">Francine Smith</a>
+                            <span class="chat-message-item">8 Friends in Common</span>
+                        </div>
+                        <span class="notification-icon">
+              <a href="#" class="accept-request">
+                <span class="icon-add without-text">
+                  <svg class="olymp-happy-face-icon">
+                    <use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use>
+                  </svg>
+                </span>
+                        </a>
+                        </span>
+                    </li>
+
+
+                </ul>
+
+                <!-- ... end W-Action -->
+            </div>
+
+        </div>
+        <div class="col col-xl-8 order-xl-2 col-lg-8 order-lg-2 col-md-12 order-md-2 col-sm-12 col-12">
+            <div class="ui-block">
+                <div class="ui-block-title">
+                    <h6 class="title">Materias de Tutoria</h6>
+                    <a href="#" class="more"><svg class="olymp-three-dots-icon">
+              <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
+            </svg></a>
+                </div>
+                <div class="ui-block-content">
+                    <div class="row">
+                        <div *ngFor="let item of [1,2,3,4,5,6] " class="col col-lg-6 col-md-6 col-sm-12 col-12">
+
+                            <div class="birthday-item inline-items border border-light rounded  m-2">
+
+                                <div class="birthday-author-name ">
+                                    <a href="# " class="h6 author-name ">Ing. de Software</a>
+                                    <div class="birthday-date ">Calificacion
+                                        <Strong>4.7</Strong>
+                                    </div>
+                                </div>
+                                <a href="20-CalendarAndEvents-MonthlyCalendar.html " class="btn btn-sm bg-blue ">Contactar</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="ui-block ">
+
+
+                <!-- Full Calendar -->
+
+                <div id="calendar " class="crumina-full-calendar ">
+                </div>
+
+                <!-- ... end Full Calendar -->
+            </div>
+            <!-- comments -->
+            <div class="ui-block ">
+
+                <div class="crumina-module crumina-heading with-title-decoration m-5 ">
+                    <h5 class="heading-title ">Comentarios (n)</h5>
+                </div>
+
+
+                <!-- Comments -->
+
+                <ul class="comments-list style-3 ">
+                    <li *ngFor="let item of [1,1,1,1,1,1,1] " class="comment-item ">
+                        <div class="post__author-thumb ">
+                            <img src="assets/img/avatar1.jpg " alt="author ">
+                        </div>
+
+                        <div class="comments-content ">
+                            <div class="post__author author vcard ">
+
+                                <div class="author-date ">
+                                    <a class="h6 post__author-name fn " href="# ">Nicholas Grissom</a>
+                                    <div class="post__date ">
+                                        <time class="published " datetime="2004-07-24T18:18 ">
+                      27 mins ago
+                    </time>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.
+                            </p>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

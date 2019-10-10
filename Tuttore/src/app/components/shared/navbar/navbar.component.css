@@ -1,0 +1,18 @@
+.logo-container img {
+    height: 100%;
+    width: auto;
+    ;
+}
+
+.logo-container {
+    width: 70px;
+    ;
+    height: 100%;
+    margin: 0;
+    ;
+}
+
+#site-header {
+    display: flex;
+    justify-content: space-between
+}
