@@ -2,10 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { TutorsService } from "src/app/services/tutors.service";
 import { SearchModel } from "src/app/models/search.model";
 
-import { Query } from '@syncfusion/ej2-data';
-import { EmitType } from '@syncfusion/ej2-base';
-import { FilteringEventArgs } from '@syncfusion/ej2-dropdowns';
-
 @Component({
   selector: "app-search",
   templateUrl: "./search.component.html",

@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 
 
 
@@ -44,8 +43,7 @@ import { LogInComponent } from './components/log-in/log-in.component';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule,ReactiveFormsModule, DropDownListModule
-
+    FormsModule,ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
