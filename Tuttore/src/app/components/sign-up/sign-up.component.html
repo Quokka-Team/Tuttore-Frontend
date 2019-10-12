@@ -12,31 +12,83 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="home" role="tabpanel" data-mh="log-tab">
                     <div class="title h6">Registrate a Tuttore</div>
-                    <form class="content" action="" method="POST">
+                    <form #signUpForm = "ngForm" class="content" action="" method="POST">
                         <div class="row">
+                            {{signUpForm.value | json}}
                             <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group label-floating">
-                                    <label class="control-label">Nombre</label>
-                                    <input class="form-control" placeholder="" type="text" name="name" id="name">
+                                    <label for= "name" class="control-label">Nombre</label>
+                                    <input 
+                                        required 
+                                        ngModel 
+                                        name="name" 
+                                        #name="ngModel" 
+                                        class="form-control" 
+                                        placeholder="" 
+                                        type="text" 
+                                        id="name">
+                                    <div 
+                                        class="alert alert-danger" 
+                                        *ngIf="name.touched && !name.valid">El nombre es requerido</div>
                                 </div>
                             </div>
                             <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group label-floating">
-                                    <label class="control-label">Apellido</label>
-                                    <input class="form-control" placeholder="" type="text" name="lastName" id="lastName">
+                                    <label for="lastName" class="control-label">Apellido</label>
+                                    <input 
+                                        required 
+                                        ngModel 
+                                        name="lastName" 
+                                        #lastName="ngModel" 
+                                        class="form-control" 
+                                        placeholder="" 
+                                        type="text" 
+                                        id="lastName">
+                                    <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
+                                        El apellido es requerido
+                                    </div>
                                 </div>
                             </div>
                             <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group label-floating">
-                                    <label class="control-label">Correo electrónico</label>
-                                    <input class="form-control" placeholder="" type="email" name="email" id="email">
+                                    <label for="email" class="control-label">Correo electrónico</label>
+                                    <input 
+                                        required 
+                                        ngModel name="email"
+                                        #email="ngModel" 
+                                        class="form-control" 
+                                        placeholder="" 
+                                        type="email" 
+                                        id="email">
+                                    <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+                                        El email no es válido
+                                    </div>
                                 </div>
                                 <div class="form-group label-floating">
-                                    <label class="control-label">Contraseña</label>
-                                    <input class="form-control" placeholder="" type="password" name="password" id="password">
+                                    <label for="password" class="control-label">Contraseña</label>
+                                    <input 
+                                        required 
+                                        minlength="6" 
+                                        ngModel 
+                                        name="password" 
+                                        #password="ngModel" 
+                                        class="form-control" 
+                                        placeholder="" 
+                                        type="password" 
+                                        id="password">
+                                    <div 
+                                        class="alert alert-danger" 
+                                        *ngIf="password.touched && !password.valid">
+                                        <div *ngIf="password.control.errors.required">
+                                            La contraseña es requerida
+                                        </div>
+                                        <div *ngIf="password.control.errors.minlength">
+                                            La contraseña debe ser de {{ password.control.errors.minlength.requiredLength }} caractéres o más
+                                        </div>
+                                    </div>
                                 </div>			
         
-                                <a href="#" class="btn btn-purple btn-lg full-width">Completar Registro!</a>
+                                <button [disabled]="signUpForm.form.invalid" class="btn btn-purple btn-lg full-width" type="submit">Completar Registro!</button>
                             </div>
                         </div>
                     </form>
