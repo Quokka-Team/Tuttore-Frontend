@@ -15,6 +15,8 @@ import { SearchComponent } from './components/search/search.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { TutorCardHomeComponent } from './components/tutor-card-home/tutor-card-home.component';
 import { SubjectCardComponent } from './components/subject-card/subject-card.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { LogInComponent } from './components/log-in/log-in.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { SubjectCardComponent } from './components/subject-card/subject-card.com
     SearchComponent,
     SearchBarComponent,
     TutorCardHomeComponent,
-    SubjectCardComponent
+    SubjectCardComponent,
+    SignUpComponent,
+    LogInComponent
   ],
   imports: [
     HttpClientModule,

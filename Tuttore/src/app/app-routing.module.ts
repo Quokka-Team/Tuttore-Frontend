@@ -5,12 +5,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SearchComponent } from './components/search/search.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { LogInComponent } from './components/log-in/log-in.component';
+
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'sign-up', component: SignUpComponent },
+  { path: 'log-in', component: LogInComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];
