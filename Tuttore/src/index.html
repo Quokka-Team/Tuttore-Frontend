@@ -27,25 +27,6 @@
     <!-- Main Styles CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
     <link rel="stylesheet" type="text/css" href="assets/css/fonts.min.css">
-    <!-- Main Font -->
-
-    <script src="assets/js/libs/webfontloader.min.js"></script>
-    <script>
-        WebFont.load({
-            google: {
-                families: ['Roboto:300,400,500,700:latin']
-            }
-        });
-    </script>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/Bootstrap/dist/css/bootstrap-reboot.css">
-    <link rel="stylesheet" type="text/css" href="assets/Bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="assets/Bootstrap/dist/css/bootstrap-grid.css">
-
-    <!-- Main Styles CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/fonts.min.css">
 
 </head>
 
@@ -85,11 +66,31 @@
 <script src="assets/js/libs/mediaelement-and-player.js"></script>
 <script src="assets/js/libs/mediaelement-playlist-plugin.min.js"></script>
 <script src="assets/js/libs/ion.rangeSlider.js"></script>
-
 <script src="assets/js/main.js"></script>
 <script src="assets/js/libs-init/libs-init.js"></script>
 <script defer src="assets/fonts/fontawesome-all.js"></script>
-
 <script src="assets/Bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+<script>
+    $('#tutorcarousel').on('slide.bs.carousel', function(e) {
+        console.log("juan")
+        var $e = $(e.relatedTarget);
+        var idx = $e.index();
+        var itemsPerSlide = 6;
+        var totalItems = $('.carousel-item').length;
+
+        if (idx >= totalItems - (itemsPerSlide - 1)) {
+            var it = itemsPerSlide - (totalItems - idx);
+            for (var i = 0; i < it; i++) {
+                // append slides to end
+                if (e.direction == "left") {
+                    $('.carousel-item').eq(i).appendTo('.carousel-inner');
+                } else {
+                    $('.carousel-item').eq(0).appendTo('.carousel-inner');
+                }
+            }
+        }
+    });
+</script>
 
 </html>

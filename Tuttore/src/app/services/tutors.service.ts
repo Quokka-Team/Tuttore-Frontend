@@ -42,5 +42,13 @@ export class TutorsService {
     const query: string = `browse/categories/${id}`;
     return this.getQuery(query);
   }
+
+  getUsersTest(){
+    return this.http.get('https://jsonplaceholder.typicode.com/users');
+  }
+
+  getUserPostTest(id:string){
+    return this.http.get(`https://jsonplaceholder.typicode.com/posts?userId=${id}`);
+  }
   
 }

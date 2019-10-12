@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { SubjectModel } from 'src/app/models/subjects.model';
 
 @Component({
   selector: 'app-subject-card',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubjectCardComponent implements OnInit {
 
+  @Input() subject:SubjectModel;
   constructor() { }
 
   ngOnInit() {
