@@ -1,7 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+
+
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +17,9 @@ import { NoimagePipe } from './pipes/noimage.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+
+
+
 import { TutorCardHomeComponent } from './components/tutor-card-home/tutor-card-home.component';
 import { SubjectCardComponent } from './components/subject-card/subject-card.component';
 
@@ -33,7 +40,8 @@ import { SubjectCardComponent } from './components/subject-card/subject-card.com
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,ReactiveFormsModule, DropDownListModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

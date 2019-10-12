@@ -1,0 +1,24 @@
+.add-Subject {
+    width: 75px;
+    height: 75px;
+}
+
+.movement {
+    background-position: 0 0;
+    background-repeat: repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 300px;
+    ;
+    margin: 0;
+    /* text-align: center; */
+    /* box-sizing: border-box; */
+    -webkit-animation: slide 50s linear infinite;
+    animation: slide 50s linear infinite;
+    /* will-change: background-position; */
+    background-size: auto;
+}

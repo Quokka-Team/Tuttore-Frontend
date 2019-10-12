@@ -6,7 +6,7 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class SubjectsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {  }
 
   private getQuery(query: string) {
     const url = `https://api.spotify.com/v1/${query}`;
@@ -28,7 +28,7 @@ export class SubjectsService {
     return this.getQuery(query).pipe(map(data => data["categories"].items));
   }
 
-  getSubjects() {
-    
+  getSubjectsTest() {
+    return this.http.get('https://jsonplaceholder.typicode.com/albums');
   }
 }

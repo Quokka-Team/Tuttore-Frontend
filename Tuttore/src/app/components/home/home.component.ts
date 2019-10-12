@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SubjectsService } from "src/app/services/subjects.service";
 import { TutorsService } from "src/app/services/tutors.service";
+import { UserTestModel } from 'src/app/models/usertest.model';
 
 @Component({
   selector: "app-home",
@@ -10,7 +11,8 @@ import { TutorsService } from "src/app/services/tutors.service";
 export class HomeComponent implements OnInit {
   subjects: any[];
   newSubjects: any[];
-  newTutors: any[];
+  newTutors: UserTestModel[];
+
 
   constructor(
     private subjectsService: SubjectsService,
@@ -18,9 +20,11 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getNewTutors();
-    this.getMostSearchSubjects();
-    this.getNewSubjects();
+    // this.getNewTutors();
+    // this.getMostSearchSubjects();
+    // this.getNewSubjects();
+    this.getUsersTest();
+    this.getSubjectsTest();
   }
 
   getMostSearchSubjects() {
@@ -54,6 +58,30 @@ export class HomeComponent implements OnInit {
         console.log("NEW TUTORS");
         console.log(data);
         this.newTutors = data;
+      },
+      e => {
+        console.log(e.error.error.message);
+      }
+    );
+  }
+
+  getUsersTest() {
+    this.tutorsService.getUsersTest().subscribe(
+      (data: any) => {
+        console.log(data);
+        this.newTutors = data;
+      },
+      e => {
+        console.log(e.error.error.message);
+      }
+    );
+  }
+  getSubjectsTest() {
+    this.subjectsService.getSubjectsTest().subscribe(
+      (data: any) => {
+        console.log(data);
+        this.newSubjects = data.slice(0,16);
+        this.subjects = data.slice(0,16);
       },
       e => {
         console.log(e.error.error.message);

@@ -3,8 +3,11 @@
         <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="ui-block">
                 <div class="top-header">
-                    <div class="top-header-thumb">
-                        <img src="assets/img/top-header1.jpg" alt="nature">
+                    <div class="top-header-thumb ">
+                        <div class=" ">
+                            <!-- <img src="assets/img/top-header4.png" alt="Portada"> -->
+                            <img src="assets/img/top-header1.jpg" alt="Portada">
+                        </div>
                     </div>
                     <div class="profile-section">
                     </div>
@@ -56,7 +59,7 @@
                             <span class="text">Ingenieria de Sistemas</span>
                         </li>
                         <li>
-                            <span class="title">LPromedio</span>
+                            <span class="title">Promedio</span>
                             <span class="text">4.4</span>
                         </li>
                         <li>
@@ -67,13 +70,13 @@
                     </ul>
 
                     <div class="widget w-socials">
-                        <a href="#" class="social-item bg-blue">
+                        <a class="social-item bg-blue text-white">
                             <i class="fas fa-address-book" aria-hidden="true"></i> Historial
                         </a>
-                        <a href="#" class="social-item bg-blue">
+                        <a h class="social-item bg-blue text-white" data-toggle="modal" data-target="#edit-profile">
                             <i class="fas fa-edit" aria-hidden="true"></i> Editar Informacion
                         </a>
-                        <a href="#" class="social-item bg-blue">
+                        <a class="social-item bg-blue text-white" data-toggle="modal" data-target="#create-friend-group-1">
                             <i class="fas fa-plus-circle" aria-hidden="true"></i> Añadir Materia
                         </a>
                     </div>
@@ -130,8 +133,8 @@
             </svg></a>
                 </div>
                 <div class="ui-block-content">
-                    <div class="row">
-                        <div *ngFor="let item of [1,2,3,4,5,6] " class="col col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="row" *ngIf="subjects.length>0; else addSubject">
+                        <div *ngFor="let item of subjects " class="col col-lg-6 col-md-6 col-sm-12 col-12">
 
                             <div class="birthday-item inline-items border border-light rounded  m-2">
 
@@ -146,6 +149,17 @@
                         </div>
 
                     </div>
+                    <ng-template #addSubject>
+                        <a class="  full-block" data-toggle="modal" data-target="#create-friend-group-1"></a>
+                        <div class="content text-center">
+                            <div class="">
+                                <i class="fas fa-plus-square add-Subject"></i>
+                            </div>
+                            <div class="author-content">
+                                <h4 class="country">Convierte en Tutor agregando materias</h4>
+                            </div>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
             <div class="ui-block ">
@@ -202,4 +216,144 @@
 
     </div>
 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="edit-profile" tabindex="-1" role="dialog" aria-labelledby="create-event" aria-hidden="true">
+    <div class="modal-dialog window-popup create-event" role="document">
+        <div class="modal-content">
+            <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+                <svg class="olymp-close-icon">
+          <use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use>
+        </svg>
+            </a>
+            <div class="modal-header">
+                <h6 class="title">Edit your Profile</h6>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group label-floating mb-2">
+                    <label class="control-label">Name</label>
+                    <input class="form-control" placeholder="" type="text">
+                </div>
+
+
+                <div class="form-group label-floating is-empty mb-2">
+                    <label class="control-label">Email</label>
+                    <input class="form-control" placeholder="" value="" type="text">
+                </div>
+
+                <div class="form-group label-floating is-empty mb-2">
+                    <label class="control-label">Carrera</label>
+                    <input class="form-control" placeholder="" value="" type="text">
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group label-floating is-empty mb-2">
+                            <label class="control-label">Telefono</label>
+                            <input class="form-control" placeholder="" value="" type="text">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group label-floating is-empty mb-2">
+                            <label class="control-label">Promedio</label>
+                            <input class="form-control" placeholder="" value="" type="text">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group label-floating">
+                    <label class="control-label">Event Description</label>
+                    <textarea class="form-control" placeholder="">I need to take Querty for a check up and ask the doctor if he needs a new tank.
+					</textarea>
+                </div>
+
+
+
+                <button class="btn btn-breez btn-lg full-width">Create Event</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="create-friend-group-1" tabindex="-1" role="dialog" aria-labelledby="create-friend-group-1" aria-hidden="true">
+    <div class="modal-dialog window-popup create-friend-group create-friend-group-1" role="document">
+        <div class="modal-content">
+            <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+                <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+            </a>
+            <div class="modal-header">
+                <h6 class="title">incluye Materia de Tutoria</h6>
+            </div>
+
+            <div class="modal-body">
+
+
+                <label class="control-label">Personal Event</label>
+                <select class="selectpicker form-control">
+                                <option value="MA">Private Event</option>
+                                <option value="FE">Personal Event</option>
+                            </select>
+
+                <a href="#" class="btn btn-blue btn-lg full-width">Añadir</a>
+            </div>
+        </div>
+    </div>
 </div>

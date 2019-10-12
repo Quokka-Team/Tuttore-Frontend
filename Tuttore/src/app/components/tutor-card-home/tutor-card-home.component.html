@@ -1,15 +1,15 @@
-<div class="crumina-module crumina-teammembers-item">
+<div class="crumina-module crumina-teammembers-item" *ngIf="tutor">
 
     <div class="teammembers-thumb">
-        <img class="main" src="img/team6.jpg" alt="slide 2">
-        <img class="hover" src="img/team6.jpg" alt="slide 2">
+        <img class="main" src="assets/img/team6.jpg" alt="Tutor">
+        <img class="hover" src="assets/img/team6.jpg" alt="Tutor">
     </div>
 
     <div class="teammember-content">
 
-        <a href="#" class="h5 teammembers-item-name">Pedro Perez</a>
+        <a href="#" class="h5 teammembers-item-name">{{tutor.name}}</a>
 
-        <div class="teammembers-item-prof">Arquitectura</div>
+        <div class="teammembers-item-prof">{{tutor.username}}</div>
 
         <ul class="socials socials--round">
 
