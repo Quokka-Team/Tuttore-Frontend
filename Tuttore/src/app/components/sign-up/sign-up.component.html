@@ -14,7 +14,7 @@
                     <div class="title h6">Registrate a Tuttore</div>
                     <form #signUpForm = "ngForm" class="content" action="" method="POST">
                         <div class="row">
-                            {{signUpForm.value | json}}
+                            {{newStudent | json}}
                             <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group label-floating">
                                     <label for= "name" class="control-label">Nombre</label>
@@ -26,7 +26,8 @@
                                         class="form-control" 
                                         placeholder="" 
                                         type="text" 
-                                        id="name">
+                                        id="name"
+                                        [(ngModel)]="newStudent.name">
                                     <div 
                                         class="alert alert-danger" 
                                         *ngIf="name.touched && !name.valid">El nombre es requerido</div>
@@ -43,7 +44,8 @@
                                         class="form-control" 
                                         placeholder="" 
                                         type="text" 
-                                        id="lastName">
+                                        id="lastName"
+                                        [(ngModel)]="newStudent.lastName">
                                     <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
                                         El apellido es requerido
                                     </div>
@@ -59,7 +61,8 @@
                                         class="form-control" 
                                         placeholder="" 
                                         type="email" 
-                                        id="email">
+                                        id="email"
+                                        [(ngModel)]="newStudent.email">
                                     <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
                                         El email no es válido
                                     </div>
@@ -75,7 +78,8 @@
                                         class="form-control" 
                                         placeholder="" 
                                         type="password" 
-                                        id="password">
+                                        id="password"
+                                        [(ngModel)]="newStudent.password">
                                     <div 
                                         class="alert alert-danger" 
                                         *ngIf="password.touched && !password.valid">
