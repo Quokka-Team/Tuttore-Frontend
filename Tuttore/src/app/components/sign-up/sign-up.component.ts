@@ -12,4 +12,8 @@ export class SignUpComponent implements OnInit{
   ngOnInit() {
     this.newStudent = new StudentModel();
   }
+
+  onSubmit() {
+    console.log(this.newStudent);
+  }
 }

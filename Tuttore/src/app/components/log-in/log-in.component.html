@@ -14,7 +14,7 @@
             <div class="tab-content">			
                 <div class="tab-pane active" id="profile" role="tabpanel" data-mh="log-tab">
                     <div class="title h6">Inicia sesión en tu cuenta</div>
-                    <form #logInForm="ngForm" class="content" action="" method="POST">
+                    <form #logInForm="ngForm" (ngSubmit)="onSubmit()" novalidate class="content">
                         <div class="row">
                             <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group label-floating">
@@ -26,7 +26,8 @@
                                         class="form-control" 
                                         placeholder="" 
                                         type="email" 
-                                        id="email">
+                                        id="email"
+                                        [(ngModel)]="incomingStudent.email">
                                     <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
                                         El email no es válido
                                     </div>
@@ -42,7 +43,8 @@
                                         class="form-control" 
                                         placeholder="" 
                                         type="password" 
-                                        id="password">
+                                        id="password"
+                                        [(ngModel)]="incomingStudent.password">
                                     <div 
                                         class="alert alert-danger" 
                                         *ngIf="password.touched && !password.valid">

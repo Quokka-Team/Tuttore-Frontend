@@ -12,9 +12,8 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="home" role="tabpanel" data-mh="log-tab">
                     <div class="title h6">Registrate a Tuttore</div>
-                    <form #signUpForm = "ngForm" class="content" action="" method="POST">
+                    <form #signUpForm = "ngForm" (ngSubmit)="onSubmit()" novalidate class="content">
                         <div class="row">
-                            {{newStudent | json}}
                             <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group label-floating">
                                     <label for= "name" class="control-label">Nombre</label>
