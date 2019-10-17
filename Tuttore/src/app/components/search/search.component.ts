@@ -60,26 +60,26 @@ export class SearchComponent implements OnInit {
 
 
 
-//   public data: { [key: string]: Object }[] = [
-//     { Id: "s3", Country: "Alaska" },
-//     { Id: "s1", Country: "California" },
-//     { Id: "s2", Country: "Florida" },
-//     { Id: "s4", Country: "Georgia" }];
-// // maps the appropriate column to fields property
-// public fields: Object = { text: "Country", value: "Id" };
-// // set the placeholder to the DropDownList input
-// public text: string = "Select a country";
-// //Bind the filter event
-// public onFiltering =  (e: FilteringEventArgs) => {
-//     let query = new Query();
+  public data: { [key: string]: Object }[] = [
+    { Id: "s3", Country: "Alaska" },
+    { Id: "s1", Country: "California" },
+    { Id: "s2", Country: "Florida" },
+    { Id: "s4", Country: "Georgia" }];
+// maps the appropriate column to fields property
+public fields: Object = { text: "Country", value: "Id" };
+// set the placeholder to the DropDownList input
+public text: string = "Select a country";
+//Bind the filter event
+public onFiltering =  (e: FilteringEventArgs) => {
+    let query = new Query();
     
-//     console.log(e)
-//     console.log(e.text)
-//     //frame the query based on search string with filter type.
-//     query = (e.text != "") ? query.where("Country", "startswith", e.text, true) : query;
-//     //pass the filter data source, filter query to updateData method.
-//     e.updateData(this.data, query);
-// };
+    console.log(e)
+    console.log(e.text)
+    //frame the query based on search string with filter type.
+    query = (e.text != "") ? query.where("Country", "startswith", e.text, true) : query;
+    //pass the filter data source, filter query to updateData method.
+    e.updateData(this.data, query);
+};
 
 
 
