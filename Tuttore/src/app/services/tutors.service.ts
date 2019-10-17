@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map } from "rxjs/operators";
+import { StudentModel } from '../models/student.model';
 
 @Injectable({
   providedIn: "root"
@@ -38,10 +39,20 @@ export class TutorsService {
     return this.getQuery(query);
   }
   
-  getProfile(id: string) {
-    const query: string = `browse/categories/${id}`;
-    return this.getQuery(query);
+  signIn(student: StudentModel){
+    const headers = new HttpHeaders({
+      'Content-Type':
+        "application/x-www-form-urlencoded",
+        'Access-Control-Allow-Origin':'*'
+    });
+
+    let cors = "https://cors-anywhere.herokuapp.com/";
+    return this.http.post(
+      cors +'http://tuttore-backend.cczfhywny8.us-east-1.elasticbeanstalk.com/signIn/',
+      student/*,*/ );
+      // {headers});
   }
+
 
   getUsersTest(){
     return this.http.get('https://jsonplaceholder.typicode.com/users');
