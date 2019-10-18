@@ -1,17 +1,17 @@
 <div class="row display-flex">
-    <div class="col col-xl-8 col-lg-6 col-md-12 col-sm-12 col-12 image-login" >
+    <div class="col col-xl-8 col-lg-6 col-md-12 col-sm-12 col-12 image-login">
 
-    </div> 
+    </div>
 
     <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12" style="padding: 0;height: 100vh;">
-        
+
         <!-- Login-Registration Form  -->
-        
+
         <div class="registration-login-form" style="padding: 0; height: 100vh;">
             <!-- Nav tabs -->
 
             <!-- Tab panes -->
-            <div class="tab-content">			
+            <div class="tab-content">
                 <div class="tab-pane active" id="profile" role="tabpanel" data-mh="log-tab">
                     <div class="title h6">Inicia sesión en tu cuenta</div>
                     <form #logInForm="ngForm" (ngSubmit)="onSubmit()" novalidate class="content">
@@ -19,35 +19,15 @@
                             <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group label-floating">
                                     <label for="email" class="control-label">Correo electrónico</label>
-                                    <input 
-                                        required 
-                                        ngModel name="email"
-                                        #email="ngModel" 
-                                        class="form-control" 
-                                        placeholder="" 
-                                        type="email" 
-                                        id="email"
-                                        [(ngModel)]="incomingStudent.email">
+                                    <input required ngModel name="email" #email="ngModel" class="form-control" placeholder="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email" [(ngModel)]="incomingStudent.email">
                                     <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
                                         El email no es válido
                                     </div>
                                 </div>
                                 <div class="form-group label-floating">
                                     <label for="password" class="control-label">Contraseña</label>
-                                    <input 
-                                        required 
-                                        minlength="6" 
-                                        ngModel 
-                                        name="password" 
-                                        #password="ngModel" 
-                                        class="form-control" 
-                                        placeholder="" 
-                                        type="password" 
-                                        id="password"
-                                        [(ngModel)]="incomingStudent.password">
-                                    <div 
-                                        class="alert alert-danger" 
-                                        *ngIf="password.touched && !password.valid">
+                                    <input required minlength="6" ngModel name="password" #password="ngModel" class="form-control" placeholder="" type="password" id="password" [(ngModel)]="incomingStudent.password">
+                                    <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
                                         <div *ngIf="password.control.errors.required">
                                             La contraseña es requerida
                                         </div>
@@ -56,7 +36,7 @@
                                         </div>
                                     </div>
                                 </div>
-        
+
                                 <button class="btn btn-lg btn-primary full-width" style="background-color: #00BBF0;border-color: #00BBF0">Iniciar con Google</button>
                                 <button [disabled]="logInForm.form.invalid" class="btn btn-lg btn-primary full-width">Iniciar sesión</button>
                                 <p>¿No tienes una cuenta aún? <a href="sign-up">Regístrate ahora!</a> y encuentra tutores para las materias que necesites!</p>
@@ -66,6 +46,7 @@
                 </div>
             </div>
         </div>
-        
-        <!-- ... end Login-Registration Form  -->		</div>
+
+        <!-- ... end Login-Registration Form  -->
+    </div>
 </div>

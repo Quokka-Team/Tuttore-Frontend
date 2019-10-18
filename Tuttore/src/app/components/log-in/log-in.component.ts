@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentModel } from 'src/app/models/student.model';
 import { TutorsService } from 'src/app/services/tutors.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -8,10 +9,10 @@ import { TutorsService } from 'src/app/services/tutors.service';
   styleUrls: ['./log-in.component.css']
 })
 export class LogInComponent implements OnInit {
+
   incomingStudent: StudentModel;
 
-
-  constructor(private tutorsService: TutorsService) {}
+  constructor(private tutorsService: TutorsService, private route:Router) {}
   ngOnInit() {
     this.incomingStudent = new StudentModel();
   }
@@ -19,7 +20,10 @@ export class LogInComponent implements OnInit {
   onSubmit() {
     // console.log(this.incomingStudent);
     this.tutorsService.signIn(this.incomingStudent).subscribe(
-      data => console.log(data),
+      data => {
+        //console.log(data.message);
+        this.route.navigateByUrl("/home");
+      },
       error => console.log(error.error.message)
     );
     
