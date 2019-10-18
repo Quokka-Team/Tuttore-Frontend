@@ -7,17 +7,19 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SearchComponent } from './components/search/search.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { LogInComponent } from './components/log-in/log-in.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoggedGuard } from './guards/logged.guard';
 
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'search', component: SearchComponent },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'log-in', component: LogInComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: '**', pathMatch: 'full', redirectTo: 'home' },
+  { path: 'home', component: HomeComponent, canActivate:[AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate:[AuthGuard] },
+  { path: 'search', component: SearchComponent, canActivate:[AuthGuard] },
+  { path: 'sign-up', component: SignUpComponent, canActivate:[LoggedGuard] },
+  { path: 'log-in', component: LogInComponent, canActivate:[LoggedGuard] },
+  { path: '', pathMatch: 'full', redirectTo: 'home', canActivate:[AuthGuard] },
+  { path: '**', pathMatch: 'full', redirectTo: 'home', canActivate:[AuthGuard] },
 ];
 
 @NgModule({
