@@ -6,5 +6,6 @@ export class StudentModel {
     career:string;
     gpa:number;
     phoneNumber:string;
+    subjects: {}
 
 }
