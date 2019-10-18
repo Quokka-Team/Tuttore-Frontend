@@ -20,11 +20,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.getNewTutors();
-    // this.getMostSearchSubjects();
-    // this.getNewSubjects();
-    this.getUsersTest();
-    this.getSubjectsTest();
+
   }
 
   getMostSearchSubjects() {
@@ -65,27 +61,4 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  getUsersTest() {
-    this.tutorsService.getUsersTest().subscribe(
-      (data: any) => {
-        console.log(data);
-        this.newTutors = data;
-      },
-      e => {
-        console.log(e.error.error.message);
-      }
-    );
-  }
-  getSubjectsTest() {
-    this.subjectsService.getSubjectsTest().subscribe(
-      (data: any) => {
-        console.log(data);
-        this.newSubjects = data.slice(0,16);
-        this.subjects = data.slice(0,16);
-      },
-      e => {
-        console.log(e.error.error.message);
-      }
-    );
-  }
 }

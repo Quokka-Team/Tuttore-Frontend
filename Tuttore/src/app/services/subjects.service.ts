@@ -9,26 +9,23 @@ export class SubjectsService {
   constructor(private http: HttpClient) {  }
 
   private getQuery(query: string) {
-    const url = `https://api.spotify.com/v1/${query}`;
+    const url = ``; // URL base del Backend
     const headers = new HttpHeaders({
-      Authorization:
-        "Bearer BQD69lYwx3-CYZ9-S6LpwWmboPA69kzuqFBuTcTzUw9w1xrWKEblcQ96EV3abmtPdTF1oOJ9qv_wAtztLmw"
+      Authorization:  "" // Aqui va el Token
     });
 
     return this.http.get(url, { headers });
   }
 
   getMostSearchSubjects() {
-    const query: string = "browse/categories";
-    return this.getQuery(query).pipe(map(data => data["categories"].items));
+    const query: string = "";
+    return this.getQuery(query).pipe(map(data => data));
   }
 
   getNewSubjects() {
-    const query: string = "browse/categories";
-    return this.getQuery(query).pipe(map(data => data["categories"].items));
+    const query: string = "";
+    return this.getQuery(query).pipe(map(data => data));
   }
 
-  getSubjectsTest() {
-    return this.http.get('https://jsonplaceholder.typicode.com/albums');
-  }
+
 }

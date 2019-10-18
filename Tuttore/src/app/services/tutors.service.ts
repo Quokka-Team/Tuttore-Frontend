@@ -10,32 +10,31 @@ export class TutorsService {
   constructor(private http: HttpClient) {}
 
   private getQuery(query: string) {
-    const url = `https://api.spotify.com/v1/${query}`;
+    const url = `http://tuttore-backend.cczfhywny8.us-east-1.elasticbeanstalk.com/`; // URL Base del Backend
     const headers = new HttpHeaders({
-      Authorization:
-        "Bearer BQD69lYwx3-CYZ9-S6LpwWmboPA69kzuqFBuTcTzUw9w1xrWKEblcQ96EV3abmtPdTF1oOJ9qv_wAtztLmw"
+      Authorization: "" // Token 
     });
 
     return this.http.get(url, { headers });
   }
 
   getNewTutors() {
-    const query: string = "browse/new-releases";
-    return this.getQuery(query).pipe(map(data => data["albums"].items));
+    const query: string = "";
+    return this.getQuery(query).pipe(map(data =>data));
   }
 
   getTutorsBySubject(id: string) {
-    const query: string = `browse/categories/${id}`;
+    const query: string = `${id}`; 
     return this.getQuery(query);
   }
 
   getNewTutorsBySubject(id: string) {
-    const query: string = `browse/categories/${id}`;
+    const query: string = `${id}`;
     return this.getQuery(query);
   }
 
   getTutor(id: string) {
-    const query: string = `browse/categories/${id}`;
+    const query: string = `${id}`;
     return this.getQuery(query);
   }
   
@@ -54,12 +53,5 @@ export class TutorsService {
   }
 
 
-  getUsersTest(){
-    return this.http.get('https://jsonplaceholder.typicode.com/users');
-  }
-
-  getUserPostTest(id:string){
-    return this.http.get(`https://jsonplaceholder.typicode.com/posts?userId=${id}`);
-  }
   
 }

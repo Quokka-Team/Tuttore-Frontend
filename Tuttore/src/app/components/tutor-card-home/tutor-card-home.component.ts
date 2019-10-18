@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UserTestModel } from 'src/app/models/usertest.model';
+import { StudentModel } from 'src/app/models/student.model';
 
 @Component({
   selector: 'app-tutor-card-home',
@@ -8,7 +8,7 @@ import { UserTestModel } from 'src/app/models/usertest.model';
 })
 export class TutorCardHomeComponent implements OnInit {
 
-  @Input() tutor: UserTestModel;
+  @Input() tutor: StudentModel;
   constructor() { }
 
   ngOnInit() {
