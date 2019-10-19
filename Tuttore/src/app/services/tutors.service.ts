@@ -75,8 +75,10 @@ export class TutorsService {
     this.readToken();
   }
 
-  logout() {
+  logOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('expires');
+    this.readToken();
   }
 
   readToken(){
@@ -98,10 +100,17 @@ export class TutorsService {
     actualDate.setTime(date);
 
     if( actualDate < new Date()){
-      console.log("El token expiró");
+      console.log("El token no es válido");
       return false;
     }
     return true;
+  }
+
+  getUser(){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+    return this.http.post('http://tuttore-backend-env.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/getStudent', " " , {headers: headers});
   }
 
 }

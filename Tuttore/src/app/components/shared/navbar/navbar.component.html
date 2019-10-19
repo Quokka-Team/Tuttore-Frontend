@@ -6,30 +6,30 @@
         <div class="control-block mr-5 px-0">
             <div class="author-page author vcard inline-items more" routerLink="profile">
                 <div class="author-thumb">
-                    <img alt="author" src="assets/img/author-page.jpg" class="avatar">
+                    <img alt="author" src="assets/img/no-profile-icon.png" class="avatar">
                     <span class="icon-status online"></span>
                     <div class="more-dropdown more-with-triangle">
                         <div class="mCustomScrollbar" data-mcs-theme="dark">
                             <div class="ui-block-title ">
-                                <h6 class="title">Your Account</h6>
+                                <h6 class="title">{{user.email}}</h6>
                             </div>
 
                             <ul class="account-settings">
                                 <li>
-                                    <a>
+                                    <a (click)="profileSettings()">
 
                                         <svg class="olymp-menu-icon">
                       <use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-menu-icon"></use>
                     </svg>
-                                        <span>Profile Settings</span>
+                                        <span>Mi perfil</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a>
+                                    <a (click)="logOut()">
                                         <svg class="olymp-logout-icon">
                       <use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-logout-icon"></use>
                     </svg>
-                                        <span>Log Out</span>
+                                        <span>Desconectarse</span>
                                     </a>
                                 </li>
                             </ul>
@@ -40,11 +40,11 @@
                 </div>
                 <a class="author-name">
                     <div class="author-title">
-                        James Spiegel <svg class="olymp-dropdown-arrow-icon">
+                        {{user.name}} {{user.lastName}}<svg class="olymp-dropdown-arrow-icon">
               <use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"></use>
             </svg>
                     </div>
-                    <span class="author-subtitle">SPACE COWBOY</span>
+                    <span class="author-subtitle">ESTUDIANTE</span>
                 </a>
             </div>
 
