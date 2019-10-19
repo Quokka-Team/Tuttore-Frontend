@@ -6,20 +6,30 @@
             <div class="ui-block mx-auto">
                 <div class="ui-block-title bar">
 
-                    <!-- <div class="" style="width: 500px;;">
-                        <ejs-dropdownlist id='idlelement' #samples [dataSource]='data' [fields]='fields' [placeholder]='text' [allowFiltering]='true' (filtering)='onFiltering($event)'></ejs-dropdownlist>
-                    </div> -->
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <input type="text" placeholder="Ingresa la Materia" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getData($event.option.value)'>
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                        <div class="button-form">
+                            <button class="btn btn-primary btn-md-2 mt-3" type="submit">Buscar</button>
+                        </div>
+                    </form>
 
 
 
                     <!-- <form (ngSubmit)="getTutors()"> -->
-                    <form (ngSubmit)="getUserPostTest()">
+                    <!-- <form (ngSubmit)="getUserPostTest()">
 
                         <input type="text" class=" form-control my-auto" name="subject" placeholder="Search your Subject" [(ngModel)]="subjectSearched.subject">
                         <div class="button-form">
                             <button class="btn btn-primary btn-md-2 mt-3" type="submit">Buscar</button>
                         </div>
-                    </form>
+                    </form> -->
                 </div>
             </div>
         </div>
