@@ -24,6 +24,12 @@ import { SubjectCardComponent } from './components/subject-card/subject-card.com
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,9 +48,13 @@ import { LogInComponent } from './components/log-in/log-in.component';
   imports: [
     HttpClientModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    FormsModule,ReactiveFormsModule
+    FormsModule,ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
   ],
+  exports: [MatAutocompleteModule,],
   providers: [],
   bootstrap: [AppComponent]
 })
