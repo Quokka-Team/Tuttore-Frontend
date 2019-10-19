@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudentModel } from 'src/app/models/student.model';
 import { Router } from '@angular/router';
 import { TutorsService } from '../../services/tutors.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-up',
@@ -24,11 +25,27 @@ export class SignUpComponent implements OnInit{
 
   onSubmit() {
 
-    this.auth.signUp(this.newStudent).subscribe( res => {
-      console.log("Succesful");
+    Swal.fire({
+      allowOutsideClick: false,
+      type: 'info',
+      text: 'Procesando solicitud'
+    })
+
+    Swal.showLoading();
+
+    this.auth.signUp(this.newStudent).subscribe( async res => {
+      await Swal.fire({
+        allowOutsideClick: false,
+        type: 'success',
+        text: 'Se le ha enviado un email a su correo para validar su cuenta',
+      })
       this.route.navigateByUrl("/log-in");
     }, err => {
-      console.log(err);
+      Swal.fire({
+        allowOutsideClick: false,
+        type: 'error',
+        text: err.error.message,
+      })
     });
   }
 }

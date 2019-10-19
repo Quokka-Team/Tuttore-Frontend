@@ -23,6 +23,9 @@ import { TutorCardHomeComponent } from './components/tutor-card-home/tutor-card-
 import { SubjectCardComponent } from './components/subject-card/subject-card.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { LogInComponent } from './components/log-in/log-in.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { NoiconimagePipe } from './pipes/noiconimage.pipe';
+import { NobackgroundPipe } from './pipes/nobackground.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { LogInComponent } from './components/log-in/log-in.component';
     TutorCardHomeComponent,
     SubjectCardComponent,
     SignUpComponent,
-    LogInComponent
+    LogInComponent,
+    HomePageComponent,
+    NoiconimagePipe,
+    NobackgroundPipe
   ],
   imports: [
     HttpClientModule,

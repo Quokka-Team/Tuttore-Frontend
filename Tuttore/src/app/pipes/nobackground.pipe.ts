@@ -1,18 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'noimage'
+  name: 'nobackground'
 })
-export class NoimagePipe implements PipeTransform {
+export class NobackgroundPipe implements PipeTransform {
 
   transform(images: any[]): string {
     if (!images) {
-      return "assets/img/no-profile-icon.png";
+      return "assets/img/background-profile.png";
     }
     if (images.length > 0) {
       return images[0];
     }
-    return "assets/img/no-profile-icon.png";
+    return "assets/img/background-profile.png";
   }
 
 }

@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }else{
       console.log("El usuario no ha ingresado a su cuenta");
-      this.route.navigateByUrl("/log-in");
+      this.route.navigateByUrl("/home-page");
       return false;
     }
   }

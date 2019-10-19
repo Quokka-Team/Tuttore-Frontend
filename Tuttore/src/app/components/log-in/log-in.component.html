@@ -28,11 +28,11 @@
                                     <label for="password" class="control-label">Contraseña</label>
                                     <input required minlength="6" ngModel name="password" #password="ngModel" class="form-control" placeholder="" type="password" id="password" [(ngModel)]="incomingStudent.password">
                                     <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
-                                        <div *ngIf="password.control.errors.required">
+                                        <div *ngIf="password?.control.errors.required">
                                             La contraseña es requerida
                                         </div>
-                                        <div *ngIf="password.control.errors.minlength">
-                                            La contraseña debe ser de {{ password.control.errors.minlength.requiredLength }} caractéres o más
+                                        <div *ngIf="password?.control.errors.minlength">
+                                            La contraseña debe ser de {{ password?.control.errors.minlength.requiredLength }} caractéres o más
                                         </div>
                                     </div>
                                 </div>

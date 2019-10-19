@@ -43,4 +43,8 @@ export class SearchComponent implements OnInit {
       }
     );
   }
+
+  getUserPostTest(){
+    
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudentModel } from 'src/app/models/student.model';
 import { TutorsService } from 'src/app/services/tutors.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-log-in',
@@ -19,12 +20,33 @@ export class LogInComponent implements OnInit {
 
   onSubmit() {
     // console.log(this.incomingStudent);
+    Swal.fire({
+      allowOutsideClick: false,
+      type: 'info',
+      text: 'Procesando solicitud'
+    })
+
+    Swal.showLoading();
+
     this.tutorsService.signIn(this.incomingStudent).subscribe(
-      data => {
+      async data => {
+        await Swal.fire({
+          allowOutsideClick: false,
+          type: 'success',
+          text: 'Se ha logueado correctamente',
+          timer: 1500,
+          showConfirmButton:false
+        })
         //console.log(data.message);
         this.route.navigateByUrl("/home");
       },
-      error => console.log(error.error.message)
+      error => {
+        Swal.fire({
+          type: 'error',
+          title: 'Hubo un error',
+          text: error.error.message
+        })
+      }
     );
     
     

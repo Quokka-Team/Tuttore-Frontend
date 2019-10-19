@@ -7,19 +7,16 @@
                 <div class="top-header">
                     <div class="top-header-thumb ">
                         <div class=" ">
-                            <!-- <img src="assets/img/top-header4.png" alt="Portada"> -->
-                            <img src="assets/img/top-header1.jpg" alt="Portada">
+                            <img [src]="user.background | nobackground" alt="Portada">
                         </div>
                     </div>
                     <div class="profile-section">
                     </div>
                     <div class="top-header-author">
-                        <a href="02-ProfilePage.html" class="author-thumb">
-                            <img src="img/author-main1.jpg" alt="author">
-                        </a>
+                        <img class="author-thumb" [src]="user.profilePicture | noiconimage" alt="author">
                         <div class="author-content">
-                            <a href="02-ProfilePage.html" class="h4 author-name">James Spiegel</a>
-                            <div class="country">San Francisco, CA</div>
+                            <a href="02-ProfilePage.html" class="h4 author-name">{{user.name}} {{user.lastName}}</a>
+                            <div class="country">{{user.career}}</div>
                         </div>
                     </div>
                 </div>
@@ -37,8 +34,8 @@
                 <div class="ui-block-title">
                     <h6 class="title">Informacion Personal</h6>
                     <a href="#" class="more"><svg class="olymp-three-dots-icon">
-              <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
-            </svg></a>
+                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
+                </svg></a>
                 </div>
                 <div class="ui-block-content">
 
@@ -48,25 +45,23 @@
                     <ul class="widget w-personal-info">
                         <li>
                             <span class="title">Descripcion:</span>
-                            <span class="text">Hi, I’m James, I’m 36 and I work as a Digital Designer for the
-                “Daydreams” Agency in Pier 56
-              </span>
+                            <span class="text">{{user.description}}</span>
                         </li>
                         <li>
                             <span class="title">Email:</span>
-                            <span class="text">jmedinan@unal.edu.co</span>
+                            <span class="text">{{user.email}}</span>
                         </li>
                         <li>
                             <span class="title">Carrera:</span>
-                            <span class="text">Ingenieria de Sistemas</span>
+                            <span class="text">{{user.career}}</span>
                         </li>
                         <li>
                             <span class="title">Promedio</span>
-                            <span class="text">4.4</span>
+                            <span class="text">{{user.gpa}}</span>
                         </li>
                         <li>
                             <span class="title">Telefono</span>
-                            <span class="text">321 654 9999</span>
+                            <span class="text">{{user.phoneNumber}}</span>
                         </li>
 
                     </ul>
@@ -91,8 +86,8 @@
                 <div class="ui-block-title">
                     <h6 class="title">Tutores Similares</h6>
                     <a href="#" class="more"><svg class="olymp-three-dots-icon">
-              <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
-            </svg></a>
+                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
+                </svg></a>
                 </div>
 
 
@@ -102,19 +97,19 @@
                 <ul class="widget w-friend-pages-added notification-list friend-requests">
                     <li *ngFor="let item of [1,1,1,1,1]" class="inline-items">
                         <div class="author-thumb">
-                            <img src="img/avatar1.jpg" alt="author">
+                            <img class="author-thumb" [src]="item.profilePicture | noimage" alt="author">
                         </div>
                         <div class="notification-event">
-                            <a href="#" class="h6 notification-friend">Francine Smith</a>
-                            <span class="chat-message-item">8 Friends in Common</span>
+                            <a href="#" class="h6 notification-friend">Tutor</a>
+                            <span class="chat-message-item">Carrera del tutor</span>
                         </div>
                         <span class="notification-icon">
-              <a href="#" class="accept-request">
-                <span class="icon-add without-text">
-                  <svg class="olymp-happy-face-icon">
-                    <use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use>
-                  </svg>
-                </span>
+                  <a href="#" class="accept-request">
+                    <span class="icon-add without-text">
+                      <svg class="olymp-happy-face-icon">
+                        <use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use>
+                      </svg>
+                    </span>
                         </a>
                         </span>
                     </li>
@@ -131,8 +126,8 @@
                 <div class="ui-block-title">
                     <h6 class="title">Materias de Tutoria</h6>
                     <a href="#" class="more"><svg class="olymp-three-dots-icon">
-              <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
-            </svg></a>
+                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
+                </svg></a>
                 </div>
                 <div class="ui-block-content">
                     <div class="row" *ngIf="subjects.length>0; else addSubject">
@@ -158,7 +153,7 @@
                                 <i class="fas fa-plus-square add-Subject"></i>
                             </div>
                             <div class="author-content">
-                                <h4 class="country">Convierte en Tutor agregando materias</h4>
+                                <h4 class="country">Conviértete en Tutor agregando materias</h4>
                             </div>
                         </div>
                     </ng-template>
@@ -187,7 +182,7 @@
                 <ul class="comments-list style-3 ">
                     <li *ngFor="let item of [1,1,1,1,1,1,1] " class="comment-item ">
                         <div class="post__author-thumb ">
-                            <img src="assets/img/avatar1.jpg " alt="author ">
+                            <img [src]="item.profilePicture | noiconimage" alt="author ">
                         </div>
 
                         <div class="comments-content ">
@@ -197,8 +192,8 @@
                                     <a class="h6 post__author-name fn " href="# ">Nicholas Grissom</a>
                                     <div class="post__date ">
                                         <time class="published " datetime="2004-07-24T18:18 ">
-                      27 mins ago
-                    </time>
+                          27 mins ago
+                        </time>
                                     </div>
                                 </div>
 
@@ -257,8 +252,8 @@
         <div class="modal-content">
             <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
                 <svg class="olymp-close-icon">
-          <use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use>
-        </svg>
+              <use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use>
+            </svg>
             </a>
             <div class="modal-header">
                 <h6 class="title">Edit your Profile</h6>
@@ -302,7 +297,7 @@
                 <div class="form-group label-floating">
                     <label class="control-label">Event Description</label>
                     <textarea class="form-control" placeholder="">I need to take Querty for a check up and ask the doctor if he needs a new tank.
-					</textarea>
+                        </textarea>
                 </div>
 
 
@@ -350,9 +345,9 @@
 
                 <label class="control-label">Personal Event</label>
                 <select class="selectpicker form-control">
-                                <option value="MA">Private Event</option>
-                                <option value="FE">Personal Event</option>
-                            </select>
+                                    <option value="MA">Private Event</option>
+                                    <option value="FE">Personal Event</option>
+                                </select>
 
                 <a href="#" class="btn btn-blue btn-lg full-width">Añadir</a>
             </div>
