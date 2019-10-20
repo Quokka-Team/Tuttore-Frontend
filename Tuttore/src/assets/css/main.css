@@ -158,7 +158,7 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
 }
 
 .header {
-    height: 70px;
+    height: 60px;
     background-color: #233D4D;
     position: fixed;
     top: 0;

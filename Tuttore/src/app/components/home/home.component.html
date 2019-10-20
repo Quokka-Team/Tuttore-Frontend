@@ -24,11 +24,13 @@
             <div class="container-fluid">
                 <div id="tutorcarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
                     <div class="carousel-inner row w-100 mx-auto" role="listbox">
+
                         <div class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 active">
                             <!-- Teammember Item  -->
-                            <app-tutor-card-home [tutor]="newTutors[0]"></app-tutor-card-home>
+                            <app-tutor-card-home [tutor]="tutor0"></app-tutor-card-home>
+                            <!-- ... end Teammember Item  -->
                         </div>
-                        <div *ngFor="let tutor of newTutors.slice(1,newTutors.length)" class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 ">
+                        <div *ngFor="let tutor of newTutors" class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 ">
                             <!-- Teammember Item  -->
                             <app-tutor-card-home [tutor]="tutor"></app-tutor-card-home>
                             <!-- ... end Teammember Item  -->

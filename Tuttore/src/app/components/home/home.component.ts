@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   subjects: SubjectModel[];
   newSubjects: SubjectModel[];
   newTutors: TutorModel[];
+  tutor0: TutorModel;
 
 
   constructor(
@@ -53,8 +54,8 @@ export class HomeComponent implements OnInit {
     this.tutorsService.getNewTutors().subscribe(
       (data: TutorModel[]) => {
         console.log(data);
-        
-        this.newTutors = data;
+        this.newTutors = data.slice(1,data.length);
+        this.tutor0 = data[0];
       },
       e => {
         console.log(e.error.error.message);

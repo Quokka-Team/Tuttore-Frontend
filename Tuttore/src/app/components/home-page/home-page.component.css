@@ -70,10 +70,16 @@
 .search h1 {
     color: #fff;
     position: relative;
-    top: -25px;
+    top: 50%;
+    font-weight: 400;
+    font-size: 45px;
 }
 
 .search input:focus {
     background: #fff;
     border-color: #fff;
+}
+
+.conectamos {
+    font-size: 1.5rem;
 }

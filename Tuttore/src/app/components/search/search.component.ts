@@ -16,7 +16,7 @@ import { TutorModel } from 'src/app/models/tutor.model';
   styleUrls: ["./search.component.css"]
 })
 export class SearchComponent implements OnInit {
-  tutors: any[] = [];
+  tutors: any[];
   recommendedTutors: any[] = [];
   subjectSearched;
 

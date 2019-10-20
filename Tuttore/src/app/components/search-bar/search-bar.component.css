@@ -32,6 +32,7 @@
 .search button {
     margin: 0;
     background-color: #00BBF0;
+    border-collapse: #00BBF0;
 }
 
 .search input {

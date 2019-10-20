@@ -34,13 +34,11 @@
             </div>
         </div>
         <div class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 col-12">
-            <div class="ui-block" *ngIf="subject">
+            <div class="ui-block" *ngIf="tutors">
                 <div class="ui-block-title">
 
                     <h6 class="title">Algunos Tutores Nuevos de {{subject}}</h6>
-                    <a href="#" class="more"><svg class="olymp-three-dots-icon">
-              <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
-            </svg></a>
+
                 </div>
                 <!-- W-Action -->
 
@@ -57,11 +55,11 @@
                             </div>
                             <div class="col-xs-4">
                                 <span class="notification-icon">
-                                                    <a [routerLink]="['/profile',tutor.idTutor]" class="accept-request">
-                                      
-                                                      <i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i>
-                                                    </a>
-                                                  </span>
+                                    <a [routerLink]="['/profile',tutor.idTutor]" class="accept-request">
+
+                                        <i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i>
+                                    </a>
+                                </span>
                             </div>
                         </div>
 
@@ -86,12 +84,7 @@
 
                             <div class="friend-item-content">
 
-                                <div class="more">
-                                    <svg class="olymp-three-dots-icon">
-                    <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
-                  </svg>
 
-                                </div>
                                 <div class="friend-avatar">
                                     <div class="author-thumb">
                                         <img src="assets/img/avatar1.jpg" alt="author">

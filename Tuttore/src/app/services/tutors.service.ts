@@ -27,7 +27,7 @@ export class TutorsService {
      const headers = new HttpHeaders({
       // numberTutors: "" 
     });
-    return this.http.get(`${this.url}getNewTutors/2`,{ headers})
+    return this.http.get(`${this.url}getNewTutors/10`,{ headers})
   }
 
   getTutorsBySubject(id: string) {

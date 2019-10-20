@@ -33,9 +33,7 @@
             <div class="ui-block">
                 <div class="ui-block-title">
                     <h6 class="title">Informacion Personal</h6>
-                    <a href="#" class="more"><svg class="olymp-three-dots-icon">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
-                </svg></a>
+
                 </div>
                 <div class="ui-block-content">
 
@@ -43,7 +41,7 @@
                     <!-- W-Personal-Info -->
 
                     <ul class="widget w-personal-info">
-                        <li *ngIf="user.isTutor">
+                        <li>
                             <span class="title">Descripcion:</span>
                             <span class="text">{{user.description}}</span>
                         </li>
@@ -85,9 +83,7 @@
             <div class="ui-block">
                 <div class="ui-block-title">
                     <h6 class="title">Algunos Tutores Nuevos</h6>
-                    <a href="#" class="more"><svg class="olymp-three-dots-icon">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
-                </svg></a>
+
                 </div>
                 <ul class="widget w-friend-pages-added notification-list friend-requests">
                     <li *ngFor="let tutor of newTutors" class="inline-items">
@@ -98,15 +94,7 @@
                             <a href="#" class="h6 notification-friend">{{tutor.name}} {{tutor.lastName}}</a>
                             <span class="chat-message-item">Carrera del tutor</span>
                         </div>
-                        <span class="notification-icon">
-                  <a href="" class="accept-request">
-                    <span class="icon-add without-text">
-                      <svg class="olymp-happy-face-icon">
-                        <use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use>
-                      </svg>
-                    </span>
-                        </a>
-                        </span>
+
                     </li>
 
 
@@ -120,9 +108,7 @@
             <div class="ui-block">
                 <div class="ui-block-title">
                     <h6 class="title">Materias de Tutoria</h6>
-                    <a href="#" class="more"><svg class="olymp-three-dots-icon">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
-                </svg></a>
+
                 </div>
                 <div class="ui-block-content">
                     <div class="row" *ngIf="user.isTutor; else addSubject">
@@ -245,11 +231,7 @@
 <div class="modal fade" id="edit-profile" tabindex="-1" role="dialog" aria-labelledby="create-event" aria-hidden="true">
     <div class="modal-dialog window-popup create-event" role="document">
         <div class="modal-content">
-            <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
-                <svg class="olymp-close-icon">
-              <use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use>
-            </svg>
-            </a>
+
             <div class="modal-header">
                 <h6 class="title">Edit your Profile</h6>
             </div>
@@ -328,9 +310,7 @@
 <div class="modal fade" id="create-friend-group-1" tabindex="-1" role="dialog" aria-labelledby="create-friend-group-1" aria-hidden="true">
     <div class="modal-dialog window-popup create-friend-group create-friend-group-1" role="document">
         <div class="modal-content">
-            <a href="" class="close icon-close" data-dismiss="modal" aria-label="Close">
-                <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
-            </a>
+
             <div class="modal-header">
                 <h6 *ngIf="user.isTutor" class="title">incluye Materia de Tutoria</h6>
                 <h6 *ngIf="!user.isTutor" class="title">Estas a punto de convertire en tutor</h6>
