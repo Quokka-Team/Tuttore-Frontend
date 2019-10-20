@@ -22,6 +22,10 @@
     box-shadow: none;
 }
 
+.full-width{
+    width: 100%;
+}
+
 .search {
     top: 60vh;
     height: 50px;
@@ -45,6 +49,7 @@
     color: #fff;
     position: relative;
     top: -25px;
+    font-size: 60px;;
 }
 
 .search input:focus {

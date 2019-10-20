@@ -66,7 +66,9 @@
             </li>
           </ul>
 
-          <div class="widget w-socials">
+          <div class="widget w-socials"
+           *ngIf="isUser()"
+          >
             <a class="social-item bg-blue text-white">
               <i class="fas fa-address-book" aria-hidden="true"></i> Historial
             </a>
@@ -107,7 +109,7 @@
               />
             </div>
             <div class="notification-event">
-              <a href="profile/{{ tutor._id }}" class="h6 notification-friend"
+              <a [routerLink]="['/profile',tutor._id ]" class="h6 notification-friend"
                 >{{ tutor.name }} {{ tutor.lastName }}</a
               >
               <span class="chat-message-item">{{ tutor.career }}</span>
@@ -207,7 +209,7 @@
   </div>
 
   <div
-    class="modal fade"
+    class="modal  animated zoomIn faster"
     id="edit-profile"
     tabindex="-1"
     role="dialog"
@@ -221,22 +223,54 @@
         </div>
         <form #editForm="ngForm">
         <div class="modal-body">
-            <div class="form-group label-floating mb-2">
-              <label class="control-label">Name</label>
-              <input class="form-control" placeholder="" type="text" />
-            </div>
-            <div class="form-group label-floating mb-2">
-              <label class="control-label">Last Name</label>
-              <input class="form-control" placeholder="" type="text" />
-            </div>
-            <div class="form-group label-floating is-empty mb-2">
-              <label class="control-label">Email</label>
-              <input class="form-control" placeholder="" value="" type="text" />
-            </div>
-            <div class="form-group label-floating is-empty mb-2">
-              <label class="control-label">Carrera</label>
-              <input class="form-control" placeholder="" value="" type="text" />
-            </div>
+                <div class="row">
+                        <div class="col-6">
+                          <div class="form-group label-floating is-empty mb-2">
+                            <label class="control-label">Nombre</label>
+                            <input
+                              class="form-control"
+                              placeholder=""
+                              value=""
+                              type="text"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="form-group label-floating is-empty mb-2">
+                            <label class="control-label">Apellido</label>
+                            <input
+                              class="form-control"
+                              placeholder=""
+                              value=""
+                              type="text"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                            <div class="col-6">
+                              <div class="form-group label-floating is-empty mb-2">
+                                <label class="control-label">Email</label>
+                                <input
+                                  class="form-control"
+                                  placeholder=""
+                                  value=""
+                                  type="text"
+                                />
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="form-group label-floating is-empty mb-2">
+                                <label class="control-label">Carrera</label>
+                                <input
+                                  class="form-control"
+                                  placeholder=""
+                                  value=""
+                                  type="text"
+                                />
+                              </div>
+                            </div>
+                          </div>
             <div class="row">
               <div class="col-6">
                 <div class="form-group label-floating is-empty mb-2">
@@ -278,7 +312,7 @@
   </div>
 
   <div
-    class="modal fade"
+    class="modal animated zoomIn faster"
     id="create-friend-group-1"
     tabindex="-1"
     role="dialog"
@@ -286,20 +320,22 @@
     aria-hidden="true"
   >
     <div
-      class="modal-dialog window-popup create-friend-group create-friend-group-1"
+      class="modal-dialog modal-dialog-centered window-popup create-friend-group create-friend-group-1"
       role="document"
     >
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header justify-content-center">
           <h6 *ngIf="user.isTutor" class="title">incluye Materia de Tutoria</h6>
           <h6 *ngIf="!user.isTutor" class="title">
             Estas a punto de convertire en tutor
           </h6>
         </div>
 
-        <div *ngIf="user.isTutor" class="modal-body">
-          <form class="example-form mt-5 " (ngSubmit)="add()">
-            <mat-form-field class="example-full-width">
+        <div *ngIf="user.isTutor" class="modal-body ">
+          <form class="example-form text-center "
+          sty
+          (ngSubmit)="add()">
+            <mat-form-field class="full-width">
               <input
                 type="text"
                 placeholder="Nombre Materia"
@@ -374,14 +410,14 @@
   </div>
 
   <div
-    class="modal fade"
+    class="modal  animated zoomIn faster"
     id="edit-my-poll-popup"
     tabindex="-1"
     role="dialog"
     aria-labelledby="edit-my-poll-popup"
     aria-hidden="true"
   >
-    <div class="modal-dialog window-popup edit-my-poll-popup" role="document">
+    <div class="modal-dialog modal-dialog-centered window-popup edit-my-poll-popup" role="document">
       <div class="modal-content">
         <a class="close icon-close" data-dismiss="modal" aria-label="Close">
           <svg class="olymp-close-icon">

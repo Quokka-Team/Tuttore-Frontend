@@ -36,7 +36,7 @@ export class TutorsService {
   }
 
   getNewTutorsBySubject(id: string) {
-    return this.http.get(`${this.url}getNewTutorsByCourse/${id}/2`);
+    return this.http.get(`${this.url}getNewTutorsByCourse/${id}/5`);
   }
 
   getTutor(id: string) {

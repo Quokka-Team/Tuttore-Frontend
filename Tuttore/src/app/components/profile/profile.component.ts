@@ -29,22 +29,29 @@ export class ProfileComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   subjectId;
   editProfile: ProfileModel;
-
+  id:string;
   constructor(
     private tutorsService: TutorsService,
     private subjectService: SubjectsService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    this.getUserInfo();
+
     this.getNewTutors();
     this. editProfile = new ProfileModel();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(routeParams => {
+      const id = routeParams.id;
+      this.getUserInfo(id);
+    });
 
-  getUserInfo() {
-    const id = this.activatedRoute.snapshot.paramMap.get("id");
+  }
+
+  getUserInfo(id:string) {
+   
+    this.id =id;
     if (id == "user") {
       this.tutorsService.getUser().subscribe(
         (data: any) => {
@@ -145,6 +152,10 @@ export class ProfileComponent implements OnInit {
 
   getData(value) {
     this.subjectId = _.invert(this.courses)[value];
+  }
+
+  isUser(){
+    return this.id=="user";
   }
 
 }

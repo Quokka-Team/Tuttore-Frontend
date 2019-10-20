@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TutorsService } from "../../../services/tutors.service";
 import { Router } from "@angular/router";
-import { StudentModel } from "../../../models/student.model";
+
 
 @Component({
   selector: "app-navbar",
@@ -11,7 +11,7 @@ import { StudentModel } from "../../../models/student.model";
 export class NavbarComponent implements OnInit {
   user: any = {};
 
-  constructor(private auth: TutorsService, private route: Router) {
+  constructor(private auth: TutorsService, private route: Router,) {
     this.getUserInfo();
   }
 
@@ -36,6 +36,6 @@ export class NavbarComponent implements OnInit {
   }
 
   profileSettings() {
-    this.route.navigateByUrl("/profile/user");
+       this.route.navigateByUrl("/profile/user");
   }
 }
