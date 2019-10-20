@@ -6720,8 +6720,8 @@ fieldset[disabled] .checkbox input[type=checkbox],
     overflow: hidden;
     position: relative;
     padding-left: 71px;
-    margin-bottom: 20px;
-    min-height: 700px;
+    margin-bottom: 0px;
+    min-height: 600px;
 }
 
 .registration-login-form .nav-tabs {
