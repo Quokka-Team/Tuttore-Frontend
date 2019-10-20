@@ -6,7 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SearchComponent } from './components/search/search.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { LogInComponent } from './components/log-in/log-in.component';
+import { LogInComponent } from './components/sign-in/sign-in.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoggedGuard } from './guards/logged.guard';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate:[AuthGuard] },
   { path: 'search', component: SearchComponent, canActivate:[AuthGuard] },
   { path: 'sign-up', component: SignUpComponent, canActivate:[LoggedGuard] },
-  { path: 'log-in', component: LogInComponent, canActivate:[LoggedGuard] },
+  { path: 'sign-in', component: LogInComponent, canActivate:[LoggedGuard] },
   { path: 'home-page', component: HomePageComponent, canActivate:[LoggedGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'home', canActivate:[AuthGuard] },
   { path: '**', pathMatch: 'full', redirectTo: 'home', canActivate:[AuthGuard] },

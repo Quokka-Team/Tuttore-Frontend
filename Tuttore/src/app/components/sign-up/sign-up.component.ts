@@ -39,7 +39,7 @@ export class SignUpComponent implements OnInit{
         type: 'success',
         text: 'Se le ha enviado un email a su correo para validar su cuenta',
       })
-      this.route.navigateByUrl("/log-in");
+      this.route.navigateByUrl("/sign-in");
     }, err => {
       Swal.fire({
         allowOutsideClick: false,
