@@ -10,6 +10,7 @@ import { SubjectModel } from "src/app/models/subjects.model";
 import { map, startWith } from "rxjs/operators";
 import { SearchModel } from "src/app/models/search.model";
 import * as _ from "underscore";
+import { ProfileModel } from 'src/app/models/profile.model';
 
 @Component({
   selector: "app-profile",
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
   subjectSearched;
   filteredOptions: Observable<string[]>;
   subjectId;
+  editProfile: ProfileModel;
 
   constructor(
     private tutorsService: TutorsService,
@@ -36,7 +38,7 @@ export class ProfileComponent implements OnInit {
   ) {
     this.getUserInfo();
     this.getNewTutors();
-
+    this. editProfile = new ProfileModel();
   }
 
   ngOnInit() {}
@@ -52,6 +54,13 @@ export class ProfileComponent implements OnInit {
               .subscribe((tutor: TutorModel) => {
                 this.user = tutor;
                 this.user.isTutor = true;
+                this.editProfile.name=this.user.name;
+                this.editProfile.lastName=this.user.lastName;
+                this.editProfile.email=this.user.email;
+                this.editProfile.career=this.user.career;
+                this.editProfile.gpa=this.user.gpa;
+                this.editProfile.description=this.user.description;
+                this.editProfile.phoneNumber=this.user.phoneNumber;
                 this.getSubjects();
               });
           } else {
@@ -88,7 +97,7 @@ export class ProfileComponent implements OnInit {
   becomeTutor() {
     this.tutorsService.becomeTutor(this.description).subscribe(data => {
       console.log(data);
-      this.router.navigateByUrl("/profile");
+      this.router.navigateByUrl("/profile/user");
     });
   }
 
@@ -137,4 +146,5 @@ export class ProfileComponent implements OnInit {
   getData(value) {
     this.subjectId = _.invert(this.courses)[value];
   }
+
 }

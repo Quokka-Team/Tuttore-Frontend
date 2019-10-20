@@ -27,12 +27,12 @@
 
                         <div class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 active">
                             <!-- Teammember Item  -->
-                            <app-tutor-card-home [tutor]="tutor0"></app-tutor-card-home>
+                            <app-tutor-card-home [tutor]="tutor0" [routerLink]="['/profile',tutor0._id]"></app-tutor-card-home>
                             <!-- ... end Teammember Item  -->
                         </div>
                         <div *ngFor="let tutor of newTutors" class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 ">
                             <!-- Teammember Item  -->
-                            <app-tutor-card-home [tutor]="tutor"></app-tutor-card-home>
+                            <app-tutor-card-home [tutor]="tutor" [routerLink]="['/profile',tutor._id]"></app-tutor-card-home>
                             <!-- ... end Teammember Item  -->
                         </div>
                     </div>

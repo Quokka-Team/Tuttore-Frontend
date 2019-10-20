@@ -557,7 +557,7 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
 }
 
 .author-page .account-settings {
-    padding: 15px 25px;
+    
     margin-bottom: 0;
 }
 
@@ -570,7 +570,6 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
 }
 
 .account-settings {
-    padding: 15px 25px;
     margin-bottom: 0;
 }
 
@@ -583,7 +582,7 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
 }
 
 .account-settings a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 .account-settings a>* {
@@ -738,7 +737,6 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
     transform: translate(-50%, 0);
     bottom: 15px;
     text-align: center;
-    max-width: 200px;
     z-index: 4;
 }
 
@@ -2258,7 +2256,7 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
 
 .footer--dark .socials i:hover,
 .footer--dark .socials svg:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 .sub-footer-copyright {
@@ -2273,7 +2271,7 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
 }
 
 .sub-footer-copyright a {
-    color: #ff5e3a;
+    color: #00BBF0;
     opacity: .7;
     font-weight: 500;
 }
@@ -2791,7 +2789,7 @@ section {
 }
 
 .mobile-app .left-menu a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 .mobile-app .fixed-sidebar-left.sidebar--large {
@@ -2938,7 +2936,7 @@ section {
 }
 
 .about-olympus a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 .mobile-app-tabs {
@@ -3488,7 +3486,7 @@ a {
 }
 
 a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 select,
@@ -5786,7 +5784,7 @@ fieldset[disabled] .checkbox input[type=checkbox],
 }
 
 .left-menu a:hover svg {
-    fill: #ff5e3a;
+    fill: #00BBF0;
 }
 
 .profile-completion {
@@ -6164,7 +6162,7 @@ fieldset[disabled] .checkbox input[type=checkbox],
 }
 
 .more-dropdown ul {
-    padding: 15px 25px;
+
     margin-bottom: 0;
 }
 
@@ -6189,7 +6187,7 @@ fieldset[disabled] .checkbox input[type=checkbox],
 }
 
 .more-dropdown a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 .more:hover .more-dropdown {
@@ -8101,7 +8099,7 @@ figcaption a {
 }
 
 figcaption a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 figcaption span {
@@ -9934,7 +9932,7 @@ ol ol li {
 
 .cat-list__item a:hover {
     color: #fff;
-    background-color: #ff5e3a;
+    background-color: #00BBF0;
 }
 
 .cat-list__item.active {
@@ -11595,7 +11593,7 @@ ol ol li {
 }
 
 .sub-forums a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 .author-started {
@@ -12272,7 +12270,7 @@ ol ol li {
 }
 
 .single-post-additional a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 .post-date-wrap svg {
@@ -13014,7 +13012,7 @@ ol ol li {
 }
 
 .socials li a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 .socials li+li {
@@ -13267,7 +13265,7 @@ ol ol li {
 }
 
 .contact-item a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 .contact-item+.contact-item {
@@ -14238,7 +14236,7 @@ ol ol li {
 }
 
 .comments__item-review .comments__header-review .comments__author-review a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 
@@ -15377,7 +15375,7 @@ ol ol li {
 }
 
 .w-personal-info a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 .w-personal-info.item-block .title {
@@ -16728,7 +16726,7 @@ ol ol li {
 }
 
 .w-list a:hover {
-    color: #ff5e3a;
+    color: #00BBF0;
 }
 
 .w-list ul {

@@ -90,7 +90,7 @@
                                         <img src="assets/img/avatar1.jpg" alt="author">
                                     </div>
                                     <div class="author-content">
-                                        <a href="" class="h5 author-name">{{tutor.name}} {{tutor.lastName}}</a>
+                                        <a [routerLink]="['/profile',tutor.idTutor]" class="h5 author-name">{{tutor.name}} {{tutor.lastName}}</a>
                                         <!-- <a href="#" class="h5 author-name">{{tutor.name}}</a> -->
                                         <hr>
                                         <div class="country">{{tutor.description}}</div>

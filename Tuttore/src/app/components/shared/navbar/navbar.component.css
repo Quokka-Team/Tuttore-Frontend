@@ -20,3 +20,12 @@
 *:focus {
     outline: none;
 }
+
+.account-settings li{
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.account-settings li:hover{
+    background-color: #ECFBFF;
+ 
+}
