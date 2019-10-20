@@ -5709,6 +5709,7 @@ fieldset[disabled] .checkbox input[type=checkbox],
 }
 
 .logo {
+    padding: 35px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -6776,7 +6777,7 @@ fieldset[disabled] .checkbox input[type=checkbox],
 }
 
 .registration-login-form .content {
-    padding: 35px 25px;
+    padding: 0px 10px;
 }
 
 .registration-login-form .title {
