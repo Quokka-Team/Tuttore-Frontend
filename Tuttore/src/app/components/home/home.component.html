@@ -26,9 +26,9 @@
                     <div class="carousel-inner row w-100 mx-auto" role="listbox">
                         <div class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 active">
                             <!-- Teammember Item  -->
-                            <app-tutor-card-home></app-tutor-card-home>
+                            <app-tutor-card-home [tutor]="newTutors[0]"></app-tutor-card-home>
                         </div>
-                        <div *ngFor="let tutor of newTutors" class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+                        <div *ngFor="let tutor of newTutors.slice(1,newTutors.length)" class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 ">
                             <!-- Teammember Item  -->
                             <app-tutor-card-home [tutor]="tutor"></app-tutor-card-home>
                             <!-- ... end Teammember Item  -->
@@ -88,7 +88,7 @@
         <div class="row mb60">
             <div class="col col-xl-5 col-lg-5 m-auto col-md-12 col-sm-12 col-12">
                 <div class="crumina-module crumina-heading align-center">
-                    <h2 class="heading-title">¿Por qué usar Tutore?</h2>
+                    <h2 class="heading-title">¿Por qué usar Tuttore?</h2>
                     <hr>
                     <p class="heading-text">¡Conectamos a estudiantes de la Universidad Macional que buscan tutorías académicas con estudiantes que quieren darlas!
                     </p>

@@ -15,7 +15,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate:[AuthGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate:[AuthGuard] },
+  { path: 'profile/:id', component: ProfileComponent, canActivate:[AuthGuard] },
   { path: 'search', component: SearchComponent, canActivate:[AuthGuard] },
   { path: 'sign-up', component: SignUpComponent, canActivate:[LoggedGuard] },
   { path: 'log-in', component: LogInComponent, canActivate:[LoggedGuard] },

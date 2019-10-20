@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SubjectsService } from "src/app/services/subjects.service";
 import { TutorsService } from "src/app/services/tutors.service";
-import { UserTestModel } from 'src/app/models/usertest.model';
+import { SubjectModel } from 'src/app/models/subjects.model';
+import { TutorModel } from 'src/app/models/tutor.model';
 
 @Component({
   selector: "app-home",
@@ -9,50 +10,50 @@ import { UserTestModel } from 'src/app/models/usertest.model';
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-  subjects: any[];
-  newSubjects: any[];
-  newTutors: UserTestModel[];
+  subjects: SubjectModel[];
+  newSubjects: SubjectModel[];
+  newTutors: TutorModel[];
 
 
   constructor(
     private subjectsService: SubjectsService,
     private tutorsService: TutorsService
-  ) {}
+  ) {
+    this.getNewTutors();
+    this.getNewSubjects();
+    this.getMostSearchSubjects();
+  }
 
   ngOnInit() {
-
+    
   }
 
   getMostSearchSubjects() {
     this.subjectsService.getMostSearchSubjects().subscribe(
       (data: any) => {
-        console.log("MOST SEARCHED SUBJECTS");
-        console.log(data);
         this.subjects = data;
       },
       e => {
-        console.log(e.error.error.message);
+        console.log(e);
       }
     );
   }
   getNewSubjects() {
     this.subjectsService.getNewSubjects().subscribe(
       (data: any) => {
-        console.log("NEW SUBJECTS");
-        console.log(data);
         this.newSubjects = data;
       },
       e => {
-        console.log(e.error.error.message);
+        console.log(e);
       }
     );
   }
 
   getNewTutors() {
     this.tutorsService.getNewTutors().subscribe(
-      (data: any) => {
-        console.log("NEW TUTORS");
+      (data: TutorModel[]) => {
         console.log(data);
+        
         this.newTutors = data;
       },
       e => {

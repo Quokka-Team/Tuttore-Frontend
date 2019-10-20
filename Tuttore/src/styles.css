@@ -4,3 +4,8 @@
 .form-control.ng-touched.ng-invalid {
     border: 2px solid red;
 }
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+    z-index: 9999!important;
+}

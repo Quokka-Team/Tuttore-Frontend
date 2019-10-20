@@ -15,7 +15,7 @@
                     <div class="top-header-author">
                         <img class="author-thumb" [src]="user.profilePicture | noiconimage" alt="author">
                         <div class="author-content">
-                            <a href="02-ProfilePage.html" class="h4 author-name">{{user.name}} {{user.lastName}}</a>
+                            <a href="02-ProfilePage.html" class="h4 author-name">{{user.name | titlecase}} {{user.lastName | titlecase}}</a>
                             <div class="country">{{user.career}}</div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                     <!-- W-Personal-Info -->
 
                     <ul class="widget w-personal-info">
-                        <li>
+                        <li *ngIf="user.isTutor">
                             <span class="title">Descripcion:</span>
                             <span class="text">{{user.description}}</span>
                         </li>
@@ -84,27 +84,22 @@
             </div>
             <div class="ui-block">
                 <div class="ui-block-title">
-                    <h6 class="title">Tutores Similares</h6>
+                    <h6 class="title">Algunos Tutores Nuevos</h6>
                     <a href="#" class="more"><svg class="olymp-three-dots-icon">
                   <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
                 </svg></a>
                 </div>
-
-
-
-                <!-- W-Action -->
-
                 <ul class="widget w-friend-pages-added notification-list friend-requests">
-                    <li *ngFor="let item of [1,1,1,1,1]" class="inline-items">
+                    <li *ngFor="let tutor of newTutors" class="inline-items">
                         <div class="author-thumb">
-                            <img class="author-thumb" [src]="item.profilePicture | noimage" alt="author">
+                            <img class="author-thumb" [src]="tutor.profilePicture | noimage" alt="author">
                         </div>
                         <div class="notification-event">
-                            <a href="#" class="h6 notification-friend">Tutor</a>
+                            <a href="#" class="h6 notification-friend">{{tutor.name}} {{tutor.lastName}}</a>
                             <span class="chat-message-item">Carrera del tutor</span>
                         </div>
                         <span class="notification-icon">
-                  <a href="#" class="accept-request">
+                  <a href="" class="accept-request">
                     <span class="icon-add without-text">
                       <svg class="olymp-happy-face-icon">
                         <use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use>
@@ -130,15 +125,15 @@
                 </svg></a>
                 </div>
                 <div class="ui-block-content">
-                    <div class="row" *ngIf="subjects.length>0; else addSubject">
-                        <div *ngFor="let item of subjects " class="col col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="row" *ngIf="user.isTutor; else addSubject">
+                        <div *ngFor="let course of user.courses " class="col col-lg-6 col-md-6 col-sm-12 col-12">
 
                             <div class="birthday-item inline-items border border-light rounded  m-2">
 
                                 <div class="birthday-author-name ">
-                                    <a href="# " class="h6 author-name ">Ing. de Software</a>
-                                    <div class="birthday-date ">Calificacion
-                                        <Strong>4.7</Strong>
+                                    <a href="# " class="h6 author-name ">{{course.name}}</a>
+                                    <div class="birthday-date ">{{course.code}}
+                                        <!-- <Strong>4.7</Strong> -->
                                     </div>
                                 </div>
                                 <a href="20-CalendarAndEvents-MonthlyCalendar.html " class="btn btn-sm bg-blue ">Contactar</a>
@@ -180,7 +175,7 @@
                 <!-- Comments -->
 
                 <ul class="comments-list style-3 ">
-                    <li *ngFor="let item of [1,1,1,1,1,1,1] " class="comment-item ">
+                    <li *ngFor="let item of [] " class="comment-item ">
                         <div class="post__author-thumb ">
                             <img [src]="item.profilePicture | noiconimage" alt="author ">
                         </div>
@@ -333,23 +328,46 @@
 <div class="modal fade" id="create-friend-group-1" tabindex="-1" role="dialog" aria-labelledby="create-friend-group-1" aria-hidden="true">
     <div class="modal-dialog window-popup create-friend-group create-friend-group-1" role="document">
         <div class="modal-content">
-            <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+            <a href="" class="close icon-close" data-dismiss="modal" aria-label="Close">
                 <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
             </a>
             <div class="modal-header">
-                <h6 class="title">incluye Materia de Tutoria</h6>
+                <h6 *ngIf="user.isTutor" class="title">incluye Materia de Tutoria</h6>
+                <h6 *ngIf="!user.isTutor" class="title">Estas a punto de convertire en tutor</h6>
             </div>
 
-            <div class="modal-body">
+            <div *ngIf="user.isTutor" class="modal-body">
+                <form class="example-form mt-5 " (ngSubmit)="add()">
+                    <mat-form-field class="example-full-width">
+                        <input type="text" placeholder="Nombre Materia" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getData($event.option.value)'>
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{option}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <div class="button-form">
+                        <button class="btn btn-primary btn-md-2 mt-3" type="submit">Enviar</button>
+                    </div>
+                </form>
+            </div>
 
-
-                <label class="control-label">Personal Event</label>
-                <select class="selectpicker form-control">
-                                    <option value="MA">Private Event</option>
-                                    <option value="FE">Personal Event</option>
-                                </select>
-
-                <a href="#" class="btn btn-blue btn-lg full-width">Añadir</a>
+            <div *ngIf="!user.isTutor" class="modal-body">
+                <label class="control-label">Escribe una breve descripcion de ti como tutor y elige la primera materia de la cual quieres ser tutor</label>
+                <form #logInForm="ngForm" (ngSubmit)="becomeTutor()" novalidate class="content">
+                    <div class="row">
+                        <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group label-floating">
+                                <label for="email" class="control-label">Descripcion:</label>
+                                <textarea required ngModel name="description" #email="ngModel" class="form-control" minlength="25" [(ngModel)]="description"></textarea>
+                                <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+                                    Tu descripcion debe tener al menos 25 caracteres
+                                </div>
+                            </div>
+                            <button class="btn btn-lg btn-primary full-width" style="background-color: #00BBF0;border-color: #00BBF0">Enviar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

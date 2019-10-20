@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
   async getUserInfo(){
     await this.auth.getUser().subscribe( data => {
       this.user=data;
-      console.log(data);
+      // console.log(data);
     }, error => {
       console.log("hubo un error");
       console.log(error);
@@ -35,6 +35,6 @@ export class NavbarComponent implements OnInit {
   }
 
   profileSettings(){
-    this.route.navigateByUrl("/profile");
+    this.route.navigateByUrl("/profile/user");
   }
 }

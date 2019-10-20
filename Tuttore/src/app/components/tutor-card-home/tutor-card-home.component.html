@@ -7,9 +7,9 @@
 
     <div class="teammember-content">
 
-        <a href="#" class="h5 teammembers-item-name">{{tutor.name}}</a>
+        <a href="#" class="h5 teammembers-item-name">{{tutor.name | titlecase}}  {{tutor.lastName | titlecase}}</a>
 
-        <div class="teammembers-item-prof">{{tutor.username}}</div>
+        <div class="teammembers-item-prof">{{tutor.career}}</div>
 
         <ul class="socials socials--round">
 

@@ -1,4 +1,6 @@
-export class SubjectModel{
-    name:string;
-    code:string;
+export class SubjectModel {
+  _id: string;
+  name: string;
+  code: string;
+  dateCreated: string;
 }

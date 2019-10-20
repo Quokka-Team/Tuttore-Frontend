@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders,HttpParams } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { StudentModel } from '../models/student.model';
+import { SearchSubjectModel } from '../models/searchSubject.model';
 
 @Injectable({
   providedIn: "root"
@@ -9,47 +10,43 @@ import { StudentModel } from '../models/student.model';
 export class TutorsService {
   
   userToken:string;
-
+   url = `http://tuttore-backend-env.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/`;
   constructor(private http: HttpClient) {
     this.readToken();
   }
 
   private getQuery(query: string) {
-    const url = `http://tuttore-backend-env.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/`; // URL Base del Backend
     const headers = new HttpHeaders({
       Authorization: "" // Token 
     });
 
-    return this.http.get(url, { headers });
+    return this.http.get(this.url, { headers });
   }
 
   getNewTutors() {
-    const query: string = "";
-    return this.getQuery(query).pipe(map(data =>data));
+     const headers = new HttpHeaders({
+      // numberTutors: "" 
+    });
+    return this.http.get(`${this.url}getNewTutors/2`,{ headers})
   }
 
   getTutorsBySubject(id: string) {
-    const query: string = `${id}`; 
-    return this.getQuery(query);
+    return this.http.get(`${this.url}getTutorsByCourse/${id}`);
+
   }
 
   getNewTutorsBySubject(id: string) {
-    const query: string = `${id}`;
-    return this.getQuery(query);
+    return this.http.get(`${this.url}getNewTutorsByCourse/${id}/2`);
   }
 
   getTutor(id: string) {
-    const query: string = `${id}`;
-    return this.getQuery(query);
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+    return this.http.get(`${this.url}getTutor/${id}`, {headers: headers});
   }
   
   signIn(student: StudentModel){
-    const headers = new HttpHeaders({
-      'Content-Type':
-        "application/x-www-form-urlencoded",
-        'Access-Control-Allow-Origin':'*'
-    });
-
     let cors = "https://cors-anywhere.herokuapp.com/";
     return this.http.post( cors +'http://tuttore-backend-env.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/signIn/', student ).pipe(
         map( resp => {
@@ -110,7 +107,26 @@ export class TutorsService {
     const headers = new HttpHeaders({
       'authorization': `bearer ${this.readToken()}`
     });
-    return this.http.post('http://tuttore-backend-env.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/getStudent', " " , {headers: headers});
+    return this.http.get('http://tuttore-backend-env.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/getStudent' , {headers: headers});
+  }
+
+  becomeTutor(des:string){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+    const data = {
+      description: des
+    }
+   return this.http.post(`${this.url}registerTutor`, data,{headers})
+  }
+  addSubject(id:string){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+    const data = {
+      idCourse: id
+    }
+   return this.http.post(`${this.url}addCourseTutor`, data,{headers})
   }
 
 }
