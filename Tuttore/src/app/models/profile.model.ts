@@ -1,11 +1,9 @@
-export class StudentModel {
+export class ProfileModel {
     name:string;
     lastName:string;
     email:string;
-    password:string;
     career:string;
-    gpa:number;
     phoneNumber:string;
-    isTutor:string
-
+    gpa:string;
+    description:string
 }

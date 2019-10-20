@@ -5,7 +5,7 @@
 }
 
 .logo-container {
-    width: 70px;
+    width: 60px;
     ;
     height: 100%;
     margin: 0;
@@ -14,9 +14,21 @@
 
 #site-header {
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
 }
 
 *:focus {
     outline: none;
+}
+
+.account-settings li{
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.account-settings li:hover{
+    background-color: #ECFBFF;
+}
+
+.author-name span{
+    font-weight: 500;
 }

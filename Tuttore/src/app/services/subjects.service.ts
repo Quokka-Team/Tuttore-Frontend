@@ -6,26 +6,21 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class SubjectsService {
-  constructor(private http: HttpClient) {  }
+  url = `http://tuttore-backend-env.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/`;
 
-  private getQuery(query: string) {
-    const url = ``; // URL base del Backend
-    const headers = new HttpHeaders({
-      Authorization:  "" // Aqui va el Token
-    });
-
-    return this.http.get(url, { headers });
-  }
+  constructor(private http: HttpClient) {}
 
   getMostSearchSubjects() {
-    const query: string = "";
-    return this.getQuery(query).pipe(map(data => data));
+
+    return this.http.get(`${this.url}getNewCourses/8`);
   }
 
   getNewSubjects() {
-    const query: string = "";
-    return this.getQuery(query).pipe(map(data => data));
+
+    return this.http.get(`${this.url}getNewCourses/8`);
   }
 
-
+  getAllSubjects() {
+    return this.http.get(`${this.url}getAllCourses`);
+  }
 }

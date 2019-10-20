@@ -1,6 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 .form-control.ng-touched.ng-invalid {
     border: 2px solid red;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+    z-index: 9999!important;
 }
