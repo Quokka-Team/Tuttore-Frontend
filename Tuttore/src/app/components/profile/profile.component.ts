@@ -49,15 +49,7 @@ export class ProfileComponent implements OnInit {
     });
 
   }
-  private loadScript(url: string) {
-    const body = <HTMLDivElement> document.body;
-    const script = document.createElement('script');
-    script.innerHTML = '';
-    script.src = url;
-    script.async = false;
-    script.defer = true;
-    body.appendChild(script);
-  }
+
 
   getUserInfo(id:string) {
    
@@ -154,10 +146,12 @@ export class ProfileComponent implements OnInit {
   }
 
   add() {
-    this.tutorsService.addSubject(this.subjectId).subscribe(data => {
-      console.log(data);
-      location.reload();
-    });
+    if(this.subjectId){ 
+      this.tutorsService.addSubject(this.subjectId).subscribe(data => {
+        console.log(data);
+        location.reload();
+      });
+    }
   }
 
   getData(value) {

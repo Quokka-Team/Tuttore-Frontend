@@ -29,13 +29,13 @@
 .text{
     color: #fff;
     padding: 0 15%;
-    margin-bottom: 15%
+
 }
 
 
 
 .search {
-    top: 40vh;
+    top: 30vh;
     height: 50px;
     width: 100vw;
     margin: 0 auto;
