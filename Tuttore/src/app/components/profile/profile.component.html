@@ -66,9 +66,7 @@
             </li>
           </ul>
 
-          <div class="widget w-socials"
-           *ngIf="isUser()"
-          >
+          <div class="widget w-socials" *ngIf="isUser()">
             <a class="social-item bg-blue text-white">
               <i class="fas fa-address-book" aria-hidden="true"></i> Historial
             </a>
@@ -84,7 +82,7 @@
               class="social-item bg-blue text-white"
               data-toggle="modal"
               data-target="#create-friend-group-1"
-              >
+            >
               <i class="fas fa-plus-circle" aria-hidden="true"></i> Añadir
               Materia
             </a>
@@ -109,7 +107,9 @@
               />
             </div>
             <div class="notification-event">
-              <a [routerLink]="['/profile',tutor._id ]" class="h6 notification-friend"
+              <a
+                [routerLink]="['/profile', tutor._id]"
+                class="h6 notification-friend"
                 >{{ tutor.name }} {{ tutor.lastName }}</a
               >
               <span class="chat-message-item">{{ tutor.career }}</span>
@@ -170,9 +170,11 @@
           </ng-template>
         </div>
       </div>
+
       <div class="ui-block ">
         <div id="calendar" class="crumina-full-calendar"></div>
       </div>
+
       <div class="ui-block ">
         <div class="crumina-module crumina-heading with-title-decoration m-5 ">
           <h5 class="heading-title ">Comentarios</h5>
@@ -222,55 +224,55 @@
           <h6 class="title">Edit your Profile</h6>
         </div>
         <form #editForm="ngForm">
-        <div class="modal-body">
-                <div class="row">
-                        <div class="col-6">
-                          <div class="form-group label-floating is-empty mb-2">
-                            <label class="control-label">Nombre</label>
-                            <input
-                              class="form-control"
-                              placeholder=""
-                              value=""
-                              type="text"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="form-group label-floating is-empty mb-2">
-                            <label class="control-label">Apellido</label>
-                            <input
-                              class="form-control"
-                              placeholder=""
-                              value=""
-                              type="text"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                            <div class="col-6">
-                              <div class="form-group label-floating is-empty mb-2">
-                                <label class="control-label">Email</label>
-                                <input
-                                  class="form-control"
-                                  placeholder=""
-                                  value=""
-                                  type="text"
-                                />
-                              </div>
-                            </div>
-                            <div class="col-6">
-                              <div class="form-group label-floating is-empty mb-2">
-                                <label class="control-label">Carrera</label>
-                                <input
-                                  class="form-control"
-                                  placeholder=""
-                                  value=""
-                                  type="text"
-                                />
-                              </div>
-                            </div>
-                          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group label-floating is-empty mb-2">
+                  <label class="control-label">Nombre</label>
+                  <input
+                    class="form-control"
+                    placeholder=""
+                    value=""
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group label-floating is-empty mb-2">
+                  <label class="control-label">Apellido</label>
+                  <input
+                    class="form-control"
+                    placeholder=""
+                    value=""
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group label-floating is-empty mb-2">
+                  <label class="control-label">Email</label>
+                  <input
+                    class="form-control"
+                    placeholder=""
+                    value=""
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group label-floating is-empty mb-2">
+                  <label class="control-label">Carrera</label>
+                  <input
+                    class="form-control"
+                    placeholder=""
+                    value=""
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
             <div class="row">
               <div class="col-6">
                 <div class="form-group label-floating is-empty mb-2">
@@ -295,18 +297,17 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="form-group label-floating">
               <label class="control-label">Descripcion</label>
-              <textarea class="form-control" placeholder="">
-  
-                          </textarea
-              >
+              <textarea class="form-control" placeholder=""> </textarea>
             </div>
-  
-            <button class="btn btn-breez btn-lg full-width"  type="submit">Guardar Cambios</button>
+
+            <button class="btn btn-breez btn-lg full-width" type="submit">
+              Guardar Cambios
+            </button>
           </div>
-    </form>
+        </form>
       </div>
     </div>
   </div>
@@ -332,9 +333,7 @@
         </div>
 
         <div *ngIf="user.isTutor" class="modal-body ">
-          <form class="example-form text-center "
-          sty
-          (ngSubmit)="add()">
+          <form class="example-form text-center " sty (ngSubmit)="add()">
             <mat-form-field class="full-width">
               <input
                 type="text"
@@ -417,7 +416,10 @@
     aria-labelledby="edit-my-poll-popup"
     aria-hidden="true"
   >
-    <div class="modal-dialog modal-dialog-centered window-popup edit-my-poll-popup" role="document">
+    <div
+      class="modal-dialog modal-dialog-centered window-popup edit-my-poll-popup"
+      role="document"
+    >
       <div class="modal-content">
         <a class="close icon-close" data-dismiss="modal" aria-label="Close">
           <svg class="olymp-close-icon">
