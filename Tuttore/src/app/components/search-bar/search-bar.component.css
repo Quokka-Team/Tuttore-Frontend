@@ -3,7 +3,7 @@
     overflow: hidden;
     height: 100vh;
     display: flex;
-    background-image: url("../../../assets/img/main/landing20.jpg");
+    background-image: url("../../../assets/img/main/landing21.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -26,8 +26,16 @@
     width: 100%;
 }
 
+.text{
+    color: #fff;
+    padding: 0 15%;
+    margin-bottom: 15%
+}
+
+
+
 .search {
-    top: 60vh;
+    top: 40vh;
     height: 50px;
     width: 100vw;
     margin: 0 auto;
@@ -49,7 +57,47 @@
     color: #fff;
     position: relative;
     top: -25px;
-    font-size: 60px;;
+    font-size: 80px;
+}
+
+@media (max-width: 600px) {
+    .search h1 {
+        color: #fff;
+        position: relative;
+        top: -25px;
+        font-size: 50px;
+    }
+    .search {
+        top: 20vh;
+        height: 50px;
+        width: 100vw;
+        margin: 0 auto;
+    }
+    .hero {
+        position: relative;
+        overflow: hidden;
+        height: 70vh;
+        display: flex;
+        background-image: url("../../../assets/img/main/landing21.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        text-align: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .search {
+        top: 30vh;
+        height: 50px;
+        width: 100vw;
+        margin: 0 auto;
+    }
+  }
+
+.search input:focus {
+    background: #fff;
+    border-color: #fff;
 }
 
 .search input:focus {

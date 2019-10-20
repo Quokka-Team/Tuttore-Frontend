@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<div class="container">
+<div class="container screen">
     <div class="row">
         <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="ui-block mx-auto">
@@ -34,42 +34,35 @@
             </div>
         </div>
         <div class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 col-12">
-            <div class="ui-block" *ngIf="tutors">
-                <div class="ui-block-title">
-
-                    <h6 class="title">Algunos Tutores Nuevos de {{subject}}</h6>
-
-                </div>
-                <!-- W-Action -->
-
-                <ul class="widget w-friend-pages-added notification-list friend-requests">
-                    <li *ngFor="let tutor of recommendedTutors" class="inline-items">
-                        <div class="d-flex justify-content-between">
-                            <div class="author-thumb ">
-                                <img src="assets/img/avatar62-sm.jpg" alt="author">
-                            </div>
-                            <div class="notification-event ">
-                                <a href="" class="h6 notification-friend">{{tutor.name}} {{tutor.lastName}}</a>
-                                <!-- <span class="chat-message-item">8 Friends in Common</span> -->
-
-                            </div>
-                            <div class="col-xs-4">
-                                <span class="notification-icon">
-                                    <a [routerLink]="['/profile',tutor.idTutor]" class="accept-request">
-
-                                        <i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i>
-                                    </a>
-                                </span>
-                            </div>
+                <div class="ui-block"  *ngIf="tutors">
+                        <div class="ui-block-title">
+                          <h6 class="title">Algunos Tutores Nuevos</h6>
                         </div>
+                        <ul
+                          class="widget w-friend-pages-added notification-list friend-requests"
+                        >
+                          <li *ngFor="let tutor of recommendedTutors" class="inline-items">
+                            <div class="author-thumb">
+                              <img
+                                class="author-thumb"
+                                [src]="tutor.profilePicture | noimage"
+                                alt="author"
+                              />
+                            </div>
+                            <div class="notification-event">
+                              <a
+                                [routerLink]="['/profile', tutor.idTutor]"
+                                class="h6 notification-friend"
+                                >{{ tutor.name }} {{ tutor.lastName }}</a
+                              >
+                              <span class="chat-message-item">{{ tutor.career }}</span>
+                            </div>
+                          </li>
+                        </ul>
+                
+                        <!-- ... end W-Action -->
+                      </div>
 
-                    </li>
-
-
-                </ul>
-
-                <!-- ... end W-Action -->
-            </div>
         </div>
         <div class="col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
 

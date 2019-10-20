@@ -1,452 +1,418 @@
 <app-navbar> </app-navbar>
-<div class="container">
-  <div class="row">
-    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-      <div class="ui-block">
-        <div class="top-header">
-          <div class="top-header-thumb ">
-            <div class=" ">
-              <img [src]="user.background | nobackground" alt="Portada" />
+<div class="animated fadeIn ">
+  <div class="container">
+    <div class="row">
+      <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="ui-block">
+          <div class="top-header">
+            <div class="top-header-thumb ">
+              <div class=" ">
+                <img [src]="user.background | nobackground" alt="Portada" />
+              </div>
             </div>
-          </div>
-          <div class="profile-section"></div>
-          <div class="top-header-author">
-            <img
-              class="author-thumb"
-              [src]="user.profilePicture | noiconimage"
-              alt="author"
-            />
-            <div class="author-content">
-              <a href="02-ProfilePage.html" class="h4 author-name"
-                >{{ user.name | titlecase }} {{ user.lastName | titlecase }}</a
-              >
-              <div class="country">{{ user.career }}</div>
+            <div class="profile-section"></div>
+            <div class="top-header-author">
+              <img
+                class="author-thumb"
+                [src]="user.profilePicture | noiconimage"
+                alt="author"
+              />
+              <div class="author-content">
+                <a href="02-ProfilePage.html" class="h4 author-name"
+                  >{{ user.name | titlecase }}
+                  {{ user.lastName | titlecase }}</a
+                >
+                <div class="country">{{ user.career }}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ... end Top Header-Profile -->
+  <!-- ... end Top Header-Profile -->
 
-<div class="container">
-  <div class="row">
-    <div
-      class="col col-xl-4 order-xl-1 col-lg-4 order-lg-1 col-md-12 order-md-1 col-sm-12 col-12"
-    >
-      <div class="ui-block">
-        <div class="ui-block-title">
-          <h6 class="title">Informacion Personal</h6>
+  <div class="container">
+    <div class="row">
+      <div
+        class="col col-xl-4 order-xl-1 col-lg-4 order-lg-1 col-md-12 order-md-1 col-sm-12 col-12"
+      >
+        <div class="ui-block">
+          <div class="ui-block-title">
+            <h6 class="title">Informacion Personal</h6>
+          </div>
+          <div class="ui-block-content">
+            <!-- W-Personal-Info -->
+
+            <ul class="widget w-personal-info">
+              <li>
+                <span class="title">Descripcion:</span>
+                <span class="text">{{ user.description }}</span>
+              </li>
+              <li>
+                <span class="title">Email:</span>
+                <span class="text">{{ user.email }}</span>
+              </li>
+              <li>
+                <span class="title">Carrera:</span>
+                <span class="text">{{ user.career }}</span>
+              </li>
+              <li>
+                <span class="title">Promedio</span>
+                <span class="text">{{ user.gpa }}</span>
+              </li>
+              <li>
+                <span class="title">Telefono</span>
+                <span class="text">{{ user.phoneNumber }}</span>
+              </li>
+            </ul>
+
+            <div class="widget w-socials" *ngIf="isUser()">
+              <a class="social-item bg-blue text-white">
+                <i class="fas fa-address-book" aria-hidden="true"></i> Historial
+              </a>
+              <a
+                h
+                class="social-item bg-blue text-white"
+                data-toggle="modal"
+                data-target="#edit-profile"
+              >
+                <i class="fas fa-edit" aria-hidden="true"></i> Editar
+                Informacion
+              </a>
+              <a
+                class="social-item bg-blue text-white"
+                data-toggle="modal"
+                data-target="#create-friend-group-1"
+              >
+                <i class="fas fa-plus-circle" aria-hidden="true"></i> Añadir
+                Materia
+              </a>
+            </div>
+
+            <!-- ... end W-Socials -->
+          </div>
         </div>
-        <div class="ui-block-content">
-          <!-- W-Personal-Info -->
-
-          <ul class="widget w-personal-info">
-            <li>
-              <span class="title">Descripcion:</span>
-              <span class="text">{{ user.description }}</span>
-            </li>
-            <li>
-              <span class="title">Email:</span>
-              <span class="text">{{ user.email }}</span>
-            </li>
-            <li>
-              <span class="title">Carrera:</span>
-              <span class="text">{{ user.career }}</span>
-            </li>
-            <li>
-              <span class="title">Promedio</span>
-              <span class="text">{{ user.gpa }}</span>
-            </li>
-            <li>
-              <span class="title">Telefono</span>
-              <span class="text">{{ user.phoneNumber }}</span>
+        <div class="ui-block">
+          <div class="ui-block-title">
+            <h6 class="title">Algunos Tutores Nuevos</h6>
+          </div>
+          <ul
+            class="widget w-friend-pages-added notification-list friend-requests"
+          >
+            <li *ngFor="let tutor of newTutors" class="inline-items">
+              <div class="author-thumb">
+                <img
+                  class="author-thumb"
+                  [src]="tutor.profilePicture | noimage"
+                  alt="author"
+                />
+              </div>
+              <div class="notification-event">
+                <a
+                  [routerLink]="['/profile', tutor._id]"
+                  class="h6 notification-friend"
+                  >{{ tutor.name }} {{ tutor.lastName }}</a
+                >
+                <span class="chat-message-item">{{ tutor.career }}</span>
+              </div>
             </li>
           </ul>
 
-          <div class="widget w-socials" *ngIf="isUser()">
-            <a class="social-item bg-blue text-white">
-              <i class="fas fa-address-book" aria-hidden="true"></i> Historial
-            </a>
-            <a
-              h
-              class="social-item bg-blue text-white"
-              data-toggle="modal"
-              data-target="#edit-profile"
-            >
-              <i class="fas fa-edit" aria-hidden="true"></i> Editar Informacion
-            </a>
-            <a
-              class="social-item bg-blue text-white"
-              data-toggle="modal"
-              data-target="#create-friend-group-1"
-            >
-              <i class="fas fa-plus-circle" aria-hidden="true"></i> Añadir
-              Materia
-            </a>
+          <!-- ... end W-Action -->
+        </div>
+      </div>
+      <div
+        class="col col-xl-8 order-xl-2 col-lg-8 order-lg-2 col-md-12 order-md-2 col-sm-12 col-12"
+      >
+        <div class="ui-block">
+          <div class="ui-block-title">
+            <h6 class="title">Materias de Tutoria</h6>
           </div>
-
-          <!-- ... end W-Socials -->
-        </div>
-      </div>
-      <div class="ui-block">
-        <div class="ui-block-title">
-          <h6 class="title">Algunos Tutores Nuevos</h6>
-        </div>
-        <ul
-          class="widget w-friend-pages-added notification-list friend-requests"
-        >
-          <li *ngFor="let tutor of newTutors" class="inline-items">
-            <div class="author-thumb">
-              <img
-                class="author-thumb"
-                [src]="tutor.profilePicture | noimage"
-                alt="author"
-              />
-            </div>
-            <div class="notification-event">
-              <a
-                [routerLink]="['/profile', tutor._id]"
-                class="h6 notification-friend"
-                >{{ tutor.name }} {{ tutor.lastName }}</a
-              >
-              <span class="chat-message-item">{{ tutor.career }}</span>
-            </div>
-          </li>
-        </ul>
-
-        <!-- ... end W-Action -->
-      </div>
-    </div>
-    <div
-      class="col col-xl-8 order-xl-2 col-lg-8 order-lg-2 col-md-12 order-md-2 col-sm-12 col-12"
-    >
-      <div class="ui-block">
-        <div class="ui-block-title">
-          <h6 class="title">Materias de Tutoria</h6>
-        </div>
-        <div class="ui-block-content">
-          <div class="row" *ngIf="user.isTutor; else addSubject">
-            <div
-              *ngFor="let course of user.courses"
-              class="col col-lg-6 col-md-6 col-sm-12 col-12"
-            >
+          <div class="ui-block-content">
+            <div class="row" *ngIf="user.isTutor; else addSubject">
               <div
-                class="birthday-item inline-items border border-light rounded  m-2"
+                *ngFor="let course of user.courses"
+                class="col col-lg-6 col-md-6 col-sm-12 col-12"
               >
-                <div class="birthday-author-name ">
-                  <a href="# " class="h6 author-name ">{{ course.name }}</a>
-                  <div class="birthday-date ">
-                    {{ course.code }}
-                    <!-- <Strong>4.7</Strong> -->
-                  </div>
-                </div>
-                <a
-                  data-toggle="modal"
-                  data-target="#edit-my-poll-popup"
-                  class="btn btn-sm bg-blue"
-                  style="color: #fff;"
-                  >Contactar</a
+                <div
+                  class="birthday-item inline-items border border-light rounded  m-2"
                 >
-              </div>
-            </div>
-          </div>
-          <ng-template #addSubject>
-            <a
-              class="  full-block"
-              data-toggle="modal"
-              data-target="#create-friend-group-1"
-            ></a>
-            <div class="content text-center">
-              <div class="">
-                <i class="fas fa-plus-square add-Subject"></i>
-              </div>
-              <div class="author-content">
-                <h4 class="country">Conviértete en Tutor agregando materias</h4>
-              </div>
-            </div>
-          </ng-template>
-        </div>
-      </div>
-
-      <div class="ui-block ">
-        <div id="calendar" class="crumina-full-calendar"></div>
-      </div>
-
-      <div class="ui-block ">
-        <div class="crumina-module crumina-heading with-title-decoration m-5 ">
-          <h5 class="heading-title ">Comentarios</h5>
-        </div>
-        <ul class="comments-list style-3 ">
-          <li *ngFor="let item of []" class="comment-item ">
-            <div class="post__author-thumb ">
-              <img [src]="item.profilePicture | noiconimage" alt="author " />
-            </div>
-
-            <div class="comments-content ">
-              <div class="post__author author vcard ">
-                <div class="author-date ">
-                  <a class="h6 post__author-name fn " href="# "
-                    >Nicholas Grissom</a
+                  <div class="birthday-author-name ">
+                    <a href="# " class="h6 author-name ">{{ course.name }}</a>
+                    <div class="birthday-date ">
+                      {{ course.code }}
+                      <!-- <Strong>4.7</Strong> -->
+                    </div>
+                  </div>
+                  <a
+                    data-toggle="modal"
+                    data-target="#edit-my-poll-popup"
+                    class="btn btn-sm bg-blue"
+                    style="color: #fff;"
+                    >Contactar</a
                   >
-                  <div class="post__date ">
-                    <time class="published " datetime="2004-07-24T18:18 ">
-                      27 mins ago
-                    </time>
+                </div>
+              </div>
+            </div>
+            <ng-template #addSubject>
+              <a
+                class="  full-block"
+                data-toggle="modal"
+                data-target="#create-friend-group-1"
+              ></a>
+              <div class="content text-center">
+                <div class="">
+                  <i class="fas fa-plus-square add-Subject"></i>
+                </div>
+                <div class="author-content">
+                  <h4 class="country">
+                    Conviértete en Tutor agregando materias
+                  </h4>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="ui-block ">
+          <div id="calendar" class="crumina-full-calendar"></div>
+        </div>
+
+        <div class="ui-block ">
+          <div
+            class="crumina-module crumina-heading with-title-decoration m-5 "
+          >
+            <h5 class="heading-title ">Comentarios</h5>
+          </div>
+          <ul class="comments-list style-3 ">
+            <li *ngFor="let item of []" class="comment-item ">
+              <div class="post__author-thumb ">
+                <img [src]="item.profilePicture | noiconimage" alt="author " />
+              </div>
+
+              <div class="comments-content ">
+                <div class="post__author author vcard ">
+                  <div class="author-date ">
+                    <a class="h6 post__author-name fn " href="# "
+                      >Nicholas Grissom</a
+                    >
+                    <div class="post__date ">
+                      <time class="published " datetime="2004-07-24T18:18 ">
+                        27 mins ago
+                      </time>
+                    </div>
+                  </div>
+                </div>
+
+                <p>
+                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                  accusantium der doloremque laudantium.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    
+    <div
+      class="modal  animated zoomIn faster"
+      id="edit-profile"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="create-event"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog window-popup create-event" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="title">Edit your Profile</h6>
+          </div>
+          <form #editForm="ngForm">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group label-floating is-empty mb-2">
+                    <label class="control-label">Nombre</label>
+                    <input
+                      class="form-control"
+                      placeholder=""
+                      value=""
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group label-floating is-empty mb-2">
+                    <label class="control-label">Apellido</label>
+                    <input
+                      class="form-control"
+                      placeholder=""
+                      value=""
+                      type="text"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group label-floating is-empty mb-2">
+                    <label class="control-label">Email</label>
+                    <input
+                      class="form-control"
+                      placeholder=""
+                      value=""
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group label-floating is-empty mb-2">
+                    <label class="control-label">Carrera</label>
+                    <input
+                      class="form-control"
+                      placeholder=""
+                      value=""
+                      type="text"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group label-floating is-empty mb-2">
+                    <label class="control-label">Telefono</label>
+                    <input
+                      class="form-control"
+                      placeholder=""
+                      value=""
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group label-floating is-empty mb-2">
+                    <label class="control-label">Promedio</label>
+                    <input
+                      class="form-control"
+                      placeholder=""
+                      value=""
+                      type="text"
+                    />
                   </div>
                 </div>
               </div>
 
-              <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium der doloremque laudantium.
-              </p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+              <div class="form-group label-floating">
+                <label class="control-label">Descripcion</label>
+                <textarea class="form-control" placeholder=""> </textarea>
+              </div>
 
-  <div
-    class="modal  animated zoomIn faster"
-    id="edit-profile"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="create-event"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog window-popup create-event" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h6 class="title">Edit your Profile</h6>
-        </div>
-        <form #editForm="ngForm">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group label-floating is-empty mb-2">
-                  <label class="control-label">Nombre</label>
-                  <input
-                    class="form-control"
-                    placeholder=""
-                    value=""
-                    type="text"
-                  />
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group label-floating is-empty mb-2">
-                  <label class="control-label">Apellido</label>
-                  <input
-                    class="form-control"
-                    placeholder=""
-                    value=""
-                    type="text"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group label-floating is-empty mb-2">
-                  <label class="control-label">Email</label>
-                  <input
-                    class="form-control"
-                    placeholder=""
-                    value=""
-                    type="text"
-                  />
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group label-floating is-empty mb-2">
-                  <label class="control-label">Carrera</label>
-                  <input
-                    class="form-control"
-                    placeholder=""
-                    value=""
-                    type="text"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group label-floating is-empty mb-2">
-                  <label class="control-label">Telefono</label>
-                  <input
-                    class="form-control"
-                    placeholder=""
-                    value=""
-                    type="text"
-                  />
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group label-floating is-empty mb-2">
-                  <label class="control-label">Promedio</label>
-                  <input
-                    class="form-control"
-                    placeholder=""
-                    value=""
-                    type="text"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group label-floating">
-              <label class="control-label">Descripcion</label>
-              <textarea class="form-control" placeholder=""> </textarea>
-            </div>
-
-            <button class="btn btn-breez btn-lg full-width" type="submit">
-              Guardar Cambios
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div
-    class="modal animated zoomIn faster"
-    id="create-friend-group-1"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="create-friend-group-1"
-    aria-hidden="true"
-  >
-    <div
-      class="modal-dialog modal-dialog-centered window-popup create-friend-group create-friend-group-1"
-      role="document"
-    >
-      <div class="modal-content">
-        <div class="modal-header justify-content-center">
-          <h6 *ngIf="user.isTutor" class="title">incluye Materia de Tutoria</h6>
-          <h6 *ngIf="!user.isTutor" class="title">
-            Estas a punto de convertire en tutor
-          </h6>
-        </div>
-
-        <div *ngIf="user.isTutor" class="modal-body ">
-          <form class="example-form text-center " sty (ngSubmit)="add()">
-            <mat-form-field class="full-width">
-              <input
-                type="text"
-                placeholder="Nombre Materia"
-                aria-label="Number"
-                matInput
-                [formControl]="myControl"
-                [matAutocomplete]="auto"
-              />
-              <mat-autocomplete
-                #auto="matAutocomplete"
-                (optionSelected)="getData($event.option.value)"
-              >
-                <mat-option
-                  *ngFor="let option of filteredOptions | async"
-                  [value]="option"
-                >
-                  {{ option }}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-            <div class="button-form">
-              <button class="btn btn-primary btn-md-2 mt-3" type="submit">
-                Enviar
+              <button class="btn btn-breez btn-lg full-width" type="submit">
+                Guardar Cambios
               </button>
             </div>
           </form>
         </div>
+      </div>
+    </div>
+    
 
-        <div *ngIf="!user.isTutor" class="modal-body">
-          <label class="control-label"
-            >Escribe una breve descripcion de ti como tutor y elige la primera
-            materia de la cual quieres ser tutor</label
-          >
-          <form
-            #logInForm="ngForm"
-            (ngSubmit)="becomeTutor()"
-            novalidate
-            class="content"
-          >
-            <div class="row">
-              <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                <div class="form-group label-floating">
-                  <label for="email" class="control-label">Descripcion:</label>
-                  <textarea
-                    required
-                    ngModel
-                    name="description"
-                    #email="ngModel"
-                    class="form-control"
-                    minlength="25"
-                    [(ngModel)]="description"
-                  ></textarea>
-                  <div
-                    class="alert alert-danger"
-                    *ngIf="email.touched && !email.valid"
-                  >
-                    Tu descripcion debe tener al menos 25 caracteres
-                  </div>
-                </div>
-                <button
-                  class="btn btn-lg btn-primary full-width"
-                  style="background-color: #00BBF0;border-color: #00BBF0"
+    <div
+      class="modal animated zoomIn faster"
+      id="create-friend-group-1"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="create-friend-group-1"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered window-popup create-friend-group create-friend-group-1"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <h6 *ngIf="user.isTutor" class="title">
+              incluye Materia de Tutoria
+            </h6>
+            <h6 *ngIf="!user.isTutor" class="title">
+              Estas a punto de convertire en tutor
+            </h6>
+          </div>
+
+          <div *ngIf="user.isTutor" class="modal-body ">
+            <form class="example-form text-center " sty (ngSubmit)="add()">
+              <mat-form-field class="full-width">
+                <input
+                  type="text"
+                  placeholder="Nombre Materia"
+                  aria-label="Number"
+                  matInput
+                  [formControl]="myControl"
+                  [matAutocomplete]="auto"
+                />
+                <mat-autocomplete
+                  #auto="matAutocomplete"
+                  (optionSelected)="getData($event.option.value)"
                 >
+                  <mat-option
+                    *ngFor="let option of filteredOptions | async"
+                    [value]="option"
+                  >
+                    {{ option }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <div class="button-form">
+                <button class="btn btn-primary btn-md-2 mt-3" type="submit">
                   Enviar
                 </button>
               </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+            </form>
+          </div>
 
-  <div
-    class="modal  animated zoomIn faster"
-    id="edit-my-poll-popup"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="edit-my-poll-popup"
-    aria-hidden="true"
-  >
-    <div
-      class="modal-dialog modal-dialog-centered window-popup edit-my-poll-popup"
-      role="document"
-    >
-      <div class="modal-content">
-        <a class="close icon-close" data-dismiss="modal" aria-label="Close">
-          <svg class="olymp-close-icon">
-            <use
-              xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"
-            ></use>
-          </svg>
-        </a>
-        <div class="modal-body">
-          <div class="edit-my-poll-content">
-            <form class="resume-form">
-              <h3>Envia un mensaje al tutor para contactarte !</h3>
-              <p>
-                Una vez envies el mensajes el tutor aparecera disponible en tu
-                chat para una mejor comincación
-              </p>
+          <div *ngIf="!user.isTutor" class="modal-body">
+            <label class="control-label"
+              >Escribe una breve descripcion de ti como tutor y elige la primera
+              materia de la cual quieres ser tutor</label
+            >
+            <form
+              #logInForm="ngForm"
+              (ngSubmit)="becomeTutor()"
+              novalidate
+              class="content"
+            >
               <div class="row">
                 <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                  <div class="form-group label-floating is-empty">
-                    <label class="control-label">Tu mensaje</label>
-                    <textarea class="form-control" placeholder=""></textarea>
+                  <div class="form-group label-floating">
+                    <label for="email" class="control-label"
+                      >Descripcion:</label
+                    >
+                    <textarea
+                      required
+                      ngModel
+                      name="description"
+                      #email="ngModel"
+                      class="form-control"
+                      minlength="25"
+                      [(ngModel)]="description"
+                    ></textarea>
+                    <div
+                      class="alert alert-danger"
+                      *ngIf="email.touched && !email.valid"
+                    >
+                      Tu descripcion debe tener al menos 25 caracteres
+                    </div>
                   </div>
-                  <a
-                    class="btn btn-primary btn-lg full-width"
-                    style="color: #fff;"
-                    >Enviar</a
+                  <button
+                    class="btn btn-lg btn-primary full-width"
+                    style="background-color: #00BBF0;border-color: #00BBF0"
                   >
+                    Enviar
+                  </button>
                 </div>
               </div>
             </form>
@@ -454,9 +420,58 @@
         </div>
       </div>
     </div>
+
+
+    <div
+      class="modal  animated zoomIn faster"
+      id="edit-my-poll-popup"
+ 
+    >
+      <div
+        class="modal-dialog modal-dialog-centered window-popup edit-my-poll-popup"
+        role="document"
+      >
+        <div class="modal-content">
+          <a class="close icon-close" data-dismiss="modal" aria-label="Close">
+            <svg class="olymp-close-icon">
+              <use
+                xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"
+              ></use>
+            </svg>
+          </a>
+          <div class="modal-body">
+            <div class="edit-my-poll-content">
+              <form class="resume-form">
+                <h3>Envia un mensaje al tutor para contactarte !</h3>
+                <p>
+                  Una vez envies el mensajes el tutor aparecera disponible en tu
+                  chat para una mejor comincación
+                </p>
+                <div class="row">
+                  <div
+                    class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                  >
+                    <div class="form-group label-floating is-empty">
+                      <label class="control-label">Tu mensaje</label>
+                      <textarea class="form-control" placeholder=""></textarea>
+                    </div>
+                    <a
+                      class="btn btn-primary btn-lg full-width"
+                      style="color: #fff;"
+                      >Enviar</a
+                    >
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
 </div>
 
 <app-footer></app-footer>
-
-<script src="assets/js/libs/fullcalendar.js"></script>

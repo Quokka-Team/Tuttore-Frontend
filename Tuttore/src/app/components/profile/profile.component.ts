@@ -42,11 +42,21 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.loadScript('assets/js/libs/fullcalendar.js');
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
       this.getUserInfo(id);
     });
 
+  }
+  private loadScript(url: string) {
+    const body = <HTMLDivElement> document.body;
+    const script = document.createElement('script');
+    script.innerHTML = '';
+    script.src = url;
+    script.async = false;
+    script.defer = true;
+    body.appendChild(script);
   }
 
   getUserInfo(id:string) {

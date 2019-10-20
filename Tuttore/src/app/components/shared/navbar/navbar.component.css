@@ -27,5 +27,8 @@
 }
 .account-settings li:hover{
     background-color: #ECFBFF;
- 
+}
+
+.author-name span{
+    font-weight: 500;
 }

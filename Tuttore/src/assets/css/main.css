@@ -1961,7 +1961,7 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
         float: none;
         display: block;
         height: auto;
-        padding: 15px 20px 0;
+        margin: auto;
     }
     .author-page .author-name {
         display: inline-block;
