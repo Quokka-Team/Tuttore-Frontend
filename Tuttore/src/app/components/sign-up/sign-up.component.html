@@ -44,10 +44,10 @@
                             </div>
                             <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group label-floating">
-                                    <label for="carrer" class="control-label">Carrera</label>
-                                    <input required ngModel name="carrer" #carrer="ngModel" class="form-control" placeholder="" type="text" id="carrer" [(ngModel)]="newStudent.carrer">
-                                    <div class="alert alert-danger" *ngIf="carrer.touched && !carrer.valid">
-                                        La carrera es requerida
+                                    <label for="phoneNumber" class="control-label">Teléfono</label>
+                                    <input required ngModel name="phoneNumber" #phoneNumber="ngModel" class="form-control" placeholder="" type="number" id="phoneNumber" [(ngModel)]="newStudent.phoneNumber">
+                                    <div class="alert alert-danger" *ngIf="phoneNumber.touched && !phoneNumber.valid">
+                                        El teléfono es requerido
                                     </div>
                                 </div>
                             </div>
@@ -61,6 +61,16 @@
                                     </div>
                                 </div>
                                 
+                                <div class="form-group label-floating">
+                                    <label for="carrer" class="control-label">Carrera</label>
+                                    <input required ngModel name="carrer" #carrer="ngModel" class="form-control" placeholder="" type="text" id="carrer" [(ngModel)]="newStudent.carrer">
+                                    <div class="alert alert-danger" *ngIf="carrer.touched && !carrer.valid">
+                                        <div *ngIf="carrer.control.errors.required">
+                                            La carrera es requerida
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group label-floating">
                                     <label for="password" class="control-label">Contraseña</label>
                                     <input required minlength="6" ngModel name="password" #password="ngModel" class="form-control" placeholder="" type="password" id="password" [(ngModel)]="newStudent.password">
