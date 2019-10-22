@@ -15,6 +15,15 @@
     width: 100%;
 }
 
-.example-full-width {
+::ng-deep .example-full-width {
     width: 100%;
 }
+
+.notification-event{
+    width: 80%;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+  }
+  

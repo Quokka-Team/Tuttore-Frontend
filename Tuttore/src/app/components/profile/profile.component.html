@@ -175,11 +175,9 @@
             </ng-template>
           </div>
         </div>
-
         <div class="ui-block ">
           <div id="calendar" class="crumina-full-calendar"></div>
         </div>
-
         <div class="ui-block ">
           <div
             class="crumina-module crumina-heading with-title-decoration m-5 "
@@ -187,7 +185,10 @@
             <h5 class="heading-title ">Comentarios</h5>
           </div>
           <ul class="comments-list style-3 ">
-            <li *ngFor="let item of []" class="comment-item ">
+            <li
+              *ngFor="let item of [1, 1, 1, 1]; let i = index"
+              class="comment-item "
+            >
               <div class="post__author-thumb ">
                 <img [src]="item.profilePicture | noiconimage" alt="author " />
               </div>
@@ -196,11 +197,11 @@
                 <div class="post__author author vcard ">
                   <div class="author-date ">
                     <a class="h6 post__author-name fn " href="# "
-                      >Nicholas Grissom</a
+                      >Estudiante {{ i }}</a
                     >
                     <div class="post__date ">
                       <time class="published " datetime="2004-07-24T18:18 ">
-                        27 mins ago
+                        2{{ i }} mins ago
                       </time>
                     </div>
                   </div>
@@ -228,7 +229,9 @@
       <div class="modal-dialog window-popup create-event" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h6 class="title">Edit your Profile</h6>
+            <h6 class="title">
+              Edit your Profile - Funcionalidad en desarrollo
+            </h6>
           </div>
           <form #editForm="ngForm">
             <div class="modal-body">
@@ -325,54 +328,77 @@
       tabindex="-1"
       role="dialog"
       aria-labelledby="create-friend-group-1"
-      aria-hidden="true"
     >
       <div
         class="modal-dialog modal-dialog-centered window-popup create-friend-group create-friend-group-1"
         role="document"
       >
         <div class="modal-content">
-          <div class="modal-header justify-content-center">
-            <h6 *ngIf="user.isTutor" class="title">
-              incluye Materia de Tutoria
-            </h6>
-            <h6 *ngIf="!user.isTutor" class="title">
-              Estas a punto de convertire en tutor
-            </h6>
-          </div>
-
           <div *ngIf="user.isTutor" class="modal-body ">
-            <form class="example-form text-center " sty (ngSubmit)="add()">
-              <mat-form-field class="full-width">
-                <input
-                  type="text"
-                  placeholder="Nombre Materia"
-                  aria-label="Number"
-                  matInput
-                  [formControl]="myControl"
-                  [matAutocomplete]="auto"
-                />
-                <mat-autocomplete
-                  #auto="matAutocomplete"
-                  (optionSelected)="getData($event.option.value)"
-                >
-                  <mat-option
-                    *ngFor="let option of filteredOptions | async"
-                    [value]="option"
+            <div *ngIf="courses != {}; else noAvaliableSubjects">
+              <div class="modal-header justify-content-center">
+                <h6 class="title">
+                  incluye Materia de Tutoria
+                </h6>
+              </div>
+              <form
+                class="example-form text-center "
+                (ngSubmit)="add_Subject()"
+              >
+              <mat-form-field
+              class="full-width mb-5
+            example-full-width"
+              style="border: 1px solid rgb(222, 226, 230);
+      padding: 3px 25px 0;
+      border-radius: 6px;;"
+            >
+              <label style="font: 14px; ">Busca tu Materia:</label>
+              <input
+                type="text"
+                aria-label="Number"
+                matInput
+                [formControl]="myControl"
+                [matAutocomplete]="auto"
+              />
+                  <mat-autocomplete
+                    #auto="matAutocomplete"
+                    (optionSelected)="getData($event.option.value)"
                   >
-                    {{ option }}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-              <div class="button-form">
-                <button class="btn btn-primary btn-md-2 mt-3" type="submit">
-                  Enviar
+                    <mat-option
+                      *ngFor="let option of filteredOptions | async"
+                      [value]="option"
+                    >
+                      {{ option }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <div class="button-form">
+                  <button class="btn btn-primary btn-md-2 mt-3" type="submit">
+                    Enviar
+                  </button>
+                </div>
+              </form>
+            </div>
+            <ng-template #noAvaliableSubjects>
+              <div class=" justify-content-center text-center">
+                <h6>
+                  Por el momento ya eres tutor de todas las materias que tenemos
+                  disponibles
+                </h6>
+                <button
+                  class="btn btn-primary btn-md-2 mt-3"
+                  data-dismiss="modal"
+                >
+                  Cerrar
                 </button>
               </div>
-            </form>
+            </ng-template>
           </div>
 
           <div *ngIf="!user.isTutor" class="modal-body">
+            <h6 class="title">
+              Estas a punto de convertire en tutor
+            </h6>
             <label class="control-label"
               >Escribe una breve descripcion de ti como tutor y elige la primera
               materia de la cual quieres ser tutor</label
@@ -405,9 +431,37 @@
                       Tu descripcion debe tener al menos 25 caracteres
                     </div>
                   </div>
+                  <mat-form-field
+                    class="full-width mb-5
+                  example-full-width"
+                    style="border: 1px solid;
+            padding: 3px 25px 0;
+            border-radius: 6px;;"
+                  >
+                    <label style="font: 14px;">Busca tu Materia:</label>
+                    <input
+                      type="text"
+                      aria-label="Number"
+                      matInput
+                      [formControl]="myControl"
+                      [matAutocomplete]="auto"
+                    />
+                    <mat-autocomplete
+                      #auto="matAutocomplete"
+                      (optionSelected)="getData($event.option.value)"
+                    >
+                      <mat-option
+                        *ngFor="let option of filteredOptions | async"
+                        [value]="option"
+                      >
+                        {{ option }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
                   <button
                     class="btn btn-lg btn-primary full-width"
                     style="background-color: #00BBF0;border-color: #00BBF0"
+                    type="submit"
                   >
                     Enviar
                   </button>
@@ -419,48 +473,41 @@
       </div>
     </div>
 
-    <div
-      class="modal  animated zoomIn faster"
-      id="edit-my-poll-popup">
+    <div class="modal  animated zoomIn faster" id="edit-my-poll-popup">
       <div
-      class="modal-dialog modal-dialog-centered window-popup edit-my-poll-popup"
-      role="document"
-    >
-      <div class="modal-content">
-        <a class="close icon-close" data-dismiss="modal" aria-label="Close">
-          <svg class="olymp-close-icon">
-            <use
-              xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"
-            ></use>
-          </svg>
-        </a>
-        <div class="modal-body">
-          <div class="edit-my-poll-content">
-            <form class="resume-form">
-              <h3>Envia un mensaje al tutor para contactarte !</h3>
-              <p>
-                Una vez envies el mensajes el tutor aparecera disponible en tu
-                chat para una mejor comincación
-              </p>
-              <div class="row">
-                <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                  <div class="form-group label-floating is-empty">
-                    <label class="control-label">Tu mensaje</label>
-                    <textarea class="form-control" placeholder=""></textarea>
-                  </div>
-                  <a
-                    class="btn btn-primary btn-lg full-width"
-                    style="color: #fff;"
-                    >Enviar</a
+        class="modal-dialog modal-dialog-centered window-popup edit-my-poll-popup"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="edit-my-poll-content">
+              <form class="resume-form">
+                <h3>Envia un mensaje al tutor para contactarte !</h3>
+                <p>
+                  Una vez envies el mensajes el tutor aparecera disponible en tu
+                  chat para una mejor comincación
+                </p>
+                <div class="row">
+                  <div
+                    class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
                   >
+                    <div class="form-group label-floating is-empty">
+                      <label class="control-label">Tu mensaje</label>
+                      <textarea class="form-control" placeholder=""></textarea>
+                    </div>
+                    <a
+                      class="btn btn-primary btn-lg full-width"
+                      style="color: #fff;"
+                      >Enviar</a
+                    >
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 <app-footer></app-footer>

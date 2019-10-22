@@ -1,99 +1,129 @@
 <app-navbar></app-navbar>
 
 <div class="container screen">
-    <div class="row">
-        <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="ui-block mx-auto">
-                <div class="ui-block-title bar">
-                    <h3 class="text-center">Ingresa la materia que Buscas</h3>
-                    <form class="example-form mt-5 " (ngSubmit)="getTutors(); getNewTutors()">
-                        <mat-form-field class="example-full-width">
-                            <input type="text" placeholder="Nombre Materia" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
-                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getData($event.option.value)'>
-                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                    {{option}}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
-                        <div class="button-form">
-                            <button class="btn btn-primary btn-md-2 mt-3" type="submit">Buscar</button>
-                        </div>
-                    </form>
+  <div class="row">
+    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="ui-block mx-auto">
+        <div class="ui-block-title bar">
+          <h2 class="text-center mb-3">Ingresa la materia que Buscas</h2>
+          <p>Aparecera una la lista de materias disponibles, selecciona la que necestias!</p>
+          <form
+            class="example-form mt-5 "
+            (ngSubmit)="getTutors(); getNewTutors()"
+          >
+            <mat-form-field class="example-full-width"
+            style="border: 1px solid rgb(222, 226, 230);
+            padding: 3px 25px 0;
+            border-radius: 6px;;"
+            >
+              <input
+              style="font-size: 17px;"
+                type="text"
+               
+                aria-label="Number"
+                matInput
+                [formControl]="myControl"
+                [matAutocomplete]="auto"
+              />
+              <mat-autocomplete
+                #auto="matAutocomplete"
+                (optionSelected)="getData($event.option.value)"
+              >
+                <mat-option
+                  *ngFor="let option of filteredOptions | async"
+                  [value]="option"
+                  type="text"
+                >
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <div class="button-form">
+              <button class="btn btn-primary btn-md-2 mt-3" type="submit">
+                Buscar
+              </button>
+            </div>
+          </form>
 
-
-
-                    <!-- <form (ngSubmit)="getTutors()"> -->
-                    <!-- <form (ngSubmit)="getUserPostTest()">
+          <!-- <form (ngSubmit)="getTutors()"> -->
+          <!-- <form (ngSubmit)="getUserPostTest()">
 
                         <input type="text" class=" form-control my-auto" name="subject" placeholder="Busca un tutor por materia" [(ngModel)]="subjectSearched.subject">
                         <div class="button-form">
                             <button class="btn btn-primary btn-md-2 mt-3" type="submit">Buscar</button>
                         </div>
                     </form> -->
-                </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 col-12"
+    >
+      <div class="ui-block" *ngIf="tutors">
+        <div class="ui-block-title">
+          <h6 class="title">Algunos Tutores Nuevos</h6>
+        </div>
+
+        <ul
+          class="widget w-friend-pages-added notification-list friend-requests"
+        >
+          <li *ngFor="let tutor of recommendedTutors" class="inline-items">
+            <div class="author-thumb">
+              <img
+                class="author-thumb"
+                [src]="tutor.profilePicture | noimage"
+                alt="author"
+              />
             </div>
-        </div>
-        <div class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 col-12">
-                <div class="ui-block"  *ngIf="tutors">
-                        <div class="ui-block-title">
-                          <h6 class="title">Algunos Tutores Nuevos</h6>
-                        </div>
-                        <ul
-                          class="widget w-friend-pages-added notification-list friend-requests"
-                        >
-                          <li *ngFor="let tutor of recommendedTutors" class="inline-items">
-                            <div class="author-thumb">
-                              <img
-                                class="author-thumb"
-                                [src]="tutor.profilePicture | noimage"
-                                alt="author"
-                              />
-                            </div>
-                            <div class="notification-event">
-                              <a
-                                [routerLink]="['/profile', tutor.idTutor]"
-                                class="h6 notification-friend"
-                                >{{ tutor.name }} {{ tutor.lastName }}</a
-                              >
-                              <span class="chat-message-item">{{ tutor.career }}</span>
-                            </div>
-                          </li>
-                        </ul>
-                
-                        <!-- ... end W-Action -->
-                      </div>
+            <div class="notification-event">
+              <a
+                [routerLink]="['/profile', tutor.idTutor]"
+                class="h6 notification-friend"
+                >{{ tutor.name }} {{ tutor.lastName }}</a
+              >
+              <span class="chat-message-item">{{ tutor.career }}</span>
+            </div>
+          </li>
+        </ul>
+        <!-- ... end W-Action -->
+      </div>
+    </div>
+    <div
+      class="col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12"
+    >
+      <div class="row">
+        <div
+          *ngFor="let tutor of tutors"
+          class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12"
+        >
+          <div class="ui-block">
+            <!-- Friend Item -->
+            <div class="friend-item">
+              <div class="friend-header-thumb">
+                <img src="assets/img/friend1.jpg" alt="friend" />
+              </div>
 
-        </div>
-        <div class="col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
+              <div class="friend-item-content">
+                <div class="friend-avatar">
+                  <div class="author-thumb">
+                    <img src="assets/img/avatar1.jpg" alt="author" />
+                  </div>
+                  <div class="author-content">
+                    <a
+                      [routerLink]="['/profile', tutor.idTutor]"
+                      class="h5 author-name"
+                      >{{ tutor.name }} {{ tutor.lastName }}</a
+                    >
+                    <!-- <a href="#" class="h5 author-name">{{tutor.name}}</a> -->
+                    <hr />
+                    <div class="country">{{ tutor.description }}</div>
+                  </div>
+                </div>
 
-            <div class="row">
-                <div *ngFor="let tutor of tutors" class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="ui-block">
-                        <!-- Friend Item -->
-                        <div class="friend-item">
-                            <div class="friend-header-thumb">
-                                <img src="assets/img/friend1.jpg" alt="friend">
-                            </div>
-
-                            <div class="friend-item-content">
-
-
-                                <div class="friend-avatar">
-                                    <div class="author-thumb">
-                                        <img src="assets/img/avatar1.jpg" alt="author">
-                                    </div>
-                                    <div class="author-content">
-                                        <a [routerLink]="['/profile',tutor.idTutor]" class="h5 author-name">{{tutor.name}} {{tutor.lastName}}</a>
-                                        <!-- <a href="#" class="h5 author-name">{{tutor.name}}</a> -->
-                                        <hr>
-                                        <div class="country">{{tutor.description}}</div>
-                                    </div>
-                                </div>
-
-                                <div class="swiper-container mp-0" data-slide="fade">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <!-- <div class="friend-count" data-swiper-parallax="-500">
+                <div class="swiper-container mp-0" data-slide="fade">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <!-- <div class="friend-count" data-swiper-parallax="-500">
                                                 <a href="#" class="friend-count-item">
                                                     <div class="h6">52</div>
                                                     <div class="title">Friends</div>
@@ -107,27 +137,30 @@
                                                     <div class="title">Videos</div>
                                                 </a>
                                             </div> -->
-                                            <div class="control-block-button d-inline-flex" data-swiper-parallax="-100">
-                                                <div class="my-auto mx-3">
-                                                    <h2>{{tutor.gpa}}</h2>
-                                                </div>
-                                                <a href="#" class="btn btn-control bg-yellow">
-                                                    <i class="fas fa-star"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- If we need pagination -->
-                                    <div class="swiper-pagination"></div>
-                                </div>
-                            </div>
+                      <div
+                        class="control-block-button d-inline-flex"
+                        data-swiper-parallax="-100"
+                      >
+                        <div class="my-auto mx-3">
+                          <h2>{{ tutor.gpa }}</h2>
                         </div>
-                        <!-- ... end Friend Item -->
+                        <a href="#" class="btn btn-control bg-yellow">
+                          <i class="fas fa-star"></i>
+                        </a>
+                      </div>
                     </div>
+                  </div>
+                  <!-- If we need pagination -->
+                  <div class="swiper-pagination"></div>
                 </div>
+              </div>
             </div>
+            <!-- ... end Friend Item -->
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <app-footer></app-footer>
