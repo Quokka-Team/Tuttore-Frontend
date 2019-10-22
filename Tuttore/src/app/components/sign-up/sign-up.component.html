@@ -3,7 +3,7 @@
 
     </div>
 
-    <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12" style="padding: 0;height: 100vh;">
+    <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12" style="padding: 0">
 
         <!-- Login-Registration Form  -->
 
@@ -35,6 +35,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group label-floating">
+                                    <label for="gpa" class="control-label">P.A.P.A</label>
+                                    <input required ngModel name="gpa" #gpa="ngModel" class="form-control" placeholder="" type="number" id="gpa" [(ngModel)]="newStudent.gpa">
+                                    <div class="alert alert-danger" *ngIf="gpa.touched && !gpa.valid">El P.A.P.A es requerido</div>
+                                </div>
+                            </div>
+                            <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group label-floating">
+                                    <label for="phoneNumber" class="control-label">Teléfono</label>
+                                    <input required ngModel name="phoneNumber" #phoneNumber="ngModel" class="form-control" placeholder="" type="number" id="phoneNumber" [(ngModel)]="newStudent.phoneNumber">
+                                    <div class="alert alert-danger" *ngIf="phoneNumber.touched && !phoneNumber.valid">
+                                        El teléfono es requerido
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group label-floating">
                                     <label for="email" class="control-label">Correo electrónico</label>
@@ -43,6 +60,17 @@
                                         El email no es válido
                                     </div>
                                 </div>
+                                
+                                <div class="form-group label-floating">
+                                    <label for="carrer" class="control-label">Carrera</label>
+                                    <input required ngModel name="carrer" #carrer="ngModel" class="form-control" placeholder="" type="text" id="carrer" [(ngModel)]="newStudent.carrer">
+                                    <div class="alert alert-danger" *ngIf="carrer.touched && !carrer.valid">
+                                        <div *ngIf="carrer.control.errors.required">
+                                            La carrera es requerida
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group label-floating">
                                     <label for="password" class="control-label">Contraseña</label>
                                     <input required minlength="6" ngModel name="password" #password="ngModel" class="form-control" placeholder="" type="password" id="password" [(ngModel)]="newStudent.password">
@@ -55,7 +83,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                
                                 <button [disabled]="signUpForm.form.invalid" class="btn btn-primary btn-lg full-width " style="background-color: #233D4D; border-color: #233D4D" type="submit">Completar Registro!</button>
                             </div>
                         </div>
