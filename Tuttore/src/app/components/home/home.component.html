@@ -24,7 +24,11 @@
 
                         <div class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 active">
                             <!-- Teammember Item  -->
-                            <app-tutor-card-home [tutor]="tutor0" [routerLink]="['/profile',tutor0._id]"></app-tutor-card-home>
+                            <ng-template *ngIf="tutor0">
+                                    <app-tutor-card-home [tutor]="tutor0" [routerLink]="['/profile',tutor0._id]"></app-tutor-card-home>
+                            </ng-template>
+                        
+                            
                             <!-- ... end Teammember Item  -->
                         </div>
                         <div *ngFor="let tutor of newTutors" class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 ">

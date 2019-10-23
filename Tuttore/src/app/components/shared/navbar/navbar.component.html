@@ -2,7 +2,14 @@
   <div class="logo-container" routerLink="/home">
     <img src="assets/img/logo/Logo.png" alt="Tuttore" />
   </div>
+
   <div class="header-content-wrapper">
+      <div class="search" [routerLink]="['/search']" >
+          <div >
+              <i class="fas fa-search"></i>
+              <p>Buscar Tutor</p>
+            </div>
+        </div>
     <div class="control-block mr-5 px-0">
       <div class="author-page author vcard inline-items more">
         <div class="author-thumb">

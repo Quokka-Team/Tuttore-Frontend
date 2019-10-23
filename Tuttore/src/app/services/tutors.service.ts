@@ -10,18 +10,22 @@ import { SearchSubjectModel } from '../models/searchSubject.model';
 export class TutorsService {
   
   userToken:string;
-   url = `http://tuttore-backend-env.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/`;
+   url = `http://tuttore.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/`;
   constructor(private http: HttpClient) {
     this.readToken();
   }
 
-  private getQuery(query: string) {
-    const headers = new HttpHeaders({
-      Authorization: "" // Token 
-    });
+  private saveToken(tokenId){
+    localStorage.setItem('token',tokenId);
 
-    return this.http.get(this.url, { headers });
+    let date = new Date();
+    date.setSeconds(1296000);
+
+    localStorage.setItem('expires', date.getTime().toString() );
+
+    this.readToken();
   }
+
 
   getNewTutors() {
      const headers = new HttpHeaders({
@@ -48,7 +52,7 @@ export class TutorsService {
   
   signIn(student: StudentModel){
     let cors = "https://cors-anywhere.herokuapp.com/";
-    return this.http.post( cors +'http://tuttore-backend-env.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/signIn/', student ).pipe(
+    return this.http.post( cors +`${this.url}signIn/`, student ).pipe(
         map( resp => {
           this.saveToken( resp['token'] );
           return resp;
@@ -58,18 +62,7 @@ export class TutorsService {
 
   signUp( student:StudentModel) {
     const authData = {...student};
-    return this.http.post('http://tuttore-backend-env.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/signUp', authData);
-  }
-
-  private saveToken(tokenId){
-    localStorage.setItem('token',tokenId);
-
-    let date = new Date();
-    date.setSeconds(1296000);
-
-    localStorage.setItem('expires', date.getTime().toString() );
-
-    this.readToken();
+    return this.http.post(`${this.url}signUp`, authData);
   }
 
   logOut() {
@@ -107,7 +100,7 @@ export class TutorsService {
     const headers = new HttpHeaders({
       'authorization': `bearer ${this.readToken()}`
     });
-    return this.http.get('http://tuttore-backend-env.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/getStudent' , {headers: headers});
+    return this.http.get(`${this.url}getStudent` , {headers: headers});
   }
 
   becomeTutor(des:string){
@@ -119,6 +112,7 @@ export class TutorsService {
     }
    return this.http.post(`${this.url}registerTutor`, data,{headers})
   }
+
   addSubject(id:string){
     const headers = new HttpHeaders({
       'authorization': `bearer ${this.readToken()}`

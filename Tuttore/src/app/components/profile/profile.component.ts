@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TutorsService } from "../../services/tutors.service";
 import { TutorModel } from "src/app/models/tutor.model";
-import { StudentModel } from "src/app/models/student.model";
+
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
@@ -10,7 +10,7 @@ import { SubjectModel } from "src/app/models/subjects.model";
 import { map, startWith } from "rxjs/operators";
 import { SearchModel } from "src/app/models/search.model";
 import * as _ from "underscore";
-import { ProfileModel } from 'src/app/models/profile.model';
+import { ProfileModel } from "src/app/models/profile.model";
 
 @Component({
   selector: "app-profile",
@@ -18,7 +18,7 @@ import { ProfileModel } from 'src/app/models/profile.model';
   styleUrls: ["./profile.component.css"]
 })
 export class ProfileComponent implements OnInit {
-  user: any={};
+  user: any = {};
   newTutors: TutorModel[];
   subjects: any[] = [];
   description: string;
@@ -28,17 +28,14 @@ export class ProfileComponent implements OnInit {
   subjectSearched;
   filteredOptions: Observable<string[]>;
   subjectId;
-  editProfile: ProfileModel;
-  id:string;
+  id: string;
   constructor(
     private tutorsService: TutorsService,
     private subjectService: SubjectsService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-
     this.getNewTutors();
-    this. editProfile = new ProfileModel();
   }
 
   ngOnInit() {
@@ -47,35 +44,25 @@ export class ProfileComponent implements OnInit {
       const id = routeParams.id;
       this.getUserInfo(id);
     });
-
   }
 
-
-  getUserInfo(id:string) {
-   
-    this.id =id;
+  getUserInfo(id: string) {
+    this.id = id;
     if (id == "user") {
       this.tutorsService.getUser().subscribe(
         (data: any) => {
           if (data.isTutor) {
             this.tutorsService
-              .getTutor("this")
-              .subscribe((tutor: TutorModel) => {
-                this.user = tutor;
-                this.user.isTutor = true;
-                this.editProfile.name=this.user.name;
-                this.editProfile.lastName=this.user.lastName;
-                this.editProfile.email=this.user.email;
-                this.editProfile.career=this.user.career;
-                this.editProfile.gpa=this.user.gpa;
-                this.editProfile.description=this.user.description;
-                this.editProfile.phoneNumber=this.user.phoneNumber;
-                this.getSubjects();
-              });
+            .getTutor("this")
+            .subscribe((tutor: TutorModel) => {
+              this.user = tutor;
+              this.user.isTutor = true;
+            });
           } else {
             this.user = data;
             this.user.isTutor = false;
           }
+          this.getSubjects();
         },
         error => {
           console.log("hubo un error");
@@ -106,7 +93,7 @@ export class ProfileComponent implements OnInit {
   becomeTutor() {
     this.tutorsService.becomeTutor(this.description).subscribe(data => {
       console.log(data);
-      this.router.navigateByUrl("/profile/user");
+      this.add_Subject();
     });
   }
 
@@ -121,11 +108,13 @@ export class ProfileComponent implements OnInit {
     for (let subject of data) {
       this.courses[subject._id] = subject.name;
     }
-    for(let course of this.user.courses){
-      if (course.idCourse in this.courses){
-        delete this.courses[course.idCourse];
+    if(this.user.courses){
+      for (let course of this.user.courses) {
+        if (course.idCourse in this.courses) {
+          delete this.courses[course.idCourse];
+        }
       }
-    }  
+    }
     this.options = Object.values(this.courses);
     this.subjectSearched = new SearchModel();
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -145,8 +134,8 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  add() {
-    if(this.subjectId){ 
+  add_Subject() {
+    if (this.subjectId) {
       this.tutorsService.addSubject(this.subjectId).subscribe(data => {
         console.log(data);
         location.reload();
@@ -158,8 +147,7 @@ export class ProfileComponent implements OnInit {
     this.subjectId = _.invert(this.courses)[value];
   }
 
-  isUser(){
-    return this.id=="user";
+  isUser() {
+    return this.id == "user";
   }
-
 }
