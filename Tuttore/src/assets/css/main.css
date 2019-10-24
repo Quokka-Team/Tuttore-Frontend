@@ -4618,7 +4618,7 @@ input,
 }
 
 .form-group.has-error:after {
-    content: '\f00d';
+    content: 'X';
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     position: absolute;
