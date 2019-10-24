@@ -19,7 +19,6 @@ export class LogInComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.incomingStudent);
     Swal.fire({
       allowOutsideClick: false,
       type: 'info',
@@ -37,7 +36,6 @@ export class LogInComponent implements OnInit {
           timer: 1500,
           showConfirmButton:false
         })
-        //console.log(data.message);
         this.route.navigateByUrl("/home");
       },
       error => {
@@ -47,9 +45,6 @@ export class LogInComponent implements OnInit {
           text: error.error.message
         })
       }
-    );
-    
-    
+    );    
   }
-
 }

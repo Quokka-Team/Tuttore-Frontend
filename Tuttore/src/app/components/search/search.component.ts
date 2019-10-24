@@ -9,6 +9,7 @@ import * as _ from "underscore";
 import { SubjectsService } from "src/app/services/subjects.service";
 import { SubjectModel } from "src/app/models/subjects.model";
 import { TutorModel } from 'src/app/models/tutor.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: "app-search",
@@ -29,8 +30,16 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private tutorsService: TutorsService,
-    private subjectService: SubjectsService
-  ) {}
+    private subjectService: SubjectsService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute.params.subscribe(routeParams => {
+      if(routeParams.subject){
+        this.getTutorsBySubjectName(routeParams.subject);
+      }
+    });
+    localStorage.setItem('reloaded','true');
+  }
 
   ngOnInit() {
     this.getSubjects();
@@ -60,12 +69,31 @@ export class SearchComponent implements OnInit {
     this.subject = value;
   }
 
+  getTutorsBySubjectName(subject:string){
+
+    this.tutorsService.getTutorsBySubject(subject).subscribe(
+      (data: any) => {
+        this.tutors = data.avaibleTutors;
+      },
+      e => {
+        console.log(e.error.error.message);
+      }
+    );
+
+    this.tutorsService.getNewTutorsBySubject(subject).subscribe(
+      (data: any) => {
+        this.recommendedTutors = data;
+      },
+      e => {
+        console.log(e.error.error.message);
+      }
+    );    
+  }
+
   getTutors() {
-    
     if (this.subjectId) {
       this.tutorsService.getTutorsBySubject(this.subjectId).subscribe(
-        (data: any) => {         
-          console.log(data);
+        (data: any) => {
           this.tutors = data.avaibleTutors;
         },
         e => {
@@ -77,16 +105,8 @@ export class SearchComponent implements OnInit {
 
   getNewTutors() {
     if (this.subjectId) {
-    this.tutorsService.getNewTutorsBySubject(this.subjectId).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.recommendedTutors = data;
-      },
-      e => {
-        console.log(e.error.error.message);
-      }
-    );
-  }
+    
+    }
   }
 
   getSubjects() {

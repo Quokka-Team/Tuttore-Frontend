@@ -1,25 +1,22 @@
 <app-navbar> </app-navbar>
+
+
 <div class=" ">
-  <div class="container">
-    <div class="row">
-      <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="ui-block">
-          <div class="top-header">
-            <div class="top-header-thumb ">
-              <div class=" ">
-                <img [src]="user.background | nobackground" alt="Portada" />
-              </div>
-            </div>
-            <div class="profile-section"></div>
-            <div class="top-header-author">
-              <img
-                class="author-thumb"
-                [src]="user.profilePicture | noiconimage"
-                alt="author"
-              />
-              <div class="author-content">
-                <a href="02-ProfilePage.html" class="h4 author-name"
-                  >{{ user.name | titlecase }}
+    <div class="container">
+        <div class="row">
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="ui-block">
+                    <div class="top-header">
+                        <div class="top-header-thumb ">
+                            <div class=" ">
+                                <img [src]="user.background | nobackground" alt="Portada" />
+                            </div>
+                        </div>
+                        <div class="profile-section"></div>
+                        <div class="top-header-author">
+                            <img class="author-thumb" [src]="user.profilePicture | noiconimage" alt="author" />
+                            <div class="author-content">
+                                <a href="02-ProfilePage.html" class="h4 author-name">{{ user.name | titlecase }}
                   {{ user.lastName | titlecase }}</a
                 >
                 <div class="country">{{ user.career }}</div>
@@ -72,48 +69,28 @@
               <a class="social-item bg-blue text-white">
                 <i class="fas fa-address-book" aria-hidden="true"></i> Historial
               </a>
-              <a
-                h
-                class="social-item bg-blue text-white"
-                data-toggle="modal"
-                data-target="#edit-profile"
-              >
-                <i class="fas fa-edit" aria-hidden="true"></i> Editar
-                Informacion
-              </a>
-              <a
-                class="social-item bg-blue text-white"
-                data-toggle="modal"
-                data-target="#create-friend-group-1"
-              >
-                <i class="fas fa-plus-circle" aria-hidden="true"></i> Añadir
-                Materia
-              </a>
-            </div>
+                                <a h class="social-item bg-blue text-white" data-toggle="modal" data-target="#edit-profile">
+                                    <i class="fas fa-edit" aria-hidden="true"></i> Editar Informacion
+                                </a>
+                                <a class="social-item bg-blue text-white" data-toggle="modal" data-target="#create-friend-group-1">
+                                    <i class="fas fa-plus-circle" aria-hidden="true"></i> Añadir Materia
+                                </a>
+                            </div>
 
-            <!-- ... end W-Socials -->
-          </div>
-        </div>
-        <div class="ui-block">
-          <div class="ui-block-title">
-            <h6 class="title">Algunos Tutores Nuevos</h6>
-          </div>
-          <ul
-            class="widget w-friend-pages-added notification-list friend-requests"
-          >
-            <li *ngFor="let tutor of newTutors" class="inline-items">
-              <div class="author-thumb">
-                <img
-                  class="author-thumb"
-                  [src]="tutor.profilePicture | noimage"
-                  alt="author"
-                />
-              </div>
-              <div class="notification-event">
-                <a
-                  [routerLink]="['/profile', tutor._id]"
-                  class="h6 notification-friend"
-                  >{{ tutor.name }} {{ tutor.lastName }}</a
+                            <!-- ... end W-Socials -->
+                        </div>
+                    </div>
+                    <div class="ui-block">
+                        <div class="ui-block-title">
+                            <h6 class="title">Algunos Tutores Nuevos</h6>
+                        </div>
+                        <ul class="widget w-friend-pages-added notification-list friend-requests">
+                            <li *ngFor="let tutor of newTutors" class="inline-items">
+                                <div class="author-thumb">
+                                    <img class="author-thumb" [src]="tutor.profilePicture | noimage" alt="author" />
+                                </div>
+                                <div class="notification-event">
+                                    <a [routerLink]="['/profile', tutor._id]" class="h6 notification-friend">{{ tutor.name }} {{ tutor.lastName }}</a
                 >
                 <span class="chat-message-item">{{ tutor.career }}</span>
               </div>
@@ -137,21 +114,16 @@
                 class="col col-lg-6 col-md-6 col-sm-12 col-12"
               >
                 <div
-                  class="birthday-item inline-items border border-light rounded  m-2"
+                  class="birthday-item inline-items border border-light rounded  m-2" style="padding-left:0px; padding-right: 15px;"
                 >
-                  <div class="birthday-author-name ">
+                  <div class="birthday-author-name " style="width: 50%;">
                     <a href="# " class="h6 author-name ">{{ course.name }}</a>
-                    <div class="birthday-date ">
-                      {{ course.code }}
-                      <!-- <Strong>4.7</Strong> -->
-                    </div>
-                  </div>
-                  <a
-                    data-toggle="modal"
-                    data-target="#edit-my-poll-popup"
-                    class="btn btn-sm bg-blue"
-                    style="color: #fff;"
-                    >Contactar</a
+                                    <div class="birthday-date ">
+                                        {{ course.code }}
+                                        <!-- <Strong>4.7</Strong> -->
+                                    </div>
+                                </div>
+                                <a *ngIf="id!=='user'" data-toggle="modal" data-target="#edit-my-poll-popup" class="btn btn-sm bg-blue" style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;">Contactar</a
                   >
                 </div>
               </div>
@@ -162,42 +134,38 @@
                 data-toggle="modal"
                 data-target="#create-friend-group-1"
               ></a>
-              <div class="content text-center">
-                <div class="">
-                  <i class="fas fa-plus-square add-Subject"></i>
+                                <div class="content text-center">
+                                    <div class="">
+                                        <i class="fas fa-plus-square add-Subject"></i>
+                                    </div>
+                                    <div class="author-content">
+                                        <h4 class="country">
+                                            Conviértete en Tutor agregando materias
+                                        </h4>
+                                    </div>
+                                </div>
+                                </ng-template>
+                    </div>
                 </div>
-                <div class="author-content">
-                  <h4 class="country">
-                    Conviértete en Tutor agregando materias
-                  </h4>
+                <!-- Calendario -->
+                <div class="ui-block ">
+                    <div id="calendar" class="crumina-full-calendar"></div>
                 </div>
-              </div>
-            </ng-template>
-          </div>
-        </div>
-        <div class="ui-block ">
-          <div id="calendar" class="crumina-full-calendar"></div>
-        </div>
-        <div class="ui-block ">
-          <div
-            class="crumina-module crumina-heading with-title-decoration m-5 "
-          >
-            <h5 class="heading-title ">Comentarios</h5>
-          </div>
-          <ul class="comments-list style-3 ">
-            <li
-              *ngFor="let item of [1, 1, 1, 1]; let i = index"
-              class="comment-item "
-            >
-              <div class="post__author-thumb ">
-                <img [src]="item.profilePicture | noiconimage" alt="author " />
-              </div>
+                <!-- Fin de calendario -->
+                <div class="ui-block ">
+                    <div class="crumina-module crumina-heading with-title-decoration m-5 ">
+                        <h5 class="heading-title ">Comentarios</h5>
+                    </div>
+                    <ul class="comments-list style-3 ">
+                        <li *ngFor="let item of [1, 1, 1, 1]; let i = index" class="comment-item ">
+                            <div class="post__author-thumb ">
+                                <img [src]="item.profilePicture | noiconimage" alt="author " />
+                            </div>
 
-              <div class="comments-content ">
-                <div class="post__author author vcard ">
-                  <div class="author-date ">
-                    <a class="h6 post__author-name fn " href="# "
-                      >Estudiante {{ i }}</a
+                            <div class="comments-content ">
+                                <div class="post__author author vcard ">
+                                    <div class="author-date ">
+                                        <a class="h6 post__author-name fn " href="# ">Estudiante {{ i }}</a
                     >
                     <div class="post__date ">
                       <time class="published " datetime="2004-07-24T18:18 ">
@@ -482,10 +450,10 @@
           <div class="modal-body">
             <div class="edit-my-poll-content">
               <form class="resume-form">
-                <h3>Envia un mensaje al tutor para contactarte !</h3>
+                <h3>Envía un mensaje al tutor para contactarte !</h3>
                 <p>
-                  Una vez envies el mensajes el tutor aparecera disponible en tu
-                  chat para una mejor comincación
+                  Una vez envies el mensajes el tutor aparecerá disponible en tu
+                  chat para una mejor comunicación
                 </p>
                 <div class="row">
                   <div
@@ -510,4 +478,5 @@
     </div>
   </div>
 </div>
+
 <app-footer></app-footer>

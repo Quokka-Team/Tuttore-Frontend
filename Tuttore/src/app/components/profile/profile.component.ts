@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, NgZone } from "@angular/core";
 import { TutorsService } from "../../services/tutors.service";
 import { TutorModel } from "src/app/models/tutor.model";
 
@@ -10,7 +10,6 @@ import { SubjectModel } from "src/app/models/subjects.model";
 import { map, startWith } from "rxjs/operators";
 import { SearchModel } from "src/app/models/search.model";
 import * as _ from "underscore";
-import { ProfileModel } from "src/app/models/profile.model";
 
 @Component({
   selector: "app-profile",
@@ -29,21 +28,33 @@ export class ProfileComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   subjectId;
   id: string;
+  reloaded: boolean = true;
   constructor(
     private tutorsService: TutorsService,
     private subjectService: SubjectsService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private zone: NgZone
   ) {
     this.getNewTutors();
+    this.reload();
   }
 
   ngOnInit() {
-    // this.loadScript('assets/js/libs/fullcalendar.js');
+    //this.loadScript('assets/js/libs/fullcalendar.js');
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
       this.getUserInfo(id);
     });
+  }
+
+  reload(){
+    if(localStorage.getItem('reloaded')==='true'){
+    this.zone.runOutsideAngular(() => {
+      location.reload();
+    });
+    localStorage.setItem('reloaded','false');
+    }
   }
 
   getUserInfo(id: string) {
@@ -80,8 +91,6 @@ export class ProfileComponent implements OnInit {
   getNewTutors() {
     this.tutorsService.getNewTutors().subscribe(
       (data: TutorModel[]) => {
-        console.log(data);
-
         this.newTutors = data;
       },
       e => {
@@ -92,7 +101,6 @@ export class ProfileComponent implements OnInit {
 
   becomeTutor() {
     this.tutorsService.becomeTutor(this.description).subscribe(data => {
-      console.log(data);
       this.add_Subject();
     });
   }
@@ -137,7 +145,6 @@ export class ProfileComponent implements OnInit {
   add_Subject() {
     if (this.subjectId) {
       this.tutorsService.addSubject(this.subjectId).subscribe(data => {
-        console.log(data);
         location.reload();
       });
     }
