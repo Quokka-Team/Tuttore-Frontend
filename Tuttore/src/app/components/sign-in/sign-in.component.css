@@ -10,3 +10,18 @@
     text-align: center;
     min-height: 600px;
   }
+
+  @media only screen and (max-width: 1024px) {
+    .image-login {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      height: 0;
+      background-image: url("../../../assets/img/sign-in/sign-in-image.jpg");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      text-align: center;
+      min-height: 150px;
+    }
+  }

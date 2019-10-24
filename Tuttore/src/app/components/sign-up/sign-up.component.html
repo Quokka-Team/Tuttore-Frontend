@@ -11,7 +11,6 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane active" id="home" role="tabpanel" data-mh="log-tab">
-                    <div class="title h6">Registrate a Tuttore</div>
                     <form #signUpForm="ngForm" (ngSubmit)="onSubmit()" novalidate class="content">
                         <a class="logo d-flex justify-content-center">
                             <div class="img-wrap">
@@ -85,6 +84,7 @@
                                 </div>
                                 
                                 <button [disabled]="signUpForm.form.invalid" class="btn btn-primary btn-lg full-width " style="background-color: #233D4D; border-color: #233D4D" type="submit">Completar Registro!</button>
+                                <p>¿Ya tienes una cuenta? <a href="sign-in">Inicia sesión ahora!</a> y encuentra tutores para las materias que necesites!</p>
                             </div>
                         </div>
                     </form>
