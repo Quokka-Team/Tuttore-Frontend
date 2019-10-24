@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, NgZone } from "@angular/core";
 import { TutorsService } from "../../../services/tutors.service";
 import { Router } from "@angular/router";
 
@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 export class NavbarComponent implements OnInit {
   user: any = {};
 
-  constructor(private auth: TutorsService, private route: Router,) {
+  constructor(private auth: TutorsService, private route: Router, private zone:NgZone) {
     this.getUserInfo();
   }
 

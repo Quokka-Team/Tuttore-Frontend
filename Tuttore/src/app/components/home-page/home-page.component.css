@@ -83,3 +83,42 @@
 .conectamos {
     font-size: 1.5rem;
 }
+
+.signUpBtn {
+    font-size: 20px;
+    color: #ff5e3a;
+    border-color: #ff5e3a;
+    font-weight: lighter;
+    min-width: 110px;
+}
+
+.loginBtn {
+    font-size: 20px;
+    color: #00bbf0;
+    border-color: #00bbf0;
+    font-weight: lighter;
+    min-width: 110px;
+}
+
+@media only screen and (max-width:415px) {
+    .signUpBtn {
+        font-size: 15px;
+        padding: 0px;
+    }
+    .loginBtn {
+        font-size: 15px;
+        padding: 0px;
+    }
+}
+
+@media only screen and (max-width:343px) {
+    .signUpBtn {
+        font-size: 13px;
+    }
+    .loginBtn {
+        font-size: 13px;
+    }
+    .logo-container {
+        margin-right: 20%;
+    }
+}
