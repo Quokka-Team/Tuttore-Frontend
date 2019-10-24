@@ -35,6 +35,49 @@
       <div
         class="col col-xl-4 order-xl-1 col-lg-4 order-lg-1 col-md-12 order-md-1 col-sm-12 col-12"
       >
+      <div class="ui-block">
+          <div class="ui-block-title">
+            <h6 class="title">Materias de Tutoria</h6>
+          </div>
+          <div class="ui-block-content">
+            <div class="" *ngIf="user.isTutor; else addSubject">
+              <div
+                *ngFor="let course of user.courses"
+              >
+                <div
+                  class="birthday-item inline-items border border-light rounded  m-2" style="padding-left:0px; padding-right: 15px;"
+                >
+                  <div class="birthday-author-name " style="width: 50%;">
+                    <a href="# " class="h6 author-name ">{{ course.name }}</a>
+                                    <div class="birthday-date ">
+                                        {{ course.code }}
+                                        <!-- <Strong>4.7</Strong> -->
+                                    </div>
+                                </div>
+                                <a *ngIf="id!=='user'" data-toggle="modal" data-target="#edit-my-poll-popup" class="btn btn-sm bg-blue" style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;">Contactar</a
+                  >
+                </div>
+              </div>
+            </div>
+            <ng-template #addSubject>
+              <a
+                class="  full-block"
+                data-toggle="modal"
+                data-target="#create-friend-group-1"
+              ></a>
+                                <div class="content text-center">
+                                    <div class="">
+                                        <i class="fas fa-plus-square add-Subject"></i>
+                                    </div>
+                                    <div class="author-content">
+                                        <h4 class="country">
+                                            Conviértete en Tutor agregando materias
+                                        </h4>
+                                    </div>
+                                </div>
+                                </ng-template>
+                    </div>
+                </div>
         <div class="ui-block">
           <div class="ui-block-title">
             <h6 class="title">Informacion Personal</h6>
@@ -103,50 +146,7 @@
       <div
         class="col col-xl-8 order-xl-2 col-lg-8 order-lg-2 col-md-12 order-md-2 col-sm-12 col-12"
       >
-        <div class="ui-block">
-          <div class="ui-block-title">
-            <h6 class="title">Materias de Tutoria</h6>
-          </div>
-          <div class="ui-block-content">
-            <div class="row" *ngIf="user.isTutor; else addSubject">
-              <div
-                *ngFor="let course of user.courses"
-                class="col col-lg-6 col-md-6 col-sm-12 col-12"
-              >
-                <div
-                  class="birthday-item inline-items border border-light rounded  m-2" style="padding-left:0px; padding-right: 15px;"
-                >
-                  <div class="birthday-author-name " style="width: 50%;">
-                    <a href="# " class="h6 author-name ">{{ course.name }}</a>
-                                    <div class="birthday-date ">
-                                        {{ course.code }}
-                                        <!-- <Strong>4.7</Strong> -->
-                                    </div>
-                                </div>
-                                <a *ngIf="id!=='user'" data-toggle="modal" data-target="#edit-my-poll-popup" class="btn btn-sm bg-blue" style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;">Contactar</a
-                  >
-                </div>
-              </div>
-            </div>
-            <ng-template #addSubject>
-              <a
-                class="  full-block"
-                data-toggle="modal"
-                data-target="#create-friend-group-1"
-              ></a>
-                                <div class="content text-center">
-                                    <div class="">
-                                        <i class="fas fa-plus-square add-Subject"></i>
-                                    </div>
-                                    <div class="author-content">
-                                        <h4 class="country">
-                                            Conviértete en Tutor agregando materias
-                                        </h4>
-                                    </div>
-                                </div>
-                                </ng-template>
-                    </div>
-                </div>
+        
                 <!-- Calendario -->
                 <div class="ui-block ">
                     <div id="calendar" class="crumina-full-calendar"></div>
