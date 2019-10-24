@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
     private zone: NgZone
   ) {
     this.getNewTutors();
+    this.reload();
   }
 
   ngOnInit() {
@@ -48,11 +49,11 @@ export class ProfileComponent implements OnInit {
   }
 
   reload(){
-    if(this.reloaded){
+    if(localStorage.getItem('reloaded')==='true'){
     this.zone.runOutsideAngular(() => {
       location.reload();
     });
-    this.reloaded=false;
+    localStorage.setItem('reloaded','false');
     }
   }
 
