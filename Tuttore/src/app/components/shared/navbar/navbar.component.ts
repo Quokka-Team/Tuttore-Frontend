@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 })
 export class NavbarComponent implements OnInit {
   user: any = {};
+  username: any;
 
   constructor(private auth: TutorsService, private route: Router,) {
     this.getUserInfo();
@@ -26,7 +27,7 @@ export class NavbarComponent implements OnInit {
     await this.auth.getUser().subscribe(
       data => {
         this.user = data;
-
+        this.username = this.user.email.match(/^([^@]*)@/)[1];
       },
       error => {
         console.log("hubo un error");
