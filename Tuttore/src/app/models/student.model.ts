@@ -4,6 +4,7 @@ export class StudentModel {
     email:string;
     password:string;
     carrer:string;
+    career:string;
     gpa:number;
     phoneNumber:string;
     isTutor:string

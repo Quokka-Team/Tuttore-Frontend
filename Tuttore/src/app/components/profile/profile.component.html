@@ -200,6 +200,9 @@
             <h6 class="title">
               Edita tu Perfil - Funcionalidad en desarrollo
             </h6>
+                  <div class="cancel-button " data-dismiss="modal" >
+                  <i class="fas fa-window-close"></i>
+                </div>
           </div>
           <form #editForm="ngForm">
             <div class="modal-body">
@@ -305,7 +308,10 @@
       >
         <div class="modal-content ">
           <div *ngIf="user.isTutor" class="modal-body ">
-            <div *ngIf="courses != {}; else noAvaliableSubjects">
+            <div *ngIf="!fulltutor(); else noAvaliableSubjects">
+              <div class="cancel-button" data-dismiss="modal">
+                  <i class="fas fa-window-close"></i>
+              </div>
               <div class="modal-header justify-content-center">
                 <h6 class="title">
                   incluye Materia de Tutoria
@@ -457,6 +463,9 @@
                   <div
                   class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
                   >
+                  <div class="cancel-button" data-dismiss="modal">
+                      <i class="fas fa-window-close"></i>
+                  </div>
                   <h3>Envía un mensaje al tutor para contactarte !</h3>
                   <p>
                     Una vez envies el mensajes el tutor aparecerá disponible en tu

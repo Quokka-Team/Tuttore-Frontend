@@ -124,11 +124,13 @@ export class ProfileComponent implements OnInit {
     }
 
     if(this.user.courses){
+      console.log(this.user.courses);
       
       for (let course of this.user.courses) {
         if (course.idCourse in this.courses) {
           delete this.courses[course.idCourse];
         }
+        console.log(Object.keys(this.courses).length);
       }
     }
     
@@ -165,5 +167,9 @@ export class ProfileComponent implements OnInit {
 
   isUser() {
     return this.id == "user";
+  }
+
+  fulltutor(){
+    return Object.keys(this.courses).length == 0;
   }
 }

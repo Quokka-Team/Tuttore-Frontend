@@ -31,6 +31,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
+import { HomeInfoComponent } from './components/shared/home-info/home-info.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import {MatInputModule} from '@angular/material/input';
     LogInComponent,
     HomePageComponent,
     NoiconimagePipe,
-    NobackgroundPipe
+    NobackgroundPipe,
+    HomeInfoComponent
   ],
   imports: [
     HttpClientModule,

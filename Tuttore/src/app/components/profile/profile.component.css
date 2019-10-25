@@ -19,6 +19,13 @@
     background-size: auto;
 }
 
+.cancel-button{
+    text-align: right;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #082F47;
+}
+
 .contact-tutor {
     max-width: 500px;
 }
