@@ -3567,3 +3567,4 @@ function(e, t) { "object" == typeof exports && "undefined" != typeof module ? t(
         C = t.createPlugin({ defaultView: "timeGridWeek", views: { timeGrid: { class: T, allDaySlot: !0, slotDuration: "00:30:00", slotEventOverlap: !0 }, timeGridDay: { type: "timeGrid", duration: { days: 1 } }, timeGridWeek: { type: "timeGrid", duration: { weeks: 1 } } } });
     e.AbstractTimeGridView = b, e.TimeGrid = y, e.TimeGridSlicer = w, e.TimeGridView = T, e.buildDayRanges = u, e.buildDayTable = d, e.default = C, Object.defineProperty(e, "__esModule", { value: !0 })
 });
+

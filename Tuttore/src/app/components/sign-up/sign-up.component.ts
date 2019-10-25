@@ -3,6 +3,7 @@ import { StudentModel } from 'src/app/models/student.model';
 import { Router } from '@angular/router';
 import { TutorsService } from '../../services/tutors.service';
 import Swal from 'sweetalert2';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,31 +14,77 @@ import Swal from 'sweetalert2';
 export class SignUpComponent implements OnInit{
 
   newStudent: StudentModel;
+  careers: any [];
 
-
-  constructor( private auth:TutorsService, private route:Router ) { 
+  constructor( private tutorService:TutorsService, private route:Router ) { 
 
   }
 
   ngOnInit() {
     this.newStudent = new StudentModel();
+
   }
 
-  onSubmit() {
+  onSubmit(f: NgForm) {
 
+    
+    if(f.invalid){
+      return;
+    }
+    
+    
     Swal.fire({
       allowOutsideClick: false,
       type: 'info',
       text: 'Procesando solicitud'
     })
-
     Swal.showLoading();
+    this.tutorService.getVerificationCode(this.newStudent.email).subscribe(  res => {
+      console.log(res);
+      
 
-    this.auth.signUp(this.newStudent).subscribe( async res => {
-      await Swal.fire({
+
+      Swal.fire({
+        allowOutsideClick: false,
+        type: 'info',
+        input: "text",
+        text: "Ingrese el codigo de verificacion que se enviado a su correo",
+        inputAttributes: {
+          maxlength: '6'  
+        }
+      }).then((result) => {
+        if (result.value) {
+            if(result.value == res['code']){
+              this.makeRegister();
+            }
+        }
+    });
+
+
+  },
+     err => {
+      Swal.fire({
+        allowOutsideClick: false,
+        type: 'error',
+        text: err.error.message,
+      })
+    }
+    )
+  }
+   
+  
+  getCareers(){
+    this.tutorService.getAllCareers().subscribe( (careers:any[]) => {
+      this.careers = careers;
+    })
+  }
+
+  private makeRegister(){
+     this.tutorService.signUp(this.newStudent).subscribe( async res => {
+      Swal.fire({
         allowOutsideClick: false,
         type: 'success',
-        text: 'Se le ha enviado un email a su correo para validar su cuenta',
+        text: 'Su cuenta se ha creado satisfactoriamente',
       })
       this.route.navigateByUrl("/sign-in");
     }, err => {

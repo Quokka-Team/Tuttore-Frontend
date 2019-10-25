@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
   getNewTutors() {
     this.tutorsService.getNewTutors().subscribe(
       (data: TutorModel[]) => {
-        console.log(data);
+
         this.newTutors = data.slice(1,data.length);
         this.tutor0 = data[0];
       },

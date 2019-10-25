@@ -112,7 +112,7 @@
               <a class="social-item bg-blue text-white">
                 <i class="fas fa-address-book" aria-hidden="true"></i> Historial
               </a>
-                                <a h class="social-item bg-blue text-white" data-toggle="modal" data-target="#edit-profile">
+                                <a class="social-item bg-blue btn text-white .modal-button" data-toggle="modal" data-target="#edit-profile">
                                     <i class="fas fa-edit" aria-hidden="true"></i> Editar Informacion
                                 </a>
                                 <a class="social-item bg-blue text-white" data-toggle="modal" data-target="#create-friend-group-1">
@@ -194,11 +194,11 @@
       aria-labelledby="create-event"
       aria-hidden="true"
     >
-      <div class="modal-dialog window-popup create-event" role="document">
+      <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h6 class="title">
-              Edit your Profile - Funcionalidad en desarrollo
+              Edita tu Perfil - Funcionalidad en desarrollo
             </h6>
           </div>
           <form #editForm="ngForm">
@@ -281,7 +281,7 @@
                 <textarea class="form-control" placeholder=""> </textarea>
               </div>
 
-              <button class="btn btn-breez btn-lg full-width" type="submit">
+              <button class="btn modal-button btn-lg full-width" type="submit">
                 Guardar Cambios
               </button>
             </div>
@@ -296,12 +296,14 @@
       tabindex="-1"
       role="dialog"
       aria-labelledby="create-friend-group-1"
+      aria-hidden="true"
+
     >
       <div
-        class="modal-dialog modal-dialog-centered window-popup create-friend-group create-friend-group-1"
+        class="modal-dialog modal-dialog-centered window-popup create-event"
         role="document"
       >
-        <div class="modal-content">
+        <div class="modal-content ">
           <div *ngIf="user.isTutor" class="modal-body ">
             <div *ngIf="courses != {}; else noAvaliableSubjects">
               <div class="modal-header justify-content-center">
@@ -341,8 +343,8 @@
                   </mat-autocomplete>
                 </mat-form-field>
                 <div class="button-form">
-                  <button class="btn btn-primary btn-md-2 mt-3" type="submit">
-                    Enviar
+                  <button class="btn btn-primary btn-md-2 mt-3 modal-button" type="submit">
+                    Añadir
                   </button>
                 </div>
               </form>
@@ -354,7 +356,7 @@
                   disponibles
                 </h6>
                 <button
-                  class="btn btn-primary btn-md-2 mt-3"
+                  class="btn btn-primary btn-md-2 mt-3 modal-button"
                   data-dismiss="modal"
                 >
                   Cerrar
@@ -427,11 +429,11 @@
                     </mat-autocomplete>
                   </mat-form-field>
                   <button
-                    class="btn btn-lg btn-primary full-width"
-                    style="background-color: #00BBF0;border-color: #00BBF0"
+                    class="btn btn-lg btn-primary full-width modal-button"
+                   
                     type="submit"
                   >
-                    Enviar
+                    Añadir
                   </button>
                 </div>
               </div>
@@ -441,31 +443,32 @@
       </div>
     </div>
 
-    <div class="modal  animated zoomIn faster" id="edit-my-poll-popup">
+    <div class="modal  animated zoomIn faster" 
+    id="edit-my-poll-popup">
       <div
-        class="modal-dialog modal-dialog-centered window-popup edit-my-poll-popup"
+        class="modal-dialog modal-dialog-centered window-popup contact-tutor"
         role="document"
       >
         <div class="modal-content">
           <div class="modal-body">
             <div class="edit-my-poll-content">
               <form class="resume-form">
-                <h3>Envía un mensaje al tutor para contactarte !</h3>
-                <p>
-                  Una vez envies el mensajes el tutor aparecerá disponible en tu
-                  chat para una mejor comunicación
-                </p>
                 <div class="row">
                   <div
-                    class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                  class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
                   >
+                  <h3>Envía un mensaje al tutor para contactarte !</h3>
+                  <p>
+                    Una vez envies el mensajes el tutor aparecerá disponible en tu
+                    chat para una mejor comunicación
+                  </p>
                     <div class="form-group label-floating is-empty">
                       <label class="control-label">Tu mensaje</label>
                       <textarea class="form-control" placeholder=""></textarea>
                     </div>
                     <a
-                      class="btn btn-primary btn-lg full-width"
-                      style="color: #fff;"
+                      class="btn btn-primary btn-lg full-width modal-button"
+                      
                       >Enviar</a
                     >
                   </div>

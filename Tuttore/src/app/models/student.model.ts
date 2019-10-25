@@ -3,7 +3,7 @@ export class StudentModel {
     lastName:string;
     email:string;
     password:string;
-    career:string;
+    carrer:string;
     gpa:number;
     phoneNumber:string;
     isTutor:string

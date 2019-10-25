@@ -11,6 +11,7 @@ export class TutorsService {
   
   userToken:string;
    url = `http://tuttore.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/`;
+    
   constructor(private http: HttpClient) {
     this.readToken();
   }
@@ -30,7 +31,7 @@ export class TutorsService {
   getNewTutors() {
      const headers = new HttpHeaders({
     });
-    return this.http.get(`${this.url}getNewTutors/10`,{ headers})
+    return this.http.get(`${this.url}getNewTutors/10`,{ headers});
   }
 
   getTutorsBySubject(id: string) {
@@ -48,7 +49,15 @@ export class TutorsService {
     });
     return this.http.get(`${this.url}getTutor/${id}`, {headers: headers});
   }
+
+  getAllCareers(){
+    return this.http.get(`${this.url}getAllCareers`);
+  }
   
+  getVerificationCode(email:string){
+    return this.http.get(`${this.url}verificationCode/${email}`)
+  }
+
   signIn(student: StudentModel){
     let cors = "https://cors-anywhere.herokuapp.com/";
     return this.http.post( cors +`${this.url}signIn/`, student ).pipe(
@@ -121,5 +130,6 @@ export class TutorsService {
     }
    return this.http.post(`${this.url}addCourseTutor`, data,{headers})
   }
+
 
 }

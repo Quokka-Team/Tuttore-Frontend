@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { TutorsService } from "src/app/services/tutors.service";
 import { SearchModel } from "src/app/models/search.model";
 
-import { FormControl } from "@angular/forms";
+import { FormControl, NgForm } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import * as _ from "underscore";
@@ -67,12 +67,16 @@ export class SearchComponent implements OnInit {
   getData(value) {
     this.subjectId = _.invert(this.courses)[value];
     this.subject = value;
+   
   }
 
   getTutorsBySubjectName(subject:string){
 
+    subject
     this.tutorsService.getTutorsBySubject(subject).subscribe(
       (data: any) => {
+        console.log(data);
+        
         this.tutors = data.avaibleTutors;
       },
       e => {
@@ -105,7 +109,14 @@ export class SearchComponent implements OnInit {
 
   getNewTutors() {
     if (this.subjectId) {
-    
+      this.tutorsService.getNewTutorsBySubject(this.subjectId).subscribe(
+        (data: any) => {
+          this.recommendedTutors = data;
+        },
+        e => {
+          console.log(e.error.error.message);
+        }
+      );
     }
   }
 
@@ -119,4 +130,5 @@ export class SearchComponent implements OnInit {
       }
     );
   }
+
 }

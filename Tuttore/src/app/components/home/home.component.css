@@ -8,6 +8,10 @@
     background-image: none;
 }
 
+.subject-container{
+    /* background-color: #f8f8f8l; */
+}
+
 @media (max-width: 767px) {
     .carousel-inner .active.left {
         left: -100%;

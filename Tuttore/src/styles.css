@@ -1,7 +1,10 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-.form-control.ng-touched.ng-invalid {
-    border: 2px solid red;
-}
+
+
+html {
+    scroll-behavior: smooth;
+  }
+  
 
 body{
     font-family: 'Montserrat', sans-serif;
