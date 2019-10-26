@@ -1,0 +1,92 @@
+<header class="header" id="site-header">
+  <div class="logo-container" routerLink="home">
+    <img src="assets/img/logo/Logo.png" alt="Tuttore" />
+  </div>
+  <div class="header-content-wrapper">
+    <div class="control-block mr-3 px-0">
+      <div class="inline-items" routerLink="profile">
+        <div>
+          <a routerLink="/sign-up">
+            <button type="button" class="m-1 btn signUpBtn">Registrarse</button>
+          </a>
+        </div>
+        <div>
+          <a routerLink="/sign-in">
+            <button type="button" class="m-1 btn loginBtn">
+              Iniciar Sesión
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-8 search">
+        <h1 style="font-weight:bold;">Bienvenido a Tuttore</h1>
+        <div class="arrow" (click)="navigateToSection('porque-tuttore')">
+          <i class="fas fa-arrow-alt-circle-down mt-5 "></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-home-info></app-home-info>
+
+<div class="footer footer--dark pb-3" id="footer">
+  <div class="container mx-auto">
+    <div class="row d-flex justify-content-center">
+      <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
+        <!-- Widget About -->
+
+        <div class="widget w-about ">
+          <a href="" class="logo d-flex justify-content-center">
+            <div class="img-wrap">
+              <img
+                class="tuttore-logo-footer"
+                src="assets/img/logo/LogoName.png"
+                alt="Tuttore"
+              />
+            </div>
+          </a>
+          <p class="text-center">
+            Tuttore te ayuda a encontrar a tu tutor indicado
+          </p>
+          <ul class="socials d-flex justify-content-center">
+            <li>
+              <a href="">
+                <i class="fab fa-facebook-square" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <i class="fab fa-twitter" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <i class="fab fa-youtube" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <i class="fab fa-google-plus-g" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <i class="fab fa-instagram" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ... end Widget About -->
+      </div>
+    </div>
+  </div>
+</div>
