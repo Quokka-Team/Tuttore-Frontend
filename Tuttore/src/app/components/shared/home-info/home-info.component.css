@@ -26,17 +26,7 @@
     margin: 0 auto;
 }
 
-.hero {
-    position: relative;
-    overflow: hidden;
-    height: 100vh;
-    display: flex;
-    background-image: url("../../../assets/img/main/landing20.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    text-align: center;
-}
+
 
 .form-control-borderless {
     border: none;
@@ -106,7 +96,7 @@
 }
 
 .pc-info{
-    background-color: #f8f8f8;;
+    background-color: #edf2f6;;
 }
 
 .pc-info-c{

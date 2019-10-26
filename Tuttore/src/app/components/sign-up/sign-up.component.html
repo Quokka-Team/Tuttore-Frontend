@@ -1,97 +1,256 @@
 <div class="row display-flex">
-    <div class="col col-xl-8 col-lg-6 col-md-12 col-sm-12 col-12 image-register">
+  <div
+    class="col col-xl-8 col-lg-6 col-md-12 col-sm-12 col-12 image-register"
+  ></div>
 
-    </div>
+  <div
+    class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12"
+    style="padding: 0"
+  >
+    <!-- Login-Registration Form  -->
 
-    <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12" style="padding: 0">
-
-        <!-- Login-Registration Form  -->
-
-        <div class="registration-login-form" style="padding: 0; height: 100vh;">
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane active" id="home" role="tabpanel" data-mh="log-tab">
-                    <form #signUpForm="ngForm" (ngSubmit)="onSubmit()" novalidate class="content">
-                        <a class="logo d-flex justify-content-center">
-                            <div class="img-wrap">
-                                <img class="tuttore-logo-footer" src="assets/img/logo/LogoName.png" alt="Tuttore">
-                            </div>
-                        </a>
-                        <div class="row">
-                            <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group label-floating">
-                                    <label for="name" class="control-label">Nombre</label>
-                                    <input required ngModel name="name" #name="ngModel" class="form-control" placeholder="" type="text" id="name" [(ngModel)]="newStudent.name">
-                                    <div class="alert alert-danger" *ngIf="name.touched && !name.valid">El nombre es requerido</div>
-                                </div>
-                            </div>
-                            <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group label-floating">
-                                    <label for="lastName" class="control-label">Apellido</label>
-                                    <input required ngModel name="lastName" #lastName="ngModel" class="form-control" placeholder="" type="text" id="lastName" [(ngModel)]="newStudent.lastName">
-                                    <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
-                                        El apellido es requerido
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group label-floating">
-                                    <label for="gpa" class="control-label">P.A.P.A</label>
-                                    <input required ngModel name="gpa" #gpa="ngModel" class="form-control" placeholder="" type="number" id="gpa" [(ngModel)]="newStudent.gpa">
-                                    <div class="alert alert-danger" *ngIf="gpa.touched && !gpa.valid">El P.A.P.A es requerido</div>
-                                </div>
-                            </div>
-                            <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group label-floating">
-                                    <label for="phoneNumber" class="control-label">Teléfono</label>
-                                    <input required ngModel name="phoneNumber" #phoneNumber="ngModel" class="form-control" placeholder="" type="number" id="phoneNumber" [(ngModel)]="newStudent.phoneNumber">
-                                    <div class="alert alert-danger" *ngIf="phoneNumber.touched && !phoneNumber.valid">
-                                        El teléfono es requerido
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group label-floating">
-                                    <label for="email" class="control-label">Correo electrónico</label>
-                                    <input required ngModel name="email" #email="ngModel" class="form-control" placeholder="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email" [(ngModel)]="newStudent.email">
-                                    <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
-                                        El email no es válido
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group label-floating">
-                                    <label for="carrer" class="control-label">Carrera</label>
-                                    <input required ngModel name="carrer" #carrer="ngModel" class="form-control" placeholder="" type="text" id="carrer" [(ngModel)]="newStudent.carrer">
-                                    <div class="alert alert-danger" *ngIf="carrer.touched && !carrer.valid">
-                                        <div *ngIf="carrer.control.errors.required">
-                                            La carrera es requerida
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group label-floating">
-                                    <label for="password" class="control-label">Contraseña</label>
-                                    <input required minlength="6" ngModel name="password" #password="ngModel" class="form-control" placeholder="" type="password" id="password" [(ngModel)]="newStudent.password">
-                                    <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
-                                        <div *ngIf="password.control.errors.required">
-                                            La contraseña es requerida
-                                        </div>
-                                        <div *ngIf="password.control.errors.minlength">
-                                            La contraseña debe ser de {{ password.control.errors.minlength.requiredLength }} caractéres o más
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <button [disabled]="signUpForm.form.invalid" class="btn btn-primary btn-lg full-width " style="background-color: #233D4D; border-color: #233D4D" type="submit">Completar Registro!</button>
-                                <p>¿Ya tienes una cuenta? <a href="sign-in">Inicia sesión ahora!</a> y encuentra tutores para las materias que necesites!</p>
-                            </div>
-                        </div>
-                    </form>
+    <div class="registration-login-form" style="padding: 0; height: 100vh;">
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div
+          class="tab-pane active"
+          id="home"
+          role="tabpanel"
+          data-mh="log-tab"
+        >
+        <a class="logo d-flex justify-content-center">
+          <div class="img-wrap">
+            <img
+              class="tuttore-logo-footer"
+              src="assets/img/logo/LogoName.png"
+              alt="Tuttore"
+            />
+          </div>
+        </a>
+          <form
+            #signUpForm="ngForm"
+            (ngSubmit)="onSubmit(signUpForm)"
+            novalidate
+            class="content animated bounceInRight"
+          >
+            <div class="row">
+              <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <span
+                  class="alert text-danger"
+                  *ngIf="
+                    signUpForm.submitted && signUpForm.controls['name'].errors
+                  "
+                  >El nombre es obligatorio</span
+                >
+                <div class="form-group label-floating">
+                  <label for="name" class="control-label">Nombre</label>
+                  <input
+                    required
+                    ngModel
+                    name="name"
+                    #name="ngModel"
+                    class="form-control"
+                    placeholder=""
+                    type="text"
+                    id="name"
+                    [(ngModel)]="newStudent.name"
+                  />
                 </div>
-            </div>
-        </div>
+              </div>
+              <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <span
+                  class="alert text-danger"
+                  *ngIf="
+                    signUpForm.submitted &&
+                    signUpForm.controls['lastName'].errors
+                  "
+                >
+                  El apellido es obligatorio</span
+                >
+                <div class="form-group label-floating">
+                  <label for="lastName" class="control-label">Apellido</label>
+                  <input
+                    required
+                    ngModel
+                    name="lastName"
+                    #lastName="ngModel"
+                    class="form-control"
+                    placeholder=""
+                    type="text"
+                    id="lastName"
+                    [(ngModel)]="newStudent.lastName"
+                  />
+                </div>
+              </div>
+              <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <span
+                  class="alert text-danger"
+                  *ngIf="
+                    (signUpForm.submitted && signUpForm.controls['gpa'].errors) || (signUpForm.value.gp<=0 || signUpForm.value.gpa>=5)
+                  "
+                  >El P.A.P.A es obligatorio y debe estar entre 0-5</span
+                >
+                <div class="form-group label-floating">
+                  <label for="gpa" class="control-label">P.A.P.A</label>
+                  <input
+                    required
+                    ngModel
+                    name="gpa"
+                    #gpa="ngModel"
+                    class="form-control"
+                    placeholder=""
+                    type="number"
+                    step="0.1"
+                    id="gpa"
+                    [(ngModel)]="newStudent.gpa"
+                  />
+                </div>
+              </div>
+              <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <span
+                  class="alert text-danger"
+                  *ngIf="
+                    signUpForm.submitted &&
+                    signUpForm.controls['phoneNumber'].errors
+                  "
+                >
+                  El teléfono es obligatorio
+                </span>
+                <div class="form-group label-floating">
+                  <label for="phoneNumber" class="control-label"
+                    >Teléfono</label
+                  >
+                  <input
+                    required
+                    ngModel
+                    name="phoneNumber"
+                    #phoneNumber="ngModel"
+                    class="form-control"
+                    placeholder=""
+                    type="number"
+                    id="phoneNumber"
+                    [(ngModel)]="newStudent.phoneNumber"
+                  />
+                </div>
+              </div>
 
-        <!-- ... end Login-Registration Form  -->
+              <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <span
+                  class="alert text-danger"
+                  *ngIf="
+                    signUpForm.submitted && signUpForm.controls['email'].errors
+                  "
+                >
+                  El email no es válido
+                </span>
+                <div class="form-group label-floating">
+                  <label for="email" class="control-label"
+                    >Correo electrónico</label
+                  >
+                  <input
+                    required
+                    ngModel
+                    name="email"
+                    #email="ngModel"
+                    class="form-control"
+                    placeholder=""
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                    id="email"
+                    [(ngModel)]="newStudent.email"
+                  />
+                </div>
+
+                <span
+                  class="alert text-danger"
+                  *ngIf="
+                    signUpForm.submitted && signUpForm.controls['carrer'].errors
+                  "
+                >
+                  La carrera es requerida
+                </span>
+                <div class="form-group label-floating">
+                  <label for="carrer" class="control-label">Carrera</label>
+                  <input
+                    required
+                    ngModel
+                    name="carrer"
+                    #carrer="ngModel"
+                    class="form-control"
+                    placeholder=""
+                    type="text"
+                    id="carrer"
+                    [(ngModel)]="newStudent.carrer"
+                  />
+                  <div
+                    class="alert text-danger"
+                    *ngIf="carrer.touched && !carrer.valid"
+                  ></div>
+                </div>
+
+              <div *ngIf="signUpForm.controls['password']">
+                  <div *ngIf="signUpForm.controls['password'].errors != null">
+                      <span
+                    class="alert text-danger"
+                    *ngIf="
+                      signUpForm.submitted &&
+                      signUpForm.controls['password'].errors.required
+                    "
+                  >
+                    La contraseña es requerida
+                  </span>
+                  <span
+                    class="alert text-danger"
+                    *ngIf="
+                      signUpForm.submitted &&
+                      signUpForm.controls['password'].errors.minlength
+                    "
+                  >
+                    La contraseña debe ser de
+                    {{
+                      signUpForm.controls["password"].errors.minlength
+                        .requiredLength
+                    }}
+                    caractéres o más
+                  </span>
+                  </div>
+              </div>
+                <div class="form-group label-floating">
+                  <label for="password" class="control-label">Contraseña</label>
+                  <input
+                    required
+                    minlength="6"
+                    ngModel
+                    name="password"
+                    #password="ngModel"
+                    class="form-control"
+                    placeholder=""
+                    type="password"
+                    id="password"
+                    [(ngModel)]="newStudent.password"
+                  />
+
+                  
+                </div>
+
+                <button
+                  class="btn btn-primary btn-lg full-width "
+                  style="background-color: #233D4D; border-color: #233D4D"
+                  type="submit"
+                >
+                  Completar Registro!
+                </button>
+                <p>
+                  ¿Ya tienes una cuenta?
+                  <a [routerLink]="['/sign-in']">Inicia sesión ahora!</a> y
+                  encuentra tutores para las materias que necesites!
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+
+    <!-- ... end Login-Registration Form  -->
+  </div>
 </div>

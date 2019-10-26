@@ -3,7 +3,7 @@
     overflow: hidden;
     height: 100vh;
     display: flex;
-    background-image: url("../../../assets/img/sign-up/sign-up-image.jpg");
+    background-image: url("../../../assets/img/sign-in/sign-in-image.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -11,13 +11,27 @@
     min-height: 600px;
 }
 
-@media only screen and (max-width: 1024px) {
+.img-wrap img{
+    width: 80%;
+    margin: auto;
+}
+
+.form-group{
+    box-shadow: 0 1px 8px 0 rgba(160, 124, 124, 0.1);
+    background-color: #fff;
+}
+
+.registration-login-form{
+    background-color: #f8f8f8;
+}
+
+@media only screen and (max-width: 1023px) {
     .image-register {
         position: relative;
         overflow: hidden;
         display: flex;
         height: 0;
-        background-image: url("../../../assets/img/sign-up/sign-up-image.jpg");
+        background-image: url("../../../assets/img/sign-in/sign-in-image.jpg");
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;

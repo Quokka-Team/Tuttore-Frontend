@@ -12,26 +12,12 @@
                 </div>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#tutorcarousel" role="button" data-slide="prev">
-            <i class="fa fa-chevron-left fa-lg text-muted"></i>
-            <span class="sr-only">Previous</span>
-        </a>
 
-        <div class="row teammembers-wrap">
+        <div class="row     members-wrap">
             <div class="container-fluid">
-                <div id="tutorcarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-
-                        <div class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 active">
-                            <!-- Teammember Item  -->
-                            <ng-template *ngIf="tutor0">
-                                <app-tutor-card-home [tutor]="tutor0" [routerLink]="['/profile',tutor0._id]"></app-tutor-card-home>
-                            </ng-template>
-
-
-                            <!-- ... end Teammember Item  -->
-                        </div>
-                        <div *ngFor="let tutor of newTutors" class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 ">
+                <div data-interval="3000">
+                    <div class="row w-100 mx-auto">
+                        <div *ngFor="let tutor of newTutors" class="col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                             <!-- Teammember Item  -->
                             <app-tutor-card-home [tutor]="tutor" [routerLink]="['/profile',tutor._id]"></app-tutor-card-home>
                             <!-- ... end Teammember Item  -->
@@ -40,10 +26,7 @@
                 </div>
             </div>
         </div>
-        <a class="carousel-control-next text-faded" href="#tutorcarousel" role="button" data-slide="next">
-            <i class="fa fa-chevron-right fa-lg text-muted"></i>
-            <span class="sr-only">Next</span>
-        </a>
+
     </div>
 </section>
 <section class="medium-padding80" style="background: #e3eff3;">

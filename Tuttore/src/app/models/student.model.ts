@@ -3,6 +3,7 @@ export class StudentModel {
     lastName:string;
     email:string;
     password:string;
+    carrer:string;
     career:string;
     gpa:number;
     phoneNumber:string;

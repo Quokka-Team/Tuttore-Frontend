@@ -135,11 +135,6 @@ var CRUMINA = {};
             left: "77%",
             scale: "1"
         }, 1e3).triggerHook(.1).addTo(e)
-    }, CRUMINA.perfectScrollbarInit = function() {
-        var n = e(".popup-chat-responsive .mCustomScrollbar");
-        e(".mCustomScrollbar").perfectScrollbar({
-            wheelPropagation: !1
-        }), n.length && (n.scrollTop(n.prop("scrollHeight")), n.perfectScrollbar("update"))
     }, CRUMINA.responsive = {
         $profilePanel: null,
         $desktopContainerPanel: null,
@@ -163,7 +158,7 @@ var CRUMINA = {};
             }).resize()
         }
     }, t.ready(function() {
-        CRUMINA.preloader(), CRUMINA.perfectScrollbarInit(), e(".call-to-action-animation").length && CRUMINA.CallToActionAnimation(), e(".img-scale-animation").length && CRUMINA.ImgScaleAnimation(), e(".subscribe-animation").length && CRUMINA.SubscribeAnimation(), e(".planer-animation").length && CRUMINA.PlanerAnimation(), e(".contact-form-animation").length && CRUMINA.ContactAnimationAnimation(), void 0 !== e.fn.gifplayer && e(".gif-play-image").gifplayer(), void 0 !== e.fn.mediaelementplayer && e("#mediaplayer").mediaelementplayer({
+        CRUMINA.preloader(), e(".call-to-action-animation").length && CRUMINA.CallToActionAnimation(), e(".img-scale-animation").length && CRUMINA.ImgScaleAnimation(), e(".subscribe-animation").length && CRUMINA.SubscribeAnimation(), e(".planer-animation").length && CRUMINA.PlanerAnimation(), e(".contact-form-animation").length && CRUMINA.ContactAnimationAnimation(), void 0 !== e.fn.gifplayer && e(".gif-play-image").gifplayer(), void 0 !== e.fn.mediaelementplayer && e("#mediaplayer").mediaelementplayer({
             features: ["prevtrack", "playpause", "nexttrack", "loop", "shuffle", "current", "progress", "duration", "volume"]
         }), CRUMINA.responsive.init()
     })

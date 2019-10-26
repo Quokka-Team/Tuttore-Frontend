@@ -66,14 +66,20 @@ export class ProfileComponent implements OnInit {
             this.tutorsService
             .getTutor("this")
             .subscribe((tutor: TutorModel) => {
+
+            
               this.user = tutor;
+              this.getSubjects();
               this.user.isTutor = true;
             });
           } else {
+            
+            
+            this.user.isTutor = false;
             this.user = data;
+            this.getSubjects();
             this.user.isTutor = false;
           }
-          this.getSubjects();
         },
         error => {
           console.log("hubo un error");
@@ -116,13 +122,18 @@ export class ProfileComponent implements OnInit {
     for (let subject of data) {
       this.courses[subject._id] = subject.name;
     }
+
     if(this.user.courses){
+      console.log(this.user.courses);
+      
       for (let course of this.user.courses) {
         if (course.idCourse in this.courses) {
           delete this.courses[course.idCourse];
         }
+        console.log(Object.keys(this.courses).length);
       }
     }
+    
     this.options = Object.values(this.courses);
     this.subjectSearched = new SearchModel();
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -156,5 +167,9 @@ export class ProfileComponent implements OnInit {
 
   isUser() {
     return this.id == "user";
+  }
+
+  fulltutor(){
+    return Object.keys(this.courses).length == 0;
   }
 }
