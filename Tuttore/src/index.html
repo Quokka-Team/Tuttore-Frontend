@@ -1,13 +1,58 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>Tuttore</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta charset="utf-8">
+    <title>Tuttore</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" type="image/x-icon" href="assets/img/logo/tabIcon.png">
+    <!-- Main Font -->
+    <script type="text/javascript" src="/assets/js/libs/fullcalendar.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/Bootstrap/dist/css/bootstrap-reboot.css">
+    <link rel="stylesheet" type="text/css" href="assets/Bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/Bootstrap/dist/css/bootstrap-grid.css">
+
+    <!-- Main Styles CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
-  <app-root></app-root>
+    <app-root></app-root>
 </body>
+
+<script src="assets/js/jQuery/jquery-3.4.1.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/libs-init/libs-init.js"></script>
+<script defer src="assets/fonts/fontawesome-all.js"></script>
+<script src="assets/Bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+<script>
+    $('#tutorcarousel').on('slide.bs.carousel', function(e) {
+        console.log("juan")
+        var $e = $(e.relatedTarget);
+        var idx = $e.index();
+        var itemsPerSlide = 6;
+        var totalItems = $('.carousel-item').length;
+
+        if (idx >= totalItems - (itemsPerSlide - 1)) {
+            var it = itemsPerSlide - (totalItems - idx);
+            for (var i = 0; i < it; i++) {
+                // append slides to end
+                if (e.direction == "left") {
+                    $('.carousel-item').eq(i).appendTo('.carousel-inner');
+                } else {
+                    $('.carousel-item').eq(0).appendTo('.carousel-inner');
+                }
+            }
+        }
+    });
+</script>
+
 </html>
