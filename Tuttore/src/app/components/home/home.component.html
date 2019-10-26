@@ -1,6 +1,6 @@
 <app-navbar>
 </app-navbar>
-<app-search-bar class="animated fadeIn slower"></app-search-bar>
+<app-search-bar></app-search-bar>
 <section class="medium-padding80" style="background: #fff;">
     <div class="container">
         <div class="row mb60">
@@ -12,26 +12,12 @@
                 </div>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#tutorcarousel" role="button" data-slide="prev">
-            <i class="fa fa-chevron-left fa-lg text-muted"></i>
-            <span class="sr-only">Previous</span>
-        </a>
 
-        <div class="row teammembers-wrap">
+        <div class="row     members-wrap">
             <div class="container-fluid">
-                <div id="tutorcarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-
-                        <div class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 active">
-                            <!-- Teammember Item  -->
-                            <ng-template *ngIf="tutor0">
-                                <app-tutor-card-home [tutor]="tutor0" [routerLink]="['/profile',tutor0._id]"></app-tutor-card-home>
-                            </ng-template>
-
-
-                            <!-- ... end Teammember Item  -->
-                        </div>
-                        <div *ngFor="let tutor of newTutors" class="carousel-item col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 ">
+                <div data-interval="3000">
+                    <div class="row w-100 mx-auto">
+                        <div *ngFor="let tutor of newTutors" class="col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                             <!-- Teammember Item  -->
                             <app-tutor-card-home [tutor]="tutor" [routerLink]="['/profile',tutor._id]"></app-tutor-card-home>
                             <!-- ... end Teammember Item  -->
@@ -40,13 +26,10 @@
                 </div>
             </div>
         </div>
-        <a class="carousel-control-next text-faded" href="#tutorcarousel" role="button" data-slide="next">
-            <i class="fa fa-chevron-right fa-lg text-muted"></i>
-            <span class="sr-only">Next</span>
-        </a>
+
     </div>
 </section>
-<section class="medium-padding80 subject-container">
+<section class="medium-padding80" style="background: #e3eff3;">
     <div class="container">
         <!-- Most Searched Subjects -->
         <div class="row mb30">
@@ -83,5 +66,121 @@
 
 </section>
 
-<app-home-info></app-home-info>
+<section class="pt120" style="background: #fff;">
+    <div class="container">
+        <div class="row mb60">
+            <div class="col col-xl-5 col-lg-5 m-auto col-md-12 col-sm-12 col-12">
+                <div class="crumina-module crumina-heading align-center">
+                    <h2 class="heading-title">¿Por qué usar Tuttore?</h2>
+                    <hr>
+                    <p class="heading-text">¡Conectamos a estudiantes de la Universidad Macional que buscan tutorías académicas con estudiantes que quieren darlas!
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="info-box-wrap">
+            <div class="row">
+                <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+
+
+                    <!-- Info Box  -->
+
+                    <div class="crumina-module crumina-info-box" data-mh="box--classic">
+                        <div class="info-box-image">
+                            <img src="assets/img/info/info1.png" alt="icon">
+                        </div>
+                        <div class="info-box-content">
+                            <h3 class="info-box-title">Horarios Flexibles</h3>
+                            <p class="info-box-text">Consigue tutorías en los horarios que tengas disponibles cuando lo necesites.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- ... end Info Box  -->
+
+                </div>
+                <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+
+
+                    <!-- Info Box  -->
+
+                    <div class="crumina-module crumina-info-box" data-mh="box--classic">
+                        <div class="info-box-image">
+                            <img src="assets/img/info/info2.png" alt="icon">
+                        </div>
+                        <div class="info-box-content">
+                            <h3 class="info-box-title">Amplio Catálogo</h3>
+                            <p class="info-box-text">Encuentra tutorías para cualquier materia en cualquier carrera.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- ... end Info Box  -->
+
+                </div>
+                <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+
+
+                    <!-- Info Box  -->
+
+                    <div class="crumina-module crumina-info-box" data-mh="box--classic">
+                        <div class="info-box-image">
+                            <img src="assets/img/info/info3.png" alt="icon">
+                        </div>
+                        <div class="info-box-content">
+                            <h3 class="info-box-title">Comunicación Segura</h3>
+                            <p class="info-box-text">Comunícate de forma segura con tu tutor al contar con el respaldo de Tuttore.</p>
+                        </div>
+                    </div>
+
+                    <!-- ... end Info Box  -->
+
+                </div>
+                <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+
+
+                    <!-- Info Box  -->
+
+                    <div class="crumina-module crumina-info-box" data-mh="box--classic">
+                        <div class="info-box-image">
+                            <img src="assets/img/info/info4.png" alt="icon">
+                        </div>
+                        <div class="info-box-content">
+                            <h3 class="info-box-title">Interfaz Amigable</h3>
+                            <p class="info-box-text">Encuentra de manera fácil y organizada toda la información correspondiente a tutores y a tu perfil.</p>
+                        </div>
+                    </div>
+
+                    <!-- ... end Info Box  -->
+
+                </div>
+                <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                    <div class="crumina-module crumina-info-box" data-mh="box--classic">
+                        <div class="info-box-image">
+                            <img src="assets/img/info/info5.png" alt="icon">
+                        </div>
+                        <div class="info-box-content">
+                            <h3 class="info-box-title">Contacto Rápido y Sencillo</h3>
+                            <p class="info-box-text">Cuando veas un tutor que cumple cons tus expectativas has contacto directo con él al instante.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                    <div class="crumina-module crumina-info-box" data-mh="box--classic">
+                        <div class="info-box-image">
+                            <img src="assets/img/info/info6.png" alt="icon">
+                        </div>
+                        <div class="info-box-content">
+                            <h3 class="info-box-title">Diviértete Aprendiendo Cosas Nuevas</h3>
+                            <p class="info-box-text">Cada tutor dará lo mejor de si para enseñarte lo que necesitas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
 <app-footer></app-footer>
