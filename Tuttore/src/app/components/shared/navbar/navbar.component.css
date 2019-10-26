@@ -1,0 +1,72 @@
+.logo-container img {
+    height: 100%;
+    width: auto;
+    ;
+}
+
+.logo-container {
+    width: 60px;
+    ;
+    height: 100%;
+    margin: 0;
+    ;
+}
+
+#site-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+*:focus {
+    outline: none;
+}
+
+.account-settings li{
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.account-settings li:hover{
+    background-color: #ECFBFF;
+}
+
+.author-name span{
+    font-weight: 500;
+}
+
+.search{
+    margin-right: 20px;
+    font-size: 17px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.search:hover{
+    color: #00BBF0;
+}
+
+.search div{
+    text-align: center;
+}
+
+.search p{
+    margin-bottom: 0;
+}
+.header-content-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.author-title{
+    font-size: 16px; 
+    font-weight: 300;
+}
+
+@media only screen and (max-width: 383px) {
+    .author-thumb{
+        display: none;
+    }
+
+    .author-title{
+        font-size: 14px;
+    }
+}
