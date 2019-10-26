@@ -10,7 +10,7 @@ import { SearchSubjectModel } from '../models/searchSubject.model';
 export class TutorsService {
   
   userToken:string;
-   url = `http://tuttore.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/`;
+   url = `https://tuttore.tk/`;
     
   constructor(private http: HttpClient) {
     this.readToken();
