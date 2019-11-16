@@ -1,0 +1,33 @@
+.card {
+    height: 250px;
+    border: 1px solid #f8f8f8;
+}
+
+.card:hover{
+    box-shadow: 0 1px 8px 0 rgba(160, 124, 124, 0.35);
+    cursor:pointer; cursor: hand;
+}
+
+.star{
+    height: 30px;
+
+}
+
+.star a{
+    height: 100%;
+    margin: 0;
+   
+}
+
+.content{
+    height: 70px;
+}
+
+.img{
+    height: 110px;
+    margin-bottom: 10px
+}
+
+.img img{
+    height: 100%;
+}

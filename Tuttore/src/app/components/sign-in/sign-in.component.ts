@@ -37,7 +37,7 @@ export class LogInComponent implements OnInit {
         await Swal.fire({
           allowOutsideClick: false,
           type: 'success',
-          text: 'Se has logueado correctamente',
+          text: 'Te has logueado correctamente',
           timer: 1500,
           showConfirmButton:false
         })

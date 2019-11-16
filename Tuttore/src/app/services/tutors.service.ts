@@ -59,8 +59,8 @@ export class TutorsService {
   }
 
   signIn(student: StudentModel){
-    let cors = "https://cors-anywhere.herokuapp.com/";
-    return this.http.post( cors +`${this.url}signIn/`, student ).pipe(
+
+    return this.http.post(`${this.url}signIn/`, student ).pipe(
         map( resp => {
           this.saveToken( resp['token'] );
           return resp;

@@ -40,7 +40,7 @@ export class SignUpComponent implements OnInit{
     })
     Swal.showLoading();
     this.tutorService.getVerificationCode(this.newStudent.email).subscribe(  res => {
-      console.log(res);
+   
       
 
 
