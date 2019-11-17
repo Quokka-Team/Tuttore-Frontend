@@ -3,10 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -16,9 +12,6 @@ import { NoimagePipe } from './pipes/noimage.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-
-
-
 import { TutorCardHomeComponent } from './components/tutor-card-home/tutor-card-home.component';
 import { SubjectCardComponent } from './components/subject-card/subject-card.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -32,6 +25,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import { HomeInfoComponent } from './components/shared/home-info/home-info.component';
+import { ChatComponent } from './components/chat/chat.component';
+
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { TranslateDatePipe } from './pipes/translate-date.pipe';
 
 
 @NgModule({
@@ -51,7 +52,9 @@ import { HomeInfoComponent } from './components/shared/home-info/home-info.compo
     HomePageComponent,
     NoiconimagePipe,
     NobackgroundPipe,
-    HomeInfoComponent
+    HomeInfoComponent,
+    ChatComponent,
+    TranslateDatePipe
   ],
   imports: [
     HttpClientModule,
@@ -61,6 +64,10 @@ import { HomeInfoComponent } from './components/shared/home-info/home-info.compo
     FormsModule,ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, 
+    AngularFireAuthModule, 
+    AngularFireStorageModule
   ],
   exports: [MatAutocompleteModule,],
   providers: [],

@@ -1,0 +1,15 @@
+.chat-message-item{
+    word-wrap:break-word;
+    text-align: justify;
+    
+}
+#app-mensajes{
+    overflow-y:scroll;
+    height:400px;
+    /*background:gray;*/
+    padding: 5px;
+  }
+
+  .blue{
+      color: royalblue;
+  }

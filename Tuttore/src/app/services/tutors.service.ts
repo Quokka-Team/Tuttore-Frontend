@@ -67,8 +67,9 @@ export class TutorsService {
         })
       );
   }
-
+  
   signUp( student:StudentModel) {
+    
     const authData = {...student};
     return this.http.post(`${this.url}signUp`, authData);
   }

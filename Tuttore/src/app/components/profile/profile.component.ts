@@ -29,6 +29,8 @@ export class ProfileComponent implements OnInit {
   subjectId;
   id: string;
   reloaded: boolean = true;
+  username:string ;
+
   constructor(
     private tutorsService: TutorsService,
     private subjectService: SubjectsService,
@@ -44,6 +46,7 @@ export class ProfileComponent implements OnInit {
     //this.loadScript('assets/js/libs/fullcalendar.js');
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
+     
       this.getUserInfo(id);
     });
   }
@@ -62,6 +65,7 @@ export class ProfileComponent implements OnInit {
     if (id == "user") {
       this.tutorsService.getUser().subscribe(
         (data: any) => {
+          
           if (data.isTutor) {
             this.tutorsService
             .getTutor("this")
@@ -71,6 +75,7 @@ export class ProfileComponent implements OnInit {
               this.user = tutor;
               this.getSubjects();
               this.user.isTutor = true;
+             
             });
           } else {
             
@@ -80,6 +85,9 @@ export class ProfileComponent implements OnInit {
             this.getSubjects();
             this.user.isTutor = false;
           }
+          
+        
+          
         },
         error => {
           console.log("hubo un error");
@@ -90,8 +98,12 @@ export class ProfileComponent implements OnInit {
       this.tutorsService.getTutor(id).subscribe((tutor: TutorModel) => {
         this.user = tutor;
         this.user.isTutor = true;
+        this.username = this.user.email.match(/^([^@]*)@/)[1];
+
       });
     }
+    
+    
   }
 
   getNewTutors() {
