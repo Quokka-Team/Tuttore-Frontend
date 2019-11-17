@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 export class SearchBarComponent {
 
   constructor(private router: Router) { 
-    localStorage.setItem('reloaded','true');
+    sessionStorage.setItem('reloaded','true');
   }
 
   btnClick(){

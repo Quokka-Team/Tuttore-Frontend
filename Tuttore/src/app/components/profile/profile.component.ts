@@ -49,11 +49,11 @@ export class ProfileComponent implements OnInit {
   }
 
   reload(){
-    if(localStorage.getItem('reloaded')==='true'){
+    if(sessionStorage.getItem('reloaded')==='true'){
     this.zone.runOutsideAngular(() => {
       location.reload();
     });
-    localStorage.setItem('reloaded','false');
+    sessionStorage.setItem('reloaded','false');
     }
   }
 
