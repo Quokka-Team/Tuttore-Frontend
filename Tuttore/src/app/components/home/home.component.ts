@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
     this.getNewTutors();
     this.getNewSubjects();
     this.getMostSearchSubjects();
-    localStorage.setItem('reloaded','true');
   }
 
   ngOnInit() {
