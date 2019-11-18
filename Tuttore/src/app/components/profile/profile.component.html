@@ -184,7 +184,7 @@
 
                 </div>
                 
-                
+                <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#new-event"></button>
 
                 
                 <!-- Fin de calendario -->
@@ -224,7 +224,7 @@
     </div>
 
     <div
-      class="modal  animated zoomIn faster"
+      class="modal animated zoomIn faster"
       id="new-event"
       tabindex="-1"
       role="dialog"
@@ -234,28 +234,35 @@
       <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
         <div class="modal-content">
 
-          <div class="modal-header">
-            <h6 class="title center">
+          <div class="modal-header" style="padding-left: 21%;">
+            <h6>
               ¿Que tipo de evento deseas agregar?
             </h6>
           </div>
 
           <div class="modal-body">
-                  
-            <select class="full-width" style="margin-bottom: 20px;">
-              <option> Sin definir </option>
-              <option> Disponible </option>
-              <option> Tutoria </option>
-            </select>
+            <form (ngSubmit)="onSubmit()">
+              <select 
+                class="custom-select" 
+                style="margin-bottom: 20px;"
+                [(ngModel)]="selector"
+                name="selector"
+                ngModel
+              >
+                  <option> Disponible </option>
+                  <option> Tutoría </option>
+              </select>
 
-            <div class="row">
-              <button class="btn modal-button " type="submit">
-                Aceptar
-              </button>
-              <button class="btn modal-button " data-dismiss="modal">
+              <div class="row">
+                <button class="btn modal-button" style="margin-left:25%; margin-bottom: 0px; margin-top: 5px;" type="submit">
+                  Aceptar
+                </button>
+                
+                <button id="close" class="btn modal-button" style="margin-left: 33px; margin-bottom: 0px; margin-top: 5px;"data-dismiss="modal">
                   Cancelar
-              </button>
-            </div>
+                </button>
+              </div>
+            </form>   
 
             
           </div>

@@ -9,6 +9,7 @@ import { SubjectsService } from "src/app/services/subjects.service";
 import { SubjectModel } from "src/app/models/subjects.model";
 import { map, startWith } from "rxjs/operators";
 import { SearchModel } from "src/app/models/search.model";
+import { NgForm } from '@angular/forms';
 import * as _ from "underscore";
 
 import { Calendar } from '@fullcalendar/core';
@@ -52,6 +53,9 @@ export class ProfileComponent implements OnInit {
     center: 'title',
     right: 'dayGridMonth,timeGridWeek,timeGridDay'
   }
+
+  selector:string = null;
+  addingDate;
   //Fin Calendario
 
   
@@ -139,13 +143,11 @@ export class ProfileComponent implements OnInit {
     }
 
     if(this.user.courses){
-      console.log(this.user.courses);
       
       for (let course of this.user.courses) {
         if (course.idCourse in this.courses) {
           delete this.courses[course.idCourse];
         }
-        console.log(Object.keys(this.courses).length);
       }
     }
     
@@ -188,13 +190,19 @@ export class ProfileComponent implements OnInit {
     return Object.keys(this.courses).length == 0;
   }
 
-  handleDateClick(arg) {
-    // if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
-    //   this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
-    //     title: 'New Event',
-    //     start: arg.date,
-    //     allDay: arg.allDay
-    //   })
-    // }
+  async handleDateClick(arg) {
+    document.getElementById("openModalButton").click();
+    this.addingDate = arg;
+  }
+
+  onSubmit(f: NgForm){
+    if(this.selector!=null){
+      this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
+        title: this.selector,
+        start: this.addingDate.date,
+        allDay: this.addingDate.allDay
+      });
+      document.getElementById("close").click();
+    }
   }
 }
