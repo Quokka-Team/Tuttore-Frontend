@@ -35,6 +35,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { TranslateDatePipe } from './pipes/translate-date.pipe';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -56,21 +56,15 @@
                       <!-- <Strong>4.7</Strong> -->
                     </div>
                   </div>
-                  
+
                   <a
-                    *ngIf="id !== 'user'"
-                    [username]=username
-                    routerLink= "/chat/{{username}}"
-                    class="btn btn-sm bg-blue"
-                    style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
-                    >Contactar</a>
-                  <!-- <a
                     *ngIf="id !== 'user'"
                     data-toggle="modal"
                     data-target="#edit-my-poll-popup"
                     class="btn btn-sm bg-blue"
                     style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
-                    >Contactar</a> -->
+                    >Contactar</a
+                  >
                 </div>
               </div>
             </div>
@@ -500,12 +494,18 @@
         <div class="modal-content">
           <div class="modal-body">
             <div class="edit-my-poll-content">
-              <form class="resume-form">
+              <form
+                class="resume-form"
+                #contactForm="ngForm"
+                (ngSubmit)="sendMessage(contactForm)"
+              >
                 <div class="row">
                   <div
                     class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
                   >
-                    <div class="cancel-button" data-dismiss="modal">
+                    <div class="cancel-button"
+                    id="CloseButton"
+                    data-dismiss="modal">
                       <i class="fas fa-window-close"></i>
                     </div>
                     <h3>Envía un mensaje al tutor para contactarte !</h3>
@@ -514,11 +514,22 @@
                       en tu chat para una mejor comunicación
                     </p>
                     <div class="form-group label-floating is-empty">
-                      <label class="control-label">Tu mensaje</label>
-                      <textarea class="form-control" placeholder=""></textarea>
+                      <textarea
+                        class="form-control"
+                        placeholder="Tu mensaje"
+                        [(ngModel)]="contactMessage"
+                        name="contactMessage"
+                        
+                      ></textarea>
                     </div>
-                    <a class="btn btn-primary btn-lg full-width modal-button"
-                      >Enviar</a
+                    
+                    <button
+                      class="btn btn-primary btn-lg full-width modal-button"
+                       
+                      
+                      type="submit"
+                     
+                      >Enviar</button
                     >
                   </div>
                 </div>

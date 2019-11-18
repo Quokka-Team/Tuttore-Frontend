@@ -10,63 +10,100 @@
           <div
             class="col col-xl-5 col-lg-6 col-md-12 col-sm-12 col-12 padding-r-0"
           >
-            <!-- Notification List Chat Messages -->
-
             <ul class="notification-list chat-message">
-              <li>
-                <div class="author-thumb">
-                  <img src="assets/img/no-profile-icon.png" alt="author" />
-                </div>
-                <div class="notification-event">
-                  <a href="#" class="h6 notification-friend">Diana Jameson</a>
-                  <span class="chat-message-item"
-                    >Hi James! It’s Diana, I just wanted to let you know that we
-                    have to reschedule...</span
-                  >
-                  <span class="notification-date"
-                    ><time
-                      class="entry-date updated"
-                      datetime="2004-07-24T18:18"
-                      >4 hours ago</time
-                    ></span
-                  >
-                </div>
-                <span class="notification-icon"> </span>
-              </li>
-            </ul>
+              <ng-container *ngFor="let chat of chats">
+                <li
+                  class="d-flex justify-content-around my-1 py-1"
+                  *ngIf="myUser == chat.userId2"
+                  routerLink="/chat/{{ chat.userId1 }}"
+                >
+                  <div class="author-thumb">
+                    <img src="assets/img/no-profile-icon.png" alt="author" />
+                  </div>
+                  <div class="notification-event">
+                    <a class="h6 notification-friend"
+                    style=" color: #00bbf0;"
+                    >{{ chat.userId1 }}</a>
 
-            <!-- ... end Notification List Chat Messages -->
+                    <span class="chat-message-item">{{
+                      chat.lastmessage
+                    }}</span>
+                    <span class="notification-date"
+                      ><time
+                        class="entry-date updated"
+                        datetime="2004-07-24T18:18"
+                        >{{ chat.lastmessagedate }}</time
+                      ></span
+                    >
+                  </div>
+                  <span class="notification-icon"> </span>
+                </li>
+
+                <li
+                class="d-flex justify-content-around my-1 py-1"
+                  *ngIf="myUser != chat.userId2"
+                  routerLink="/chat/{{ chat.userId2 }}"
+                >
+                  <div class="author-thumb">
+                    <img src="assets/img/no-profile-icon.png" alt="author" />
+                  </div>
+                  <div class="notification-event">
+                    <a class="h6 notification-friend" 
+                    style=" color: #00bbf0;"
+                    >{{ chat.userId2 }}</a>
+                    <span class="chat-message-item">{{
+                      chat.lastmessage
+                    }}</span>
+                    <span class="notification-date"
+                      ><time
+                        class="entry-date updated"
+                        datetime="2004-07-24T18:18"
+                        >4 hours ago</time
+                      ></span
+                    >
+                  </div>
+                  <span class="notification-icon"> </span>
+                </li>
+              </ng-container>
+            </ul>
           </div>
           <div
             class="col col-xl-7 col-lg-6 col-md-12 col-sm-12 col-12 padding-l-0"
           >
             <div class="chat-field">
-              <div class="ui-block-title">
-                <h6 class="title">Elaine Dreyfuss</h6>
-              </div>
-              <div class="mCustomScrollbar" data-mcs-theme="dark">
-                <ul class="notification-list chat-message chat-message-field" id="app-mensajes"  >
-                  <li *ngFor="let message of messages" 
-                        class="row"
+              <div class="m" data-mcs-theme="dark">
+                <ul
+                  id="app-mensajes"
+                  class="notification-list chat-message chat-message-field"
+                >
+                  <li
+                    *ngFor="let message of messages"
+                    [ngClass]="{
+                      blue: myUser == message.ownerId,
+                      red: myUser != message.ownerId
+                    }"
+                    class=""
                   >
-                    <div class="author-thumb ">
+                    <div class="author-thumb " *ngIf="myUser != message.ownerId">
                       <img src="assets/img/no-profile-icon.png" alt="author" />
                     </div>
                     <div class="notification-event col-9">
-                      <a class="h6 notification-friend"
-                       
-                      >{{
-                        message.ownerId}}</a>
+                      <!-- <a class="h6 notification-friend">{{
+                        message.ownerId
+                      }}</a> -->
                       <span class="notification-date"
                         ><time
                           class="entry-date updated"
                           datetime="2004-07-24T18:18"
-                          >{{ message.date | translateDate}}</time
+                          ><strong>{{ message.date | translateDate }}</strong></time
                         ></span
                       >
-                      <p class="chat-message-item pt-2">{{
-                        message.message}}   
+                      <p class="chat-message-item pt-3">
+                        {{ message.message }}
                       </p>
+                    </div>
+                    <div class="author-thumb " *ngIf="myUser == message.ownerId">
+                      <img src="assets/img/no-profile-icon.png" alt="author" />
                     </div>
                   </li>
                 </ul>
@@ -75,6 +112,8 @@
               <form>
                 <div class="form-group label-floating is-empty">
                   <textarea
+                  rows="2"
+                  style="max-height: 25px;"
                     type="text"
                     name="message"
                     class="form-control mx-1"
@@ -82,15 +121,16 @@
                     placeholder="Enviar Mensaje"
                     (keyup.enter)="sendMessage()"
                   ></textarea>
+                  <div class="add-options-message">
+                    <button
+                      class="btn btn-primary btn-sm"
+                      (click)="sendMessage()"
+                    >
+                      Enviar
+                    </button>
                 </div>
 
-                <div class="add-options-message">
-                  <button
-                    class="btn btn-primary btn-sm"
-                    (click)="sendMessage()"
-                  >
-                    Enviar
-                  </button>
+                
                 </div>
               </form>
             </div>
@@ -102,7 +142,7 @@
 
       <!-- Pagination -->
 
-      <nav aria-label="Page navigation">
+      <!-- <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled">
             <a class="page-link" href="#" tabindex="-1">Previous</a>
@@ -125,12 +165,11 @@
             <a class="page-link" href="#">Next</a>
           </li>
         </ul>
-      </nav>
+      </nav> -->
 
       <!-- ... end Pagination -->
     </div>
   </div>
 </div>
-
 
 <app-footer></app-footer>
