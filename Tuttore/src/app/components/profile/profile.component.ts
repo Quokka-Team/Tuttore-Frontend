@@ -11,12 +11,19 @@ import { map, startWith } from "rxjs/operators";
 import { SearchModel } from "src/app/models/search.model";
 import * as _ from "underscore";
 
+import { Calendar } from '@fullcalendar/core';
+import { EventInput } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGrigPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.css"]
 })
 export class ProfileComponent implements OnInit {
+
   user: any = {};
   newTutors: TutorModel[];
   subjects: any[] = [];
@@ -28,7 +35,26 @@ export class ProfileComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   subjectId;
   id: string;
-  reloaded: boolean = true;
+
+
+  //Calendario
+  calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
+
+  calendarEvents: EventInput[] = [
+    { title: 'Event Now', start: new Date() },
+    { title: 'EVENTO', date: '2019-11-20' }
+  ];
+
+  calendarWeekends = true;
+
+  calendarHeader = {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+  }
+  //Fin Calendario
+
+  
   constructor(
     private tutorsService: TutorsService,
     private subjectService: SubjectsService,
@@ -37,24 +63,13 @@ export class ProfileComponent implements OnInit {
     private zone: NgZone
   ) {
     this.getNewTutors();
-    this.reload();
   }
 
   ngOnInit() {
-    //this.loadScript('assets/js/libs/fullcalendar.js');
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
       this.getUserInfo(id);
     });
-  }
-
-  reload(){
-    if(sessionStorage.getItem('reloaded')==='true'){
-    this.zone.runOutsideAngular(() => {
-      location.reload();
-    });
-    sessionStorage.setItem('reloaded','false');
-    }
   }
 
   getUserInfo(id: string) {
@@ -171,5 +186,15 @@ export class ProfileComponent implements OnInit {
 
   fulltutor(){
     return Object.keys(this.courses).length == 0;
+  }
+
+  handleDateClick(arg) {
+    // if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
+    //   this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
+    //     title: 'New Event',
+    //     start: arg.date,
+    //     allDay: arg.allDay
+    //   })
+    // }
   }
 }

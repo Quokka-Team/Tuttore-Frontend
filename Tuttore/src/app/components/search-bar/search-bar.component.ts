@@ -8,9 +8,7 @@ import {Router} from '@angular/router';
 })
 export class SearchBarComponent {
 
-  constructor(private router: Router) { 
-    sessionStorage.setItem('reloaded','true');
-  }
+  constructor(private router: Router) {}
 
   btnClick(){
     this.router.navigate(["/search"])
