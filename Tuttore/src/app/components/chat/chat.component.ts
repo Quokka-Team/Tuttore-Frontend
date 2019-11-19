@@ -38,7 +38,7 @@ export class ChatComponent implements OnInit {
     this.myUser = localStorage.getItem('mail');
     this.elemento = document.getElementById("app-mensajes");
     this.chatService.getChatList().subscribe(chats => {
-      console.log(chats);
+
       this.chats = chats
       
       

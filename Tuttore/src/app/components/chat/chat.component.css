@@ -6,24 +6,29 @@
 #app-mensajes{
     overflow-y:scroll;
     height: 500px;  
-    
-   
-    /*background:gray;*/
+    padding: 5px;
+  }
+#app-chats{
+    overflow-y:scroll;
+    height: 100%;  
     padding: 5px;
   }
 
   .blue{
       color: #082F47;
       margin: 10px 0 10px 25%;
-      border-radius: 20px;
-      background-color: #ECFBFF;
+      border-radius:  20px 20px  0 20px;
+      background-color: rgb(221, 248, 255);
+      /* border: 1px solid #B1EEFF; */
+      box-shadow: 0 1px 8px 0 rgba(160, 124, 124, 0.25);
       padding: 15px;
     }
     .red{
         color: #082F47;
         margin: 10px 25% 10px 0;
         background: #B1EEFF;
-      border-radius: 20px;
+        border-radius:  20px 20px 20px 0;
+        box-shadow: 0 1px 8px 0 rgba(160, 124, 124, 0.25);
       padding: 15px;
   }
 
@@ -32,11 +37,11 @@
       overflow: hidden;
   }
 
-  #app-mensajes::-webkit-scrollbar {
+  #app-mensajes::-webkit-scrollbar ,#app-chats::-webkit-scrollbar {
     background-color: #B1EEFF;
-    outline: 1px solid red;
+    outline: 1px solid #0B5F77;
   }
-  #app-mensajes::-webkit-scrollbar-thumb{
+  #app-mensajes::-webkit-scrollbar-thumb, #app-chats::-webkit-scrollbar-thumb{
     background-color:#0B5F77;
     border-radius:5px;
     }

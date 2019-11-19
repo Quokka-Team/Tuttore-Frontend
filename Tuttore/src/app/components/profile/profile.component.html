@@ -7,8 +7,11 @@
         <div class="ui-block">
           <div class="top-header">
             <div class="top-header-thumb ">
-              <div class=" ">
-                <img [src]="user.background | nobackground" alt="Portada" />
+              <div class=" "
+              style="height: 250px;">
+              <div class="animatedBackground"></div>
+                <!-- <img [src]="user.background | nobackground" alt="Portada" /> -->
+                <!-- <img [src]="user.background | nobackground" alt="Portada" /> -->
               </div>
             </div>
             <div class="profile-section"></div>
@@ -20,7 +23,7 @@
               />
               <div class="author-content">
                 <a class="h4 author-name"
-                  >{{ user.name | titlecase }} {{ user.lastName | titlecase }}
+                  >{{ user.name | titlecase }} {{ user.lastName | titlecase }} 
                 </a>
                 <div class="country">{{ user.career }}</div>
               </div>
@@ -59,11 +62,10 @@
 
                   <a
                     *ngIf="id !== 'user'"
-                    data-toggle="modal"
-                    data-target="#edit-my-poll-popup"
+                    
                     class="btn btn-sm bg-blue"
                     style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
-                    >Contactar</a
+                    >Solicitar Tutoria</a
                   >
                 </div>
               </div>
@@ -138,6 +140,17 @@
                 Materia
               </a>
             </div>
+            <div class="widget w-socials" *ngIf="!isUser()">
+             
+              <a
+              *ngIf="id !== 'user'"
+              data-toggle="modal"
+              data-target="#edit-my-poll-popup"
+              class="btn btn-sm bg-blue w-100"
+              style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
+              >Contactar  <i class="fas fa-comments"></i></a>
+            </div>
+          
 
             <!-- ... end W-Socials -->
           </div>

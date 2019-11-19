@@ -12,6 +12,7 @@ import { SearchModel } from "src/app/models/search.model";
 import * as _ from "underscore";
 import { ChatService } from "src/app/services/chat.service";
 import { ViewChild, ElementRef } from "@angular/core";
+import { log } from 'util';
 
 @Component({
   selector: "app-profile",
@@ -81,6 +82,7 @@ export class ProfileComponent implements OnInit {
             this.user = data;
             this.getSubjects();
             this.user.isTutor = false;
+
           }
         },
         error => {
