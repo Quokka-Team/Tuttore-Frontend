@@ -9,10 +9,17 @@ import { SubjectsService } from "src/app/services/subjects.service";
 import { SubjectModel } from "src/app/models/subjects.model";
 import { map, startWith } from "rxjs/operators";
 import { SearchModel } from "src/app/models/search.model";
+import { NgForm } from '@angular/forms';
 import * as _ from "underscore";
 import { ChatService } from "src/app/services/chat.service";
 import { ViewChild, ElementRef } from "@angular/core";
 import { log } from 'util';
+
+import { Calendar } from '@fullcalendar/core';
+import { EventInput } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGrigPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 
 @Component({
   selector: "app-profile",
@@ -20,6 +27,7 @@ import { log } from 'util';
   styleUrls: ["./profile.component.css"]
 })
 export class ProfileComponent implements OnInit {
+
   user: any = {};
   newTutors: TutorModel[];
   subjects: any[] = [];
@@ -31,8 +39,33 @@ export class ProfileComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   subjectId;
   id: string;
+
   reloaded: boolean = true;
   username: string;
+
+
+
+
+  //Calendario
+  calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
+
+  calendarEvents: EventInput[] = [
+    { title: 'Event Now', start: new Date() },
+    { title: 'EVENTO', date: '2019-11-20' }
+  ];
+
+  calendarWeekends = true;
+
+  calendarHeader = {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+  }
+
+  selector:string = null;
+  addingDate;
+  //Fin Calendario
+
 
   constructor(
     private tutorsService: TutorsService,
@@ -43,17 +76,16 @@ export class ProfileComponent implements OnInit {
     private zone: NgZone
   ) {
     this.getNewTutors();
-    this.reload();
   }
 
   ngOnInit() {
-    //this.loadScript('assets/js/libs/fullcalendar.js');
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
 
       this.getUserInfo(id);
     });
   }
+
 
   reload() {
     if (localStorage.getItem("reloaded") === "true") {
@@ -63,6 +95,7 @@ export class ProfileComponent implements OnInit {
       localStorage.setItem("reloaded", "false");
     }
   }
+
 
   getUserInfo(id: string) {
     this.id = id;
@@ -128,14 +161,13 @@ export class ProfileComponent implements OnInit {
       this.courses[subject._id] = subject.name;
     }
 
-    if (this.user.courses) {
-      console.log(this.user.courses);
 
+    if(this.user.courses){
+      
       for (let course of this.user.courses) {
         if (course.idCourse in this.courses) {
           delete this.courses[course.idCourse];
         }
-        console.log(Object.keys(this.courses).length);
       }
     }
 
@@ -178,6 +210,7 @@ export class ProfileComponent implements OnInit {
     return Object.keys(this.courses).length == 0;
   }
 
+
   // @ViewChild("closeModal", { static: false }) private closeModal: ElementRef;
   public sendMessage(form: NgForm) {
     let message = form.form.value.contactMessage;
@@ -191,5 +224,21 @@ export class ProfileComponent implements OnInit {
       })
 
       .catch();
+
+  async handleDateClick(arg) {
+    document.getElementById("openModalButton").click();
+    this.addingDate = arg;
+  }
+
+  onSubmit(f: NgForm){
+    if(this.selector!=null){
+      this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
+        title: this.selector,
+        start: this.addingDate.date,
+        allDay: this.addingDate.allDay
+      });
+      document.getElementById("close").click();
+    }
+
   }
 }

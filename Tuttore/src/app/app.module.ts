@@ -12,6 +12,7 @@ import { NoimagePipe } from './pipes/noimage.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+
 import { TutorCardHomeComponent } from './components/tutor-card-home/tutor-card-home.component';
 import { SubjectCardComponent } from './components/subject-card/subject-card.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -34,6 +35,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { TranslateDatePipe } from './pipes/translate-date.pipe';
 
+
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 @NgModule({
@@ -68,7 +71,8 @@ import { TranslateDatePipe } from './pipes/translate-date.pipe';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, 
     AngularFireAuthModule, 
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    FullCalendarModule 
   ],
   exports: [MatAutocompleteModule,],
   providers: [],

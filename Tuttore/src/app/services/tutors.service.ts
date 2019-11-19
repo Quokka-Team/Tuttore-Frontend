@@ -17,12 +17,12 @@ export class TutorsService {
   }
 
   private saveToken(tokenId){
-    localStorage.setItem('token',tokenId);
+    sessionStorage.setItem('token',tokenId);
 
     let date = new Date();
     date.setSeconds(1296000);
 
-    localStorage.setItem('expires', date.getTime().toString() );
+    sessionStorage.setItem('expires', date.getTime().toString() );
 
     this.readToken();
   }
@@ -75,14 +75,14 @@ export class TutorsService {
   }
 
   logOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expires');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('expires');
     this.readToken();
   }
 
   readToken(){
-    if ( localStorage.getItem('token') ) {
-      this.userToken = localStorage.getItem('token');
+    if ( sessionStorage.getItem('token') ) {
+      this.userToken = sessionStorage.getItem('token');
     } else {
       this.userToken = '';
     }
@@ -94,7 +94,7 @@ export class TutorsService {
       return false;
     }
     
-    const date = Number(localStorage.getItem('expires'));
+    const date = Number(sessionStorage.getItem('expires'));
     const actualDate = new Date();
     actualDate.setTime(date);
 

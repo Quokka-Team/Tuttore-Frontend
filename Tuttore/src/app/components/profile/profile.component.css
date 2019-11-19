@@ -27,7 +27,7 @@
     }
 }
 
-.cancel-button{
+.cancel-button {
     text-align: right;
     font-size: 20px;
     margin-bottom: 20px;
@@ -37,13 +37,15 @@
 .contact-tutor {
     max-width: 500px;
 }
- .add-subject{
+
+.add-subject {
     max-width: 500px;
 }
 
-.modal-button{
-    color: #fff; background-color:
-     #233D4D; border: none;
+.modal-button {
+    color: #fff;
+    background-color: #233D4D;
+    border: none;
 }
 
 .notification-event {
@@ -56,4 +58,8 @@
 
  ::ng-deep .example-full-width {
     width: 100%;
+}
+
+.text-color {
+    color: #fff;
 }

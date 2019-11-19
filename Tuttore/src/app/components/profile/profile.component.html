@@ -1,5 +1,4 @@
 <app-navbar> </app-navbar>
-
 <div class=" ">
   <div class="container">
     <div class="row">
@@ -25,6 +24,7 @@
                 <a class="h4 author-name"
                   >{{ user.name | titlecase }} {{ user.lastName | titlecase }} 
                 </a>
+
                 <div class="country">{{ user.career }}</div>
               </div>
             </div>
@@ -54,6 +54,7 @@
                 >
                   <div class="birthday-author-name " style="width: 50%;">
                     <a href="# " class="h6 author-name ">{{ course.name }}</a>
+
                     <div class="birthday-date ">
                       {{ course.code }}
                       <!-- <Strong>4.7</Strong> -->
@@ -65,8 +66,7 @@
                     
                     class="btn btn-sm bg-blue"
                     style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
-                    >Solicitar Tutoria</a
-                  >
+                    >Solicitar Tutoria</a>
                 </div>
               </div>
             </div>
@@ -76,6 +76,7 @@
                 data-toggle="modal"
                 data-target="#create-friend-group-1"
               ></a>
+
               <div class="content text-center">
                 <div class="">
                   <i class="fas fa-plus-square add-Subject"></i>
@@ -96,28 +97,30 @@
           <div class="ui-block-content">
             <!-- W-Personal-Info -->
 
-            <ul class="widget w-personal-info">
-              <li>
-                <span class="title">Descripcion:</span>
-                <span class="text">{{ user.description }}</span>
-              </li>
-              <li>
-                <span class="title">Email:</span>
-                <span class="text">{{ user.email }}</span>
-              </li>
-              <li>
-                <span class="title">Carrera:</span>
-                <span class="text">{{ user.career }}</span>
-              </li>
-              <li>
-                <span class="title">Promedio</span>
-                <span class="text">{{ user.gpa }}</span>
-              </li>
-              <li>
-                <span class="title">Telefono</span>
-                <span class="text">{{ user.phoneNumber }}</span>
-              </li>
-            </ul>
+
+                            <ul class="widget w-personal-info">
+                                <li>
+                                    <span class="title">Descripcion:</span>
+                                    <span class="text">{{ user.description }}</span>
+                                </li>
+                                <li>
+                                    <span class="title">Email:</span>
+                                    <span class="text">{{ user.email }}</span>
+                                </li>
+                                <li>
+                                    <span class="title">Carrera:</span>
+                                    <span class="text">{{ user.career }}</span>
+                                </li>
+                                <li>
+                                    <span class="title">Promedio</span>
+                                    <span class="text">{{ user.gpa }}</span>
+                                </li>
+                                <li>
+                                    <span class="title">Telefono</span>
+                                    <span class="text">{{ user.phoneNumber }}</span>
+                                </li>
+                            </ul>
+
 
             <div class="widget w-socials" *ngIf="isUser()">
               <a class="social-item bg-blue text-white">
@@ -151,6 +154,8 @@
               >Contactar  <i class="fas fa-comments"></i></a>
             </div>
           
+=
+
 
             <!-- ... end W-Socials -->
           </div>
@@ -187,25 +192,59 @@
       <div
         class="col col-xl-8 order-xl-2 col-lg-8 order-lg-2 col-md-12 order-md-2 col-sm-12 col-12"
       >
-        <!-- Calendario -->
-        <div class="ui-block ">
-          <div id="calendar" class="crumina-full-calendar"></div>
-        </div>
-        <!-- Fin de calendario -->
-        <div class="ui-block ">
-          <div
-            class="crumina-module crumina-heading with-title-decoration m-5 "
-          >
-            <h5 class="heading-title ">Comentarios</h5>
-          </div>
-          <ul class="comments-list style-3 ">
-            <li
-              *ngFor="let item of [1, 1, 1, 1]; let i = index"
-              class="comment-item "
-            >
-              <div class="post__author-thumb ">
-                <img [src]="item.profilePicture | noiconimage" alt="author " />
-              </div>
+
+                <!-- Calendario -->
+                <div  class="ui-block" style="padding: 20px;">
+
+                  <!-- Calendario de otro tutor -->
+                  <full-calendar 
+                    class="text-color"
+                    *ngIf="id!=='user'; else elseBlock"
+                    defaultView="dayGridMonth"
+                    [plugins]="calendarPlugins"
+                    [weekends]="calendarWeekends"
+                    [events]="[
+                      { title: 'event 2', date: '2019-11-19' }
+                    ]"
+                    [header]="{
+                      left: 'prev,next today',
+                      center: 'title',
+                      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    }"
+                  ></full-calendar>
+
+                  <!-- Calendario propio -->
+
+                  <ng-template #elseBlock>
+                    <full-calendar 
+                    
+                    class=""
+                    defaultView="dayGridMonth"
+                    [plugins]="calendarPlugins"
+                    [weekends]="calendarWeekends"
+                    [events]="calendarEvents"
+                    [header]="calendarHeader"
+                    (dateClick)="handleDateClick($event)"
+                    ></full-calendar>
+                  </ng-template>
+
+                </div>
+                
+                <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#new-event"></button>
+
+                
+                <!-- Fin de calendario -->
+
+                <div class="ui-block ">
+                    <div class="crumina-module crumina-heading with-title-decoration m-5 ">
+                        <h5 class="heading-title ">Comentarios</h5>
+                    </div>
+                    <ul class="comments-list style-3 ">
+                        <li *ngFor="let item of [1, 1, 1, 1]; let i = index" class="comment-item ">
+                            <div class="post__author-thumb ">
+                                <img [src]="item.profilePicture | noiconimage" alt="author " />
+                            </div>
+
 
               <div class="comments-content ">
                 <div class="post__author author vcard ">
@@ -228,6 +267,54 @@
               </div>
             </li>
           </ul>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal animated zoomIn faster"
+      id="new-event"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="create-event"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header" style="padding-left: 21%;">
+            <h6>
+              ¿Que tipo de evento deseas agregar?
+            </h6>
+          </div>
+
+          <div class="modal-body">
+            <form (ngSubmit)="onSubmit()">
+              <select 
+                class="custom-select" 
+                style="margin-bottom: 20px;"
+                [(ngModel)]="selector"
+                name="selector"
+                ngModel
+              >
+                  <option> Disponible </option>
+                  <option> Tutoría </option>
+              </select>
+
+              <div class="row">
+                <button class="btn modal-button" style="margin-left:25%; margin-bottom: 0px; margin-top: 5px;" type="submit">
+                  Aceptar
+                </button>
+                
+                <button id="close" class="btn modal-button" style="margin-left: 33px; margin-bottom: 0px; margin-top: 5px;"data-dismiss="modal">
+                  Cancelar
+                </button>
+              </div>
+            </form>   
+
+            
+          </div>
+
         </div>
       </div>
     </div>
