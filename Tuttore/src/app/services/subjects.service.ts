@@ -6,7 +6,7 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class SubjectsService {
-  url = `http://tuttore.sy4e6mgnfh.us-east-1.elasticbeanstalk.com/`;
+  url = `https://tuttore.tk/`;
 
   constructor(private http: HttpClient) {}
 

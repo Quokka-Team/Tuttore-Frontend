@@ -1,24 +1,30 @@
 <app-navbar> </app-navbar>
+<div class=" ">
+  <div class="container">
+    <div class="row">
+      <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="ui-block">
+          <div class="top-header">
+            <div class="top-header-thumb ">
+              <div class=" "
+              style="height: 250px;">
+              <div class="animatedBackground"></div>
+                <!-- <img [src]="user.background | nobackground" alt="Portada" /> -->
+                <!-- <img [src]="user.background | nobackground" alt="Portada" /> -->
+              </div>
+            </div>
+            <div class="profile-section"></div>
+            <div class="top-header-author">
+              <img
+                class="author-thumb"
+                [src]="user.profilePicture | noiconimage"
+                alt="author"
+              />
+              <div class="author-content">
+                <a class="h4 author-name"
+                  >{{ user.name | titlecase }} {{ user.lastName | titlecase }} 
+                </a>
 
-
-<div>
-    <div class="container">
-        <div class="row">
-            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="ui-block">
-                    <div class="top-header">
-                        <div class="top-header-thumb ">
-                            <div class=" ">
-                                <img [src]="user.background | nobackground" alt="Portada" />
-                            </div>
-                        </div>
-                        <div class="profile-section"></div>
-                        <div class="top-header-author">
-                            <img class="author-thumb" [src]="user.profilePicture | noiconimage" alt="author" />
-                            <div class="author-content">
-                                <a href="02-ProfilePage.html" class="h4 author-name">{{ user.name | titlecase }}
-                  {{ user.lastName | titlecase }}</a
-                >
                 <div class="country">{{ user.career }}</div>
               </div>
             </div>
@@ -35,27 +41,32 @@
       <div
         class="col col-xl-4 order-xl-1 col-lg-4 order-lg-1 col-md-12 order-md-1 col-sm-12 col-12"
       >
-      <div class="ui-block">
+        <div class="ui-block">
           <div class="ui-block-title">
-            <h6 class="title">Materias de Tutoria</h6>
+            <h6 class="title">Materias de Tutoria {{ username }}</h6>
           </div>
           <div class="ui-block-content">
             <div class="" *ngIf="user.isTutor; else addSubject">
-              <div
-                *ngFor="let course of user.courses"
-              >
+              <div *ngFor="let course of user.courses">
                 <div
-                  class="birthday-item inline-items border border-light rounded  m-2" style="padding-left:0px; padding-right: 15px;"
+                  class="birthday-item inline-items border border-light rounded  m-2"
+                  style="padding-left:0px; padding-right: 15px;"
                 >
                   <div class="birthday-author-name " style="width: 50%;">
                     <a href="# " class="h6 author-name ">{{ course.name }}</a>
-                                <div class="birthday-date ">
-                                    {{ course.code }}
-                                    <!-- <Strong>4.7</Strong> -->
-                                </div>
-                            </div>
-                            <a *ngIf="id!=='user'" data-toggle="modal" data-target="#edit-my-poll-popup" class="btn btn-sm bg-blue" style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;">Contactar</a
-                  >
+
+                    <div class="birthday-date ">
+                      {{ course.code }}
+                      <!-- <Strong>4.7</Strong> -->
+                    </div>
+                  </div>
+
+                  <a
+                    *ngIf="id !== 'user'"
+                    
+                    class="btn btn-sm bg-blue"
+                    style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
+                    >Solicitar Tutoria</a>
                 </div>
               </div>
             </div>
@@ -65,25 +76,27 @@
                 data-toggle="modal"
                 data-target="#create-friend-group-1"
               ></a>
-                            <div class="content text-center">
-                                <div class="">
-                                    <i class="fas fa-plus-square add-Subject"></i>
-                                </div>
-                                <div class="author-content">
-                                    <h4 class="country">
-                                        Conviértete en Tutor agregando materias
-                                    </h4>
-                                </div>
-                            </div>
-                            </ng-template>
-                        </div>
-                    </div>
-                    <div class="ui-block">
-                        <div class="ui-block-title">
-                            <h6 class="title">Informacion Personal</h6>
-                        </div>
-                        <div class="ui-block-content">
-                            <!-- W-Personal-Info -->
+
+              <div class="content text-center">
+                <div class="">
+                  <i class="fas fa-plus-square add-Subject"></i>
+                </div>
+                <div class="author-content">
+                  <h4 class="country">
+                    Conviértete en Tutor agregando materias
+                  </h4>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <div class="ui-block">
+          <div class="ui-block-title">
+            <h6 class="title">Informacion Personal</h6>
+          </div>
+          <div class="ui-block-content">
+            <!-- W-Personal-Info -->
+
 
                             <ul class="widget w-personal-info">
                                 <li>
@@ -108,32 +121,65 @@
                                 </li>
                             </ul>
 
-                            <div class="widget w-socials" *ngIf="isUser()">
-                                <a class="social-item bg-blue text-white">
-                                    <i class="fas fa-address-book" aria-hidden="true"></i> Historial
-                                </a>
-                                <a class="social-item bg-blue btn text-white .modal-button" data-toggle="modal" data-target="#edit-profile">
-                                    <i class="fas fa-edit" aria-hidden="true"></i> Editar Informacion
-                                </a>
-                                <a class="social-item bg-blue text-white" data-toggle="modal" data-target="#create-friend-group-1">
-                                    <i class="fas fa-plus-circle" aria-hidden="true"></i> Añadir Materia
-                                </a>
-                            </div>
 
-                            <!-- ... end W-Socials -->
-                        </div>
-                    </div>
-                    <div class="ui-block">
-                        <div class="ui-block-title">
-                            <h6 class="title">Algunos Tutores Nuevos</h6>
-                        </div>
-                        <ul class="widget w-friend-pages-added notification-list friend-requests">
-                            <li *ngFor="let tutor of newTutors" class="inline-items">
-                                <div class="author-thumb">
-                                    <img class="author-thumb" [src]="tutor.profilePicture | noimage" alt="author" />
-                                </div>
-                                <div class="notification-event">
-                                    <a [routerLink]="['/profile', tutor._id]" class="h6 notification-friend">{{ tutor.name }} {{ tutor.lastName }}</a
+            <div class="widget w-socials" *ngIf="isUser()">
+              <a class="social-item bg-blue text-white">
+                <i class="fas fa-address-book" aria-hidden="true"></i> Historial
+              </a>
+              <a
+                class="social-item bg-blue btn text-white .modal-button"
+                data-toggle="modal"
+                data-target="#edit-profile"
+              >
+                <i class="fas fa-edit" aria-hidden="true"></i> Editar
+                Informacion
+              </a>
+              <a
+                class="social-item bg-blue text-white"
+                data-toggle="modal"
+                data-target="#create-friend-group-1"
+              >
+                <i class="fas fa-plus-circle" aria-hidden="true"></i> Añadir
+                Materia
+              </a>
+            </div>
+            <div class="widget w-socials" *ngIf="!isUser()">
+             
+              <a
+              *ngIf="id !== 'user'"
+              data-toggle="modal"
+              data-target="#edit-my-poll-popup"
+              class="btn btn-sm bg-blue w-100"
+              style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
+              >Contactar  <i class="fas fa-comments"></i></a>
+            </div>
+          
+=
+
+
+            <!-- ... end W-Socials -->
+          </div>
+        </div>
+        <div class="ui-block">
+          <div class="ui-block-title">
+            <h6 class="title">Algunos Tutores Nuevos</h6>
+          </div>
+          <ul
+            class="widget w-friend-pages-added notification-list friend-requests"
+          >
+            <li *ngFor="let tutor of newTutors" class="inline-items">
+              <div class="author-thumb">
+                <img
+                  class="author-thumb"
+                  [src]="tutor.profilePicture | noimage"
+                  alt="author"
+                />
+              </div>
+              <div class="notification-event">
+                <a
+                  [routerLink]="['/profile', tutor._id]"
+                  class="h6 notification-friend"
+                  >{{ tutor.name }} {{ tutor.lastName }}</a
                 >
                 <span class="chat-message-item">{{ tutor.career }}</span>
               </div>
@@ -146,7 +192,7 @@
       <div
         class="col col-xl-8 order-xl-2 col-lg-8 order-lg-2 col-md-12 order-md-2 col-sm-12 col-12"
       >
-        
+
                 <!-- Calendario -->
                 <div  class="ui-block" style="padding: 20px;">
 
@@ -199,10 +245,12 @@
                                 <img [src]="item.profilePicture | noiconimage" alt="author " />
                             </div>
 
-                            <div class="comments-content ">
-                                <div class="post__author author vcard ">
-                                    <div class="author-date ">
-                                        <a class="h6 post__author-name fn " href="# ">Estudiante {{ i }}</a
+
+              <div class="comments-content ">
+                <div class="post__author author vcard ">
+                  <div class="author-date ">
+                    <a class="h6 post__author-name fn " href="# "
+                      >Estudiante {{ i }}</a
                     >
                     <div class="post__date ">
                       <time class="published " datetime="2004-07-24T18:18 ">
@@ -279,15 +327,18 @@
       aria-labelledby="create-event"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
+      <div
+        class="modal-dialog modal-dialog-centered window-popup create-event"
+        role="document"
+      >
         <div class="modal-content">
           <div class="modal-header">
             <h6 class="title">
               Edita tu Perfil - Funcionalidad en desarrollo
             </h6>
-                  <div class="cancel-button " data-dismiss="modal" >
-                  <i class="fas fa-window-close"></i>
-                </div>
+            <div class="cancel-button " data-dismiss="modal">
+              <i class="fas fa-window-close"></i>
+            </div>
           </div>
           <form #editForm="ngForm">
             <div class="modal-body">
@@ -385,7 +436,6 @@
       role="dialog"
       aria-labelledby="create-friend-group-1"
       aria-hidden="true"
-
     >
       <div
         class="modal-dialog modal-dialog-centered window-popup create-event"
@@ -395,7 +445,7 @@
           <div *ngIf="user.isTutor" class="modal-body ">
             <div *ngIf="!fulltutor(); else noAvaliableSubjects">
               <div class="cancel-button" data-dismiss="modal">
-                  <i class="fas fa-window-close"></i>
+                <i class="fas fa-window-close"></i>
               </div>
               <div class="modal-header justify-content-center">
                 <h6 class="title">
@@ -406,21 +456,21 @@
                 class="example-form text-center "
                 (ngSubmit)="add_Subject()"
               >
-              <mat-form-field
-              class="full-width mb-5
+                <mat-form-field
+                  class="full-width mb-5
             example-full-width"
-              style="border: 1px solid rgb(222, 226, 230);
+                  style="border: 1px solid rgb(222, 226, 230);
       padding: 3px 25px 0;
       border-radius: 6px;;"
-            >
-              <label style="font: 14px; ">Busca tu Materia:</label>
-              <input
-                type="text"
-                aria-label="Number"
-                matInput
-                [formControl]="myControl"
-                [matAutocomplete]="auto"
-              />
+                >
+                  <label style="font: 14px; ">Busca tu Materia:</label>
+                  <input
+                    type="text"
+                    aria-label="Number"
+                    matInput
+                    [formControl]="myControl"
+                    [matAutocomplete]="auto"
+                  />
                   <mat-autocomplete
                     #auto="matAutocomplete"
                     (optionSelected)="getData($event.option.value)"
@@ -434,7 +484,10 @@
                   </mat-autocomplete>
                 </mat-form-field>
                 <div class="button-form">
-                  <button class="btn btn-primary btn-md-2 mt-3 modal-button" type="submit">
+                  <button
+                    class="btn btn-primary btn-md-2 mt-3 modal-button"
+                    type="submit"
+                  >
                     Añadir
                   </button>
                 </div>
@@ -521,7 +574,6 @@
                   </mat-form-field>
                   <button
                     class="btn btn-lg btn-primary full-width modal-button"
-                   
                     type="submit"
                   >
                     Añadir
@@ -534,8 +586,7 @@
       </div>
     </div>
 
-    <div class="modal  animated zoomIn faster" 
-    id="edit-my-poll-popup">
+    <div class="modal  animated zoomIn faster" id="edit-my-poll-popup">
       <div
         class="modal-dialog modal-dialog-centered window-popup contact-tutor"
         role="document"
@@ -543,27 +594,42 @@
         <div class="modal-content">
           <div class="modal-body">
             <div class="edit-my-poll-content">
-              <form class="resume-form">
+              <form
+                class="resume-form"
+                #contactForm="ngForm"
+                (ngSubmit)="sendMessage(contactForm)"
+              >
                 <div class="row">
                   <div
-                  class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                    class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
                   >
-                  <div class="cancel-button" data-dismiss="modal">
+                    <div class="cancel-button"
+                    id="CloseButton"
+                    data-dismiss="modal">
                       <i class="fas fa-window-close"></i>
-                  </div>
-                  <h3>Envía un mensaje al tutor para contactarte !</h3>
-                  <p>
-                    Una vez envies el mensajes el tutor aparecerá disponible en tu
-                    chat para una mejor comunicación
-                  </p>
-                    <div class="form-group label-floating is-empty">
-                      <label class="control-label">Tu mensaje</label>
-                      <textarea class="form-control" placeholder=""></textarea>
                     </div>
-                    <a
+                    <h3>Envía un mensaje al tutor para contactarte !</h3>
+                    <p>
+                      Una vez envies el mensajes el tutor aparecerá disponible
+                      en tu chat para una mejor comunicación
+                    </p>
+                    <div class="form-group label-floating is-empty">
+                      <textarea
+                        class="form-control"
+                        placeholder="Tu mensaje"
+                        [(ngModel)]="contactMessage"
+                        name="contactMessage"
+                        
+                      ></textarea>
+                    </div>
+                    
+                    <button
                       class="btn btn-primary btn-lg full-width modal-button"
+                       
                       
-                      >Enviar</a
+                      type="submit"
+                     
+                      >Enviar</button
                     >
                   </div>
                 </div>

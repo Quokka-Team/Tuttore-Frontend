@@ -3,7 +3,7 @@ import { TutorsService } from "../../services/tutors.service";
 import { TutorModel } from "src/app/models/tutor.model";
 
 import { Router, ActivatedRoute } from "@angular/router";
-import { FormControl } from "@angular/forms";
+import { FormControl, NgForm } from "@angular/forms";
 import { Observable } from "rxjs";
 import { SubjectsService } from "src/app/services/subjects.service";
 import { SubjectModel } from "src/app/models/subjects.model";
@@ -11,6 +11,9 @@ import { map, startWith } from "rxjs/operators";
 import { SearchModel } from "src/app/models/search.model";
 import { NgForm } from '@angular/forms';
 import * as _ from "underscore";
+import { ChatService } from "src/app/services/chat.service";
+import { ViewChild, ElementRef } from "@angular/core";
+import { log } from 'util';
 
 import { Calendar } from '@fullcalendar/core';
 import { EventInput } from '@fullcalendar/core';
@@ -37,6 +40,11 @@ export class ProfileComponent implements OnInit {
   subjectId;
   id: string;
 
+  reloaded: boolean = true;
+  username: string;
+
+
+
 
   //Calendario
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
@@ -58,10 +66,11 @@ export class ProfileComponent implements OnInit {
   addingDate;
   //Fin Calendario
 
-  
+
   constructor(
     private tutorsService: TutorsService,
     private subjectService: SubjectsService,
+    private chatService: ChatService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private zone: NgZone
@@ -72,9 +81,21 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
+
       this.getUserInfo(id);
     });
   }
+
+
+  reload() {
+    if (localStorage.getItem("reloaded") === "true") {
+      this.zone.runOutsideAngular(() => {
+        location.reload();
+      });
+      localStorage.setItem("reloaded", "false");
+    }
+  }
+
 
   getUserInfo(id: string) {
     this.id = id;
@@ -83,21 +104,18 @@ export class ProfileComponent implements OnInit {
         (data: any) => {
           if (data.isTutor) {
             this.tutorsService
-            .getTutor("this")
-            .subscribe((tutor: TutorModel) => {
-
-            
-              this.user = tutor;
-              this.getSubjects();
-              this.user.isTutor = true;
-            });
+              .getTutor("this")
+              .subscribe((tutor: TutorModel) => {
+                this.user = tutor;
+                this.getSubjects();
+                this.user.isTutor = true;
+              });
           } else {
-            
-            
             this.user.isTutor = false;
             this.user = data;
             this.getSubjects();
             this.user.isTutor = false;
+
           }
         },
         error => {
@@ -109,6 +127,7 @@ export class ProfileComponent implements OnInit {
       this.tutorsService.getTutor(id).subscribe((tutor: TutorModel) => {
         this.user = tutor;
         this.user.isTutor = true;
+        this.username = this.user.email.match(/^([^@]*)@/)[1];
       });
     }
   }
@@ -142,6 +161,7 @@ export class ProfileComponent implements OnInit {
       this.courses[subject._id] = subject.name;
     }
 
+
     if(this.user.courses){
       
       for (let course of this.user.courses) {
@@ -150,7 +170,7 @@ export class ProfileComponent implements OnInit {
         }
       }
     }
-    
+
     this.options = Object.values(this.courses);
     this.subjectSearched = new SearchModel();
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -186,9 +206,24 @@ export class ProfileComponent implements OnInit {
     return this.id == "user";
   }
 
-  fulltutor(){
+  fulltutor() {
     return Object.keys(this.courses).length == 0;
   }
+
+
+  // @ViewChild("closeModal", { static: false }) private closeModal: ElementRef;
+  public sendMessage(form: NgForm) {
+    let message = form.form.value.contactMessage;
+    this.chatService
+      .createChat(message, this.username)
+      .then(() => {
+        
+
+        document.getElementById("CloseButton").click();
+        this.router.navigate(["/chat", `${this.username}`]);
+      })
+
+      .catch();
 
   async handleDateClick(arg) {
     document.getElementById("openModalButton").click();
@@ -204,5 +239,6 @@ export class ProfileComponent implements OnInit {
       });
       document.getElementById("close").click();
     }
+
   }
 }

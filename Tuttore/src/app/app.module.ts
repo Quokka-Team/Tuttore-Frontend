@@ -26,6 +26,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import { HomeInfoComponent } from './components/shared/home-info/home-info.component';
+import { ChatComponent } from './components/chat/chat.component';
+
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { TranslateDatePipe } from './pipes/translate-date.pipe';
+
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 
@@ -47,7 +56,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     HomePageComponent,
     NoiconimagePipe,
     NobackgroundPipe,
-    HomeInfoComponent
+    HomeInfoComponent,
+    ChatComponent,
+    TranslateDatePipe
   ],
   imports: [
     HttpClientModule,
@@ -57,6 +68,10 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     FormsModule,ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, 
+    AngularFireAuthModule, 
+    AngularFireStorageModule,
     FullCalendarModule 
   ],
   exports: [MatAutocompleteModule,],
