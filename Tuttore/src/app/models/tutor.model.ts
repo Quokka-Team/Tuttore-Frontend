@@ -14,6 +14,4 @@ dateCreatedTutor:string;
 description:string;
 profilePicture:string[];
 isTutor: boolean = true;
-
-
 }
