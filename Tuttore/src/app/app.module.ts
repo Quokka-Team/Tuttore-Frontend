@@ -30,6 +30,7 @@ import { HomeInfoComponent } from './components/shared/home-info/home-info.compo
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { GoogleApiModule, GoogleApiService, GoogleAuthService, NgGapiClientConfig, NG_GAPI_CONFIG, GoogleApiConfig } from "ng-gapi";
+import { GoogleSignUpComponent } from './components/google-sign-up/google-sign-up.component';
 
 let gapiClientConfig: NgGapiClientConfig = { 
   client_id: "929460386682-le18blljl6b3rutntl8asii4kfsb56ln.apps.googleusercontent.com",
@@ -55,7 +56,8 @@ let gapiClientConfig: NgGapiClientConfig = {
     HomePageComponent,
     NoiconimagePipe,
     NobackgroundPipe,
-    HomeInfoComponent
+    HomeInfoComponent,
+    GoogleSignUpComponent
   ],
   imports: [
     HttpClientModule,

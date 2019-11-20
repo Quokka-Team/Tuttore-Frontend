@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentModel } from 'src/app/models/student.model';
-import { TutorsService } from 'src/app/services/tutors.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import { GoogleService } from '../../services/google.service';
+import { GoogleModel } from 'src/app/models/google.model';
 
-import { GoogleService } from 'src/app/services/google.service';
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  selector: 'app-google-sign-up',
+  templateUrl: './google-sign-up.component.html',
+  styleUrls: ['./google-sign-up.component.css']
 })
-export class LogInComponent implements OnInit {
+export class GoogleSignUpComponent implements OnInit {
 
-  incomingStudent: StudentModel;
+  newGoogleUser:GoogleModel;
 
-  constructor(private tutorsService: TutorsService, private route:Router, private google:GoogleService) { }
+  constructor(private route: Router, private googleService: GoogleService) { }
 
   ngOnInit() {
-    this.incomingStudent = new StudentModel();
+    this.newGoogleUser = new GoogleModel();
   }
 
   onSubmit(f: NgForm) {
@@ -33,8 +32,10 @@ export class LogInComponent implements OnInit {
     })
 
     Swal.showLoading();
-    this.incomingStudent.career = this.incomingStudent.carrer;
-    this.tutorsService.signIn(this.incomingStudent).subscribe(
+    this.newGoogleUser.career = this.newGoogleUser.career;
+    console.log(this.newGoogleUser)
+
+    this.googleService.signUp(this.newGoogleUser).subscribe(
       async data => {
         await Swal.fire({
           allowOutsideClick: false,
@@ -55,8 +56,9 @@ export class LogInComponent implements OnInit {
     );    
   }
 
-  signIn(){
-    this.google.signIn();
+  logOut() {
+    this.googleService.signOut();
+    this.route.navigateByUrl("/sign-in");
   }
-  
+
 }

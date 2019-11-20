@@ -68,7 +68,7 @@ export class TutorsService {
       );
   }
 
-  signUp( student:StudentModel) {
+  signUp( student:StudentModel ) {
     const authData = {...student};
     return this.http.post(`${this.url}signUp`, authData);
   }
@@ -131,5 +131,8 @@ export class TutorsService {
    return this.http.post(`${this.url}addCourseTutor`, data,{headers})
   }
 
-
+  //Servicio que me indica si el usuario ya está registrado o no
+  isRegistered(email:string){
+    return false;
+  }
 }

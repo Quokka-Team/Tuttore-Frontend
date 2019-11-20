@@ -1,0 +1,81 @@
+<div class="row display-flex">
+
+    <div class="col col-xl-8 col-lg-6 col-md-12 col-sm-12 col-12 image-register"></div>
+
+    <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12" style="padding: 0">
+
+        <div class="registration-login-form" style="padding: 0; height: 100vh;">
+
+            <div class="tab-content">
+
+                <div class="tab-pane active" id="home" role="tabpanel" data-mh="log-tab">
+
+                    <a class="logo d-flex justify-content-center">
+                        <div class="img-wrap">
+                            <img class="tuttore-logo-footer" src="assets/img/logo/LogoName.png" alt="Tuttore" />
+                        </div>
+                    </a>
+
+                    <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)" novalidate class="content animated bounceInRight">
+                        <div class="row">
+
+                            <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+
+                                <span class="alert text-danger" *ngIf=" (signUpForm.submitted && signUpForm.controls['gpa'].errors) || (signUpForm.value.gp<=0 || signUpForm.value.gpa>=5)">
+                                    El P.A.P.A es obligatorio y debe estar entre 0-5
+                                </span>
+
+                                <div class="form-group label-floating">
+
+                                    <label for="gpa" class="control-label">P.A.P.A</label>
+
+                                    <input required ngModel name="gpa" #gpa="ngModel" class="form-control" placeholder="" type="number" step="0.1" id="gpa" [(ngModel)]="newGoogleUser.gpa" />
+
+                                </div>
+
+                            </div>
+
+                            <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+
+                                <span class="alert text-danger" *ngIf="signUpForm.submitted && signUpForm.controls['phoneNumber'].errors">
+                                    El teléfono es obligatorio
+                                </span>
+
+                                <div class="form-group label-floating">
+                                    <label for="phoneNumber" class="control-label">Teléfono</label>
+                                    <input required ngModel name="phoneNumber" #phoneNumber="ngModel" class="form-control" placeholder="" type="number" id="phoneNumber" [(ngModel)]="newGoogleUser.phoneNumber" />
+                                </div>
+
+                            </div>
+
+                            <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+                                <span class="alert text-danger" *ngIf="signUpForm.submitted && signUpForm.controls['carrer'].errors">
+                                La carrera es requerida
+                                </span>
+
+                                <div class="form-group label-floating">
+                                    <label for="carrer" class="control-label">Carrera</label>
+                                    <input required ngModel name="carrer" #carrer="ngModel" class="form-control" placeholder="" type="text" id="carrer" [(ngModel)]="newGoogleUser.career" />
+                                    <div class="alert text-danger" *ngIf="carrer.touched && !carrer.valid"></div>
+                                </div>
+
+                                <button class="btn btn-primary btn-lg full-width " style="background-color: #233D4D; border-color: #233D4D" type="submit">
+                                    ¡Completar Registro con Google!
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="content animated bounceInRight" style="padding-right: 25px; padding-left: 25px;">
+                        <button (click)="logOut()" class="btn btn-lg btn-primary full-width" style="background-color: #00BBF0;border-color: #00BBF0">
+                            Cancelar Registro
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
