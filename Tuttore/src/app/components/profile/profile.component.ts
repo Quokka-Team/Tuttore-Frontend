@@ -37,7 +37,6 @@ export class ProfileComponent implements OnInit {
   subjectId;
   id: string;
 
-
   //Calendario
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
 
@@ -76,24 +75,20 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  getUserInfo(id: string) {
-    this.id = id;
+  getUserInfo(id:string) {
+    this.id=id
+
     if (id == "user") {
+      this.id="user";
       this.tutorsService.getUser().subscribe(
         (data: any) => {
           if (data.isTutor) {
-            this.tutorsService
-            .getTutor("this")
-            .subscribe((tutor: TutorModel) => {
-
-            
+            this.tutorsService.getTutor("this").subscribe((tutor: TutorModel) => {            
               this.user = tutor;
               this.getSubjects();
               this.user.isTutor = true;
             });
           } else {
-            
-            
             this.user.isTutor = false;
             this.user = data;
             this.getSubjects();
@@ -105,10 +100,42 @@ export class ProfileComponent implements OnInit {
           console.log(error);
         }
       );
-    } else {
-      this.tutorsService.getTutor(id).subscribe((tutor: TutorModel) => {
-        this.user = tutor;
-        this.user.isTutor = true;
+    }else{
+      this.tutorsService.getTutor(this.id).subscribe((tutor: TutorModel) => {
+
+  	    this.tutorsService.getUser().subscribe((data:any) => {
+          console.log("pero si compara....");
+          console.log("data",data.id);
+          console.log("tutor",tutor);
+          if(data.id == tutor.idTutor){
+            console.log("Son iguales");
+            this.id="user";
+            if (data.isTutor) {
+              this.tutorsService.getTutor("this").subscribe((tutor: TutorModel) => {            
+                this.user = tutor;
+                this.getSubjects();
+                this.user.isTutor = true;
+              });
+            } else {
+              this.user.isTutor = false;
+              this.user = data;
+              this.getSubjects();
+              this.user.isTutor = false;
+            }
+
+          }else{
+            this.user = tutor;
+            this.user.isTutor = true;
+          }
+        },
+        error => {
+          console.log("hubo un error");
+          console.log(error);
+        });
+      },
+      error => {
+        console.log("hubo un error");
+        console.log(error);
       });
     }
   }
