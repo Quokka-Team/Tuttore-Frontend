@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentModel } from 'src/app/models/student.model';
 import { TutorsService } from 'src/app/services/tutors.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+
+import { GoogleService } from 'src/app/services/google.service';
+import { GoogleApiService } from 'ng-gapi';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,9 +17,17 @@ export class LogInComponent implements OnInit {
 
   incomingStudent: StudentModel;
 
-  constructor(private tutorsService: TutorsService, private route:Router) {}
+  constructor(private tutorsService: TutorsService, private route:Router, private google:GoogleService, private gapiService: GoogleApiService, private activated: ActivatedRoute) {
+    this.gapiService.onLoad().subscribe( () => {
+      console.log('Aqui se puede usar Gapiservice');
+    });
+  }
+
   ngOnInit() {
     this.incomingStudent = new StudentModel();
+    this.activated.fragment.subscribe((fragment) => {
+      console.log("Fragment ",fragment)
+  })
   }
 
   onSubmit(f: NgForm) {
@@ -53,13 +64,8 @@ export class LogInComponent implements OnInit {
     );    
   }
 
-  onSignIn(googleUser) {
-    console.log("Hola");
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  signIn(){
+    this.google.signIn();
   }
   
 }

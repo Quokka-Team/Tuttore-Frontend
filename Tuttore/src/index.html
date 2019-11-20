@@ -9,12 +9,6 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="assets/img/logo/tabIcon.png">
 
-    <!-- Google Log-In -->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="929460386682-le18blljl6b3rutntl8asii4kfsb56ln.apps.googleusercontent.com">
-    <meta name="google-signin-scope" content="profile email">
-
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="assets/Bootstrap/dist/css/bootstrap-reboot.css">
     <link rel="stylesheet" type="text/css" href="assets/Bootstrap/dist/css/bootstrap.css">
@@ -25,25 +19,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
 
-
-    <script>
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-        }
-    </script>
-
-    <script>
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function() {
-                console.log('User signed out.');
-            });
-        }
-    </script>
 </head>
 
 <body>

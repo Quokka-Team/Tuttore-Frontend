@@ -93,7 +93,7 @@
                         </div>
                     </form>
                     <div class="content animated bounceInLeft" style="padding-right: 25px; padding-left: 25px;">
-                        <button id="googleBtn" class="btn btn-lg btn-primary full-width" style="background-color: #00BBF0;border-color: #00BBF0">
+                        <button (click)="signIn()" class="btn btn-lg btn-primary full-width" style="background-color: #00BBF0;border-color: #00BBF0">
                         Iniciar con Google
                       </button>
                         <p>
@@ -104,8 +104,6 @@
                 </div>
             </div>
         </div>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        <a href="#" onclick="signOut();">Sign out</a>
 
         <!-- ... end Login-Registration Form  -->
     </div>

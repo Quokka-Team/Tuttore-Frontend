@@ -29,6 +29,14 @@ import { HomeInfoComponent } from './components/shared/home-info/home-info.compo
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 
+import { GoogleApiModule, GoogleApiService, GoogleAuthService, NgGapiClientConfig, NG_GAPI_CONFIG, GoogleApiConfig } from "ng-gapi";
+
+let gapiClientConfig: NgGapiClientConfig = { 
+  client_id: "929460386682-le18blljl6b3rutntl8asii4kfsb56ln.apps.googleusercontent.com",
+  discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
+  ux_mode: "popup",
+  scope: ["https://www.googleapis.com/auth/userinfo.profile"].join(" ")
+};
 
 @NgModule({
   declarations: [
@@ -57,7 +65,11 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     FormsModule,ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
-    FullCalendarModule 
+    FullCalendarModule,
+    GoogleApiModule.forRoot({
+      provide: NG_GAPI_CONFIG,
+      useValue: gapiClientConfig
+    })
   ],
   exports: [MatAutocompleteModule,],
   providers: [],
