@@ -38,6 +38,7 @@ export class ProfileComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   subjectId;
   id: string;
+  username: string;
 
   //Calendario
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
@@ -108,11 +109,7 @@ export class ProfileComponent implements OnInit {
       this.tutorsService.getTutor(this.id).subscribe((tutor: TutorModel) => {
 
   	    this.tutorsService.getUser().subscribe((data:any) => {
-          console.log("pero si compara....");
-          console.log("data",data.id);
-          console.log("tutor",tutor);
           if(data.id == tutor.idTutor){
-            console.log("Son iguales");
             this.id="user";
             if (data.isTutor) {
               this.tutorsService.getTutor("this").subscribe((tutor: TutorModel) => {            
@@ -130,6 +127,7 @@ export class ProfileComponent implements OnInit {
           }else{
             this.user = tutor;
             this.user.isTutor = true;
+            this.username = this.user.email.match(/^([^@]*)@/)[1];
           }
         },
         error => {
