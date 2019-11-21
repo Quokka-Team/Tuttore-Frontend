@@ -36,6 +36,7 @@ export class NavbarComponent implements OnInit {
       data => {
         this.user = data;
         this.username = this.user.email.match(/^([^@]*)@/)[1];
+        localStorage.setItem('mail',this.username)
       },
       error => {
         console.log("hubo un error");

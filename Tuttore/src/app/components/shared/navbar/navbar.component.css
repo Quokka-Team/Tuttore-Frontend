@@ -4,6 +4,10 @@
     ;
 }
 
+.header{
+    box-shadow: 0 1px 8px 0 rgba(160, 124, 124, 0.7);
+}
+
 .logo-container {
     width: 60px;
     ;

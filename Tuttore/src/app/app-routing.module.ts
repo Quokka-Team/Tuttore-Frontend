@@ -12,12 +12,15 @@ import { LoggedGuard } from './guards/logged.guard';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { GoogleSignUpComponent } from './components/google-sign-up/google-sign-up.component';
 import { GoogleGuard } from './guards/google.guard';
+import { ChatComponent } from './components/chat/chat.component';
 
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate:[AuthGuard] },
   { path: 'profile/:id', component: ProfileComponent, canActivate:[AuthGuard] },
+  { path: 'chat', component: ChatComponent, canActivate:[AuthGuard] },
+  { path: 'chat/:username', component: ChatComponent, canActivate:[AuthGuard] },
   { path: 'search/:subject', component: SearchComponent, canActivate:[AuthGuard] },
   { path: 'search', component: SearchComponent, canActivate:[AuthGuard] },
   { path: 'sign-up', component: SignUpComponent, canActivate:[LoggedGuard] },
