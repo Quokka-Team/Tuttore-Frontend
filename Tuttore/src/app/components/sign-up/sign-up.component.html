@@ -147,7 +147,7 @@
                 </span>
                 <div class="form-group label-floating">
                   <label for="carrer" class="control-label">Carrera</label>
-                                    <input required ngModel name="carrer" #carrer="ngModel" class="form-control" placeholder="" type="text" id="carrer" [(ngModel)]="newStudent.carrer" />
+                                    <input required ngModel name="carrer" #carrer="ngModel" class="form-control" placeholder="" type="text" id="carrer" [(ngModel)]="newStudent.career" />
                                     <div class="alert text-danger" *ngIf="carrer.touched && !carrer.valid"></div>
                                 </div>
 
@@ -184,6 +184,8 @@
                 </button>
                             </div>
                         </div>
+
+                        <input type="file" (change)="onFileSelected($event)">
                     </form>
 
                     <div class="content animated bounceInRight" style="padding-right: 25px; padding-left: 25px;">

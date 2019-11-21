@@ -33,7 +33,7 @@ export class LogInComponent implements OnInit {
     })
 
     Swal.showLoading();
-    this.incomingStudent.career = this.incomingStudent.carrer;
+    this.incomingStudent.career = this.incomingStudent.career;
     this.tutorsService.signIn(this.incomingStudent).subscribe(
       async data => {
         await Swal.fire({

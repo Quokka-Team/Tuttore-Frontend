@@ -33,7 +33,6 @@ export class GoogleService {
     return sessionStorage.getItem(GoogleService.SESSION_STORAGE_KEY);
   }
 
-  // ------------ Empieza Sign In ------------
   public signIn() {
     this.googleAuthService.getAuth().subscribe((auth) => {
       auth.signIn().then(res => this.signInSuccessHandler(res), err => this.signInErrorHandler(err));
@@ -48,7 +47,6 @@ export class GoogleService {
       );
 
       let email = res.getBasicProfile().getEmail();
-      console.log(res.getAuthResponse().id_token);
 
       if(this.emailVerification(email)){
 
@@ -66,7 +64,6 @@ export class GoogleService {
             
             this.userService.signInGoogle(res.getAuthResponse().id_token, email).subscribe(
               async data => {
-                console.log(data);
                 await Swal.fire({
                   allowOutsideClick: false,
                   type: 'success',
@@ -74,13 +71,10 @@ export class GoogleService {
                   timer: 1500,
                   showConfirmButton:false
                 })
-                console.log("ssssssssssssssssssssssssssssssssssssssssss");
                 this.route.navigateByUrl("/home");
               },
               error => {
-                console.log(res.getAuthResponse().id_token);
-                console.log("0ooooooooooooooooooooooooooooooooooooooooooooooo");
-                // this.errorSignOut();
+                this.errorSignOut();
                 Swal.fire({
                   type: 'error',
                   title: 'Hubo un error',
@@ -102,7 +96,6 @@ export class GoogleService {
         },
         error => {
           this.errorSignOut();
-          console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
           Swal.fire({
             type: 'error',
             title: 'Hubo un error',
@@ -127,10 +120,6 @@ export class GoogleService {
     console.log("Hubo un error con el login de Google: ", err);
   }
 
-  // ------------ Termina Sign In ------------
-
-
-  // ------------ Empieza Sign Out ------------
   public signOut(): void {
     this.googleAuthService.getAuth().subscribe((auth) => {
       try {
@@ -165,7 +154,6 @@ export class GoogleService {
       sessionStorage.removeItem(GoogleService.SESSION_STORAGE_KEY)
     });
   }
-  // ------------ Termina Sign Out ------------
 
   public isUserSignedIn(): boolean {
     return !_.isEmpty(sessionStorage.getItem(GoogleService.SESSION_STORAGE_KEY));
@@ -177,7 +165,7 @@ export class GoogleService {
     this.normalUser.name = this.user.getBasicProfile().getGivenName();
     this.normalUser.lastName = this.user.getBasicProfile().getFamilyName();
     this.normalUser.email = this.user.getBasicProfile().getEmail();
-    this.normalUser.image = this.user.getBasicProfile().getImageUrl();
+    this.normalUser.profilePicture = this.user.getBasicProfile().getImageUrl();
     this.normalUser.career = newUser.career;
     this.normalUser.gpa = newUser.gpa;
     this.normalUser.phoneNumber = newUser.phoneNumber;
