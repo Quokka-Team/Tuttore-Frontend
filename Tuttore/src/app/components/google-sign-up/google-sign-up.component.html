@@ -21,7 +21,7 @@
 
                             <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
 
-                                <span class="alert text-danger" *ngIf=" (signUpForm.submitted && signUpForm.controls['gpa'].errors) || (signUpForm.value.gp<=0 || signUpForm.value.gpa>=5)">
+                                <span class="alert text-danger" *ngIf=" (signUpForm.submitted && signUpForm.controls['gpa'].errors) || (signUpForm.value.gpa<0 || signUpForm.value.gpa>5)">
                                     El P.A.P.A es obligatorio y debe estar entre 0-5
                                 </span>
 

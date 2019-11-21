@@ -25,40 +25,11 @@ export class GoogleSignUpComponent implements OnInit {
     if(f.invalid){
       return;
     }
-    Swal.fire({
-      allowOutsideClick: false,
-      type: 'info',
-      text: 'Procesando solicitud'
-    })
-
-    Swal.showLoading();
-    this.newGoogleUser.career = this.newGoogleUser.career;
-    console.log(this.newGoogleUser)
-
-    this.googleService.signUp(this.newGoogleUser).subscribe(
-      async data => {
-        await Swal.fire({
-          allowOutsideClick: false,
-          type: 'success',
-          text: 'Te has logueado correctamente',
-          timer: 1500,
-          showConfirmButton:false
-        })
-        this.route.navigateByUrl("/home");
-      },
-      error => {
-        Swal.fire({
-          type: 'error',
-          title: 'Hubo un error',
-          text: error.error.message
-        })
-      }
-    );    
+    this.googleService.signUp(this.newGoogleUser)
   }
 
   logOut() {
-    this.googleService.signOut();
-    this.route.navigateByUrl("/sign-in");
+    this.googleService.errorSignOut();
   }
 
 }

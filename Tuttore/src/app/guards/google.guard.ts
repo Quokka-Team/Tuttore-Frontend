@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { GoogleService } from '../services/google.service';
+import { TutorsService } from '../services/tutors.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GoogleGuard implements CanActivate {
 
-  constructor(private route:Router, private googleAuth:GoogleService){ }
+  constructor(private route:Router, private googleService:GoogleService){ }
 
   canActivate(): boolean{
     
-    //Añadir funcion que me diga si ya está registrado o no (Si no está registrado deja, de otra forma)
-    if(this.googleAuth.getCurrentUser()==undefined){
-      this.googleAuth.signOut();
+    if(this.googleService.getCurrentUser()==undefined || this.googleService.getType()=="1" || this.googleService.getType()=="2"){
+      this.googleService.signOut();
       return false;
     }
 
-    if(this.googleAuth.isUserSignedIn()){
+    if(this.googleService.isUserSignedIn()){
       return true;
     }else{
       this.route.navigateByUrl("/sign-in");

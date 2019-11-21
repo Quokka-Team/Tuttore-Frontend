@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
   logOut() {
     if(this.googleAuth.isUserSignedIn()){
       this.googleAuth.signOut();
+      this.auth.logOut();
     }else{
       this.auth.logOut();
     }

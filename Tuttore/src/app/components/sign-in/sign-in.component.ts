@@ -16,7 +16,7 @@ export class LogInComponent implements OnInit {
 
   incomingStudent: StudentModel;
 
-  constructor(private tutorsService: TutorsService, private route:Router, private google:GoogleService) { }
+  constructor(private tutorsService: TutorsService, private route:Router, private googleService:GoogleService) { }
 
   ngOnInit() {
     this.incomingStudent = new StudentModel();
@@ -56,7 +56,7 @@ export class LogInComponent implements OnInit {
   }
 
   signIn(){
-    this.google.signIn();
+    this.googleService.signIn();
   }
   
 }

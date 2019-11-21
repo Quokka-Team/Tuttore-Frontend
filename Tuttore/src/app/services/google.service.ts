@@ -6,6 +6,7 @@ import GoogleUser = gapi.auth2.GoogleUser;
 import { StudentModel } from 'src/app/models/student.model';
 import { GoogleModel } from '../models/google.model';
 import { TutorsService } from './tutors.service';
+import Swal from 'sweetalert2';
 
 
 @Injectable({
@@ -16,6 +17,7 @@ export class GoogleService {
   public static readonly SESSION_STORAGE_KEY: string = "accessToken";
   private user: GoogleUser = undefined;
   private normalUser: StudentModel = new StudentModel;
+  private userType:string;
 
   constructor(private googleAuthService: GoogleAuthService, private ngZone: NgZone, private route:Router, private userService:TutorsService) { }
 
@@ -45,18 +47,79 @@ export class GoogleService {
         GoogleService.SESSION_STORAGE_KEY, res.getAuthResponse().access_token
       );
 
-      // Meter aqui que si no es un correo @unal.edu.co se sale automáticamente
+      let email = res.getBasicProfile().getEmail();
+      console.log(res.getAuthResponse().id_token);
 
-      // Ademas preguntar que pasa si la persona intenta entrar por ambos lados? lo deja sin importar la constraseña?
+      if(this.emailVerification(email)){
 
-      // Meter si el usuario ya está registrado o no
+        this.userService.typeStudent(email).subscribe((value:any) => {
+          this.userType = value.type;
+          if(value.type == "1"){
+
+            Swal.fire({
+              allowOutsideClick: false,
+              type: 'info',
+              text: 'Procesando solicitud'
+            })
+        
+            Swal.showLoading();
+            
+            this.userService.signInGoogle(res.getAuthResponse().id_token, email).subscribe(
+              async data => {
+                console.log(data);
+                await Swal.fire({
+                  allowOutsideClick: false,
+                  type: 'success',
+                  text: 'Te has logueado correctamente',
+                  timer: 1500,
+                  showConfirmButton:false
+                })
+                console.log("ssssssssssssssssssssssssssssssssssssssssss");
+                this.route.navigateByUrl("/home");
+              },
+              error => {
+                console.log(res.getAuthResponse().id_token);
+                console.log("0ooooooooooooooooooooooooooooooooooooooooooooooo");
+                // this.errorSignOut();
+                Swal.fire({
+                  type: 'error',
+                  title: 'Hubo un error',
+                  text: error.error.message
+                })
+              }
+            );
       
-      // if(this.userService.isRegistered(res.getBasicProfile().getEmail())){
-      //   this.route.navigateByUrl("/home");
-      // }else{
-      //   this.route.navigateByUrl("/Google-sign-up");
-      // }
-      this.route.navigateByUrl("/Google-sign-up");
+          }else if(value.type == "2"){
+            this.errorSignOut();
+            Swal.fire({
+              allowOutsideClick: true,
+              type: 'error',
+              text: 'Este correo ya se encuentra registrado por otro método, por favor ingrese sus credenciales'
+            })
+          }else{
+            this.route.navigateByUrl("/Google-sign-up");
+          }
+        },
+        error => {
+          this.errorSignOut();
+          console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+          Swal.fire({
+            type: 'error',
+            title: 'Hubo un error',
+            text: error.error.message
+          })
+        });
+
+      }else{
+        this.errorSignOut();
+
+        Swal.fire({
+          allowOutsideClick: true,
+          type: 'error',
+          text: 'Debe utilizar un correo institucional de la Universidad Nacional de Colombia'
+        })
+      }
+
     });
   }
 
@@ -79,6 +142,29 @@ export class GoogleService {
       this.route.navigateByUrl("/home-page");
     });
   }
+
+  public errorSignOut(): void {
+    this.googleAuthService.getAuth().subscribe((auth) => {
+      try {
+        auth.signOut();
+      } catch (e) {
+        console.error(e);
+      }
+      sessionStorage.removeItem(GoogleService.SESSION_STORAGE_KEY)
+      this.route.navigateByUrl("/sign-in");
+    });
+  }
+
+  private normalSignOut(): void {
+    this.googleAuthService.getAuth().subscribe((auth) => {
+      try {
+        auth.signOut();
+      } catch (e) {
+        console.error(e);
+      }
+      sessionStorage.removeItem(GoogleService.SESSION_STORAGE_KEY)
+    });
+  }
   // ------------ Termina Sign Out ------------
 
   public isUserSignedIn(): boolean {
@@ -96,10 +182,61 @@ export class GoogleService {
     this.normalUser.gpa = newUser.gpa;
     this.normalUser.phoneNumber = newUser.phoneNumber;
 
-    console.log(this.normalUser);
+    Swal.fire({
+      allowOutsideClick: false,
+      type: 'info',
+      text: 'Procesando solicitud'
+    })
 
-    //return this.userService.signUp(this.normalUser);
-    
-    //Se envia al backend this.normalUser y se responde con el token
+    Swal.showLoading();
+
+    this.userService.signUpGoogle(this.normalUser , this.user.getAuthResponse().id_token).subscribe(
+      async data => {
+        await Swal.fire({
+          allowOutsideClick: false,
+          type: 'success',
+          text: 'Te has registrado correctamente, accediendo...',
+          timer: 1500,
+          showConfirmButton:false
+        })
+        
+        this.userService.signInGoogle(this.user.getAuthResponse().id_token, this.user.getBasicProfile().getEmail()).subscribe(
+          async data => {
+            this.route.navigateByUrl("/home");
+          },
+          error => {
+            this.errorSignOut();
+            console.log("Hubo un error", error);
+          }
+        );
+      },
+      error => {
+        this.errorSignOut();
+        Swal.fire({
+          type: 'error',
+          title: 'Hubo un error',
+          text: error.error.message
+        })
+      }
+    );
+  }
+
+  private emailVerification(email:string){
+    let aux = 0;
+    for(let i = 0; i < email.length; i++){
+      if(email.charAt(i)=="@"){
+        aux = i;
+      }
+    }
+    let compare = email.substring(aux,email.length);
+    if(compare == "@unal.edu.co"){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  
+  public getType(){
+    return this.userType;
   }
 }

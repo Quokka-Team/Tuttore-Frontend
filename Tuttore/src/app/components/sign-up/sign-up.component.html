@@ -182,13 +182,20 @@
                                 <button class="btn btn-primary btn-lg full-width " style="background-color: #233D4D; border-color: #233D4D" type="submit">
                   !Completar Registro!
                 </button>
-                                <p>
-                                    ¿Ya tienes una cuenta?
-                                    <a [routerLink]="['/sign-in']">Inicia sesión ahora!</a> y ¡Encuentra tutores para las materias que necesites!
-                                </p>
                             </div>
                         </div>
                     </form>
+
+                    <div class="content animated bounceInRight" style="padding-right: 25px; padding-left: 25px;">
+                        <button (click)="signIn()" class="btn btn-lg btn-primary full-width" style="background-color: #00BBF0;border-color: #00BBF0">
+                        Iniciar con Google
+                        </button>
+
+                        <p>
+                            ¿Ya tienes una cuenta?
+                            <a [routerLink]="['/sign-in']">Inicia sesión ahora!</a> y ¡Encuentra tutores para las materias que necesites!
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
