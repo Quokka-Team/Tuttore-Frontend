@@ -179,13 +179,20 @@
 
                                 </div>
 
-                                <button class="btn btn-primary btn-lg full-width " style="background-color: #233D4D; border-color: #233D4D" type="submit">
-                  !Completar Registro!
+                                <div class="row">
+
+                                    <span style="font-size: 17px; width: 25%; margin-top: auto; margin-bottom: auto; margin-left: 0px;">Foto de perfil</span>
+
+                                    <div class="" style="padding-right: 0px;padding-left: 0px;width: 75%;">
+                                        <input id="file-upload" type="file" (change)="onFileSelected($event)" value="like" accept=".jpeg,.jpg,.png">
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary btn-lg full-width " style="background-color: #233D4D; border-color: #233D4D; margin-top: 20px;" type="submit">
+                  Completar Registro
                 </button>
                             </div>
                         </div>
-
-                        <input type="file" (change)="onFileSelected($event)">
                     </form>
 
                     <div class="content animated bounceInRight" style="padding-right: 25px; padding-left: 25px;">
@@ -195,7 +202,7 @@
 
                         <p>
                             ¿Ya tienes una cuenta?
-                            <a [routerLink]="['/sign-in']">Inicia sesión ahora!</a> y ¡Encuentra tutores para las materias que necesites!
+                            <a [routerLink]="['/sign-in']">Inicia sesión ahora</a> y ¡Encuentra tutores para las materias que necesites!
                         </p>
                     </div>
                 </div>

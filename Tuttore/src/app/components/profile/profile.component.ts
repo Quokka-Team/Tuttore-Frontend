@@ -19,6 +19,7 @@ import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { ViewFlags } from '@angular/compiler/src/core';
 
 @Component({
   selector: "app-profile",
@@ -109,7 +110,7 @@ export class ProfileComponent implements OnInit {
       this.tutorsService.getTutor(this.id).subscribe((tutor: TutorModel) => {
 
   	    this.tutorsService.getUser().subscribe((data:any) => {
-          if(data.id == tutor.idTutor){
+          if(data.id == tutor._id){
             this.id="user";
             if (data.isTutor) {
               this.tutorsService.getTutor("this").subscribe((tutor: TutorModel) => {            
