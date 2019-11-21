@@ -84,20 +84,7 @@ export class SignUpComponent implements OnInit{
 
   private makeRegister(){
       
-    this.tutorService.signUp(this.newStudent, this.profileImage);//.subscribe( async res => {
-    //   Swal.fire({
-    //     allowOutsideClick: false,
-    //     type: 'success',
-    //     text: 'Su cuenta se ha creado satisfactoriamente',
-    //   })
-    //   this.route.navigateByUrl("/sign-in");
-    // }, err => {
-    //   Swal.fire({
-    //     allowOutsideClick: false,
-    //     type: 'error',
-    //     text: err.error.message,
-    //   })
-    // });
+    this.tutorService.signUp(this.newStudent, this.profileImage);
   }
 
   signIn(){
