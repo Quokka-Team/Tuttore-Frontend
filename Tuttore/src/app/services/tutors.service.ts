@@ -10,7 +10,7 @@ import { SearchSubjectModel } from '../models/searchSubject.model';
 export class TutorsService {
   
   userToken:string;
-   url = `https://tuttore.tk/`;
+  url = `https://tuttore.tk/`;
     
   constructor(private http: HttpClient) {
     this.readToken();
@@ -59,7 +59,6 @@ export class TutorsService {
   }
 
   signIn(student: StudentModel){
-
     return this.http.post(`${this.url}signIn/`, student ).pipe(
         map( resp => {
           this.saveToken( resp['token'] );
@@ -67,9 +66,8 @@ export class TutorsService {
         })
       );
   }
-  
-  signUp( student:StudentModel) {
-    
+
+  signUp( student:StudentModel ) {
     const authData = {...student};
     return this.http.post(`${this.url}signUp`, authData);
   }
@@ -132,5 +130,36 @@ export class TutorsService {
    return this.http.post(`${this.url}addCourseTutor`, data,{headers})
   }
 
+  //Servicio que me indica si el usuario ya está registrado o no
+  isRegistered(email:string){
+    return false;
+  }
 
+  typeStudent(email:string){
+    return this.http.get(`${this.url}typeStudent/${email}`);
+  }
+
+  signUpGoogle(student:StudentModel, googleToken:string){
+    const authData = {...student};
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${googleToken}`
+    });
+    return this.http.post(`${this.url}signUpGoogle`, authData, {headers});
+  }
+
+  signInGoogle(googleToken: string, userEmail:string){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${googleToken}`
+    });
+
+    const data = {
+      email:userEmail
+    }
+    return this.http.post(`${this.url}signInGoogle`, data, {headers}).pipe(
+      map( resp => {
+        this.saveToken( resp['token'] );
+        return resp;
+      })
+    );
+  }
 }

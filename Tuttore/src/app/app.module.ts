@@ -38,6 +38,15 @@ import { TranslateDatePipe } from './pipes/translate-date.pipe';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 
+import { GoogleApiModule, GoogleApiService, GoogleAuthService, NgGapiClientConfig, NG_GAPI_CONFIG, GoogleApiConfig } from "ng-gapi";
+import { GoogleSignUpComponent } from './components/google-sign-up/google-sign-up.component';
+
+let gapiClientConfig: NgGapiClientConfig = { 
+  client_id: "929460386682-le18blljl6b3rutntl8asii4kfsb56ln.apps.googleusercontent.com",
+  discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
+  ux_mode: "popup",
+  scope: ["https://www.googleapis.com/auth/userinfo.profile"].join(" ")
+};
 
 @NgModule({
   declarations: [
@@ -57,6 +66,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     NoiconimagePipe,
     NobackgroundPipe,
     HomeInfoComponent,
+    GoogleSignUpComponent,
     ChatComponent,
     TranslateDatePipe
   ],
@@ -68,11 +78,16 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     FormsModule,ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
+    FullCalendarModule,
+    GoogleApiModule.forRoot({
+      provide: NG_GAPI_CONFIG,
+      useValue: gapiClientConfig
+    }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, 
     AngularFireAuthModule, 
     AngularFireStorageModule,
-    FullCalendarModule 
+    FullCalendarModule
   ],
   exports: [MatAutocompleteModule,],
   providers: [],
