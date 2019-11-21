@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders,HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders,HttpParams, HttpRequest, HttpEventType } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { StudentModel } from '../models/student.model';
 import { SearchSubjectModel } from '../models/searchSubject.model';
@@ -67,9 +67,68 @@ export class TutorsService {
       );
   }
 
-  signUp( student:StudentModel ) {
-    const authData = {...student};
-    return this.http.post(`${this.url}signUp`, authData);
+  signUp( student:StudentModel , image:File) {
+    // const authData = {
+    //   name:student.name,
+    //   lastName:student.lastName,
+    //   email:student.email,
+    //   password:student.password,
+    //   career:student.career,
+    //   gpa:student.gpa,
+    //   phoneNumber:student.phoneNumber,
+    //   isTutor:student.isTutor,
+    //   profilePicture:image,
+    // };
+
+    // if(image!=null){
+    //   let formData = new FormData();
+    //   formData.append('profilePicture',student.profilePicture);
+    //   return this.http.post(`${this.url}signUp`, authData,formData);
+    // }
+  
+    // let cors = "https://cors-anywhere.herokuapp.com/";
+
+    console.log(image);
+  
+    let formData = new FormData();
+    formData.append('name',student.name);
+    formData.append('lastName',student.lastName);
+    formData.append('email',student.email);
+    formData.append('password',student.password);
+    formData.append('career',student.career);
+    formData.append('gpa', student.gpa.toString());
+    formData.append('phoneNumber',student.phoneNumber);
+    formData.append('isTutor',student.isTutor);
+    formData.append('profilePicture',image);
+
+    // let params = new HttpParams();
+
+    // const options = {
+    //   params: params,
+    //   reportProgress: true,
+    // };
+
+    // let header = new HttpHeaders();
+    // header.append('Content-Type', 'multipart/form-data');
+    // headers.append('Accept', 'application/json');
+    //return this.http.post(`${this.url}signUp`, formData, {headers:header});
+    let params = new HttpParams();
+    
+    const options = {
+      params: params,
+      reportProgress: true,
+      observe:'events'
+    };
+
+    const req = new HttpRequest('POST', "https://tuttore.tk/signUp", formData, options);
+    return this.http.request(req).subscribe( (event) =>{
+      if(event.type === HttpEventType.UploadProgress){
+        console.log("Upload Progress " + (event.loaded / event.total) * 100 +"%");
+      }
+      console.log(event);
+    });
+
+
   }
 
   logOut() {
