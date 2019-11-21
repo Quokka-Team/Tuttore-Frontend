@@ -9,7 +9,6 @@ import { SubjectsService } from "src/app/services/subjects.service";
 import { SubjectModel } from "src/app/models/subjects.model";
 import { map, startWith } from "rxjs/operators";
 import { SearchModel } from "src/app/models/search.model";
-import { NgForm } from '@angular/forms';
 import * as _ from "underscore";
 import { ChatService } from "src/app/services/chat.service";
 import { ViewChild, ElementRef } from "@angular/core";
@@ -224,7 +223,7 @@ export class ProfileComponent implements OnInit {
       })
 
       .catch();
-
+    }
   async handleDateClick(arg) {
     document.getElementById("openModalButton").click();
     this.addingDate = arg;
