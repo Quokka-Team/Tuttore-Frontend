@@ -2,7 +2,7 @@ import { SubjectModel } from './subjects.model';
 
 
 export class TutorModel {_
-idTutor:string;
+_id:string;
 name:string;
 lastName:string;
 career:string;
@@ -14,4 +14,6 @@ dateCreatedTutor:string;
 description:string;
 profilePicture:string[];
 isTutor: boolean = true;
+
+
 }

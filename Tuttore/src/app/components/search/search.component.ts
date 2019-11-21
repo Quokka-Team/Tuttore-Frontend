@@ -38,6 +38,7 @@ export class SearchComponent implements OnInit {
         this.getTutorsBySubjectName(routeParams.subject);
       }
     });
+    localStorage.setItem('reloaded','true');
   }
 
   ngOnInit() {

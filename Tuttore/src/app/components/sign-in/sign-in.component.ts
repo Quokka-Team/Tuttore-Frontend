@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentModel } from 'src/app/models/student.model';
 import { TutorsService } from 'src/app/services/tutors.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
-
-import { GoogleService } from 'src/app/services/google.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,8 +14,7 @@ export class LogInComponent implements OnInit {
 
   incomingStudent: StudentModel;
 
-  constructor(private tutorsService: TutorsService, private route:Router, private googleService:GoogleService) { }
-
+  constructor(private tutorsService: TutorsService, private route:Router) {}
   ngOnInit() {
     this.incomingStudent = new StudentModel();
   }
@@ -34,12 +31,13 @@ export class LogInComponent implements OnInit {
 
     Swal.showLoading();
     this.incomingStudent.career = this.incomingStudent.carrer;
+    console.log(this.incomingStudent)
     this.tutorsService.signIn(this.incomingStudent).subscribe(
       async data => {
         await Swal.fire({
           allowOutsideClick: false,
           type: 'success',
-          text: 'Te has logueado correctamente',
+          text: 'Se has logueado correctamente',
           timer: 1500,
           showConfirmButton:false
         })
@@ -54,9 +52,4 @@ export class LogInComponent implements OnInit {
       }
     );    
   }
-
-  signIn(){
-    this.googleService.signIn();
-  }
-  
 }
