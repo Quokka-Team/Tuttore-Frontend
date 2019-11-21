@@ -64,7 +64,7 @@
                 <span
                   class="alert text-danger"
                   *ngIf="
-                    (signUpForm.submitted && signUpForm.controls['gpa'].errors) || (signUpForm.value.gp<=0 || signUpForm.value.gpa>=5)
+                    (signUpForm.submitted && signUpForm.controls['gpa'].errors) || (signUpForm.value.gpa < 0 || signUpForm.value.gpa > 5)
                   "
                   >El P.A.P.A es obligatorio y debe estar entre 0-5</span
                 >
@@ -81,6 +81,8 @@
                     step="0.1"
                     id="gpa"
                     [(ngModel)]="newStudent.gpa"
+                    min="0"
+                    max="5"
                   />
                 </div>
               </div>
@@ -120,7 +122,7 @@
                 >
                   El email no es válido
                 </span>
-                <div class="form-group label-floating">
+                <div class="form-group label-floating input-group mb-3">
                   <label for="email" class="control-label"
                     >Correo electrónico</label
                   >
@@ -131,10 +133,13 @@
                     #email="ngModel"
                     class="form-control"
                     placeholder=""
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
                     id="email"
                     [(ngModel)]="newStudent.email"
+                    aria-describedby="basic-addon2"
                   />
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2">@unal.edu.co</span>
+                  </div>
                 </div>
 
                 <span
