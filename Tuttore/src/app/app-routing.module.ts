@@ -10,8 +10,6 @@ import { LogInComponent } from './components/sign-in/sign-in.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoggedGuard } from './guards/logged.guard';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { GoogleSignUpComponent } from './components/google-sign-up/google-sign-up.component';
-import { GoogleGuard } from './guards/google.guard';
 
 
 
@@ -21,7 +19,6 @@ const routes: Routes = [
   { path: 'search/:subject', component: SearchComponent, canActivate:[AuthGuard] },
   { path: 'search', component: SearchComponent, canActivate:[AuthGuard] },
   { path: 'sign-up', component: SignUpComponent, canActivate:[LoggedGuard] },
-  { path: 'Google-sign-up', component: GoogleSignUpComponent, canActivate:[GoogleGuard] },
   { path: 'sign-in', component: LogInComponent, canActivate:[LoggedGuard] },
   { path: 'home-page', component: HomePageComponent, canActivate:[LoggedGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'home', canActivate:[AuthGuard] },

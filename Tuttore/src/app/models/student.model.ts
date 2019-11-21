@@ -7,6 +7,6 @@ export class StudentModel {
     career:string;
     gpa:number;
     phoneNumber:string;
-    isTutor:string;
-    image:string;
+    isTutor:string
+
 }
