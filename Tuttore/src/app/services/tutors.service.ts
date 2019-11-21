@@ -10,19 +10,19 @@ import { SearchSubjectModel } from '../models/searchSubject.model';
 export class TutorsService {
   
   userToken:string;
-   url = `https://tuttore.tk/`;
+  url = `https://tuttore.tk/`;
     
   constructor(private http: HttpClient) {
     this.readToken();
   }
 
   private saveToken(tokenId){
-    localStorage.setItem('token',tokenId);
+    sessionStorage.setItem('token',tokenId);
 
     let date = new Date();
     date.setSeconds(1296000);
 
-    localStorage.setItem('expires', date.getTime().toString() );
+    sessionStorage.setItem('expires', date.getTime().toString() );
 
     this.readToken();
   }
@@ -59,8 +59,7 @@ export class TutorsService {
   }
 
   signIn(student: StudentModel){
-    let cors = "https://cors-anywhere.herokuapp.com/";
-    return this.http.post( cors +`${this.url}signIn/`, student ).pipe(
+    return this.http.post(`${this.url}signIn/`, student ).pipe(
         map( resp => {
           this.saveToken( resp['token'] );
           return resp;
@@ -68,20 +67,20 @@ export class TutorsService {
       );
   }
 
-  signUp( student:StudentModel) {
+  signUp( student:StudentModel ) {
     const authData = {...student};
     return this.http.post(`${this.url}signUp`, authData);
   }
 
   logOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expires');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('expires');
     this.readToken();
   }
 
   readToken(){
-    if ( localStorage.getItem('token') ) {
-      this.userToken = localStorage.getItem('token');
+    if ( sessionStorage.getItem('token') ) {
+      this.userToken = sessionStorage.getItem('token');
     } else {
       this.userToken = '';
     }
@@ -93,7 +92,7 @@ export class TutorsService {
       return false;
     }
     
-    const date = Number(localStorage.getItem('expires'));
+    const date = Number(sessionStorage.getItem('expires'));
     const actualDate = new Date();
     actualDate.setTime(date);
 
@@ -131,5 +130,36 @@ export class TutorsService {
    return this.http.post(`${this.url}addCourseTutor`, data,{headers})
   }
 
+  //Servicio que me indica si el usuario ya está registrado o no
+  isRegistered(email:string){
+    return false;
+  }
 
+  typeStudent(email:string){
+    return this.http.get(`${this.url}typeStudent/${email}`);
+  }
+
+  signUpGoogle(student:StudentModel, googleToken:string){
+    const authData = {...student};
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${googleToken}`
+    });
+    return this.http.post(`${this.url}signUpGoogle`, authData, {headers});
+  }
+
+  signInGoogle(googleToken: string, userEmail:string){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${googleToken}`
+    });
+
+    const data = {
+      email:userEmail
+    }
+    return this.http.post(`${this.url}signInGoogle`, data, {headers}).pipe(
+      map( resp => {
+        this.saveToken( resp['token'] );
+        return resp;
+      })
+    );
+  }
 }

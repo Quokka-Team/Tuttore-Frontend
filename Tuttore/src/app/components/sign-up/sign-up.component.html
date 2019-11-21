@@ -1,46 +1,24 @@
 <div class="row display-flex">
-  <div
-    class="col col-xl-8 col-lg-6 col-md-12 col-sm-12 col-12 image-register"
-  ></div>
+    <div class="col col-xl-8 col-lg-6 col-md-12 col-sm-12 col-12 image-register"></div>
 
-  <div
-    class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12"
-    style="padding: 0"
-  >
-    <!-- Login-Registration Form  -->
+    <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12" style="padding: 0">
+        <!-- Login-Registration Form  -->
 
-    <div class="registration-login-form" style="padding: 0; height: 100vh;">
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <div
-          class="tab-pane active"
-          id="home"
-          role="tabpanel"
-          data-mh="log-tab"
-        >
-        <a class="logo d-flex justify-content-center">
-          <div class="img-wrap">
-            <img
-              class="tuttore-logo-footer"
-              src="assets/img/logo/LogoName.png"
-              alt="Tuttore"
-            />
-          </div>
-        </a>
-          <form
-            #signUpForm="ngForm"
-            (ngSubmit)="onSubmit(signUpForm)"
-            novalidate
-            class="content animated bounceInRight"
-          >
-            <div class="row">
-              <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                <span
-                  class="alert text-danger"
-                  *ngIf="
+        <div class="registration-login-form" style="padding: 0; height: 100vh;">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="home" role="tabpanel" data-mh="log-tab">
+                    <a class="logo d-flex justify-content-center">
+                        <div class="img-wrap">
+                            <img class="tuttore-logo-footer" src="assets/img/logo/LogoName.png" alt="Tuttore" />
+                        </div>
+                    </a>
+                    <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)" novalidate class="content animated bounceInRight">
+                        <div class="row">
+                            <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <span class="alert text-danger" *ngIf="
                     signUpForm.submitted && signUpForm.controls['name'].errors
-                  "
-                  >El nombre es obligatorio</span
+                  ">El nombre es obligatorio</span
                 >
                 <div class="form-group label-floating">
                   <label for="name" class="control-label">Nombre</label>
@@ -116,9 +94,8 @@
                 >
                   El teléfono es obligatorio
                 </span>
-                <div class="form-group label-floating">
-                  <label for="phoneNumber" class="control-label"
-                    >Teléfono</label
+                                <div class="form-group label-floating">
+                                    <label for="phoneNumber" class="control-label">Teléfono</label
                   >
                   <input
                     required
@@ -170,41 +147,22 @@
                 </span>
                 <div class="form-group label-floating">
                   <label for="carrer" class="control-label">Carrera</label>
-                  <input
-                    required
-                    ngModel
-                    name="carrer"
-                    #carrer="ngModel"
-                    class="form-control"
-                    placeholder=""
-                    type="text"
-                    id="carrer"
-                    [(ngModel)]="newStudent.carrer"
-                  />
-                  <div
-                    class="alert text-danger"
-                    *ngIf="carrer.touched && !carrer.valid"
-                  ></div>
-                </div>
+                                    <input required ngModel name="carrer" #carrer="ngModel" class="form-control" placeholder="" type="text" id="carrer" [(ngModel)]="newStudent.carrer" />
+                                    <div class="alert text-danger" *ngIf="carrer.touched && !carrer.valid"></div>
+                                </div>
 
-              <div *ngIf="signUpForm.controls['password']">
-                  <div *ngIf="signUpForm.controls['password'].errors != null">
-                      <span
-                    class="alert text-danger"
-                    *ngIf="
+                                <div *ngIf="signUpForm.controls['password']">
+                                    <div *ngIf="signUpForm.controls['password'].errors != null">
+                                        <span class="alert text-danger" *ngIf="
                       signUpForm.submitted &&
                       signUpForm.controls['password'].errors.required
-                    "
-                  >
+                    ">
                     La contraseña es requerida
                   </span>
-                  <span
-                    class="alert text-danger"
-                    *ngIf="
+                                        <span class="alert text-danger" *ngIf="
                       signUpForm.submitted &&
                       signUpForm.controls['password'].errors.minlength
-                    "
-                  >
+                    ">
                     La contraseña debe ser de
                     {{
                       signUpForm.controls["password"].errors.minlength
@@ -212,45 +170,36 @@
                     }}
                     caractéres o más
                   </span>
-                  </div>
-              </div>
-                <div class="form-group label-floating">
-                  <label for="password" class="control-label">Contraseña</label>
-                  <input
-                    required
-                    minlength="6"
-                    ngModel
-                    name="password"
-                    #password="ngModel"
-                    class="form-control"
-                    placeholder=""
-                    type="password"
-                    id="password"
-                    [(ngModel)]="newStudent.password"
-                  />
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating">
+                                    <label for="password" class="control-label">Contraseña</label>
+                                    <input required minlength="6" ngModel name="password" #password="ngModel" class="form-control" placeholder="" type="password" id="password" [(ngModel)]="newStudent.password" />
 
-                  
-                </div>
 
-                <button
-                  class="btn btn-primary btn-lg full-width "
-                  style="background-color: #233D4D; border-color: #233D4D"
-                  type="submit"
-                >
-                  Completar Registro!
+                                </div>
+
+                                <button class="btn btn-primary btn-lg full-width " style="background-color: #233D4D; border-color: #233D4D" type="submit">
+                  !Completar Registro!
                 </button>
-                <p>
-                  ¿Ya tienes una cuenta?
-                  <a [routerLink]="['/sign-in']">Inicia sesión ahora!</a> y
-                  encuentra tutores para las materias que necesites!
-                </p>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+                            </div>
+                        </div>
+                    </form>
 
-    <!-- ... end Login-Registration Form  -->
-  </div>
+                    <div class="content animated bounceInRight" style="padding-right: 25px; padding-left: 25px;">
+                        <button (click)="signIn()" class="btn btn-lg btn-primary full-width" style="background-color: #00BBF0;border-color: #00BBF0">
+                        Iniciar con Google
+                        </button>
+
+                        <p>
+                            ¿Ya tienes una cuenta?
+                            <a [routerLink]="['/sign-in']">Inicia sesión ahora!</a> y ¡Encuentra tutores para las materias que necesites!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ... end Login-Registration Form  -->
+    </div>
 </div>
