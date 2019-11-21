@@ -12,7 +12,7 @@
           >
             <ul
             id="app-chats"
-            class="notification-list chat-message">
+            class="notification-list chat-message ">
               <ng-container *ngFor="let chat of chats">
                 <li
                   class="d-flex justify-content-around my-1 py-1"
@@ -84,7 +84,7 @@
                       blue: myUser == message.ownerId,
                       red: myUser != message.ownerId
                     }"
-                    class=""
+                    class="animated fadeInUp faster"
                   >
                     <div class="author-thumb " *ngIf="myUser != message.ownerId">
                       <img src="assets/img/no-profile-icon.png" alt="author" />
@@ -113,16 +113,16 @@
 
               <form>
                 <div class="form-group label-floating is-empty">
-                  <textarea
+                  <input
                   rows="2"
-                  style="max-height: 25px;"
+                  style="height: 100px;"
                     type="text"
                     name="message"
-                    class="form-control mx-1"
+                    class="form-control m-1"
                     [(ngModel)]="message"
                     placeholder="Enviar Mensaje"
                     (keyup.enter)="sendMessage()"
-                  ></textarea>
+                  >
                   <div class="add-options-message">
                     <button
                       class="btn btn-primary btn-sm"

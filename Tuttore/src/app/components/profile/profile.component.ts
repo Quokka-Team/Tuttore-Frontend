@@ -7,7 +7,7 @@ import { FormControl, NgForm } from "@angular/forms";
 import { Observable } from "rxjs";
 import { SubjectsService } from "src/app/services/subjects.service";
 import { SubjectModel } from "src/app/models/subjects.model";
-import { map, startWith } from "rxjs/operators";
+import { map, startWith, first } from "rxjs/operators";
 import { SearchModel } from "src/app/models/search.model";
 import * as _ from "underscore";
 import { ChatService } from "src/app/services/chat.service";
@@ -222,18 +222,34 @@ export class ProfileComponent implements OnInit {
 
 
   // @ViewChild("closeModal", { static: false }) private closeModal: ElementRef;
-  public sendMessage(form: NgForm) {
-    let message = form.form.value.contactMessage;
-    this.chatService
-      .createChat(message, this.username)
-      .then(() => {
-        
+  public sendMessage() {
+    // let message = form.form.value.contactMessage;
 
-        document.getElementById("CloseButton").click();
+this.chatService
+      .getIdChat(this.username).pipe(first()).subscribe(id=> {
+  
+        
+        
+        if(id==-1){
+          this.chatService.createChat(this.username)
+          .then(()=>{
+            // document.getElementById("CloseButton").click();
+           
+          })
+          .catch();
+        }
         this.router.navigate(["/chat", `${this.username}`]);
       })
 
-      .catch();
+      
+
+    
+
+
+      
+        
+
+       
     }
   async handleDateClick(arg) {
     document.getElementById("openModalButton").click();

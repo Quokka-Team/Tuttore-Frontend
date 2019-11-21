@@ -23,10 +23,19 @@ export class ChatService {
     let resp1 :Observable<any> = this.afs.collection("chats", ref =>  ref.where("userId1", "==", user1id).where("userId2", "==", user2id)).valueChanges({ idField: "id" });
 
     let resp2 :Observable<any> = this.afs.collection("chats", ref =>  ref.where("userId2", "==", user1id).where("userId1", "==", user2id)).valueChanges({ idField: "id" });
-
+    // console.log(resp1);
+    
 
     return combineLatest<any[]>(resp2,resp1).pipe(
-      map(arr => arr.reduce((acc,cur)=> acc.concat(cur) )
+      map(arr => arr.reduce((acc,cur)=> {
+        acc = acc.concat(cur)
+       
+        if(acc.length > 0){
+          return acc[0].id
+        }else{
+          return -1
+        }
+      } )
     )
     )
   }
@@ -60,7 +69,8 @@ export class ChatService {
      .catch(err => console.error("No se pudo enviar el mensaje", err));
   }
 
-   async createChat(text: string,user2id:string) {
+   async createChat(user2id:string) {
+     let text ="emptyMessage";
     let message: Message = {
       ownerId: localStorage.getItem('mail'),
       message: text,

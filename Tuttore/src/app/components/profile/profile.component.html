@@ -145,10 +145,17 @@
             </div>
             <div class="widget w-socials" *ngIf="!isUser()">
              
-              <a
+              <!-- <a
               *ngIf="id !== 'user'"
               data-toggle="modal"
               data-target="#edit-my-poll-popup"
+              class="btn btn-sm bg-blue w-100"
+              style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
+              [routerLink]="['/chat',username]"  
+              >Contactar  <i class="fas fa-comments"></i></a> -->
+              <a
+              *ngIf="id !== 'user'"
+              (click)="sendMessage()"
               class="btn btn-sm bg-blue w-100"
               style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
               >Contactar  <i class="fas fa-comments"></i></a>
