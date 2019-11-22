@@ -20,6 +20,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { ViewFlags } from '@angular/compiler/src/core';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 
 @Component({
   selector: "app-profile",
@@ -42,12 +43,13 @@ export class ProfileComponent implements OnInit {
   username: string;
 
   //Calendario
+
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
 
   calendarEvents: EventInput[] = [
-    { title: 'Event Now', start: new Date() },
-    { title: 'EVENTO', date: '2019-11-20' }
-  ];
+    { id:"1",title: 'Event Now', start: new Date(), color:"#A2C64B",textColor:"white", overlap:false, selectable:true},
+    { id:"2",title: 'EVENTO', date: '2019-11-20' }
+  ]; //Quitar lista inicial
 
   calendarWeekends = true;
 
@@ -59,6 +61,12 @@ export class ProfileComponent implements OnInit {
 
   selector:string = null;
   addingDate;
+  singleEvent;
+  indexEvent;
+  thisEvent;
+  oppositeEvent;
+  oppositeColor;
+
   //Fin Calendario
 
 
@@ -92,6 +100,7 @@ export class ProfileComponent implements OnInit {
               this.user = tutor;
               this.getSubjects();
               this.user.isTutor = true;
+              this.calendarEvents = this.user.events;
             });
           } else {
             this.user.isTutor = false;
@@ -110,13 +119,14 @@ export class ProfileComponent implements OnInit {
       this.tutorsService.getTutor(this.id).subscribe((tutor: TutorModel) => {
 
   	    this.tutorsService.getUser().subscribe((data:any) => {
-          if(data.id == tutor._id){
+          if(data.id == this.id){
             this.id="user";
             if (data.isTutor) {
               this.tutorsService.getTutor("this").subscribe((tutor: TutorModel) => {            
                 this.user = tutor;
                 this.getSubjects();
                 this.user.isTutor = true;
+                this.calendarEvents = this.user.events;
               });
             } else {
               this.user.isTutor = false;
@@ -124,11 +134,11 @@ export class ProfileComponent implements OnInit {
               this.getSubjects();
               this.user.isTutor = false;
             }
-
           }else{
             this.user = tutor;
             this.user.isTutor = true;
             this.username = this.user.email.match(/^([^@]*)@/)[1];
+            this.calendarEvents = this.user.events;
           }
         },
         error => {
@@ -235,21 +245,100 @@ export class ProfileComponent implements OnInit {
       })
 
       .catch();
-    }
-  async handleDateClick(arg) {
-    document.getElementById("openModalButton").click();
-    this.addingDate = arg;
   }
 
-  onSubmit(f: NgForm){
+  // Funciones del calendario  ---------------------------------------------------------------------------------
+
+  async newEvent(arg) {
+    if(arg.allDay){
+      return;
+    }
+    this.addingDate = arg;
+    document.getElementById("openModalButton").click();
+  }
+
+  onSubmit(){
     if(this.selector!=null){
-      this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
+
+      let newEvent = {
+        id:null,
         title: this.selector,
         start: this.addingDate.date,
-        allDay: this.addingDate.allDay
-      });
-      document.getElementById("close").click();
-    }
+        color:null,
+        textColor:"white",
+        overlap:false,
+        selectable:true,
+      };
 
+      if(this.selector=="Disponible"){
+        newEvent.color ='#A2C64B';
+      }else{
+        newEvent.color ='#096682';
+      }
+
+      this.tutorsService.newEvent(newEvent).subscribe((res)=>{
+        console.log(res); //Revisar que esta llegando solo el id --------------------------------------
+        newEvent.id = res;
+          this.calendarEvents = this.calendarEvents.concat(newEvent);
+          document.getElementById("close").click(); 
+      }, error =>{
+        console.log("Hubo un error");
+        console.log(error);
+        document.getElementById("close").click();
+      });
+    }
+  }
+
+  editEvent(arg){
+    for(let i=0;i<this.calendarEvents.length;i++){
+      if(arg.event.id==this.calendarEvents[i].id){
+        this.indexEvent = i;
+        this.singleEvent = Object.assign({}, this.calendarEvents[i]);
+        this.thisEvent = this.calendarEvents[this.indexEvent].title;
+        if(this.thisEvent == "Tutoría"){
+          this.oppositeEvent = "Disponible";
+          this.oppositeColor = "#A2C64B";
+        }else{
+          this.oppositeEvent = "Tutoría";
+          this.oppositeColor = "#096682";
+        }
+        document.getElementById("update").click();
+        break;
+      }
+    }
+  }
+
+  update(){
+    let calendarEvents = this.calendarEvents.slice();
+    this.singleEvent.title = this.oppositeEvent;
+    this.singleEvent.color = this.oppositeColor;
+
+    this.tutorsService.updateEvent(this.singleEvent).subscribe( (res)=>{
+      console.log(res);
+
+      calendarEvents[this.indexEvent] = this.singleEvent;
+      this.calendarEvents = calendarEvents;
+      document.getElementById("closeUpdate").click();
+    }, error => {
+      console.log("Hubo un error");
+      console.log(error);
+      document.getElementById("closeUpdate").click();
+    });
+  }
+
+  delete(){
+    
+    this.tutorsService.deleteEvent(this.singleEvent.id).subscribe( (res)=>{
+      console.log(res);
+      
+      let calendarEvents = this.calendarEvents.slice();
+      calendarEvents.splice(this.indexEvent,1);
+      this.calendarEvents = calendarEvents;
+      document.getElementById("closeUpdate").click();
+    }, error => {
+      console.log("Hubo un error");
+      console.log(error);
+      document.getElementById("closeUpdate").click();
+    });
   }
 }
