@@ -150,12 +150,13 @@ export class TutorsService {
     return this.http.get(`${this.url}getStudent` , {headers: headers});
   }
 
-  becomeTutor(des:string){
+  becomeTutor(des:string, pri:number){
     const headers = new HttpHeaders({
       'authorization': `bearer ${this.readToken()}`
     });
     const data = {
-      description: des
+      description: des,
+      price: pri,
     }
    return this.http.post(`${this.url}registerTutor`, data,{headers})
   }

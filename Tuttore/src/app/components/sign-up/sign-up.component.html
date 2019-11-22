@@ -3,7 +3,6 @@
 
     <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12" style="padding: 0">
         <!-- Login-Registration Form  -->
-
         <div class="registration-login-form" style="padding: 0; height: 100vh;">
             <!-- Tab panes -->
             <div class="tab-content">
@@ -64,9 +63,9 @@
                 <span
                   class="alert text-danger"
                   *ngIf="
-                    (signUpForm.submitted && signUpForm.controls['gpa'].errors) || (signUpForm.value.gp<=0 || signUpForm.value.gpa>=5)
+                    (signUpForm.submitted && signUpForm.controls['gpa'].errors) || (signUpForm.value.gpa < 0 || signUpForm.value.gpa > 5) 
                   "
-                  >El P.A.P.A es obligatorio y debe estar entre 0-5</span
+                  >El P.A.P.A debe estar entre 0-5</span
                 >
                 <div class="form-group label-floating">
                   <label for="gpa" class="control-label">P.A.P.A</label>
@@ -81,6 +80,8 @@
                     step="0.1"
                     id="gpa"
                     [(ngModel)]="newStudent.gpa"
+                    min="0"
+                    max="5"
                   />
                 </div>
               </div>
@@ -120,7 +121,7 @@
                 >
                   El email no es válido
                 </span>
-                <div class="form-group label-floating">
+                <div class="form-group label-floating input-group mb-3">
                   <label for="email" class="control-label"
                     >Correo electrónico</label
                   >
@@ -131,10 +132,12 @@
                     #email="ngModel"
                     class="form-control"
                     placeholder=""
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
                     id="email"
                     [(ngModel)]="newStudent.email"
                   />
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="email-company">@unal.edu.co</span>
+                  </div>
                 </div>
 
                 <span
@@ -212,3 +215,4 @@
         <!-- ... end Login-Registration Form  -->
     </div>
 </div>
+

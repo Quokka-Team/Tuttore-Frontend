@@ -33,6 +33,7 @@ export class SignUpComponent implements OnInit{
       return;
     }
     
+    this.newStudent.email = this.newStudent.email + "@unal.edu.co"
     
     Swal.fire({
       allowOutsideClick: false,
