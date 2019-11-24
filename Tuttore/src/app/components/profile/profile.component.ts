@@ -46,10 +46,7 @@ export class ProfileComponent implements OnInit {
 
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
 
-  calendarEvents: EventInput[] = [
-    { id:"1",title: 'Event Now', start: new Date(), color:"#A2C64B",textColor:"white", overlap:false, selectable:true},
-    { id:"2",title: 'EVENTO', date: '2019-11-20' }
-  ]; //Quitar lista inicial
+  calendarEvents: EventInput[];
 
   calendarWeekends = true;
 
@@ -101,6 +98,7 @@ export class ProfileComponent implements OnInit {
               this.getSubjects();
               this.user.isTutor = true;
               this.calendarEvents = this.user.events;
+              console.log(this.calendarEvents);
             });
           } else {
             this.user.isTutor = false;

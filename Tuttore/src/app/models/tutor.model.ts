@@ -12,7 +12,7 @@ phoneNumber:string;
 courses: SubjectModel[];
 dateCreatedTutor:string;
 description:string;
-ProfilePicture:string;
+profilePicture:string;
 isTutor: boolean = true;
 events: any;
 }

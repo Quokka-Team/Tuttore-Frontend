@@ -13,7 +13,7 @@
                         </div>
                         <div class="profile-section"></div>
                         <div class="top-header-author">
-                            <img class="author-thumb" [src]="user.ProfilePicture | noiconimage" alt="author" />
+                            <img class="author-thumb" [src]="user.profilePicture | noiconimage" alt="author" />
                             <div class="author-content">
                                 <a class="h4 author-name">{{ user.name | titlecase }} {{ user.lastName | titlecase }} 
                 </a>
@@ -130,7 +130,7 @@
                     <ul class="widget w-friend-pages-added notification-list friend-requests">
                         <li *ngFor="let tutor of newTutors" class="inline-items">
                             <div class="author-thumb">
-                                <img class="author-thumb" [src]="tutor.ProfilePicture | noimage" alt="author" />
+                                <img class="author-thumb" [src]="tutor.profilePicture | noimage" alt="author" />
                             </div>
                             <div class="notification-event">
                                 <a [routerLink]="['/profile', tutor._id]" class="h6 notification-friend">{{ tutor.name }} {{ tutor.lastName }}</a
@@ -156,9 +156,7 @@
                     defaultView="dayGridMonth"
                     [plugins]="calendarPlugins"
                     [weekends]="calendarWeekends"
-                    [events]="[
-                      { title: 'event 2', date: '2019-11-19' }
-                    ]"
+                    [events]="calendarEvents"
                     [header]="calendarHeader"
                     selectable = "true"
                   ></full-calendar>
@@ -188,7 +186,9 @@
                     defaultView="dayGridMonth"
                     [plugins]="calendarPlugins"
                     [weekends]="calendarWeekends"
-                    [events]="calendarEvents"
+                    [events]="[
+                      { title: 'event 2', date: '2019-11-19' }
+                    ]"
                     [header]="calendarHeader"
                     selectable = "true"
                     ></full-calendar>

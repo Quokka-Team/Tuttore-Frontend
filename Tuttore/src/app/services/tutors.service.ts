@@ -214,25 +214,21 @@ export class TutorsService {
       color: event.color,
       textColor:event.textColor,
       overlap:event.overlap,
-      selectable:event.selectable,
+      selectable:event.selectable
     }
-
     return this.http.post(`${this.url}addEventTutor`, data, {headers});
   }
 
-  updateEvent(id){
-    const headers = new HttpHeaders({
-      'authorization': `bearer ${this.readToken()}`
-    });
+  deleteEvent(id){
 
     const data = {
       idEvent: id
     }
 
-    return this.http.post(`${this.url}updateEventTutor`, data, {headers});
+    return this.http.post(`${this.url}updateEventTutor`, data);
   }
 
-  deleteEvent(event){
+  updateEvent(event){
     const headers = new HttpHeaders({
       'authorization': `bearer ${this.readToken()}`
     });
