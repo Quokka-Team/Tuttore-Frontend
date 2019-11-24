@@ -33,6 +33,7 @@ export class ProfileComponent implements OnInit {
   newTutors: TutorModel[];
   subjects: any[] = [];
   description: string;
+  price: number;
   myControl = new FormControl();
   courses = {};
   options;
@@ -163,7 +164,7 @@ export class ProfileComponent implements OnInit {
   }
 
   becomeTutor() {
-    this.tutorsService.becomeTutor(this.description).subscribe(data => {
+    this.tutorsService.becomeTutor(this.description, this.price).subscribe(data => {
       this.add_Subject();
     });
   }

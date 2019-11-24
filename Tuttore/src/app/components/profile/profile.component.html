@@ -98,6 +98,10 @@
                                 <span class="title">Telefono</span>
                                 <span class="text">{{ user.phoneNumber }}</span>
                             </li>
+                            <li>
+                                <span class="title">Precio por tutoría</span>
+                                <span class="text">{{ user.price }}</span>
+                            </li>
                         </ul>
 
 
@@ -519,7 +523,7 @@
 
           <div *ngIf="!user.isTutor" class="modal-body">
             <h6 class="title">
-              Estas a punto de convertire en tutor
+              Estas a punto de convertirte en tutor
             </h6>
             <label class="control-label"
               >Escribe una breve descripcion de ti como tutor y elige la primera
@@ -553,12 +557,38 @@
                       Tu descripcion debe tener al menos 25 caracteres
                     </div>
                   </div>
+                  
+                  <div class="form-group label-floating">
+                      <label for="price" class="control-label"
+                        >Precio por tutoria (COP):</label
+                      >
+                      <input
+                        required
+                        ngModel
+                        name="price"
+                        #number="ngModel"
+                        class="form-control"
+                        placeholder=""
+                        type="number"
+                        step="0.1"
+                        [(ngModel)]="price"
+                      />
+                      <div
+                        class="alert alert-danger"
+                        *ngIf="(number.touched && !number.valid) || price < 0"
+                      >
+                        Ingrese un precio valido
+                      </div>
+                  </div>
+                  
+                  
+
                   <mat-form-field
                     class="full-width mb-5
-                  example-full-width"
+                    example-full-width"
                     style="border: 1px solid;
-            padding: 3px 25px 0;
-            border-radius: 6px;;"
+                    padding: 3px 25px 0;
+                    border-radius: 6px;;"
                   >
                     <label style="font: 14px;">Busca tu Materia:</label>
                     <input

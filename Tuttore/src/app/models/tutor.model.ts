@@ -12,6 +12,7 @@ phoneNumber:string;
 courses: SubjectModel[];
 dateCreatedTutor:string;
 description:string;
+price:number;
 profilePicture:string;
 isTutor: boolean = true;
 events: any;
