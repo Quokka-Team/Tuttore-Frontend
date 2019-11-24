@@ -13,6 +13,7 @@ courses: SubjectModel[];
 dateCreatedTutor:string;
 description:string;
 price:number;
-ProfilePicture:string;
+profilePicture:string;
 isTutor: boolean = true;
+events: any;
 }

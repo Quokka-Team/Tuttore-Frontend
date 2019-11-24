@@ -203,4 +203,47 @@ export class TutorsService {
       })
     );
   }
+
+  newEvent(event){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    const data = {
+      title: event.title,
+      start: event.start,
+      color: event.color,
+      textColor:event.textColor,
+      overlap:event.overlap,
+      selectable:event.selectable
+    }
+    return this.http.post(`${this.url}addEventTutor`, data, {headers});
+  }
+
+  deleteEvent(id){
+
+    const data = {
+      idEvent: id
+    }
+
+    return this.http.post(`${this.url}updateEventTutor`, data);
+  }
+
+  updateEvent(event){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    const data = {
+      id: event.id,
+      title: event.title,
+      start: event.start,
+      color: event.color,
+      textColor:event.textColor,
+      overlap:event.overlap,
+      selectable:event.selectable,
+    }
+
+    return this.http.post(`${this.url}deleteEventTutor`, data, {headers});
+  }
 }

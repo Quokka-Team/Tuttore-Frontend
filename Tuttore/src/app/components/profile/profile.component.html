@@ -13,7 +13,7 @@
                         </div>
                         <div class="profile-section"></div>
                         <div class="top-header-author">
-                            <img class="author-thumb" [src]="user.ProfilePicture | noiconimage" alt="author" />
+                            <img class="author-thumb" [src]="user.profilePicture | noiconimage" alt="author" />
                             <div class="author-content">
                                 <a class="h4 author-name">{{ user.name | titlecase }} {{ user.lastName | titlecase }} 
                 </a>
@@ -134,7 +134,7 @@
                     <ul class="widget w-friend-pages-added notification-list friend-requests">
                         <li *ngFor="let tutor of newTutors" class="inline-items">
                             <div class="author-thumb">
-                                <img class="author-thumb" [src]="tutor.ProfilePicture | noimage" alt="author" />
+                                <img class="author-thumb" [src]="tutor.profilePicture | noimage" alt="author" />
                             </div>
                             <div class="notification-event">
                                 <a [routerLink]="['/profile', tutor._id]" class="h6 notification-friend">{{ tutor.name }} {{ tutor.lastName }}</a
@@ -155,40 +155,53 @@
                 <div  class="ui-block" style="padding: 20px;">
 
                   <!-- Calendario de otro tutor -->
-                  <full-calendar 
-                    class="text-color"
+                  <full-calendar
                     *ngIf="id!=='user'; else elseBlock"
+                    defaultView="dayGridMonth"
+                    [plugins]="calendarPlugins"
+                    [weekends]="calendarWeekends"
+                    [events]="calendarEvents"
+                    [header]="calendarHeader"
+                    selectable = "true"
+                  ></full-calendar>
+
+                  <!-- Calendario propio cuando se es Tutor -->
+
+                  <ng-template #elseBlock>
+                    <full-calendar 
+                    *ngIf="user.isTutor; else noTutorBlock"
+                    name="#calendar"
+                    defaultView="dayGridMonth"
+                    [plugins]="calendarPlugins"
+                    [weekends]="calendarWeekends"
+                    [events]="calendarEvents"
+                    [header]="calendarHeader"
+                    selectable = "true"
+                    (eventClick) = "editEvent($event)"
+                    (dateClick)="newEvent($event)"
+                    ></full-calendar>
+                  </ng-template>
+
+                  <!-- Calendario propio cuando no se es Tutor -->
+
+                  <ng-template #noTutorBlock>
+                    <full-calendar 
+                    name="#calendar"
                     defaultView="dayGridMonth"
                     [plugins]="calendarPlugins"
                     [weekends]="calendarWeekends"
                     [events]="[
                       { title: 'event 2', date: '2019-11-19' }
                     ]"
-                    [header]="{
-                      left: 'prev,next today',
-                      center: 'title',
-                      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                    }"
-                  ></full-calendar>
-
-                  <!-- Calendario propio -->
-
-                  <ng-template #elseBlock>
-                    <full-calendar 
-                    
-                    class=""
-                    defaultView="dayGridMonth"
-                    [plugins]="calendarPlugins"
-                    [weekends]="calendarWeekends"
-                    [events]="calendarEvents"
                     [header]="calendarHeader"
-                    (dateClick)="handleDateClick($event)"
+                    selectable = "true"
                     ></full-calendar>
                   </ng-template>
 
                 </div>
                 
                 <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#new-event"></button>
+                <button id="update" [hidden]="true" data-toggle="modal" data-target="#update-event"></button>
 
                 
                 <!-- Fin de calendario -->
@@ -240,8 +253,8 @@
       <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
         <div class="modal-content">
 
-          <div class="modal-header" style="padding-left: 21%;">
-            <h6>
+          <div class="modal-header">
+            <h6 style="margin: auto;">
               ¿Que tipo de evento deseas agregar?
             </h6>
           </div>
@@ -276,6 +289,47 @@
         </div>
       </div>
     </div>
+
+    <!-- ------------------Otro Modal---------------------------- -->
+
+    <div
+    class="modal animated zoomIn faster"
+    id="update-event"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="create-event"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h6 style="margin: auto;">
+            ¿Desea cambiar {{thisEvent}} por {{oppositeEvent}}?
+          </h6>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <button class="btn modal-button" style="margin:auto" (click)="update()">
+              Aceptar
+            </button>
+                
+            <button id="closeUpdate" class="btn modal-button" style="margin:auto;" data-dismiss="modal">
+              Cancelar
+            </button>
+
+            <button class="btn modal-button" style="margin:auto; background-color: red;" (click)="delete()">
+              Eliminar
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+    
 
     <div
       class="modal  animated zoomIn faster"
