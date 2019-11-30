@@ -1,13 +1,16 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import '~@fullcalendar/core/main.css';
-@import '~@fullcalendar/daygrid/main.css';
+
+
 html {
     scroll-behavior: smooth;
+  }
+  
+
+body{
+    font-family: 'Montserrat', sans-serif;
+
 }
 
-body {
-    font-family: 'Montserrat', sans-serif;
-}
 
 .cdk-global-overlay-wrapper,
 .cdk-overlay-container {

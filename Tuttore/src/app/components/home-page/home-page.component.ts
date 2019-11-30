@@ -15,6 +15,6 @@ export class HomePageComponent implements OnInit {
   public navigateToSection(section: string) {
     window.location.hash = '';
     window.location.hash = section;
-  }
+}
 
 }
