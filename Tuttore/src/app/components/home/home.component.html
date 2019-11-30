@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row mb60">
             <div class="col col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 m-auto">
-                <div class="crumina-module crumina-heading align-center">
+                <div class="crumina-module crumina-heading align-center mb-0">
                     <h2 class="heading-title">Conoce a nuestros nuevos Tutores</h2>
                     <p class="heading-text">Estudiantes igual que tu que quieren ayudarte
                     </p>
@@ -16,7 +16,7 @@
         <div class="row     members-wrap">
             <div class="container-fluid">
                 <div data-interval="3000">
-                    <div class="row w-100 mx-auto">
+                    <div class="row w-100 mx-auto d-flex justify-content-center">
                         <div *ngFor="let tutor of newTutors" class="col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                             <!-- Teammember Item  -->
                             <app-tutor-card-home [tutor]="tutor" [routerLink]="['/profile',tutor._id]"></app-tutor-card-home>

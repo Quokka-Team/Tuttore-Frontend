@@ -17,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ["./search.component.css"]
 })
 export class SearchComponent implements OnInit {
-  tutors: any[];
+  tutors: any[] =[];
   recommendedTutors: any[] = [];
   subjectSearched;
 
@@ -35,10 +35,10 @@ export class SearchComponent implements OnInit {
   ) {
     this.activatedRoute.params.subscribe(routeParams => {
       if(routeParams.subject){
+        
         this.getTutorsBySubjectName(routeParams.subject);
       }
     });
-    localStorage.setItem('reloaded','true');
   }
 
   ngOnInit() {

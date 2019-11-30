@@ -12,8 +12,8 @@ phoneNumber:string;
 courses: SubjectModel[];
 dateCreatedTutor:string;
 description:string;
-profilePicture:string[];
+price:number;
+profilePicture:string;
 isTutor: boolean = true;
-
-
+events: any;
 }

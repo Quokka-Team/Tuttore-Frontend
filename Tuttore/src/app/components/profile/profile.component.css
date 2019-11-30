@@ -3,23 +3,31 @@
     height: 75px;
 }
 
-.movement {
-    background-position: 0 0;
-    background-repeat: repeat;
+.animatedBackground {
+    width: 100%;
+    height: 250px;
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 300px;
-    margin: 0;
-    -webkit-animation: slide 50s linear infinite;
-    animation: slide 50s linear infinite;
-    background-size: auto;
+    background: url("../../../assets/img/background-profile.png");
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-size: auto 100%;
+  /*adjust s value for speed*/
+    animation: animatedBackground 150s linear infinite;
+  }
+  
+  @keyframes animatedBackground {
+    from {
+        background-position: 0 0;
+    }
+    /*use negative width if you want it to flow right to left else and positive for left to right*/
+    to {
+        background-position: 10000px 0;
+    }
 }
 
-.cancel-button{
+.cancel-button {
     text-align: right;
     font-size: 20px;
     margin-bottom: 20px;
@@ -29,13 +37,15 @@
 .contact-tutor {
     max-width: 500px;
 }
- .add-subject{
+
+.add-subject {
     max-width: 500px;
 }
 
-.modal-button{
-    color: #fff; background-color:
-     #233D4D; border: none;
+.modal-button {
+    color: #fff;
+    background-color: #233D4D;
+    border: none;
 }
 
 .notification-event {
@@ -48,4 +58,13 @@
 
  ::ng-deep .example-full-width {
     width: 100%;
+
+}
+
+.text-color {
+    color: #fff;
+}
+
+.back{
+ color: #38a9ff;
 }
