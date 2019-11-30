@@ -14,7 +14,7 @@
     background-position: 0 0;
     background-size: auto 100%;
   /*adjust s value for speed*/
-    animation: animatedBackground 50s linear infinite;
+    animation: animatedBackground 150s linear infinite;
   }
   
   @keyframes animatedBackground {
@@ -62,4 +62,8 @@
 
 .text-color {
     color: #fff;
+}
+
+.back{
+ color: #38a9ff;
 }
