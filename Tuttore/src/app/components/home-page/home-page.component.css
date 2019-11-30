@@ -86,17 +86,17 @@
 
 .signUpBtn {
     font-size: 15px;
-    color: #ff5e3a;
-    border-color: #ff5e3a;
-    font-weight: lighter;
+    color: #00bbf0;
+    border-color: #00bbf0;
+    /* font-weight: lighter; */
     min-width: 110px;
 }
 
 .loginBtn {
     font-size: 15px;
-    color: #00bbf0;
-    border-color: #00bbf0;
-    font-weight: lighter;
+    color: #fff;
+    border-color: #fff;
+    /* font-weight: lighter; */
     min-width: 110px;
 }
 

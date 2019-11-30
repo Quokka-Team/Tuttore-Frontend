@@ -15,6 +15,7 @@ export class SignUpComponent implements OnInit{
 
   newStudent: StudentModel;
   careers: any [];
+  profileImage: File=null;
 
   constructor( private tutorService:TutorsService, private route:Router ) { 
 
@@ -22,7 +23,6 @@ export class SignUpComponent implements OnInit{
 
   ngOnInit() {
     this.newStudent = new StudentModel();
-
   }
 
   onSubmit(f: NgForm) {
@@ -32,6 +32,7 @@ export class SignUpComponent implements OnInit{
       return;
     }
     
+    this.newStudent.email = this.newStudent.email + "@unal.edu.co"
     
     Swal.fire({
       allowOutsideClick: false,
@@ -39,10 +40,8 @@ export class SignUpComponent implements OnInit{
       text: 'Procesando solicitud'
     })
     Swal.showLoading();
-    this.tutorService.getVerificationCode(this.newStudent.email).subscribe(  res => {
-      console.log(res);
-      
 
+    this.tutorService.getVerificationCode(this.newStudent.email).subscribe(  res => {
 
       Swal.fire({
         allowOutsideClick: false,
@@ -55,12 +54,16 @@ export class SignUpComponent implements OnInit{
       }).then((result) => {
         if (result.value) {
             if(result.value == res['code']){
+              Swal.fire({
+                allowOutsideClick: false,
+                type: 'info',
+                text: 'Procesando solicitud'
+              })
+              Swal.showLoading();
               this.makeRegister();
             }
         }
     });
-
-
   },
      err => {
       Swal.fire({
@@ -71,7 +74,6 @@ export class SignUpComponent implements OnInit{
     }
     )
   }
-   
   
   getCareers(){
     this.tutorService.getAllCareers().subscribe( (careers:any[]) => {
@@ -80,19 +82,16 @@ export class SignUpComponent implements OnInit{
   }
 
   private makeRegister(){
-     this.tutorService.signUp(this.newStudent).subscribe( async res => {
-      Swal.fire({
-        allowOutsideClick: false,
-        type: 'success',
-        text: 'Su cuenta se ha creado satisfactoriamente',
-      })
-      this.route.navigateByUrl("/sign-in");
-    }, err => {
-      Swal.fire({
-        allowOutsideClick: false,
-        type: 'error',
-        text: err.error.message,
-      })
-    });
+      
+    this.tutorService.signUp(this.newStudent, this.profileImage);
+  }
+
+  signIn(){
+    this.googleService.signIn();
+  }
+
+  onFileSelected(event){
+    console.log(event);
+    this.profileImage = <File> event.target.files[0];
   }
 }

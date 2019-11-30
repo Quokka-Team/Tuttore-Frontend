@@ -3,14 +3,23 @@ import { TutorsService } from "../../services/tutors.service";
 import { TutorModel } from "src/app/models/tutor.model";
 
 import { Router, ActivatedRoute } from "@angular/router";
-import { FormControl } from "@angular/forms";
+import { FormControl, NgForm } from "@angular/forms";
 import { Observable } from "rxjs";
 import { SubjectsService } from "src/app/services/subjects.service";
 import { SubjectModel } from "src/app/models/subjects.model";
-import { map, startWith } from "rxjs/operators";
+import { map, startWith, first } from "rxjs/operators";
 import { SearchModel } from "src/app/models/search.model";
 import * as _ from "underscore";
+import { ChatService } from "src/app/services/chat.service";
 
+<<<<<<< HEAD
+import { EventInput } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGrigPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+
+=======
+>>>>>>> master
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
@@ -21,6 +30,7 @@ export class ProfileComponent implements OnInit {
   newTutors: TutorModel[];
   subjects: any[] = [];
   description: string;
+  price: number;
   myControl = new FormControl();
   courses = {};
   options;
@@ -28,10 +38,41 @@ export class ProfileComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   subjectId;
   id: string;
+<<<<<<< HEAD
+  username: string;
+
+  //Calendario
+
+  calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
+
+  calendarEvents: EventInput[];
+
+  calendarWeekends = true;
+
+  calendarHeader = {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+  }
+
+  selector:string = null;
+  addingDate;
+  singleEvent;
+  indexEvent;
+  thisEvent;
+  oppositeEvent;
+  oppositeColor;
+
+  //Fin Calendario
+
+
+=======
   reloaded: boolean = true;
+>>>>>>> master
   constructor(
     private tutorsService: TutorsService,
     private subjectService: SubjectsService,
+    private chatService: ChatService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private zone: NgZone
@@ -44,9 +85,13 @@ export class ProfileComponent implements OnInit {
     //this.loadScript('assets/js/libs/fullcalendar.js');
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
+
       this.getUserInfo(id);
     });
   }
+<<<<<<< HEAD
+  
+=======
 
   reload(){
     if(localStorage.getItem('reloaded')==='true'){
@@ -57,6 +102,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+>>>>>>> master
   getUserInfo(id: string) {
     this.id = id;
     if (id == "user") {
@@ -71,6 +117,7 @@ export class ProfileComponent implements OnInit {
               this.user = tutor;
               this.getSubjects();
               this.user.isTutor = true;
+              this.calendarEvents = this.user.events;
             });
           } else {
             
@@ -79,6 +126,7 @@ export class ProfileComponent implements OnInit {
             this.user = data;
             this.getSubjects();
             this.user.isTutor = false;
+
           }
         },
         error => {
@@ -86,10 +134,47 @@ export class ProfileComponent implements OnInit {
           console.log(error);
         }
       );
+<<<<<<< HEAD
+    }else{
+      this.tutorsService.getTutor(this.id).subscribe((tutor: TutorModel) => {
+
+  	    this.tutorsService.getUser().subscribe((data:any) => {
+          if(data.id == this.id){
+            this.id="user";
+            if (data.isTutor) {
+              this.tutorsService.getTutor("this").subscribe((tutor: TutorModel) => {            
+                this.user = tutor;
+                this.getSubjects();
+                this.user.isTutor = true;
+                this.calendarEvents = this.user.events;
+              });
+            } else {
+              this.user.isTutor = false;
+              this.user = data;
+              this.getSubjects();
+              this.user.isTutor = false;
+            }
+          }else{
+            this.user = tutor;
+            this.user.isTutor = true;
+            this.username = this.user.email.match(/^([^@]*)@/)[1];
+            this.calendarEvents = this.user.events;
+          }
+        },
+        error => {
+          console.log("hubo un error");
+          console.log(error);
+        });
+      },
+      error => {
+        console.log("hubo un error");
+        console.log(error);
+=======
     } else {
       this.tutorsService.getTutor(id).subscribe((tutor: TutorModel) => {
         this.user = tutor;
         this.user.isTutor = true;
+>>>>>>> master
       });
     }
   }
@@ -106,7 +191,7 @@ export class ProfileComponent implements OnInit {
   }
 
   becomeTutor() {
-    this.tutorsService.becomeTutor(this.description).subscribe(data => {
+    this.tutorsService.becomeTutor(this.description, this.price).subscribe(data => {
       this.add_Subject();
     });
   }
@@ -123,6 +208,7 @@ export class ProfileComponent implements OnInit {
       this.courses[subject._id] = subject.name;
     }
 
+
     if(this.user.courses){
       console.log(this.user.courses);
       
@@ -133,7 +219,7 @@ export class ProfileComponent implements OnInit {
         console.log(Object.keys(this.courses).length);
       }
     }
-    
+
     this.options = Object.values(this.courses);
     this.subjectSearched = new SearchModel();
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -169,7 +255,122 @@ export class ProfileComponent implements OnInit {
     return this.id == "user";
   }
 
-  fulltutor(){
+  fulltutor() {
     return Object.keys(this.courses).length == 0;
   }
+<<<<<<< HEAD
+
+
+  // @ViewChild("closeModal", { static: false }) private closeModal: ElementRef;
+  public sendMessage() {
+    // let message = form.form.value.contactMessage;
+
+this.chatService
+      .getIdChat(this.username).pipe(first()).subscribe(id=> {
+  
+        
+        
+        if(id==-1){
+          this.chatService.createChat(this.username)
+          .then(()=>{
+            // document.getElementById("CloseButton").click();
+           
+          })
+          .catch();
+        }
+        this.router.navigate(["/chat", `${this.username}`]);
+      });
+  }
+
+  // Funciones del calendario  ---------------------------------------------------------------------------------
+
+  async newEvent(arg) {
+    if(arg.allDay){
+      return;
+    }
+    this.addingDate = arg;
+    document.getElementById("openModalButton").click();
+  }
+
+  onSubmit(){
+    if(this.selector!=null){
+
+      let newEvent = {
+        id:null,
+        title: this.selector,
+        start: this.addingDate.date,
+        color:null,
+        textColor:"white",
+        overlap:false,
+        selectable:true,
+      };
+
+      if(this.selector=="Disponible"){
+        newEvent.color ='#A2C64B';
+      }else{
+        newEvent.color ='#096682';
+      }
+
+      this.tutorsService.newEvent(newEvent).subscribe((res)=>{
+        newEvent.id = res;
+          this.calendarEvents = this.calendarEvents.concat(newEvent);
+          document.getElementById("close").click(); 
+      }, error =>{
+        console.log("Hubo un error");
+        console.log(error);
+        document.getElementById("close").click();
+      });
+    }
+  }
+
+  editEvent(arg){
+    for(let i=0;i<this.calendarEvents.length;i++){
+      if(arg.event.id==this.calendarEvents[i].id){
+        this.indexEvent = i;
+        this.singleEvent = Object.assign({}, this.calendarEvents[i]);
+        this.thisEvent = this.calendarEvents[this.indexEvent].title;
+        if(this.thisEvent == "Tutoría"){
+          this.oppositeEvent = "Disponible";
+          this.oppositeColor = "#A2C64B";
+        }else{
+          this.oppositeEvent = "Tutoría";
+          this.oppositeColor = "#096682";
+        }
+        document.getElementById("update").click();
+        break;
+      }
+    }
+  }
+
+  update(){
+    let calendarEvents = this.calendarEvents.slice();
+    this.singleEvent.title = this.oppositeEvent;
+    this.singleEvent.color = this.oppositeColor;
+
+    this.tutorsService.updateEvent(this.singleEvent).subscribe( (res)=>{
+      calendarEvents[this.indexEvent] = this.singleEvent;
+      this.calendarEvents = calendarEvents;
+      document.getElementById("closeUpdate").click();
+    }, error => {
+      console.log("Hubo un error");
+      console.log(error);
+      document.getElementById("closeUpdate").click();
+    });
+  }
+
+  delete(){
+    
+    this.tutorsService.deleteEvent(this.singleEvent.id).subscribe( (res)=>{      
+      let calendarEvents = this.calendarEvents.slice();
+      calendarEvents.splice(this.indexEvent,1);
+      this.calendarEvents = calendarEvents;
+      document.getElementById("closeUpdate").click();
+    }, error => {
+      console.log("Hubo un error");
+      console.log(error);
+      document.getElementById("closeUpdate").click();
+    });
+  }
+=======
+>>>>>>> master
 }

@@ -30,8 +30,12 @@ export class LogInComponent implements OnInit {
     })
 
     Swal.showLoading();
+<<<<<<< HEAD
+    this.incomingStudent.career = this.incomingStudent.career;
+=======
     this.incomingStudent.career = this.incomingStudent.carrer;
     console.log(this.incomingStudent)
+>>>>>>> master
     this.tutorsService.signIn(this.incomingStudent).subscribe(
       async data => {
         await Swal.fire({

@@ -160,6 +160,8 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
 .header {
     height: 60px;
     background-color: #233D4D;
+    /* background-image: linear-gradient(to right, #233D4D , #007494); */
+    background-image: linear-gradient(to right, #233D4D , #007494);
     position: fixed;
     top: 0;
     left: 0;
@@ -2213,6 +2215,8 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
     margin: 0 auto;
     padding: 70px 55px 0;
     background-color: #fff;
+    color: #fff;
+    background-image: linear-gradient(to right, #233D4D , #007494);
     box-shadow: 0 0 34px 0 rgba(63, 66, 87, 0.1);
     position: relative;
 }
@@ -4237,8 +4241,8 @@ button:hover {
 }
 
 .btn-primary:hover {
-    background-color: #ff763a;
-    border-color: #ff763a;
+    background-color: #233D4D;
+    border-color: #233D4D;
     opacity: 1;
 }
 
@@ -6396,7 +6400,7 @@ fieldset[disabled] .checkbox input[type=checkbox],
 .btn-prev:hover,
 .btn-next-without:hover,
 .btn-prev-without:hover {
-    fill: #ff5e3a;
+    fill: #233D4D;
 }
 
 .btn-next,
