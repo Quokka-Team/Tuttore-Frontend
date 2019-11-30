@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { ChatService } from "src/app/services/chat.service";
 
 import { ActivatedRoute } from "@angular/router";
+import { arrayToHash } from '@fullcalendar/core/util/object';
 
 @Component({
   selector: "app-chat",
@@ -41,23 +42,29 @@ export class ChatComponent implements OnInit {
 
       this.chats = chats
       
+     
       
     });
+
     this.activatedRoute.params.subscribe(routeParams => {
       this.user2Id = routeParams.username;
       
       
       if (routeParams.username) {
-        this.chatService.getIdChat(this.user2Id).subscribe(chats => {
-          
-          this.chatService  .loadMessages(this.user2Id, chats[0].id)
+        this.chatService.getIdChat(this.user2Id).subscribe(idchat => {
+         
+          this.chatService  .loadMessages(this.user2Id, idchat)
             .subscribe(messages => {
-             
+              
+              
               
               this.messages = messages.reverse();
+              this.messages.shift()
               setTimeout(() => {
                 this.elemento.scrollTop = this.elemento.scrollHeight;
               }, 20);
+              
+
             });
         });
       }

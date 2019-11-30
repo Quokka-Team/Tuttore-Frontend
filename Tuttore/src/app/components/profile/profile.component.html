@@ -68,6 +68,29 @@
                             </div>
                         </ng-template>
                     </div>
+                  </div>
+
+                  <a
+                    *ngIf="id !== 'user'"
+                    
+                    class="btn btn-sm bg-blue"
+                    style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
+                    >Solicitar Tutoria</a>
+                </div>
+              </div>
+            </div>
+            <ng-template #addSubject>
+             
+
+              <div class="content text-center">
+                <div class="">
+                    <a
+                 
+                    data-toggle="modal"
+                    data-target="#create-friend-group-1"
+                  >
+                  <i class="fas fa-plus-square add-Subject back"></i>
+                </a> 
                 </div>
                 <div class="ui-block">
                     <div class="ui-block-title">
@@ -127,17 +150,104 @@
                         <!-- ... end W-Socials -->
                     </div>
                 </div>
-                <div class="ui-block">
-                    <div class="ui-block-title">
-                        <h6 class="title">Algunos Tutores Nuevos</h6>
-                    </div>
-                    <ul class="widget w-friend-pages-added notification-list friend-requests">
-                        <li *ngFor="let tutor of newTutors" class="inline-items">
-                            <div class="author-thumb">
-                                <img class="author-thumb" [src]="tutor.profilePicture | noimage" alt="author" />
-                            </div>
-                            <div class="notification-event">
-                                <a [routerLink]="['/profile', tutor._id]" class="h6 notification-friend">{{ tutor.name }} {{ tutor.lastName }}</a
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <div class="ui-block">
+          <div class="ui-block-title">
+            <h6 class="title">Informacion Personal</h6>
+          </div>
+          <div class="ui-block-content">
+            <!-- W-Personal-Info -->
+
+
+                            <ul class="widget w-personal-info">
+                                <li>
+                                    <span class="title">Descripcion:</span>
+                                    <span class="text">{{ user.description }}</span>
+                                </li>
+                                <li>
+                                    <span class="title">Email:</span>
+                                    <span class="text">{{ user.email }}</span>
+                                </li>
+                                <li>
+                                    <span class="title">Carrera:</span>
+                                    <span class="text">{{ user.career }}</span>
+                                </li>
+                                <li>
+                                    <span class="title">Promedio</span>
+                                    <span class="text">{{ user.gpa }}</span>
+                                </li>
+                                <li>
+                                    <span class="title">Telefono</span>
+                                    <span class="text">{{ user.phoneNumber }}</span>
+                                </li>
+                            </ul>
+
+
+            <div class="widget w-socials" *ngIf="isUser()">
+              <a class="social-item bg-blue text-white">
+                <i class="fas fa-address-book" aria-hidden="true"></i> Historial
+              </a>
+              <a
+                class="social-item bg-blue btn text-white .modal-button"
+                data-toggle="modal"
+                data-target="#edit-profile"
+              >
+                <i class="fas fa-edit" aria-hidden="true"></i> Editar
+                Informacion
+              </a>
+              <a
+                class="social-item bg-blue text-white"
+                data-toggle="modal"
+                data-target="#create-friend-group-1"
+              >
+                <i class="fas fa-plus-circle" aria-hidden="true"></i> Añadir
+                Materia
+              </a>
+            </div>
+            <div class="widget w-socials" *ngIf="!isUser()">
+             
+              <!-- <a
+              *ngIf="id !== 'user'"
+              data-toggle="modal"
+              data-target="#edit-my-poll-popup"
+              class="btn btn-sm bg-blue w-100"
+              style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
+              [routerLink]="['/chat',username]"  
+              >Contactar  <i class="fas fa-comments"></i></a> -->
+              <a
+              *ngIf="id !== 'user'"
+              (click)="sendMessage()"
+              class="btn btn-sm bg-blue w-100"
+              style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
+              >Contactar  <i class="fas fa-comments"></i></a>
+            </div>
+            
+            <!-- ... end W-Socials -->
+          </div>
+        </div>
+        <div class="ui-block">
+          <div class="ui-block-title">
+            <h6 class="title">Algunos Tutores Nuevos</h6>
+          </div>
+          <ul
+            class="widget w-friend-pages-added notification-list friend-requests"
+          >
+            <li *ngFor="let tutor of newTutors" class="inline-items">
+              <div class="author-thumb">
+                <img
+                  class="author-thumb"
+                  [src]="tutor.profilePicture | noimage"
+                  alt="author"
+                />
+              </div>
+              <div class="notification-event">
+                <a
+                  [routerLink]="['/profile', tutor._id]"
+                  class="h6 notification-friend"
+                  >{{ tutor.name }} {{ tutor.lastName }}</a
                 >
                 <span class="chat-message-item">{{ tutor.career }}</span>
               </div>
