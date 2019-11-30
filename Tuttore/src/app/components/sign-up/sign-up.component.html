@@ -3,7 +3,6 @@
 
     <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12" style="padding: 0">
         <!-- Login-Registration Form  -->
-
         <div class="registration-login-form" style="padding: 0; height: 100vh;">
             <!-- Tab panes -->
             <div class="tab-content">
@@ -64,9 +63,9 @@
                 <span
                   class="alert text-danger"
                   *ngIf="
-                    (signUpForm.submitted && signUpForm.controls['gpa'].errors) || (signUpForm.value.gp<=0 || signUpForm.value.gpa>=5)
+                    (signUpForm.submitted && signUpForm.controls['gpa'].errors) || (signUpForm.value.gpa < 0 || signUpForm.value.gpa > 5) 
                   "
-                  >El P.A.P.A es obligatorio y debe estar entre 0-5</span
+                  >El P.A.P.A debe estar entre 0-5</span
                 >
                 <div class="form-group label-floating">
                   <label for="gpa" class="control-label">P.A.P.A</label>
@@ -81,6 +80,8 @@
                     step="0.1"
                     id="gpa"
                     [(ngModel)]="newStudent.gpa"
+                    min="0"
+                    max="5"
                   />
                 </div>
               </div>
@@ -120,7 +121,7 @@
                 >
                   El email no es válido
                 </span>
-                <div class="form-group label-floating">
+                <div class="form-group label-floating input-group mb-3">
                   <label for="email" class="control-label"
                     >Correo electrónico</label
                   >
@@ -131,10 +132,12 @@
                     #email="ngModel"
                     class="form-control"
                     placeholder=""
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
                     id="email"
                     [(ngModel)]="newStudent.email"
                   />
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="email-company">@unal.edu.co</span>
+                  </div>
                 </div>
 
                 <span
@@ -179,13 +182,20 @@
 
                                 </div>
 
-                                <button class="btn btn-primary btn-lg full-width " style="background-color: #233D4D; border-color: #233D4D" type="submit">
-                  !Completar Registro!
+                                <div class="row">
+
+                                    <span style="font-size: 17px; width: 25%; margin-top: auto; margin-bottom: auto; margin-left: 0px;">Foto de perfil</span>
+
+                                    <div class="" style="padding-right: 0px;padding-left: 0px;width: 75%;">
+                                        <input id="file-upload" type="file" (change)="onFileSelected($event)" value="like" accept=".jpeg,.jpg,.png">
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary btn-lg full-width " style="background-color: #233D4D; border-color: #233D4D; margin-top: 20px;" type="submit">
+                  Completar Registro
                 </button>
                             </div>
                         </div>
-
-                        <input type="file" (change)="onFileSelected($event)">
                     </form>
 
                     <div class="content animated bounceInRight" style="padding-right: 25px; padding-left: 25px;">
@@ -195,7 +205,7 @@
 
                         <p>
                             ¿Ya tienes una cuenta?
-                            <a [routerLink]="['/sign-in']">Inicia sesión ahora!</a> y ¡Encuentra tutores para las materias que necesites!
+                            <a [routerLink]="['/sign-in']">Inicia sesión ahora</a> y ¡Encuentra tutores para las materias que necesites!
                         </p>
                     </div>
                 </div>
@@ -205,3 +215,4 @@
         <!-- ... end Login-Registration Form  -->
     </div>
 </div>
+

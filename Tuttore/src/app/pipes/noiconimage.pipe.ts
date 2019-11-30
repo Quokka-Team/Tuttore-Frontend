@@ -5,14 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class NoiconimagePipe implements PipeTransform {
 
-  transform(images: any[]): string {
-    if (!images) {
+  transform(image): string {
+    if (image==null || image==undefined) {
       return "assets/img/no-profile-image.png";
+    }else{
+      return image;
     }
-    if (images.length > 0) {
-      return images[0];
-    }
-    return "assets/img/no-profile-image.png";
   }
 
 

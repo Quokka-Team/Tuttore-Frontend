@@ -19,11 +19,11 @@
   
   @keyframes animatedBackground {
     from {
-      background-position: 0 0;
+        background-position: 0 0;
     }
-  /*use negative width if you want it to flow right to left else and positive for left to right*/
+    /*use negative width if you want it to flow right to left else and positive for left to right*/
     to {
-      background-position: 10000px 0;
+        background-position: 10000px 0;
     }
 }
 
@@ -58,6 +58,7 @@
 
  ::ng-deep .example-full-width {
     width: 100%;
+
 }
 
 .text-color {

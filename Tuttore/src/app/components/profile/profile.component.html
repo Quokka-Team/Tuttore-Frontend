@@ -1,63 +1,72 @@
 <app-navbar> </app-navbar>
 <div class=" ">
-  <div class="container">
-    <div class="row">
-      <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="ui-block">
-          <div class="top-header">
-            <div class="top-header-thumb ">
-              <div class=" "
-              style="height: 250px;">
-              <div class="animatedBackground"></div>
-                <!-- <img [src]="user.background | nobackground" alt="Portada" /> -->
-                <!-- <img [src]="user.background | nobackground" alt="Portada" /> -->
-              </div>
-            </div>
-            <div class="profile-section"></div>
-            <div class="top-header-author">
-              <img
-                class="author-thumb"
-                [src]="user.profilePicture | noiconimage"
-                alt="author"
-              />
-              <div class="author-content">
-                <a class="h4 author-name"
-                  >{{ user.name | titlecase }} {{ user.lastName | titlecase }} 
+    <div class="container">
+        <div class="row">
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="ui-block">
+                    <div class="top-header">
+                        <div class="top-header-thumb ">
+                            <div class=" " style="height: 250px;">
+                                <div class="animatedBackground"></div>
+                                <!-- <img [src]="user.background | nobackground" alt="Portada" /> -->
+                            </div>
+                        </div>
+                        <div class="profile-section"></div>
+                        <div class="top-header-author">
+                            <img class="author-thumb" [src]="user.profilePicture | noiconimage" alt="author" />
+                            <div class="author-content">
+                                <a class="h4 author-name">{{ user.name | titlecase }} {{ user.lastName | titlecase }} 
                 </a>
 
-                <div class="country">{{ user.career }}</div>
-              </div>
+                                <div class="country">{{ user.career }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- ... end Top Header-Profile -->
+    <!-- ... end Top Header-Profile -->
 
-  <div class="container">
-    <div class="row">
-      <div
-        class="col col-xl-4 order-xl-1 col-lg-4 order-lg-1 col-md-12 order-md-1 col-sm-12 col-12"
-      >
-        <div class="ui-block">
-          <div class="ui-block-title">
-            <h6 class="title">Materias de Tutoria {{ username }}</h6>
-          </div>
-          <div class="ui-block-content">
-            <div class="" *ngIf="user.isTutor; else addSubject">
-              <div *ngFor="let course of user.courses">
-                <div
-                  class="birthday-item inline-items border border-light rounded  m-2"
-                  style="padding-left:0px; padding-right: 15px;"
-                >
-                  <div class="birthday-author-name " style="width: 50%;">
-                    <a href="# " class="h6 author-name ">{{ course.name }}</a>
+    <div class="container">
+        <div class="row">
+            <div class="col col-xl-4 order-xl-1 col-lg-4 order-lg-1 col-md-12 order-md-1 col-sm-12 col-12">
+                <div class="ui-block">
+                    <div class="ui-block-title">
+                        <h6 class="title">Materias de Tutoria {{ username }}</h6>
+                    </div>
+                    <div class="ui-block-content">
+                        <div class="" *ngIf="user.isTutor; else addSubject">
+                            <div *ngFor="let course of user.courses">
+                                <div class="birthday-item inline-items border border-light rounded  m-2" style="padding-left:0px; padding-right: 15px;">
+                                    <div class="birthday-author-name " style="width: 50%;">
+                                        <a href="# " class="h6 author-name ">{{ course.name }}</a>
 
-                    <div class="birthday-date ">
-                      {{ course.code }}
-                      <!-- <Strong>4.7</Strong> -->
+                                        <div class="birthday-date ">
+                                            {{ course.code }}
+                                            <!-- <Strong>4.7</Strong> -->
+                                        </div>
+                                    </div>
+
+                                    <a *ngIf="id !== 'user'" class="btn btn-sm bg-blue" style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;">Solicitar Tutoria</a>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-template #addSubject>
+                            <a class="  full-block" data-toggle="modal" data-target="#create-friend-group-1"></a>
+
+                            <div class="content text-center">
+                                <div class="">
+                                    <i class="fas fa-plus-square add-Subject"></i>
+                                </div>
+                                <div class="author-content">
+                                    <h4 class="country">
+                                        Conviértete en Tutor agregando materias
+                                    </h4>
+                                </div>
+                            </div>
+                        </ng-template>
                     </div>
                   </div>
 
@@ -83,10 +92,63 @@
                   <i class="fas fa-plus-square add-Subject back"></i>
                 </a> 
                 </div>
-                <div class="author-content">
-                  <h4 class="country">
-                    Conviértete en Tutor agregando materias
-                  </h4>
+                <div class="ui-block">
+                    <div class="ui-block-title">
+                        <h6 class="title">Informacion Personal</h6>
+                    </div>
+                    <div class="ui-block-content">
+                        <!-- W-Personal-Info -->
+
+
+                        <ul class="widget w-personal-info">
+                            <li>
+                                <span class="title">Descripcion:</span>
+                                <span class="text">{{ user.description }}</span>
+                            </li>
+                            <li>
+                                <span class="title">Email:</span>
+                                <span class="text">{{ user.email }}</span>
+                            </li>
+                            <li>
+                                <span class="title">Carrera:</span>
+                                <span class="text">{{ user.career }}</span>
+                            </li>
+                            <li>
+                                <span class="title">Promedio</span>
+                                <span class="text">{{ user.gpa }}</span>
+                            </li>
+                            <li>
+                                <span class="title">Telefono</span>
+                                <span class="text">{{ user.phoneNumber }}</span>
+                            </li>
+                            <li>
+                                <span class="title">Precio por tutoría</span>
+                                <span class="text">{{ user.price }}</span>
+                            </li>
+                        </ul>
+
+
+                        <div class="widget w-socials" *ngIf="isUser()">
+                            <a class="social-item bg-blue text-white">
+                                <i class="fas fa-address-book" aria-hidden="true"></i> Historial
+                            </a>
+                            <a class="social-item bg-blue btn text-white .modal-button" data-toggle="modal" data-target="#edit-profile">
+                                <i class="fas fa-edit" aria-hidden="true"></i> Editar Informacion
+                            </a>
+                            <a class="social-item bg-blue text-white" data-toggle="modal" data-target="#create-friend-group-1">
+                                <i class="fas fa-plus-circle" aria-hidden="true"></i> Añadir Materia
+                            </a>
+                        </div>
+                        <div class="widget w-socials" *ngIf="!isUser()">
+
+                            <a *ngIf="id !== 'user'" data-toggle="modal" data-target="#edit-my-poll-popup" class="btn btn-sm bg-blue w-100" style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;">Contactar  <i class="fas fa-comments"></i></a>
+                        </div>
+
+                        =
+
+
+                        <!-- ... end W-Socials -->
+                    </div>
                 </div>
               </div>
             </ng-template>
@@ -162,10 +224,7 @@
               style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;"
               >Contactar  <i class="fas fa-comments"></i></a>
             </div>
-          
-=
-
-
+            
             <!-- ... end W-Socials -->
           </div>
         </div>
@@ -206,40 +265,53 @@
                 <div  class="ui-block" style="padding: 20px;">
 
                   <!-- Calendario de otro tutor -->
-                  <full-calendar 
-                    class="text-color"
+                  <full-calendar
                     *ngIf="id!=='user'; else elseBlock"
+                    defaultView="dayGridMonth"
+                    [plugins]="calendarPlugins"
+                    [weekends]="calendarWeekends"
+                    [events]="calendarEvents"
+                    [header]="calendarHeader"
+                    selectable = "true"
+                  ></full-calendar>
+
+                  <!-- Calendario propio cuando se es Tutor -->
+
+                  <ng-template #elseBlock>
+                    <full-calendar 
+                    *ngIf="user.isTutor; else noTutorBlock"
+                    name="#calendar"
+                    defaultView="dayGridMonth"
+                    [plugins]="calendarPlugins"
+                    [weekends]="calendarWeekends"
+                    [events]="calendarEvents"
+                    [header]="calendarHeader"
+                    selectable = "true"
+                    (eventClick) = "editEvent($event)"
+                    (dateClick)="newEvent($event)"
+                    ></full-calendar>
+                  </ng-template>
+
+                  <!-- Calendario propio cuando no se es Tutor -->
+
+                  <ng-template #noTutorBlock>
+                    <full-calendar 
+                    name="#calendar"
                     defaultView="dayGridMonth"
                     [plugins]="calendarPlugins"
                     [weekends]="calendarWeekends"
                     [events]="[
                       { title: 'event 2', date: '2019-11-19' }
                     ]"
-                    [header]="{
-                      left: 'prev,next today',
-                      center: 'title',
-                      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                    }"
-                  ></full-calendar>
-
-                  <!-- Calendario propio -->
-
-                  <ng-template #elseBlock>
-                    <full-calendar 
-                    
-                    class=""
-                    defaultView="dayGridMonth"
-                    [plugins]="calendarPlugins"
-                    [weekends]="calendarWeekends"
-                    [events]="calendarEvents"
                     [header]="calendarHeader"
-                    (dateClick)="handleDateClick($event)"
+                    selectable = "true"
                     ></full-calendar>
                   </ng-template>
 
                 </div>
                 
                 <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#new-event"></button>
+                <button id="update" [hidden]="true" data-toggle="modal" data-target="#update-event"></button>
 
                 
                 <!-- Fin de calendario -->
@@ -291,8 +363,8 @@
       <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
         <div class="modal-content">
 
-          <div class="modal-header" style="padding-left: 21%;">
-            <h6>
+          <div class="modal-header">
+            <h6 style="margin: auto;">
               ¿Que tipo de evento deseas agregar?
             </h6>
           </div>
@@ -327,6 +399,47 @@
         </div>
       </div>
     </div>
+
+    <!-- ------------------Otro Modal---------------------------- -->
+
+    <div
+    class="modal animated zoomIn faster"
+    id="update-event"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="create-event"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h6 style="margin: auto;">
+            ¿Desea cambiar {{thisEvent}} por {{oppositeEvent}}?
+          </h6>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <button class="btn modal-button" style="margin:auto" (click)="update()">
+              Aceptar
+            </button>
+                
+            <button id="closeUpdate" class="btn modal-button" style="margin:auto;" data-dismiss="modal">
+              Cancelar
+            </button>
+
+            <button class="btn modal-button" style="margin:auto; background-color: red;" (click)="delete()">
+              Eliminar
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+    
 
     <div
       class="modal  animated zoomIn faster"
@@ -520,7 +633,7 @@
 
           <div *ngIf="!user.isTutor" class="modal-body">
             <h6 class="title">
-              Estas a punto de convertire en tutor
+              Estas a punto de convertirte en tutor
             </h6>
             <label class="control-label"
               >Escribe una breve descripcion de ti como tutor y elige la primera
@@ -554,12 +667,38 @@
                       Tu descripcion debe tener al menos 25 caracteres
                     </div>
                   </div>
+                  
+                  <div class="form-group label-floating">
+                      <label for="price" class="control-label"
+                        >Precio por tutoria (COP):</label
+                      >
+                      <input
+                        required
+                        ngModel
+                        name="price"
+                        #number="ngModel"
+                        class="form-control"
+                        placeholder=""
+                        type="number"
+                        step="0.1"
+                        [(ngModel)]="price"
+                      />
+                      <div
+                        class="alert alert-danger"
+                        *ngIf="(number.touched && !number.valid) || price < 0"
+                      >
+                        Ingrese un precio valido
+                      </div>
+                  </div>
+                  
+                  
+
                   <mat-form-field
                     class="full-width mb-5
-                  example-full-width"
+                    example-full-width"
                     style="border: 1px solid;
-            padding: 3px 25px 0;
-            border-radius: 6px;;"
+                    padding: 3px 25px 0;
+                    border-radius: 6px;;"
                   >
                     <label style="font: 14px;">Busca tu Materia:</label>
                     <input

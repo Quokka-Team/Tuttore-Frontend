@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders,HttpParams, HttpRequest, HttpEventType } from "
 import { map } from "rxjs/operators";
 import { StudentModel } from '../models/student.model';
 import { SearchSubjectModel } from '../models/searchSubject.model';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: "root"
@@ -12,7 +14,7 @@ export class TutorsService {
   userToken:string;
   url = `https://tuttore.tk/`;
     
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private route:Router) {
     this.readToken();
   }
 
@@ -68,25 +70,6 @@ export class TutorsService {
   }
 
   signUp( student:StudentModel , image:File) {
-    // const authData = {
-    //   name:student.name,
-    //   lastName:student.lastName,
-    //   email:student.email,
-    //   password:student.password,
-    //   career:student.career,
-    //   gpa:student.gpa,
-    //   phoneNumber:student.phoneNumber,
-    //   isTutor:student.isTutor,
-    //   profilePicture:image,
-    // };
-
-    // if(image!=null){
-    //   let formData = new FormData();
-    //   formData.append('profilePicture',student.profilePicture);
-    //   return this.http.post(`${this.url}signUp`, authData,formData);
-    // }
-  
-    // let cors = "https://cors-anywhere.herokuapp.com/";
 
     console.log(image);
   
@@ -101,17 +84,6 @@ export class TutorsService {
     formData.append('isTutor',student.isTutor);
     formData.append('profilePicture',image);
 
-    // let params = new HttpParams();
-
-    // const options = {
-    //   params: params,
-    //   reportProgress: true,
-    // };
-
-    // let header = new HttpHeaders();
-    // header.append('Content-Type', 'multipart/form-data');
-    // headers.append('Accept', 'application/json');
-    //return this.http.post(`${this.url}signUp`, formData, {headers:header});
     let params = new HttpParams();
     
     const options = {
@@ -121,14 +93,23 @@ export class TutorsService {
     };
 
     const req = new HttpRequest('POST', "https://tuttore.tk/signUp", formData, options);
-    return this.http.request(req).subscribe( (event) =>{
-      if(event.type === HttpEventType.UploadProgress){
-        console.log("Upload Progress " + (event.loaded / event.total) * 100 +"%");
-      }
+    return this.http.request(req).subscribe( async (event) =>{
       console.log(event);
+      if(event.type==3){
+        Swal.fire({
+          allowOutsideClick: false,
+          type: 'success',
+          text: 'Su cuenta se ha creado satisfactoriamente',
+        })
+        this.route.navigateByUrl("/sign-in");
+      }
+    },err => {
+        Swal.fire({
+          allowOutsideClick: false,
+          type: 'error',
+          text: err.error.message,
+        })
     });
-
-
   }
 
   logOut() {
@@ -169,12 +150,13 @@ export class TutorsService {
     return this.http.get(`${this.url}getStudent` , {headers: headers});
   }
 
-  becomeTutor(des:string){
+  becomeTutor(des:string, pri:number){
     const headers = new HttpHeaders({
       'authorization': `bearer ${this.readToken()}`
     });
     const data = {
-      description: des
+      description: des,
+      price: pri,
     }
    return this.http.post(`${this.url}registerTutor`, data,{headers})
   }
@@ -220,5 +202,48 @@ export class TutorsService {
         return resp;
       })
     );
+  }
+
+  newEvent(event){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    const data = {
+      title: event.title,
+      start: event.start,
+      color: event.color,
+      textColor:event.textColor,
+      overlap:event.overlap,
+      selectable:event.selectable
+    }
+    return this.http.post(`${this.url}addEventTutor`, data, {headers});
+  }
+
+  deleteEvent(id){
+
+    const data = {
+      idEvent: id
+    }
+
+    return this.http.post(`${this.url}updateEventTutor`, data);
+  }
+
+  updateEvent(event){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    const data = {
+      id: event.id,
+      title: event.title,
+      start: event.start,
+      color: event.color,
+      textColor:event.textColor,
+      overlap:event.overlap,
+      selectable:event.selectable,
+    }
+
+    return this.http.post(`${this.url}deleteEventTutor`, data, {headers});
   }
 }
