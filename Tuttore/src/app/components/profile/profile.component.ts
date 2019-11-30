@@ -11,16 +11,11 @@ import { map, startWith, first } from "rxjs/operators";
 import { SearchModel } from "src/app/models/search.model";
 import * as _ from "underscore";
 import { ChatService } from "src/app/services/chat.service";
-import { ViewChild, ElementRef } from "@angular/core";
-import { log } from 'util';
 
-import { Calendar } from '@fullcalendar/core';
 import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { ViewFlags } from '@angular/compiler/src/core';
-import { FullCalendarComponent } from '@fullcalendar/angular';
 
 @Component({
   selector: "app-profile",
@@ -99,7 +94,6 @@ export class ProfileComponent implements OnInit {
               this.getSubjects();
               this.user.isTutor = true;
               this.calendarEvents = this.user.events;
-              console.log(this.calendarEvents);
             });
           } else {
             this.user.isTutor = false;
@@ -249,8 +243,7 @@ this.chatService
           .catch();
         }
         this.router.navigate(["/chat", `${this.username}`]);
-      })
-      .catch();
+      });
   }
 
   // Funciones del calendario  ---------------------------------------------------------------------------------
@@ -283,7 +276,6 @@ this.chatService
       }
 
       this.tutorsService.newEvent(newEvent).subscribe((res)=>{
-        console.log(res); //Revisar que esta llegando solo el id --------------------------------------
         newEvent.id = res;
           this.calendarEvents = this.calendarEvents.concat(newEvent);
           document.getElementById("close").click(); 
@@ -320,8 +312,6 @@ this.chatService
     this.singleEvent.color = this.oppositeColor;
 
     this.tutorsService.updateEvent(this.singleEvent).subscribe( (res)=>{
-      console.log(res);
-
       calendarEvents[this.indexEvent] = this.singleEvent;
       this.calendarEvents = calendarEvents;
       document.getElementById("closeUpdate").click();
@@ -334,9 +324,7 @@ this.chatService
 
   delete(){
     
-    this.tutorsService.deleteEvent(this.singleEvent.id).subscribe( (res)=>{
-      console.log(res);
-      
+    this.tutorsService.deleteEvent(this.singleEvent.id).subscribe( (res)=>{      
       let calendarEvents = this.calendarEvents.slice();
       calendarEvents.splice(this.indexEvent,1);
       this.calendarEvents = calendarEvents;

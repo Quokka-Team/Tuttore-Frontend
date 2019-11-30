@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentModel } from 'src/app/models/student.model';
 import { TutorsService } from 'src/app/services/tutors.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 
