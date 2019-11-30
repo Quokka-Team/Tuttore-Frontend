@@ -3,10 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -16,8 +12,6 @@ import { NoimagePipe } from './pipes/noimage.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-
-
 
 import { TutorCardHomeComponent } from './components/tutor-card-home/tutor-card-home.component';
 import { SubjectCardComponent } from './components/subject-card/subject-card.component';
@@ -42,6 +36,17 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { TranslateDatePipe } from './pipes/translate-date.pipe';
 
 
+import { FullCalendarModule } from '@fullcalendar/angular';
+
+import { GoogleApiModule, GoogleApiService, GoogleAuthService, NgGapiClientConfig, NG_GAPI_CONFIG, GoogleApiConfig } from "ng-gapi";
+import { GoogleSignUpComponent } from './components/google-sign-up/google-sign-up.component';
+
+let gapiClientConfig: NgGapiClientConfig = { 
+  client_id: "929460386682-le18blljl6b3rutntl8asii4kfsb56ln.apps.googleusercontent.com",
+  discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
+  ux_mode: "popup",
+  scope: ["https://www.googleapis.com/auth/userinfo.profile"].join(" ")
+};
 
 @NgModule({
   declarations: [
@@ -63,10 +68,7 @@ import { TranslateDatePipe } from './pipes/translate-date.pipe';
     HomeInfoComponent,
     GoogleSignUpComponent,
     ChatComponent,
-    TranslateDatePipe,
-
-    HomeInfoComponent
-
+    TranslateDatePipe
   ],
   imports: [
     HttpClientModule,

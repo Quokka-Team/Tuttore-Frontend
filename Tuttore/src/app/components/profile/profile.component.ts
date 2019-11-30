@@ -12,20 +12,18 @@ import { SearchModel } from "src/app/models/search.model";
 import * as _ from "underscore";
 import { ChatService } from "src/app/services/chat.service";
 
-<<<<<<< HEAD
 import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-=======
->>>>>>> master
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.css"]
 })
 export class ProfileComponent implements OnInit {
+
   user: any = {};
   newTutors: TutorModel[];
   subjects: any[] = [];
@@ -38,7 +36,6 @@ export class ProfileComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   subjectId;
   id: string;
-<<<<<<< HEAD
   username: string;
 
   //Calendario
@@ -66,9 +63,6 @@ export class ProfileComponent implements OnInit {
   //Fin Calendario
 
 
-=======
-  reloaded: boolean = true;
->>>>>>> master
   constructor(
     private tutorsService: TutorsService,
     private subjectService: SubjectsService,
@@ -78,50 +72,30 @@ export class ProfileComponent implements OnInit {
     private zone: NgZone
   ) {
     this.getNewTutors();
-    this.reload();
   }
 
   ngOnInit() {
-    //this.loadScript('assets/js/libs/fullcalendar.js');
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
 
       this.getUserInfo(id);
     });
   }
-<<<<<<< HEAD
   
-=======
-
-  reload(){
-    if(localStorage.getItem('reloaded')==='true'){
-    this.zone.runOutsideAngular(() => {
-      location.reload();
-    });
-    localStorage.setItem('reloaded','false');
-    }
-  }
-
->>>>>>> master
   getUserInfo(id: string) {
     this.id = id;
     if (id == "user") {
+      this.id="user";
       this.tutorsService.getUser().subscribe(
         (data: any) => {
           if (data.isTutor) {
-            this.tutorsService
-            .getTutor("this")
-            .subscribe((tutor: TutorModel) => {
-
-            
+            this.tutorsService.getTutor("this").subscribe((tutor: TutorModel) => {            
               this.user = tutor;
               this.getSubjects();
               this.user.isTutor = true;
               this.calendarEvents = this.user.events;
             });
           } else {
-            
-            
             this.user.isTutor = false;
             this.user = data;
             this.getSubjects();
@@ -134,7 +108,6 @@ export class ProfileComponent implements OnInit {
           console.log(error);
         }
       );
-<<<<<<< HEAD
     }else{
       this.tutorsService.getTutor(this.id).subscribe((tutor: TutorModel) => {
 
@@ -169,12 +142,6 @@ export class ProfileComponent implements OnInit {
       error => {
         console.log("hubo un error");
         console.log(error);
-=======
-    } else {
-      this.tutorsService.getTutor(id).subscribe((tutor: TutorModel) => {
-        this.user = tutor;
-        this.user.isTutor = true;
->>>>>>> master
       });
     }
   }
@@ -210,13 +177,11 @@ export class ProfileComponent implements OnInit {
 
 
     if(this.user.courses){
-      console.log(this.user.courses);
       
       for (let course of this.user.courses) {
         if (course.idCourse in this.courses) {
           delete this.courses[course.idCourse];
         }
-        console.log(Object.keys(this.courses).length);
       }
     }
 
@@ -258,7 +223,6 @@ export class ProfileComponent implements OnInit {
   fulltutor() {
     return Object.keys(this.courses).length == 0;
   }
-<<<<<<< HEAD
 
 
   // @ViewChild("closeModal", { static: false }) private closeModal: ElementRef;
@@ -371,6 +335,4 @@ this.chatService
       document.getElementById("closeUpdate").click();
     });
   }
-=======
->>>>>>> master
 }

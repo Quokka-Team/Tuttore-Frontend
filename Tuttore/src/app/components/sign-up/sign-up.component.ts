@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TutorsService } from '../../services/tutors.service';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import { GoogleService } from '../../services/google.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,7 +18,7 @@ export class SignUpComponent implements OnInit{
   careers: any [];
   profileImage: File=null;
 
-  constructor( private tutorService:TutorsService, private route:Router ) { 
+  constructor( private tutorService:TutorsService, private route:Router, private googleService:GoogleService ) { 
 
   }
 
@@ -52,6 +53,7 @@ export class SignUpComponent implements OnInit{
           maxlength: '6'  
         }
       }).then((result) => {
+        
         if (result.value) {
             if(result.value == res['code']){
               Swal.fire({
