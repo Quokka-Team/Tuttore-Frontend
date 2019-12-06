@@ -8,7 +8,7 @@
     background-position: center center;
     background-size: cover;
     text-align: center;
-    min-height: 600px;
+    min-height: 960px;
 }
 
 .img-wrap img{
@@ -23,6 +23,7 @@
 
 .registration-login-form{
     background-color: #f8f8f8;
+    min-height: 960px;
 }
 
 @media only screen and (max-width: 1023px) {
