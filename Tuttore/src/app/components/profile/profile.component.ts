@@ -244,6 +244,7 @@ this.chatService
         }
         this.router.navigate(["/chat", `${this.username}`]);
       });
+    
   }
 
   // Funciones del calendario  ---------------------------------------------------------------------------------

@@ -29,6 +29,8 @@ export class ChatComponent implements OnInit {
     if (this.message.length === 0) {
       return;
     }
+
+    
     this.chatService.addMessage(this.message)
     .then(() => this.message="")
      .catch(err => console.error("No se pudo enviar el mensaje", err));

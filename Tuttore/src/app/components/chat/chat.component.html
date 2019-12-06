@@ -60,7 +60,7 @@
                       ><time
                         class="entry-date updated"
                         datetime="2004-07-24T18:18"
-                        >4 hours ago</time
+                        > {{chat.lastmessagedate | translateDate}} </time
                       ></span
                     >
                   </div>
@@ -84,7 +84,7 @@
                       blue: myUser == message.ownerId,
                       red: myUser != message.ownerId
                     }"
-                    class="animated fadeInUp faster"
+                    class=" "
                   >
                     <div class="author-thumb " *ngIf="myUser != message.ownerId">
                       <img src="assets/img/no-profile-icon.png" alt="author" />
@@ -121,7 +121,7 @@
                     class="form-control m-1"
                     [(ngModel)]="message"
                     placeholder="Enviar Mensaje"
-                    (keyup.enter)="sendMessage()"
+                   
                   >
                   <div class="add-options-message">
                     <button

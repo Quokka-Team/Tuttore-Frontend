@@ -44,6 +44,7 @@ export class SignUpComponent implements OnInit{
 
     this.tutorService.getVerificationCode(this.newStudent.email).subscribe(  res => {
 
+      console.log("code:",res['code']);
       Swal.fire({
         allowOutsideClick: false,
         type: 'info',
@@ -55,6 +56,7 @@ export class SignUpComponent implements OnInit{
       }).then((result) => {
         
         if (result.value) {
+            
             if(result.value == res['code']){
               Swal.fire({
                 allowOutsideClick: false,
