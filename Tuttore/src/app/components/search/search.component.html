@@ -54,7 +54,7 @@
     <div
       class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 col-12"
     >
-      <div class="ui-block" *ngIf="tutors">
+      <div class="ui-block" *ngIf="recommendedTutors.length>0">
         <div class="ui-block-title">
           <h6 class="title">Algunos Tutores Nuevos</h6>
         </div>
@@ -95,9 +95,9 @@
         >
           <div class="ui-block">
             <!-- Friend Item -->
-            <div class="friend-item">
+            <div class="friend-item ">
               <div class="friend-header-thumb">
-                <img src="assets/img/friend1.jpg" alt="friend" />
+                <img src="assets/img/backgrounds/background3.png" alt="friend" />
               </div>
 
               <div class="friend-item-content">
@@ -108,6 +108,7 @@
                   <div class="author-content"
                   >
                   <div [routerLink]="['/profile', tutor.idTutor]"
+                  class="notification-friend hover-blue cursor"
                   >
                   <a class="h5 author-name d-block">{{ tutor.name }} </a>
                     <a class="h5 author-name d-block"> {{ tutor.lastName }}</a>
@@ -120,20 +121,15 @@
                   </div>
                 </div>
 
-                <div class="swiper-container mp-0" data-slide="fade">
+                <div class="swiper-container " data-slide="fade">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
 
                       <div
-                        class="control-block-button d-inline-flex"
+                        class="control-block-button d-inline-flex "
                         data-swiper-parallax="-100"
                       >
-                        <div class="my-auto mx-3">
-                          <h2>{{ tutor.gpa }}</h2>
-                        </div>
-                        <a class="btn btn-control bg-yellow">
-                          <i class="fas fa-star"></i>
-                        </a>
+                        <a class="btn btn-control " style="color: #FFDC20;">{{ tutor.gpa }} <i class="fas fa-star"></i> </a>
                       </div>
                     </div>
                   </div>

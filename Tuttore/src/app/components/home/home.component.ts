@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    window.scrollTo(0, 0)
   }
 
   getMostSearchSubjects() {

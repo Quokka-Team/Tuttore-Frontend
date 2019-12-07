@@ -3693,7 +3693,7 @@ h4 {
 
 img {
     vertical-align: unset;
-    max-width: 100%;
+    /* max-width: 100%; */
     height: auto;
     display: inline-block;
 }
@@ -6062,7 +6062,7 @@ fieldset[disabled] .checkbox input[type=checkbox],
 }
 
 .friend-header-thumb img {
-    width: 100%;
+    height: 125px;;
     display: block;
 }
 
@@ -6076,7 +6076,7 @@ fieldset[disabled] .checkbox input[type=checkbox],
 }
 
 .friend-item .swiper-container {
-    padding-bottom: 40px;
+    padding-bottom: 0px;
 }
 
 .friend-item .btn-control {
@@ -6106,7 +6106,7 @@ fieldset[disabled] .checkbox input[type=checkbox],
 .friend-avatar {
     margin-top: -49px;
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .friend-avatar .author-thumb {
@@ -12970,13 +12970,7 @@ ol ol li {
     display: inline-block;
 }
 
-.teammembers-thumb img {
-    transition: all 1s ease-out;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-    display: block;
-    margin: 0 auto;
-}
+
 
 .teammembers-thumb img.hover {
     position: absolute;

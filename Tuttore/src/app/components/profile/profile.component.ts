@@ -75,6 +75,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0)
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
 
