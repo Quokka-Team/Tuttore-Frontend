@@ -9,7 +9,7 @@
 }
 
 .logo-container {
-    width: 25%;
+    width: 10%;
     ;
     height: 100%;
     margin: 0;
@@ -63,9 +63,14 @@
 .header-content-wrapper {
     display: flex;
     justify-content: space-between;
-    width: 25%;
+    width: 40%;
+
 }
 
+.control-block{
+    position: absolute;
+    right: 0;
+}
 .author-title {
     font-size: 16px;
     font-weight: 300;
@@ -110,7 +115,7 @@
     }
 
 }
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 818px) {
         .author-page .more-dropdown {
         
             margin-top: 20px;
@@ -118,6 +123,17 @@
         .hide{
             display: none;
         }
-
+        .logo-container {
+            width: 25%;
+            height: 100%;
+            margin: 0;
+        }
+        .header-content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            width: 25%;
+            align-items: center;
+        }
+        
 }
 

@@ -740,6 +740,7 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
     bottom: 15px;
     text-align: center;
     z-index: 4;
+    width:100%;
 }
 
 .top-header-author .author-thumb {
@@ -1876,14 +1877,14 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
 }
 
 @media (max-width: 801px) {
-    .search-bar.w-search {
+    /* .search-bar.w-search {
         max-width: 200px;
     }
     .top-header-author {
         position: relative;
         bottom: 20px;
         color: #888da8;
-    }
+    } */
     .top-header-author .author-name {
         color: #515365;
     }
@@ -1893,7 +1894,7 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
     .top-header-author {
         margin-top: 20px;
     }
-    .profile-section .control-block-button {
+    /* .profile-section .control-block-button {
         right: auto;
         top: -30px;
         left: 50%;
@@ -1910,7 +1911,7 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
         -webkit-transform: none;
         transform: none;
         width: auto;
-    }
+    } */
 }
 
 @media (max-width: 768px) {
@@ -13347,7 +13348,7 @@ ol ol li {
 }
 
 @media (max-width: 600px) {
-    .contact-form-wrap {
+    /* .contact-form-wrap {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -13358,7 +13359,7 @@ ol ol li {
     }
     .contact-form-wrap .contact-form {
         width: 100%;
-    }
+    } */
 }
 
 
