@@ -16,6 +16,7 @@ import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { dateToLocalArray } from '@fullcalendar/core/datelib/marker';
 
 @Component({
   selector: "app-profile",
@@ -59,6 +60,8 @@ export class ProfileComponent implements OnInit {
   thisEvent;
   oppositeEvent;
   oppositeColor;
+  endHours=0;
+  endMinutes=0;
 
   //Fin Calendario
 
@@ -80,6 +83,7 @@ export class ProfileComponent implements OnInit {
 
       this.getUserInfo(id);
     });
+    document.getElementById("close").addEventListener("click", () => this.cancel());
   }
   
   getUserInfo(id: string) {
@@ -256,13 +260,26 @@ this.chatService
     document.getElementById("openModalButton").click();
   }
 
-  onSubmit(){
-    if(this.selector!=null){
+  cancel(){
+    this.endHours=0;
+    this.endMinutes=0;
+    this.selector=undefined;
+  }
+
+  onSubmit(form){
+    if(!form.invalid){
+      if((this.endHours==0 && this.endMinutes<15)||(this.endHours==4 && this.endMinutes>0) || (this.endHours>4)){
+        return;
+      }
+      console.log(form.submitted);
+
+      let endDate = new Date(this.addingDate.date.getFullYear(), this.addingDate.date.getMonth(), this.addingDate.date.getDate(), this.addingDate.date.getHours()+this.endHours, this.addingDate.date.getMinutes()+this.endMinutes, this.addingDate.date.getSeconds(), this.addingDate.date.getMilliseconds());
 
       let newEvent = {
         id:null,
         title: this.selector,
         start: this.addingDate.date,
+        end: endDate,
         color:null,
         textColor:"white",
         overlap:false,
@@ -277,8 +294,10 @@ this.chatService
 
       this.tutorsService.newEvent(newEvent).subscribe((res)=>{
         newEvent.id = res;
-          this.calendarEvents = this.calendarEvents.concat(newEvent);
-          document.getElementById("close").click(); 
+        this.calendarEvents = this.calendarEvents.concat(newEvent);
+        document.getElementById("close").click();
+        form.submitted = false;
+        this.cancel();
       }, error =>{
         console.log("Hubo un error");
         console.log(error);
@@ -323,7 +342,6 @@ this.chatService
   }
 
   delete(){
-    
     this.tutorsService.deleteEvent(this.singleEvent.id).subscribe( (res)=>{      
       let calendarEvents = this.calendarEvents.slice();
       calendarEvents.splice(this.indexEvent,1);

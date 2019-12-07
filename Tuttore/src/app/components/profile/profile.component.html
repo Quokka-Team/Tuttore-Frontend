@@ -242,6 +242,8 @@
       </div>
     </div>
 
+    <!-- ------------------ Modal de creación de evento ------------------ -->
+
     <div
       class="modal animated zoomIn faster"
       id="new-event"
@@ -255,29 +257,101 @@
 
           <div class="modal-header">
             <h6 style="margin: auto;">
-              ¿Que tipo de evento deseas agregar?
+              Crea un nuevo evento
             </h6>
           </div>
 
           <div class="modal-body">
-            <form (ngSubmit)="onSubmit()">
+            <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+
+              <span style="font-weight: 510; line-height: 1.3;">
+                ¿Que tipo de evento deseas agregar?<br/>
+              </span>
+
+              <span class="text-danger" *ngIf="(form.submitted && form.controls['select'].errors)" >
+                  Seleccione alguna opción
+              </span>
+
               <select 
-                class="custom-select" 
-                style="margin-bottom: 20px;"
-                [(ngModel)]="selector"
-                name="selector"
+                required
                 ngModel
+                name="select"
+                #select = "ngModel"
+                class="custom-select" 
+                style="margin-bottom: 20px; margin-top: 5px;"
+                id="select"
+                [(ngModel)]="selector"
+                
               >
                   <option> Disponible </option>
                   <option> Tutoría </option>
               </select>
 
+              <!-- aqui se ponen los campos adicionales -->
+
+              <span style="font-weight: 510; line-height: 1.3;">Duración <br/> </span>
+
+              <span class="text-danger" *ngIf="(form.submitted && ((form.controls['hours'].errors && form.controls['minutes'].errors) || (form.value.minutes < 15 && form.value.hours == 0) || (form.value.minutes > 0 && form.value.hours>3) || (form.value.hours>4)))" >
+                  Ingrese una duración válida, mínimo 15 minutos y máximo 4 horas
+              </span>
+              
               <div class="row">
+                <div class="col-md-6">
+                  <span class="text-danger" *ngIf="(form.submitted && form.controls['hours'].errors) || (form.value.hours < 0 || form.value.hours > 4)" >
+                      Ingrese un valor válido, entre 0 y 4
+                  </span>
+      
+                  <div>
+                    Horas
+                    <input
+                      required
+                      ngModel
+                      name="hours"
+                      #hours="ngModel"
+                      style="height: 37.19px;"
+                      type="number"
+                      step="1"
+                      id="hours"
+                      [(ngModel)]="endHours"
+                      min="0"
+                      max="4"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <span class="text-danger" *ngIf="(form.submitted && form.controls['minutes'].errors) || (form.value.minutes < 0 || form.value.minutes > 59)" >
+                      Ingrese un valor válido, entre 0 y 59
+                  </span>
+    
+                  <div>
+                    Minutos
+                    <input
+                      required
+                      ngModel
+                      name="minutes"
+                      #minutes="ngModel"
+                      style="height: 37.19px;"
+                      type="number"
+                      step="1"
+                      id="minutes"
+                      [(ngModel)]="endMinutes"
+                      min="0"
+                      max="59"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Aqui termina -->
+
+              <div class="row" style="margin-top: 15px;">
                 <button class="btn modal-button" style="margin-left:25%; margin-bottom: 0px; margin-top: 5px;" type="submit">
                   Aceptar
                 </button>
                 
-                <button id="close" class="btn modal-button" style="margin-left: 33px; margin-bottom: 0px; margin-top: 5px;"data-dismiss="modal">
+                <button id="close" class="btn modal-button" style="margin-left: 33px; margin-bottom: 0px; margin-top: 5px;" data-dismiss="modal">
                   Cancelar
                 </button>
               </div>
@@ -290,7 +364,7 @@
       </div>
     </div>
 
-    <!-- ------------------Otro Modal---------------------------- -->
+    <!-- ------------------Modal de actualización de evento---------------------------- -->
 
     <div
     class="modal animated zoomIn faster"

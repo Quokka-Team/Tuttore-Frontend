@@ -212,6 +212,7 @@ export class TutorsService {
     const data = {
       title: event.title,
       start: event.start,
+      end: event.end,
       color: event.color,
       textColor:event.textColor,
       overlap:event.overlap,
@@ -238,6 +239,7 @@ export class TutorsService {
       id: event.id,
       title: event.title,
       start: event.start,
+      end: event.end,
       color: event.color,
       textColor:event.textColor,
       overlap:event.overlap,

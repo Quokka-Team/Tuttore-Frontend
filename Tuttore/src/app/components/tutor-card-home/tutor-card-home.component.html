@@ -1,14 +1,13 @@
 <div class="crumina-module crumina-teammembers-item card px-2 py-2 my-2" *ngIf="tutor">
-  <div class="teammembers-thumb img">
-    <!-- <img class="main" src="assets/img/no-profile-image.png" alt="Tutor" />
+    <div class="teammembers-thumb img">
+        <!-- <img class="main" src="assets/img/no-profile-image.png" alt="Tutor" />
     <img class="hover" src="assets/img/no-profile-image.png" alt="Tutor" /> -->
-    <img class="main" src="assets/img/team3.jpg" alt="Tutor" />
-    <img class="hover" src="assets/img/team3.jpg" alt="Tutor" />
-  </div>
+        <img class="main" [src]="tutor.profilePicture | noimage" alt="Tutor" />
+        <img class="hover" [src]="tutor.profilePicture | noimage" alt="Tutor" />
+    </div>
 
-  <div class="teammember-content content">
-    <a [routerLink]="['/profile', tutor._id]" class="h5 teammembers-item-name"
-      >{{ tutor.name | titlecase }} {{ tutor.lastName | titlecase }}</a
+    <div class="teammember-content content">
+        <a [routerLink]="['/profile', tutor._id]" class="h5 teammembers-item-name">{{ tutor.name | titlecase }} {{ tutor.lastName | titlecase }}</a
     >
 
     <!-- <div class="teammembers-item-prof">{{ tutor.career }}</div>-->
@@ -22,6 +21,6 @@
           <i class="fas fa-star" style="color: yellow"></i>
         </a>
     </div>
-  </div>
+</div>
 </div>
 <!-- ... end Teammember Item  -->
