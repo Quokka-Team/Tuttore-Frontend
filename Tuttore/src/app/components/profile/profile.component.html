@@ -109,6 +109,9 @@
                             <a class="social-item bg-blue text-white">
                                 <i class="fas fa-address-book" aria-hidden="true"></i> Historial
                             </a>
+                            <a class="social-item bg-blue text-white .modal-button" data-toggle="modal" data-target="#edit-photo">
+                                <i class="fas fa-plus-square" aria-hidden="true"></i> Editar Foto de Perfil
+                            </a>
                             <a class="social-item bg-blue btn text-white .modal-button" data-toggle="modal" data-target="#edit-profile">
                                 <i class="fas fa-edit" aria-hidden="true"></i> Editar Informacion
                             </a>
@@ -329,7 +332,48 @@
     </div>
   </div>
 
-    
+
+  <div
+      class="modal  animated zoomIn faster"
+      id="edit-photo"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="create-event"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered window-popup create-event"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="title">
+              Edita tu foto perfil
+            </h6>
+            <div class="cancel-button " data-dismiss="modal">
+              <i class="fas fa-window-close"></i>
+            </div>
+          </div>
+          <form (ngSubmit)="changeProfileImage()">
+            <div class="modal-body">
+              <div class="row">
+
+                  <span style="font-size: 17px; width: 25%; margin-top: auto; margin-bottom: 30px; margin-left: 0px;">Foto de perfil</span>
+
+                  <div class="" style="padding-right: 0px;padding-left: 0px;width: 75%;">
+                      <input id="file-upload" type="file" (change)="onFileSelected($event)" value="like" accept=".jpeg,.jpg,.png">
+                  </div>
+              </div>
+
+              <button class="btn modal-button btn-lg full-width" type="submit">
+                Guardar Cambios
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
 
     <div
       class="modal  animated zoomIn faster"
@@ -343,93 +387,130 @@
         class="modal-dialog modal-dialog-centered window-popup create-event"
         role="document"
       >
-        <div class="modal-content">
+        <div class="modal-content" *ngIf="user.isTutor; else editTutorProfile">
           <div class="modal-header">
             <h6 class="title">
-              Edita tu Perfil - Funcionalidad en desarrollo
+              Edita tu Perfil
             </h6>
             <div class="cancel-button " data-dismiss="modal">
               <i class="fas fa-window-close"></i>
             </div>
           </div>
-          <form #editForm="ngForm">
+          <form #changeStudentInfoForm="ngForm" (ngSubmit)="changeStudentInfo(changeStudentInfoForm)">
             <div class="modal-body">
               <div class="row">
                 <div class="col-6">
-                  <div class="form-group label-floating is-empty mb-2">
-                    <label class="control-label">Nombre</label>
-                    <input
-                      class="form-control"
-                      placeholder=""
-                      value=""
-                      type="text"
-                    />
+                  <div class="form-group label-floating">
+                      <label for="newNameStudentField" class="control-label">Nombre</label>
+                      <input
+                        required
+                        ngModel
+                        name="newNameStudentField"
+                        #newNameStudentField="ngModel"
+                        class="form-control"
+                        placeholder=""
+                        type="text"
+                        [(ngModel)]="newName"
+                      />
+                      <div
+                        class="alert alert-danger"
+                        *ngIf="newNameStudentField.touched && !newNameStudentField.valid"
+                      >
+                        El nombre es obligatorio
+                      </div>
                   </div>
                 </div>
                 <div class="col-6">
-                  <div class="form-group label-floating is-empty mb-2">
-                    <label class="control-label">Apellido</label>
+                  <div class="form-group label-floating">
+                    <label for="newLastNameStudentField" class="control-label">Apellido</label>
                     <input
+                      required
+                      ngModel
+                      name="newLastNameStudentField"
+                      #newLastNameStudentField="ngModel"
                       class="form-control"
                       placeholder=""
-                      value=""
                       type="text"
+                      [(ngModel)]="newLastName"
                     />
+                    <div
+                      class="alert alert-danger"
+                      *ngIf="newLastNameStudentField.touched && !newLastNameStudentField.valid"
+                    >
+                      El apellido es obligatorio
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group label-floating">
+                    <label for="newCareerStudentField" class="control-label">Carrera</label>
+                    <input
+                      required
+                      ngModel
+                      name="newCareerStudentField"
+                      #newCareerStudentField="ngModel"
+                      class="form-control"
+                      placeholder=""
+                      type="text"
+                      [(ngModel)]="newCareer"
+                    />
+                    <div
+                      class="alert alert-danger"
+                      *ngIf="newCareerStudentField.touched && !newCareerStudentField.valid"
+                    >
+                      La carrera es obligatorio
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-6">
-                  <div class="form-group label-floating is-empty mb-2">
-                    <label class="control-label">Email</label>
-                    <input
-                      class="form-control"
-                      placeholder=""
-                      value=""
-                      type="text"
-                    />
+                  <div class="form-group label-floating">
+                      <label for="newPhoneNumberStudentField" class="control-label">Telefono</label>
+                      <input
+                        required
+                        ngModel
+                        name="newPhoneNumberStudentField"
+                        #newPhoneNumberStudentField="ngModel"
+                        class="form-control"
+                        placeholder=""
+                        type="number"
+                        [(ngModel)]="newPhoneNumber"
+                      />
+                      <div
+                        class="alert alert-danger"
+                        *ngIf="newPhoneNumberStudentField.touched && !newPhoneNumberStudentField.valid"
+                      >
+                        Ingrese un telefono valido
+                      </div>
                   </div>
                 </div>
                 <div class="col-6">
-                  <div class="form-group label-floating is-empty mb-2">
-                    <label class="control-label">Carrera</label>
-                    <input
-                      class="form-control"
-                      placeholder=""
-                      value=""
-                      type="text"
-                    />
+                  <div class="form-group label-floating">
+                      <label for="newGpaStudentField" class="control-label">P.A.P.A</label>
+                      <input
+                        required
+                        ngModel
+                        name="newGpaStudentField"
+                        #newGpaStudentField="ngModel"
+                        class="form-control"
+                        placeholder=""
+                        type="number"
+                        step="0.1"
+                        [(ngModel)]="newGpa"
+                        min="0"
+                        max="5"
+                      />
+                      <div
+                          class="alert alert-danger"
+                          *ngIf="(!newGpaStudentField.valid) || (newGpa < 0 || newGpa > 5)"
+                        >
+                          El P.A.P.A debe estar entre 0-5
+                      </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <div class="form-group label-floating is-empty mb-2">
-                    <label class="control-label">Telefono</label>
-                    <input
-                      class="form-control"
-                      placeholder=""
-                      value=""
-                      type="text"
-                    />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group label-floating is-empty mb-2">
-                    <label class="control-label">Promedio</label>
-                    <input
-                      class="form-control"
-                      placeholder=""
-                      value=""
-                      type="text"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group label-floating">
-                <label class="control-label">Descripcion</label>
-                <textarea class="form-control" placeholder=""> </textarea>
               </div>
 
               <button class="btn modal-button btn-lg full-width" type="submit">
@@ -438,6 +519,187 @@
             </div>
           </form>
         </div>
+
+        <ng-template #editTutorProfile>
+        <div class="modal-content" >
+          <div class="modal-header">
+            <h6 class="title">
+              Edita tu Perfil
+            </h6>
+            <div class="cancel-button " data-dismiss="modal">
+              <i class="fas fa-window-close"></i>
+            </div>
+          </div>
+          <form #changeTutorInfoForm="ngForm" (ngSubmit)="changeTutorInfo(changeTutorInfoForm)">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group label-floating">
+                    <label for="newNameField" class="control-label">Nombre</label>
+                    <input
+                      required
+                      ngModel
+                      name="newNameField"
+                      #newNameField="ngModel"
+                      class="form-control"
+                      placeholder=""
+                      type="text"
+                      [(ngModel)]="newName"
+                    />
+                    <div
+                      class="alert alert-danger"
+                      *ngIf="newNameField.touched && !newNameField.valid"
+                    >
+                      El nombre es obligatorio
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group label-floating">
+                    <label for="newLastNameField" class="control-label">Apellido</label>
+                    <input
+                      required
+                      ngModel
+                      name="newLastNameField"
+                      #newLastNameField="ngModel"
+                      class="form-control"
+                      placeholder=""
+                      type="text"
+                      [(ngModel)]="newLastName"
+                    />
+                    <div
+                      class="alert alert-danger"
+                      *ngIf="newLastNameField.touched && !newLastNameField.valid"
+                    >
+                      El apellido es obligatorio
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group label-floating">
+                    <label for="newPriceField" class="control-label"
+                      >Precio por tutoria (COP):</label>
+                      <input
+                      required
+                      ngModel
+                      name="newPriceField"
+                      #newPriceField="ngModel"
+                      class="form-control"
+                      placeholder=""
+                      type="number"
+                      step="0.1"
+                      [(ngModel)]="newPrice"
+                    />
+                    <div
+                      class="alert alert-danger"
+                      *ngIf="(newPriceField.touched && !newPriceField.valid) || newPrice < 0"
+                    >
+                      Ingrese un precio valido
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group label-floating">
+                    <label for="newCareerField" class="control-label">Carrera</label>
+                    <input
+                      required
+                      ngModel
+                      name="newCareerField"
+                      #newCareerField="ngModel"
+                      class="form-control"
+                      placeholder=""
+                      type="text"
+                      [(ngModel)]="newCareer"
+                    />
+                    <div
+                      class="alert alert-danger"
+                      *ngIf="newCareerField.touched && !newCareerField.valid"
+                    >
+                      La carrera es obligatorio
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group label-floating">
+                      <label for="newPhoneNumberField" class="control-label">Telefono</label>
+                      <input
+                        required
+                        ngModel
+                        name="newPhoneNumberField"
+                        #newPhoneNumberField="ngModel"
+                        class="form-control"
+                        placeholder=""
+                        type="number"
+                        [(ngModel)]="newPhoneNumber"
+                      />
+                      <div
+                        class="alert alert-danger"
+                        *ngIf="newPhoneNumberField.touched && !newPhoneNumberField.valid"
+                      >
+                        Ingrese un telefono valido
+                      </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group label-floating">
+                    <div class="form-group label-floating">
+                      <label for="newGpaField" class="control-label">P.A.P.A</label>
+                      <input
+                        required
+                        ngModel
+                        name="newGpaField"
+                        #newGpaField="ngModel"
+                        class="form-control"
+                        placeholder=""
+                        type="number"
+                        step="0.1"
+                        [(ngModel)]="newGpa"
+                        min="0"
+                        max="5"
+                      />
+                      <div
+                          class="alert alert-danger"
+                          *ngIf="(!newGpaField.valid) || (newGpa < 0 || newGpa > 5)"
+                        >
+                          El P.A.P.A debe estar entre 0-5
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              
+
+              <div class="form-group label-floating">
+                <label for="newDescriptionField" class="control-label">Descripcion</label>
+                <textarea
+                  required
+                  ngModel
+                  name="newDescriptionField"
+                  #newDescriptionField="ngModel"
+                  class="form-control"
+                  minlength="25"
+                  [(ngModel)]="newDescription"
+                > {{newDescription}} </textarea>
+                <div
+                  class="alert alert-danger"
+                  *ngIf="newDescriptionField.touched && !newDescriptionField.valid"
+                >
+                  Tu descripcion debe tener al menos 25 caracteres
+                </div>
+              </div>
+
+              <button class="btn modal-button btn-lg full-width" type="submit">
+                Guardar Cambios
+              </button>
+            </div>
+          </form>
+        </div>
+      </ng-template>
       </div>
     </div>
 
@@ -461,7 +723,7 @@
               </div>
               <div class="modal-header justify-content-center">
                 <h6 class="title">
-                  incluye Materia de Tutoria
+                  Agregar materia de tutoria
                 </h6>
               </div>
               <form

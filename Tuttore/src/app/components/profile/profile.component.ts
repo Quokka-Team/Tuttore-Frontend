@@ -37,6 +37,17 @@ export class ProfileComponent implements OnInit {
   subjectId;
   id: string;
   username: string;
+  profileImage: File=null;
+
+
+  isNewImageEmpty: boolean;
+  newPrice: number;
+  newDescription: string;
+  newName: string;
+  newLastName: string;
+  newCareer: string;
+  newPhoneNumber: string;
+  newGpa: string;
 
   //Calendario
 
@@ -72,6 +83,7 @@ export class ProfileComponent implements OnInit {
     private zone: NgZone
   ) {
     this.getNewTutors();
+    this.isNewImageEmpty = true;
   }
 
   ngOnInit() {
@@ -80,6 +92,7 @@ export class ProfileComponent implements OnInit {
 
       this.getUserInfo(id);
     });
+    
   }
   
   getUserInfo(id: string) {
@@ -94,13 +107,24 @@ export class ProfileComponent implements OnInit {
               this.getSubjects();
               this.user.isTutor = true;
               this.calendarEvents = this.user.events;
+              this.newPrice = this.user.price;
+              this.newCareer = this.user.career;
+              this.newDescription = this.user.description;
+              this.newGpa = this.user.gpa;
+              this.newLastName = this.user.lastName;
+              this.newName = this.user.name;
+              this.newPhoneNumber = this.user.phoneNumber;
             });
           } else {
             this.user.isTutor = false;
             this.user = data;
             this.getSubjects();
             this.user.isTutor = false;
-
+            this.newCareer = this.user.career;
+            this.newGpa = this.user.gpa;
+            this.newLastName = this.user.lastName;
+            this.newName = this.user.name;
+            this.newPhoneNumber = this.user.phoneNumber;
           }
         },
         error => {
@@ -120,12 +144,24 @@ export class ProfileComponent implements OnInit {
                 this.getSubjects();
                 this.user.isTutor = true;
                 this.calendarEvents = this.user.events;
+                this.newPrice = this.user.price;
+                this.newCareer = this.user.career;
+                this.newDescription = this.user.description;
+                this.newGpa = this.user.gpa;
+                this.newLastName = this.user.lastName;
+                this.newName = this.user.name;
+                this.newPhoneNumber = this.user.phoneNumber;
               });
             } else {
               this.user.isTutor = false;
               this.user = data;
               this.getSubjects();
               this.user.isTutor = false;
+              this.newCareer = this.user.career;
+              this.newGpa = this.user.gpa;
+              this.newLastName = this.user.lastName;
+              this.newName = this.user.name;
+              this.newPhoneNumber = this.user.phoneNumber;
             }
           }else{
             this.user = tutor;
@@ -335,4 +371,35 @@ this.chatService
       document.getElementById("closeUpdate").click();
     });
   }
+
+// Funciones de editar perfil  ---------------------------------------------------------------------------------
+
+  onFileSelected(event){
+    console.log(event);
+    this.isNewImageEmpty = false;
+    this.profileImage = <File> event.target.files[0];
+  }
+
+  changeProfileImage(){
+    if(this.isNewImageEmpty){
+      return;
+    }
+    console.log("Cambiar imagen");
+    location.reload();
+  }
+
+  changeStudentInfo(f: NgForm){
+    if(f.invalid){
+      return;
+    }
+    console.log("Cambiar informacion del estudiante");
+  }
+
+  changeTutorInfo(f: NgForm){
+    if(f.invalid){
+      return;
+    }
+    console.log("Cambiar informacion del tutor");
+  }
+
 }
