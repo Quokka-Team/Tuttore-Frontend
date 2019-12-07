@@ -130,6 +130,8 @@ export class ProfileComponent implements OnInit {
             }
           }else{
             this.user = tutor;
+            console.log(this.user);
+            
             this.user.isTutor = true;
             this.username = this.user.email.match(/^([^@]*)@/)[1];
             this.calendarEvents = this.user.events;
@@ -172,9 +174,13 @@ export class ProfileComponent implements OnInit {
   }
 
   private initializeSubjectsData(data: SubjectModel[]) {
+    
     for (let subject of data) {
       this.courses[subject._id] = subject.name;
     }
+    // console.log(this.courses);
+    // console.log(this.user.courses);
+    
 
 
     if(this.user.courses){
@@ -247,6 +253,7 @@ this.chatService
       });
     
   }
+
 
   // Funciones del calendario  ---------------------------------------------------------------------------------
 

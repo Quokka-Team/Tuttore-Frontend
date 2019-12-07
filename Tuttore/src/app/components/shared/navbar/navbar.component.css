@@ -63,9 +63,10 @@
 .header-content-wrapper {
     display: flex;
     justify-content: space-between;
-    width: 40%;
+    width: 25%;
 
 }
+
 
 .control-block{
     position: absolute;
