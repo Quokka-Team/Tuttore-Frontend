@@ -54,8 +54,6 @@
                             </div>
                         </div>
                         <ng-template #addSubject>
-                            <a class="  full-block" data-toggle="modal" data-target="#create-friend-group-1"></a>
-
                             <div class="content text-center">
                                 <div class="">
                                     <i class="fas fa-plus-square add-Subject"></i>
@@ -387,7 +385,7 @@
         class="modal-dialog modal-dialog-centered window-popup create-event"
         role="document"
       >
-        <div class="modal-content" *ngIf="user.isTutor; else editTutorProfile">
+        <div class="modal-content" *ngIf="!user.isTutor; else editTutorProfile">
           <div class="modal-header">
             <h6 class="title">
               Edita tu Perfil
