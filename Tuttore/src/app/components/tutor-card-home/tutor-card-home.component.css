@@ -1,10 +1,15 @@
 .card {
     height: 250px;
+    /* width: 225px;; */
     border: 1px solid #f8f8f8;
 }
 
+.card{
+    box-shadow: 0 1px 8px 0 rgba(160, 124, 124, 0.2);
+    cursor:pointer; cursor: hand;
+}
 .card:hover{
-    box-shadow: 0 1px 8px 0 rgba(160, 124, 124, 0.35);
+    box-shadow: 0 1px 8px 0 rgba(160, 124, 124, 0.7);
     cursor:pointer; cursor: hand;
 }
 
