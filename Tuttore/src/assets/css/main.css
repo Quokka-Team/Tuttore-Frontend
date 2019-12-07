@@ -711,7 +711,7 @@ if the page has a “right panel”, add a class for BODY -- ".page-has-right-pa
 .profile-menu .more-dropdown {
     width: 230px;
     top: calc(100% + 10px);
-    right: -25px;
+    right: 0px;
 }
 
 .profile-menu .more-dropdown li {

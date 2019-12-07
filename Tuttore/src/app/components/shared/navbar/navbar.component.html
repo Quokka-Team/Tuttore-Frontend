@@ -1,65 +1,76 @@
-<header class="header" id="site-header">
-    <div class="logo-container" [routerLink]="['/home']">
-        <img src="assets/img/logo/Logo.png" alt="Tuttore" />
-    </div>
-
-    <div class="header-content-wrapper">
-        <div class="search" [routerLink]="['/chat']">
+<header class="header " id="site-header">
+  <div class="logo-container" [routerLink]="['/home']">
+    <img src="assets/img/logo/Logo.png" alt="Tuttore" />
+  </div>
+  <div class="icons ">
+        
+          <div class="search" [routerLink]="['/search']">
             <div>
-                <i class="fas fa-comments"></i>
-                <p>Chat </p>
+              <i class="fas fa-search"></i>
+              <p class="hide">Buscar</p>
             </div>
-        </div>
-        <div class="search" [routerLink]="['/search']">
+          </div>
+          <div class="search" [routerLink]="['/chat']">
             <div>
-                <i class="fas fa-search"></i>
-                <p>Buscar </p>
+              <i class="fas fa-comments"></i>
+              <p class="hide">Chat</p>
             </div>
-        </div>
-        <div class="control-block mr-5 px-0">
-            <div class="author-page author vcard inline-items more">
-                <div class="author-thumb">
-                    <img alt="author" class="avatar icon" [src]="user.profilePicture | noimage" />
-                    <div class="more-dropdown more-with-triangle">
-                        <div class="mCustomScrollbar" data-mcs-theme="dark">
-                            <div class="ui-block-title ">
-                                <h6 class="title">{{ username }}</h6>
-                            </div>
-                            <ul class="account-settings">
-                                <li>
-                                    <a (click)="profileSettings()">
-                                        <svg class="olymp-menu-icon">
+          </div>
+</div>
+  <div class="header-content-wrapper">
+ 
+    <div class="control-block mr-3 px-0">
+      <div class="author-page author vcard inline-items more">
+        <div class="author-thumb">
+          <img
+            alt="author"
+            class="avatar icon"
+            [src]="user.profilePicture | noimage"
+          />
+          <div class="more-dropdown more-with-triangle">
+            <div class="mCustomScrollbar" data-mcs-theme="dark">
+              <div class="ui-block-title ">
+                <h6 class="title">{{ username }}</h6>
+              </div>
+              <ul class="account-settings">
+                <li>
+                  <a (click)="profileSettings()">
+                    <svg class="olymp-menu-icon">
                       <use
                         xlink:href="assets/svg-icons/sprites/icons.svg#olymp-menu-icon"
                       ></use>
                     </svg>
-                                        <span>Mi perfil</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a (click)="logOut()">
-                                        <svg class="olymp-logout-icon">
+                    <span>Mi perfil</span>
+                  </a>
+                </li>
+                <li>
+                  <a (click)="logOut()">
+                    <svg class="olymp-logout-icon">
                       <use
                         xlink:href="assets/svg-icons/sprites/icons.svg#olymp-logout-icon"
                       ></use>
                     </svg>
-                                        <span>Desconectarse</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <a class="author-name">
-                    <div class="author-title">
-                        {{ user.name | titlecase }} {{ user.lastName | titlecase }}
-                        <svg class="olymp-dropdown-arrow-icon">
+                    <span>Desconectarse</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <a class="author-name">
+          <div class="author-title hide">
+            {{ user.name | titlecase }} {{ user.lastName | titlecase }}
+            <svg class="olymp-dropdown-arrow-icon">
               <use
                 xlink:href="assets/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"
               ></use>
             </svg>
-                    </div>
-                    <span *ngIf="user.isTutor" class="author-subtitle" style="font-size: 12px; color: #fff;">Tutor</span
+          </div>
+          <span
+            *ngIf="user.isTutor"
+            class="author-subtitle hide"
+            style="font-size: 12px; color: #fff;"
+            >Tutor</span
           >
           <span
             *ngIf="!user.isTutor"
@@ -70,7 +81,80 @@
         </a>
       </div>
     </div>
+
+
   </div>
+
+
+
+<!-- 
+  <div class="fixed-sidebar fixed-sidebar-responsive">
+
+        <div class="fixed-sidebar-left sidebar--small" id="sidebar-left-responsive">
+            <a class="logo js-sidebar-open">
+                    <img src="assets/img/logo/Logo.png" alt="Tuttore" />
+            </a>
+    
+        </div>
+    
+        <div class="fixed-sidebar-left sidebar--large" id="sidebar-left-1-responsive">
+            <a href="#" class="logo">
+                <div class="img-wrap">
+                    <img src="img/logo.png" alt="Olympus">
+                </div>
+                <div class="title-block">
+                    <h6 class="logo-title">olympus</h6>
+                </div>
+            </a>
+    
+            <div class="mCustomScrollbar" data-mcs-theme="dark">
+    
+                <div class="control-block">
+                    <div class="author-page author vcard inline-items">
+                        <div class="author-thumb">
+                            <img alt="author" src="img/author-page.jpg" class="avatar">
+                            <span class="icon-status online"></span>
+                        </div>
+                        <a href="02-ProfilePage.html" class="author-name fn">
+                            <div class="author-title">
+                                James Spiegel <svg class="olymp-dropdown-arrow-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"></use></svg>
+                            </div>
+                            <span class="author-subtitle">SPACE COWBOY</span>
+                        </a>
+                    </div>
+                </div>
+    
+    
+    
+                <div class="ui-block-title ui-block-title-small">
+                    <h6 class="title">YOUR ACCOUNT</h6>
+                </div>
+    
+                <ul class="account-settings">
+                    <li>
+                        <a href="#">
+    
+                            <svg class="olymp-menu-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-menu-icon"></use></svg>
+    
+                            <span>Profile Settings</span>
+                        </a>
+                    </li>
+    
+                    <li>
+                        <a href="#">
+                            <svg class="olymp-logout-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-logout-icon"></use></svg>
+    
+                            <span>Log Out</span>
+                        </a>
+                    </li>
+                </ul>
+    
+    
+            </div>
+        </div>
+    </div> -->
+    
+
 </header>
 
 <!-- ... end Header-BP -->

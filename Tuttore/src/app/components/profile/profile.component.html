@@ -5,7 +5,7 @@
             <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="ui-block">
                     <div class="top-header">
-                        <div class="top-header-thumb ">
+                        <div class="top-header-thumb hide">
                             <div class=" " style="height: 250px;">
                                 <div class="animatedBackground"></div>
                                 <!-- <img [src]="user.background | nobackground" alt="Portada" /> -->
@@ -129,20 +129,33 @@
                 </div>
                 <div class="ui-block">
                     <div class="ui-block-title">
-                        <h6 class="title">Algunos Tutores Nuevos</h6>
+                        <h6 class="title">Algunos Tutores Similares<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTutors" aria-expanded="false" aria-controls="collapseExample">
+                          Ver 
+                        </button></h6>
                     </div>
-                    <ul class="widget w-friend-pages-added notification-list friend-requests">
-                        <li *ngFor="let tutor of newTutors" class="inline-items">
-                            <div class="author-thumb">
-                                <img class="author-thumb" [src]="tutor.profilePicture | noimage" alt="author" />
-                            </div>
-                            <div class="notification-event">
-                                <a [routerLink]="['/profile', tutor._id]" class="h6 notification-friend">{{ tutor.name }} {{ tutor.lastName }}</a
-                >
-                <span class="chat-message-item">{{ tutor.career }}</span>
-              </div>
+                    <ul class="widget w-friend-pages-added notification-list friend-requests collapse" id="collapseTutors">
+                     
+                      <li *ngFor="let tutor of newTutors" class="inline-items">
+                        
+
+                                  <div class="author-thumb">
+                                      <img class="author-thumb" [src]="tutor.profilePicture | noimage" alt="author" />
+                                  </div>
+                                  <div class="notification-event">
+                                      <a [routerLink]="['/profile', tutor._id]" class="h6 notification-friend">{{ tutor.name }} {{ tutor.lastName }}</a
+                      >
+                      <span class="chat-message-item">{{ tutor.career }}</span>
+                    </div>
+                             
+                           
+                           
             </li>
-          </ul>
+                     </ul>
+                     <p>
+ 
+                      
+                    </p>
+                   
 
           <!-- ... end W-Action -->
         </div>
@@ -210,7 +223,7 @@
                     <div class="crumina-module crumina-heading with-title-decoration m-5 ">
                         <h5 class="heading-title ">Comentarios</h5>
                     </div>
-                    <ul class="comments-list style-3 ">
+                    <!-- <ul class="comments-list style-3 ">
                         <li *ngFor="let item of [1, 1, 1, 1]; let i = index" class="comment-item ">
                             <div class="post__author-thumb ">
                                 <img [src]="item.profilePicture | noiconimage" alt="author " />
@@ -237,8 +250,36 @@
                 </p>
               </div>
             </li>
-          </ul>
-        </div>
+                  </ul> -->
+                    <div class="comments-list style-3">
+                      <p>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseComments" aria-expanded="true" aria-controls="collapseExample">
+                          Ver Comentarios
+                        </button>
+                      </p>
+                      <div class="collapse" id="collapseComments">
+                        <div class="card card-body"  *ngFor="let item of [1, 1, 1, 1]; let i = index">
+
+          <div class="row">
+            <div class="col-5">
+               <div class="post__author-thumb hide">
+                            <img [src]="item.profilePicture | noiconimage" alt="author " />
+                        </div>
+                        <div>
+                          <a class="h6 post__author-name fn d-block text-left" href="# "
+                  >Estudiante {{ i }}</a>
+                  <time class="published d-block text-left" datetime="2004-07-24T18:18 ">
+                    2{{ i }} mins ago
+                  </time>
+                        </div>
+            </div>
+            <div class="col-7"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium der doloremque laudantium.</div>
+          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
       </div>
     </div>
 

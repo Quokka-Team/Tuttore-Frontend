@@ -17,6 +17,8 @@
     animation: animatedBackground 150s linear infinite;
   }
   
+
+
   @keyframes animatedBackground {
     from {
         background-position: 0 0;
@@ -71,4 +73,14 @@
 
 .back{
  color: #38a9ff;
+}
+
+
+
+@media (max-width: 600px) {
+    .hide{
+        display: none;
+    }
+    
+
 }
