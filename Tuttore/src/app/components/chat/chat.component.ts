@@ -40,9 +40,7 @@ export class ChatComponent implements OnInit {
     this.elemento = document.getElementById("app-mensajes");
     this.chatService.getChatList().subscribe(chats => {
 
-      this.chats = chats
-      
-     
+      this.chats = chats     
       
     });
 
