@@ -24,6 +24,11 @@ import interactionPlugin from '@fullcalendar/interaction';
 })
 export class ProfileComponent implements OnInit {
 
+
+  sessionId: string;
+  userComment: string;
+  userRate: number;
+
   user: any = {};
   newTutors: TutorModel[];
   subjects: any[] = [];
@@ -38,7 +43,6 @@ export class ProfileComponent implements OnInit {
   id: string;
   username: string;
   profileImage: File=null;
-
 
   isNewImageEmpty: boolean;
   newPrice: number;
@@ -84,6 +88,7 @@ export class ProfileComponent implements OnInit {
   ) {
     this.getNewTutors();
     this.isNewImageEmpty = true;
+    this.sessionId = "";
   }
 
   ngOnInit() {
@@ -400,6 +405,19 @@ this.chatService
       return;
     }
     console.log("Cambiar informacion del tutor");
+  }
+
+  clickRateTutor(name: string){
+    this.sessionId = name;
+  }
+
+  sendReport(f: NgForm){
+    if(f.invalid){
+      return;
+    }
+    console.log(this.sessionId);
+    console.log(this.userComment);
+    console.log(this.userRate);
   }
 
 }

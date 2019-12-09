@@ -15,9 +15,7 @@
                         <div class="top-header-author">
                             <img class="author-thumb" [src]="user.profilePicture | noiconimage" alt="author" />
                             <div class="author-content">
-                                <a class="h4 author-name">{{ user.name | titlecase }} {{ user.lastName | titlecase }} 
-                </a>
-
+                                <a class="h4 author-name">{{ user.name | titlecase }} {{ user.lastName | titlecase }} </a>
                                 <div class="country">{{ user.career }}</div>
                             </div>
                         </div>
@@ -32,6 +30,42 @@
     <div class="container">
         <div class="row">
             <div class="col col-xl-4 order-xl-1 col-lg-4 order-lg-1 col-md-12 order-md-1 col-sm-12 col-12">
+                <div class="ui-block">
+
+                    <div class="ui-block-title">
+                      <h6 class="title">Calificar ultimas tutorias</h6>
+                    </div>
+                    <!-- W-Action -->
+                    <div class="" *ngIf="!user.isTutor; else noEndedSession">
+                      <div *ngFor="let tutor of newTutors">
+                      <ul class="widget w-friend-pages-added notification-list friend-requests">
+                        <li class="inline-items">
+                          <div class="notification-event">
+                              <a class="h6 notification-friend">{{tutor.name}}</a>
+                            <span class="chat-message-item">Tutor</span>
+                          </div>
+                            
+                                <a class="social-item bg-blue text-white .modal-button" (click) = "clickRateTutor(tutor.name)" data-toggle="modal" data-target="#rate-tutor" >
+                                  Calificar
+                                </a>
+                          </li> 
+                      </ul>
+                      </div>
+                    </div>
+                    <!-- ... end W-Action -->
+                    <ng-template #noEndedSession>
+                      <div class="ui-block-content">
+                        <div class="content text-center">
+                            <div class="author-content">
+                                <h4 class="country">
+                                    No tienes tutores que calificar
+                                </h4>
+                            </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </div>
+              
                 <div class="ui-block">
                     <div class="ui-block-title">
                         <h6 class="title">Materias de Tutoria {{ username }}</h6>
@@ -138,8 +172,7 @@
                                 <img class="author-thumb" [src]="tutor.profilePicture | noimage" alt="author" />
                             </div>
                             <div class="notification-event">
-                                <a [routerLink]="['/profile', tutor._id]" class="h6 notification-friend">{{ tutor.name }} {{ tutor.lastName }}</a
-                >
+                                <a [routerLink]="['/profile', tutor._id]" class="h6 notification-friend">{{ tutor.name }} {{ tutor.lastName }}</a>
                 <span class="chat-message-item">{{ tutor.career }}</span>
               </div>
             </li>
@@ -208,38 +241,32 @@
                 <!-- Fin de calendario -->
 
                 <div class="ui-block ">
-                    <div class="crumina-module crumina-heading with-title-decoration m-5 ">
-                        <h5 class="heading-title ">Comentarios</h5>
-                    </div>
-                    <ul class="comments-list style-3 ">
-                        <li *ngFor="let item of [1, 1, 1, 1]; let i = index" class="comment-item ">
-                            <div class="post__author-thumb ">
-                                <img [src]="item.profilePicture | noiconimage" alt="author " />
-                            </div>
-
-
-              <div class="comments-content ">
-                <div class="post__author author vcard ">
-                  <div class="author-date ">
-                    <a class="h6 post__author-name fn " href="# "
-                      >Estudiante {{ i }}</a
-                    >
-                    <div class="post__date ">
-                      <time class="published " datetime="2004-07-24T18:18 ">
-                        2{{ i }} mins ago
-                      </time>
-                    </div>
+                  <div class="crumina-module crumina-heading with-title-decoration m-5 ">
+                      <h5 class="heading-title ">Comentarios</h5>
                   </div>
-                </div>
+                  <ul class="comments-list style-3 ">
+                    <li *ngFor="let course of user.courses" class="comment-item ">
+                      <div class="post__author-thumb ">
+                          <img [src]="user.profilePicture | noiconimage" alt="author " />
+                      </div>
 
-                <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium der doloremque laudantium.
-                </p>
-              </div>
-            </li>
-          </ul>
-        </div>
+
+                      <div class="comments-content ">
+                        <div class="post__author author vcard ">
+                          <div class="author-date ">
+                            <a class="h6 post__author-name fn " href="# ">
+                              {{course.name}}
+                            </a>
+                          </div>
+                        </div>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                            accusantium der doloremque laudantium.
+                        </p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
       </div>
     </div>
 
@@ -292,6 +319,90 @@
     </div>
 
     <!-- ------------------Otro Modal---------------------------- -->
+
+    <div
+      class="modal  animated zoomIn faster"
+      id="rate-tutor"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="create-event"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered window-popup create-event"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="title">
+              Califica a tu tutor
+            </h6>
+            <div class="cancel-button " data-dismiss="modal">
+              <i class="fas fa-window-close"></i>
+            </div>
+          </div>
+          <form #rateTutorForm="ngForm" (ngSubmit)="sendReport(rateTutorForm)">
+            <div class="modal-body">       
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group label-floating">
+                    <div class="form-group label-floating">
+                      <label for="rateTutorField" class="control-label">Calificacion de 0 a 5</label>
+                      <input
+                        required
+                        ngModel
+                        name="rateTutorField"
+                        #rateTutorField="ngModel"
+                        class="form-control"
+                        placeholder=""
+                        type="number"
+                        step="0.1"
+                        [(ngModel)]="userRate"
+                        min="0"
+                        max="5"
+                      />
+                      <div
+                          class="alert alert-danger"
+                          *ngIf="((!rateTutorField.valid) || (userRate < 0 || userRate > 5)) && rateTutorField.touched"
+                        >
+                          La calificacion no es valida
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              
+
+              <div class="form-group label-floating">
+                <label for="userCommentField" class="control-label">Ingrese un comentario sobre que tal fue la tutoria</label>
+                <textarea
+                  required
+                  ngModel
+                  name="userCommentField"
+                  #userCommentField="ngModel"
+                  class="form-control"
+                  minlength="10"
+                  [(ngModel)]="userComment"
+                > {{newDescription}} </textarea>
+                <div
+                  class="alert alert-danger"
+                  *ngIf="userCommentField.touched && !userCommentField.valid"
+                >
+                  Tu comentario debe ser de al menos 10 caracteres
+                </div>
+              </div>
+
+              <button class="btn modal-button btn-lg full-width" type="submit">
+                Guardar Cambios
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
 
     <div
     class="modal animated zoomIn faster"
