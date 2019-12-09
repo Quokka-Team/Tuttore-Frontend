@@ -38,18 +38,26 @@
                     </div>
                     <div class="ui-block-content">
                         <div class="" *ngIf="user.isTutor; else addSubject">
+
                             <div *ngFor="let course of user.courses">
                                 <div class="birthday-item inline-items border border-light rounded  m-2" style="padding-left:0px; padding-right: 15px;">
                                     <div class="birthday-author-name " style="width: 50%;">
-                                        <a href="# " class="h6 author-name ">{{ course.name }}</a>
+                                        <a [routerLink]="['/search',course._id]" class="h6 author-name ">{{ course.name }}</a>
 
                                         <div class="birthday-date ">
                                             {{ course.code }}
-                                            <!-- <Strong>4.7</Strong> -->
                                         </div>
                                     </div>
 
-                                    <a *ngIf="id !== 'user'" class="btn btn-sm bg-blue" style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;">Solicitar Tutoria</a>
+                                    <button (click)="request(course)" *ngIf="id !== 'user'" class="btn btn-sm bg-blue" style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;">
+                                      Solicitar Tutoria
+                                    </button>
+
+                                    <button id="request-button" [hidden]="true" data-toggle="modal" data-target="#request-session"></button>
+                                    <button id="accept-button" [hidden]="true" data-toggle="modal" data-target="#accept-session"></button>
+                                    <button id="noAvailable-button" [hidden]="true" data-toggle="modal" data-target="#noAvailable"></button>
+
+
                                 </div>
                             </div>
                         </div>
@@ -163,6 +171,10 @@
                     [events]="calendarEvents"
                     [header]="calendarHeader"
                     selectable = "true"
+                    minTime="06:00:00"
+                    maxTime="20:00:00"
+                    hiddenDays=[0]
+                    lang="es"
                   ></full-calendar>
 
                   <!-- Calendario propio cuando se es Tutor -->
@@ -179,6 +191,10 @@
                     selectable = "true"
                     (eventClick) = "editEvent($event)"
                     (dateClick)="newEvent($event)"
+                    minTime="06:00:00"
+                    maxTime="20:00:00"
+                    hiddenDays=[0]
+                    lang="es"
                     ></full-calendar>
                   </ng-template>
 
@@ -195,6 +211,10 @@
                     ]"
                     [header]="calendarHeader"
                     selectable = "true"
+                    minTime="06:00:00"
+                    maxTime="20:00:00"
+                    hiddenDays=[0]
+                    lang="es"
                     ></full-calendar>
                   </ng-template>
 
@@ -403,7 +423,110 @@
     </div>
   </div>
 
+  <!--------------------------------------------------------- Modal solicitud de tutoria por parte de un estudiante ---------------------------------------------------------->
+  <div
+  class="modal animated zoomIn faster"
+  id="request-session"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document" style="width: 600px;">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h6 style="margin: auto;">
+            Seleccione el periodo de tiempo en el que desea solicitar la tutoría
+          </h6>
+        </div>
+
+        <div class="modal-body" style="height: auto;">
+            <full-calendar
+            lang="es"
+            id="modal-calendar"
+            defaultView="dayGridMonth"
+            [plugins]="calendarPlugins"
+            [header]="calendarHeader"
+            [events]="availableEvents"
+            selectable = "true" 
+            contentHeight="auto"
+            minTime="06:00:00"
+            maxTime="20:00:00"
+            hiddenDays=[0]
+            (eventClick) = "posibleRequest($event)"
+          ></full-calendar>
+        </div>
+
+        <button id="cancel-calendar" data-dismiss="modal">
+        </button>
+      
+      </div>
+    </div>
+  </div>
+
+<!-- *************************************************************************************************************************** -->
+
+<div
+class="modal animated zoomIn faster"
+id="accept-session"
+tabindex="-1"
+role="dialog"
+aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h6 style="margin: auto;">
+          ¿Desea solicitar un tutoria entre {{posibleRequestStartString}} y {{posibleRequestEndString}}?
+        </h6>
+      </div>
+
+      <div class="modal-body" style="height: auto;">
+          <div class="row">
+            <button class="btn modal-button" style="margin:auto; background-color: green;" (click)="confirmRequest()">
+              Aceptar
+            </button>
+                  
+            <button class="btn modal-button" style="margin:auto; background-color: red;" data-dismiss="modal">
+              Cancelar
+            </button>
+          </div>
+      </div>
     
+    </div>
+  </div>
+</div>
+
+<!-- *************************************************************************************************************************** -->
+
+
+<div
+class="modal animated zoomIn faster"
+id="noAvailable"
+tabindex="-1"
+role="dialog"
+aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header" style="margin: auto; text-align: center;">
+        <h6 style="margin: auto;">
+          
+          Lo sentimos, este tutor no tiene horarios disponibles. Póngase en contacto con el tutor para programar su tutoría.
+        </h6>
+      </div>
+
+      <button class="btn modal-button" style="margin:auto; margin-top: 15px; margin-bottom: 15px;  background-color: #2C3E50;" data-dismiss="modal">
+        Aceptar
+      </button>
+    
+    </div>
+  </div>
+</div>
+
+<!-- *************************************************************************************************************************** -->
 
     <div
       class="modal  animated zoomIn faster"
