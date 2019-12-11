@@ -18,6 +18,7 @@ import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { dateToLocalArray } from '@fullcalendar/core/datelib/marker';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { SessionModel } from '../../models/session.model';
 
 @Component({
   selector: "app-profile",
@@ -40,8 +41,7 @@ export class ProfileComponent implements OnInit {
   id: string;
   username: string;
   userId;
-
-  requestedCourse;
+  tutor:boolean;
 
 
   //Calendario
@@ -68,12 +68,19 @@ export class ProfileComponent implements OnInit {
   endHours=0;
   endMinutes=0;
   availableEvents: EventInput[] = [];
+
+  //Fin Calendario
+
+  //Solicitud y respuesta de solitudes
+
   posibleRequestStart = new Date();
   posibleRequestEnd = new Date();
   posibleRequestStartString:string="null";
   posibleRequestEndString:string="null";
+  requestedCourse;
+  requestedSessions:Array<SessionModel>=[];
 
-  //Fin Calendario
+  //Fin de solicitud y respuesta de solitudes
 
 
   constructor(
@@ -92,33 +99,41 @@ export class ProfileComponent implements OnInit {
       const id = routeParams.id;
 
       this.getUserInfo(id);
-
-      //this.availableEvents.splice(0,this.availableEvents.length);
-      // for(let i=0;i<this.availableEvents.length;i++){
-      //   this.availableEvents.pop();
-      // }
     });
     document.getElementById("close").addEventListener("click", () => this.cancel());
   }
   
   getUserInfo(id: string) {
     this.id = id;
+    this.requestedSessions.splice(0,this.requestedSessions.length);
     if (id == "user") {
       this.id="user";
       this.tutorsService.getUser().subscribe(
         (data: any) => {
           if (data.isTutor) {
+            this.tutor=true;
             this.tutorsService.getTutor("this").subscribe((tutor: TutorModel) => {            
               this.user = tutor;
               this.getSubjects();
               this.user.isTutor = true;
               this.calendarEvents = this.user.events;
+              this.tutorsService.getTutorSessions(data.id).subscribe((res: Array<SessionModel>) =>{
+                if(res.length>0){
+                  for(let i=0;i<res.length;i++){
+                    if(res[i].status == "0"){
+                      this.requestedSessions = this.requestedSessions.concat(res[i]);
+                    }
+                  }
+                }else{
+                  console.log("no");
+                }
+              })
             });
           } else {
+            this.tutor=false;
             this.user.isTutor = false;
             this.user = data;
             this.getSubjects();
-            this.user.isTutor = false;
 
           }
         },
@@ -129,7 +144,7 @@ export class ProfileComponent implements OnInit {
       );
     }else{
       this.tutorsService.getTutor(this.id).subscribe((tutor: TutorModel) => {
-
+        this.tutor=true;
   	    this.tutorsService.getUser().subscribe((data:any) => {
           if(data.id == this.id){
             this.id="user";
@@ -139,12 +154,22 @@ export class ProfileComponent implements OnInit {
                 this.getSubjects();
                 this.user.isTutor = true;
                 this.calendarEvents = this.user.events;
+                this.tutorsService.getTutorSessions(data.id).subscribe((res: Array<SessionModel>) =>{
+                  if(res.length>0){
+                    for(let i=0;i<res.length;i++){
+                      if(res[i].status == "0"){
+                        this.requestedSessions = this.requestedSessions.concat(res[i]);
+                      }
+                    }
+                  }else{
+                    console.log("no");
+                  }
+                })
               });
             } else {
               this.user.isTutor = false;
               this.user = data;
               this.getSubjects();
-              this.user.isTutor = false;
             }
           }else{
             this.userId = data.id;
@@ -372,7 +397,7 @@ this.chatService
   //Solicitar tutoría
 
   request(course){
-
+    this.availableEvents.splice(0,this.availableEvents.length);
     for(let i=0;i<this.calendarEvents.length;i++){
       if(this.calendarEvents[i].title=="Disponible" && !this.availableEvents.includes(this.calendarEvents[i])){
         this.availableEvents = this.availableEvents.concat(this.calendarEvents[i]);
@@ -391,10 +416,8 @@ this.chatService
   posibleRequest(event){
     this.posibleRequestStart = event.event.start;
     this.posibleRequestStartString = event.event.start.toISOString().substring(0, 10) + " / " + (parseInt((event.event.start.toISOString().substring(11, 13)))-5).toString() + event.event.start.toISOString().substring(13, 16);
-    //this.posibleRequestEnd = event.event.end;
-    //this.posibleRequestEndString = event.event.end.toISOString().substring(0, 10)+ " / " + (parseInt((event.event.end.toISOString().substring(11, 13)))-5).toString() + event.event.end.toISOString().substring(13, 16);
-    console.log(this.posibleRequestStartString);
-    //console.log(this.posibleRequestEndString);
+    this.posibleRequestEnd = event.event.end;
+    this.posibleRequestEndString = event.event.end.toISOString().substring(0, 10)+ " / " + (parseInt((event.event.end.toISOString().substring(11, 13)))-5).toString() + event.event.end.toISOString().substring(13, 16);
     document.getElementById("accept-button").click();
 
   }
@@ -408,11 +431,86 @@ this.chatService
       dateEnd: this.posibleRequestEnd
     }
     this.tutorsService.requestEvent(data).subscribe( res =>{
+      document.getElementById("cancel-request").click();
       document.getElementById("cancel-calendar").click();
     }, error =>{
       console.log("Hubo un error");
       console.log(error);
     })
+  }
+
+  //------------------
+
+  getSessionStartDate(id):string{
+    for(let i=0;i<this.requestedSessions.length;i++){
+      if(this.requestedSessions[i].id == id){
+        return this.requestedSessions[i].event.start.substring(0, 10) + " / " + (parseInt((this.requestedSessions[i].event.start.substring(11, 13)))-5).toString() + this.requestedSessions[i].event.start.substring(13, 16);
+      }
+    }
+    return "hubo un error";
+  }
+
+  getSessionEndDate(id):string{
+    for(let i=0;i<this.requestedSessions.length;i++){
+      if(this.requestedSessions[i].id == id){
+        return (parseInt((this.requestedSessions[i].event.end.substring(11, 13)))-5).toString() + this.requestedSessions[i].event.end.substring(13, 16);
+      }
+    }
+    return "hubo un error";
+  }
+
+  getCourse(id):string{
+    for(let i=0;i<this.user.courses.length;i++){
+      if(id == this.user.courses[i].idCourse){
+        return this.user.courses[i].name;
+      }
+    }
+    return "hubo un error";
+  }
+
+  acceptSession(session){
+    this.tutorsService.acceptSession(session.id).subscribe( res => {
+      for(let i=0;i<this.calendarEvents.length;i++){
+        if(this.calendarEvents[i].start == session.event.start && this.calendarEvents[i].end == session.event.end){
+
+          this.tutorsService.deleteEvent(this.calendarEvents[i].id).subscribe( (res)=>{
+
+            let newEvent = {
+              id:null,
+              title: "Tutoria - " + this.getCourse(session.idCourse),
+              start: session.event.start,
+              end: session.event.end,
+              color:'#096682',
+              textColor:"white",
+              overlap:false,
+              selectable:true,
+            };
+
+            this.calendarEvents = this.calendarEvents.concat(newEvent); 
+            let calendarEvents = this.calendarEvents.slice();
+            calendarEvents.splice(i,1);
+            this.calendarEvents = calendarEvents;
+            let index = this.requestedSessions.indexOf( session );
+            this.requestedSessions.splice(index, 1);
+            return;
+          }, error => {
+            console.log("Hubo un error", error);
+            return;
+          });
+        }
+      }
+    },err => {
+      console.log("Hubo un error", err);
+    });
+  }
+
+  rejectSession(session){
+    this.tutorsService.rejectSession(session.id).subscribe( res => {
+      let i = this.requestedSessions.indexOf( session );
+      this.requestedSessions.splice( i, 1 );
+    },err => {
+      console.log("Hubo un error", err);
+    });
   }
 
 }

@@ -171,7 +171,6 @@ export class TutorsService {
    return this.http.post(`${this.url}addCourseTutor`, data,{headers})
   }
 
-  //Servicio que me indica si el usuario ya está registrado o no
   isRegistered(email:string){
     return false;
   }
@@ -264,5 +263,30 @@ export class TutorsService {
 
     return this.http.post(`${this.url}addRequest`, data, {headers});
 
+  }
+
+  getTutorSessions(id){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    return this.http.get(`${this.url}getSessionsTutor/${id}`,{headers});
+  }
+
+  acceptSession(id){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    return this.http.get(`${this.url}acceptRequest/${id}`);
+  }
+
+  
+  rejectSession(id){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    return this.http.get(`${this.url}rejectRequest/${id}`);
   }
 }
