@@ -95,6 +95,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0)
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
 
@@ -174,6 +175,8 @@ export class ProfileComponent implements OnInit {
           }else{
             this.userId = data.id;
             this.user = tutor;
+            console.log(this.user);
+            
             this.user.isTutor = true;
             this.username = this.user.email.match(/^([^@]*)@/)[1];
             this.calendarEvents = this.user.events;
@@ -216,9 +219,13 @@ export class ProfileComponent implements OnInit {
   }
 
   private initializeSubjectsData(data: SubjectModel[]) {
+    
     for (let subject of data) {
       this.courses[subject._id] = subject.name;
     }
+    // console.log(this.courses);
+    // console.log(this.user.courses);
+    
 
 
     if(this.user.courses){
@@ -289,7 +296,9 @@ this.chatService
         }
         this.router.navigate(["/chat", `${this.username}`]);
       });
+    
   }
+
 
   // Funciones del calendario  ---------------------------------------------------------------------------------
 

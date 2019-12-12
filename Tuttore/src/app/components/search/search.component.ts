@@ -42,6 +42,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.getSubjects();
   }
 

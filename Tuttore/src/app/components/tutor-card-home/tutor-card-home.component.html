@@ -2,9 +2,10 @@
     <div class="teammembers-thumb img">
         <!-- <img class="main" src="assets/img/no-profile-image.png" alt="Tutor" />
     <img class="hover" src="assets/img/no-profile-image.png" alt="Tutor" /> -->
-        <img class="main" [src]="tutor.profilePicture | noimage" alt="Tutor" />
-        <img class="hover" [src]="tutor.profilePicture | noimage" alt="Tutor" />
-    </div>
+    <img class="" [src]="tutor.profilePicture | noimage" alt="Tutor" />
+    <!-- <img class="main" [src]="tutor.profilePicture | noimage" alt="Tutor" /> -->
+    <!-- <img class="hover" [src]="tutor.profilePicture | noimage" alt="Tutor" /> -->
+  </div>
 
     <div class="teammember-content content">
         <a [routerLink]="['/profile', tutor._id]" class="h5 teammembers-item-name">{{ tutor.name | titlecase }} {{ tutor.lastName | titlecase }}</a
@@ -12,15 +13,8 @@
 
     <!-- <div class="teammembers-item-prof">{{ tutor.career }}</div>-->
   </div> 
-  <div class="socials socials--round star ">
-    <div>
-        <div >
-                5.0   
-        </div>
-        <a class="btn btn-control ">
-          <i class="fas fa-star" style="color: yellow"></i>
-        </a>
-    </div>
-</div>
+  <div class=" socials--round ">
+    <a class=" country" >            {{ tutor.career }}  </a>
+  </div>
 </div>
 <!-- ... end Teammember Item  -->
