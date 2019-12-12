@@ -159,6 +159,33 @@
         class="col col-xl-8 order-xl-2 col-lg-8 order-lg-2 col-md-12 order-md-2 col-sm-12 col-12"
       >
 
+                <div class="ui-block" *ngIf="requestedSessions.length > 0">
+                  <div class="with-title-decoration">
+                    <h5 class="heading-title" style="margin: 8px; padding:16px;">Solicitudes Pendientes</h5>
+                  </div>
+                  <div *ngFor="let session of requestedSessions">
+                    <div class="ui-block-content border rounded" style="margin: 20px; padding:10px; margin-left: 30px; margin-right: 30px;">
+                      <div class="row">
+                        <div style="width: 50%; position: relative; left: 0px; margin-left: 20px;">
+                          <p style="font-weight: bold;margin:0px;">Un estudiante le ha solicitado una tutoria</p>
+                          <p style="margin:0px;"> Horario: {{getSessionStartDate(session.id)}} - {{getSessionEndDate(session.id)}}</p>
+                          <p style="margin:0px;"> Materia: {{getCourse(session.idCourse)}}</p>
+                        </div>
+                        
+                        <button class="btn modal-button" style="margin:auto; background-color: green; width: 92px; margin-right: 0px;" (click)="acceptSession(session)">
+                          Aceptar
+                        </button>
+                                  
+                        <button class="btn modal-button" style="margin:auto; background-color: rgb(233, 36, 36); width: 92px; margin-left: 30px; margin-right: 50px;" (click)="rejectSession(session)">
+                          Cancelar
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                  
+                </div>
+
                 <!-- Calendario -->
                 <div  class="ui-block" style="padding: 20px;">
 
@@ -226,12 +253,12 @@
                 
                 <!-- Fin de calendario -->
 
-                <div class="ui-block ">
+                <div class="ui-block " *ngIf="tutor">
                     <div class="crumina-module crumina-heading with-title-decoration m-5 ">
                         <h5 class="heading-title ">Comentarios</h5>
                     </div>
                     <ul class="comments-list style-3 ">
-                        <li *ngFor="let item of [1, 1, 1, 1]; let i = index" class="comment-item ">
+                        <li *ngFor="let item of [1, 1, 1, 1]; let i = index" class="comment-item">
                             <div class="post__author-thumb ">
                                 <img [src]="item.profilePicture | noiconimage" alt="author " />
                             </div>
@@ -488,7 +515,7 @@ aria-hidden="true"
               Aceptar
             </button>
                   
-            <button class="btn modal-button" style="margin:auto; background-color: red;" data-dismiss="modal">
+            <button id="cancel-request" class="btn modal-button" style="margin:auto; background-color: red;" data-dismiss="modal">
               Cancelar
             </button>
           </div>
