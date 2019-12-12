@@ -86,7 +86,8 @@
     width: 50%;
 
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
+    flex-grow: 1;
 }
 
 
@@ -134,6 +135,14 @@
             justify-content: space-between;
             width: 25%;
             align-items: center;
+        }
+
+        .icons{
+            width: 50%;
+        
+            display: flex;
+            justify-content: space-around;
+            flex-grow: 1;
         }
         
 }

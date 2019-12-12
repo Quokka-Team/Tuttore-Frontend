@@ -4,7 +4,8 @@
     <div class="row">
         <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="ui-block mx-auto">
-                <div class="ui-block-title bar">
+                <div class="ui-block-title bar"
+                style="  padding:25px;">
                     <h2 class="text-center mb-3">Ingresa la materia que Buscas</h2>
                     <p>Aparecera una la lista de materias disponibles, selecciona la que necestias!</p>
                     <form class="example-form mt-5 " (ngSubmit)="getTutors(); getNewTutors()">
@@ -32,8 +33,7 @@
             </div>
 
         </div>
-      </div>
-    </div>
+     
     <div
       class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 col-12"
     >
@@ -41,11 +41,7 @@
         <div class="ui-block-title">
           <h6 class="title">Algunos Tutores Nuevos</h6>
         </div>
-        <div class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 col-12">
-            <div class="ui-block" *ngIf="tutors">
-                <div class="ui-block-title">
-                    <h6 class="title">Algunos Tutores Nuevos</h6>
-                </div>
+
 
                 <ul class="widget w-friend-pages-added notification-list friend-requests">
                     <li *ngFor="let tutor of recommendedTutors" class="inline-items ">
@@ -122,5 +118,6 @@
 </div>
 </div>
 </div>
+
 
 <app-footer></app-footer>
