@@ -278,17 +278,6 @@ export class TutorsService {
     return this.http.post(`${this.url}updateTutor`, data, {headers});
   }
 
-  // changeProfileImage(id: string, email: string, profilePicture: File){
-  //   const headers = new HttpHeaders({
-  //   });
-  //   const data = {
-  //     id: id,
-  //     email: email,
-  //     profilePicture: profilePicture,
-  //   }
-  //   return this.http.post(`${this.url}updateProfilePicture`, data, {headers});
-  // }
-
   changeProfileImage( id: string, email: string, profilePicture: File) {
   
     let formData = new FormData();
@@ -307,6 +296,8 @@ export class TutorsService {
     const req = new HttpRequest('POST', "https://tuttore.tk/updateProfilePicture", formData, options);
     return this.http.request(req);
   }
+
+
 
   requestEvent(event){
     const headers = new HttpHeaders({
@@ -348,5 +339,25 @@ export class TutorsService {
     });
 
     return this.http.get(`${this.url}rejectRequest/${id}`);
+  }
+
+  getTutorComments(idTutor){
+    return this.http.get(`${this.url}getCommentsTutor/${idTutor}`); 
+  }
+
+  getNoFeedBackSessionStudent(idStudent){
+    return this.http.get(`${this.url}getNofeedbackSessionsStudent/${idStudent}`); 
+  }
+
+  commentSession(idSession, studentComment, studentScore){
+    const headers = new HttpHeaders({
+    });
+    const data = {
+      idSession: idSession,
+      studentComment: studentComment,
+      studentScore: studentScore,
+    }
+    return this.http.post(`${this.url}commentSession`, data, {headers});
+  
   }
 }

@@ -85,6 +85,11 @@ export class ProfileComponent implements OnInit {
 
   //Fin Calendario
 
+  //Recibir sesiones sin feedback
+
+  noFeedBackedSession: Array<any>=[];
+  tutorComments: Array<any>=[];
+
   //Solicitud y respuesta de solitudes
 
   posibleRequestStart = new Date();
@@ -93,6 +98,7 @@ export class ProfileComponent implements OnInit {
   posibleRequestEndString:string="null";
   requestedCourse;
   requestedSessions:Array<SessionModel>=[];
+
 
   //Fin de solicitud y respuesta de solitudes
 
@@ -152,7 +158,18 @@ export class ProfileComponent implements OnInit {
                 }else{
                   console.log("no");
                 }
-              })
+              });
+              this.tutorsService.getNoFeedBackSessionStudent(this.user.id).subscribe( (res: Array<any>) => {
+                for(let i=0;i<res.length;i++){
+                    this.noFeedBackedSession.push(res[i]);
+                }
+                console.log(this.noFeedBackedSession.length);
+              });
+              this.tutorsService.getTutorComments(this.user.id).subscribe( (res: Array<any>) => {
+                for(let i=0;i<res.length;i++){
+                    this.tutorComments.push(res[i]);
+                }
+              });
             });
           } else {
             this.tutor=false;
@@ -165,6 +182,17 @@ export class ProfileComponent implements OnInit {
             this.newLastName = this.user.lastName;
             this.newName = this.user.name;
             this.newPhoneNumber = this.user.phoneNumber;
+            this.tutorsService.getNoFeedBackSessionStudent(this.user.id).subscribe( (res: Array<any>) => {
+              for(let i=0;i<res.length;i++){
+                  this.noFeedBackedSession.push(res[i]);
+              }
+              console.log(this.noFeedBackedSession.length);
+            });
+            this.tutorsService.getTutorComments(this.user.id).subscribe( (res: Array<any>) => {
+              for(let i=0;i<res.length;i++){
+                  this.tutorComments.push(res[i]);
+              }
+            });
           }
         },
         error => {
@@ -202,7 +230,18 @@ export class ProfileComponent implements OnInit {
                   }else{
                     console.log("no");
                   }
-                })
+                });
+                this.tutorsService.getNoFeedBackSessionStudent(this.user.id).subscribe( (res: Array<any>) => {
+                  for(let i=0;i<res.length;i++){
+                      this.noFeedBackedSession.push(res[i]);
+                  }
+                  console.log(this.noFeedBackedSession.length);
+                });
+                this.tutorsService.getTutorComments(this.user.id).subscribe( (res: Array<any>) => {
+                  for(let i=0;i<res.length;i++){
+                      this.tutorComments.push(res[i]);
+                  }
+                });
               });
             } else {
               this.user.isTutor = false;
@@ -214,15 +253,24 @@ export class ProfileComponent implements OnInit {
               this.newLastName = this.user.lastName;
               this.newName = this.user.name;
               this.newPhoneNumber = this.user.phoneNumber;
+              this.tutorsService.getTutorComments(this.user.id).subscribe( (res: Array<any>) => {
+                for(let i=0;i<res.length;i++){
+                    this.tutorComments.push(res[i]);
+                }
+              });
             }
           }else{
             this.userId = data.id;
             this.user = tutor;
-            console.log(this.user);
             
             this.user.isTutor = true;
             this.username = this.user.email.match(/^([^@]*)@/)[1];
             this.calendarEvents = this.user.events;
+            this.tutorsService.getTutorComments(this.user.id).subscribe( (res: Array<any>) => {
+              for(let i=0;i<res.length;i++){
+                  this.tutorComments.push(res[i]);
+              }
+            });
           }
         },
         error => {
@@ -481,18 +529,19 @@ this.chatService
      });
   }
 
-  clickRateTutor(name: string){
-    this.sessionId = name;
+  clickRateTutor(thisSession: string){
+    this.sessionId = thisSession;
   }
 
   sendReport(f: NgForm){
     if(f.invalid){
       return;
     }
-    console.log(this.sessionId);
-    console.log(this.userComment);
-    console.log(this.userRate);
+    this.tutorsService.commentSession(this.sessionId, this.userComment, this.userRate).subscribe(data => {
+      location.reload();
+    });
   }
+
   //Solicitar tutoría
 
   request(course){
