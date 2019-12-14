@@ -492,6 +492,7 @@ this.chatService
     console.log(this.sessionId);
     console.log(this.userComment);
     console.log(this.userRate);
+  }
   //Solicitar tutoría
 
   request(course){
