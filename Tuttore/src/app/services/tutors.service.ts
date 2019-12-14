@@ -277,4 +277,35 @@ export class TutorsService {
     return this.http.post(`${this.url}updateTutor`, data, {headers});
   }
 
+  // changeProfileImage(id: string, email: string, profilePicture: File){
+  //   const headers = new HttpHeaders({
+  //   });
+  //   const data = {
+  //     id: id,
+  //     email: email,
+  //     profilePicture: profilePicture,
+  //   }
+  //   return this.http.post(`${this.url}updateProfilePicture`, data, {headers});
+  // }
+
+  changeProfileImage( id: string, email: string, profilePicture: File) {
+  
+    let formData = new FormData();
+    formData.append('id',id);
+    formData.append('email',email);
+    formData.append('profilePicture',profilePicture);
+
+    let params = new HttpParams();
+    
+    const options = {
+      params: params,
+      reportProgress: true,
+      observe:'events'
+    };
+
+    const req = new HttpRequest('POST', "https://tuttore.tk/updateProfilePicture", formData, options);
+    return this.http.request(req);
+  }
+
+
 }

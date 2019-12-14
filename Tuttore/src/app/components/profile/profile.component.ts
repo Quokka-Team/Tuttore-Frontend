@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
   subjectId;
   id: string;
   username: string;
-  profileImage: File=null;
+  newProfileImage: File=null;
 
   isNewImageEmpty: boolean;
   newPrice: number;
@@ -389,15 +389,16 @@ this.chatService
   onFileSelected(event){
     console.log(event);
     this.isNewImageEmpty = false;
-    this.profileImage = <File> event.target.files[0];
+    this.newProfileImage = <File> event.target.files[0];
   }
 
   changeProfileImage(){
     if(this.isNewImageEmpty){
       return;
     }
-    console.log("Cambiar imagen");
-    location.reload();
+    this.tutorsService.changeProfileImage(this.user.id, this.user.email, this.newProfileImage).subscribe(data => {
+      location.reload();
+    });
   }
 
   changeStudentInfo(f: NgForm){
