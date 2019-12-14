@@ -248,6 +248,66 @@ export class TutorsService {
     return this.http.post(`${this.url}deleteEventTutor`, data, {headers});
   }
 
+  updateStudent(idStudent: string, name: string, lastName: string, career: string, gpa: number, phoneNumber: string){
+    const headers = new HttpHeaders({
+    });
+    const data = {
+      idStudent: idStudent,
+      name: name,
+      lastName: lastName,
+      career: career,
+      gpa: gpa,
+      phoneNumber: phoneNumber,
+    }
+    return this.http.post(`${this.url}updateStudent`, data, {headers});
+  }
+
+  updateTutor(idTutor: string, name: string, lastName: string, career: string, gpa: number, phoneNumber: string, description: string, price: number){
+    const headers = new HttpHeaders({
+    });
+    const data = {
+      idTutor: idTutor,
+      name: name,
+      lastName: lastName,
+      career: career,
+      gpa: gpa,
+      phoneNumber: phoneNumber,
+      description: description,
+      price: price,
+    }
+    return this.http.post(`${this.url}updateTutor`, data, {headers});
+  }
+
+  // changeProfileImage(id: string, email: string, profilePicture: File){
+  //   const headers = new HttpHeaders({
+  //   });
+  //   const data = {
+  //     id: id,
+  //     email: email,
+  //     profilePicture: profilePicture,
+  //   }
+  //   return this.http.post(`${this.url}updateProfilePicture`, data, {headers});
+  // }
+
+  changeProfileImage( id: string, email: string, profilePicture: File) {
+  
+    let formData = new FormData();
+    formData.append('id',id);
+    formData.append('email',email);
+    formData.append('profilePicture',profilePicture);
+
+    let params = new HttpParams();
+    
+    const options = {
+      params: params,
+      reportProgress: true,
+      observe:'events'
+    };
+
+    const req = new HttpRequest('POST', "https://tuttore.tk/updateProfilePicture", formData, options);
+    return this.http.request(req);
+  }
+
   requestEvent(event){
     const headers = new HttpHeaders({
       'authorization': `bearer ${this.readToken()}`

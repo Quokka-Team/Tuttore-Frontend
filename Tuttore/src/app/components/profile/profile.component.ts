@@ -16,6 +16,7 @@ import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+
 import { dateToLocalArray } from '@fullcalendar/core/datelib/marker';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { SessionModel } from '../../models/session.model';
@@ -26,6 +27,11 @@ import { SessionModel } from '../../models/session.model';
   styleUrls: ["./profile.component.css"]
 })
 export class ProfileComponent implements OnInit {
+
+
+  sessionId: string;
+  userComment: string;
+  userRate: number;
 
   user: any = {};
   newTutors: TutorModel[];
@@ -40,9 +46,17 @@ export class ProfileComponent implements OnInit {
   subjectId;
   id: string;
   username: string;
+  newProfileImage: File=null;
+  isNewImageEmpty: boolean;
+  newPrice: number;
+  newDescription: string;
+  newName: string;
+  newLastName: string;
+  newCareer: string;
+  newPhoneNumber: number;
+  newGpa: number;
   userId;
   tutor:boolean;
-
 
   //Calendario
 
@@ -92,6 +106,8 @@ export class ProfileComponent implements OnInit {
     private zone: NgZone
   ) {
     this.getNewTutors();
+    this.isNewImageEmpty = true;
+    this.sessionId = "";
   }
 
   ngOnInit() {
@@ -113,11 +129,19 @@ export class ProfileComponent implements OnInit {
         (data: any) => {
           if (data.isTutor) {
             this.tutor=true;
-            this.tutorsService.getTutor("this").subscribe((tutor: TutorModel) => {            
+            this.tutorsService.getTutor("this").subscribe((tutor: any) => {            
               this.user = tutor;
               this.getSubjects();
               this.user.isTutor = true;
               this.calendarEvents = this.user.events;
+              this.newPrice = this.user.price;
+              this.newCareer = this.user.career;
+              this.newDescription = this.user.description;
+              this.newGpa = this.user.gpa;
+              this.newLastName = this.user.lastName;
+              this.newName = this.user.name;
+              this.newPhoneNumber = this.user.phoneNumber;
+              this.user.id = tutor.idTutor;
               this.tutorsService.getTutorSessions(data.id).subscribe((res: Array<SessionModel>) =>{
                 if(res.length>0){
                   for(let i=0;i<res.length;i++){
@@ -135,7 +159,12 @@ export class ProfileComponent implements OnInit {
             this.user.isTutor = false;
             this.user = data;
             this.getSubjects();
-
+            this.user.isTutor = false;
+            this.newCareer = this.user.career;
+            this.newGpa = this.user.gpa;
+            this.newLastName = this.user.lastName;
+            this.newName = this.user.name;
+            this.newPhoneNumber = this.user.phoneNumber;
           }
         },
         error => {
@@ -150,11 +179,19 @@ export class ProfileComponent implements OnInit {
           if(data.id == this.id){
             this.id="user";
             if (data.isTutor) {
-              this.tutorsService.getTutor("this").subscribe((tutor: TutorModel) => {            
+              this.tutorsService.getTutor("this").subscribe((tutor: any) => {            
                 this.user = tutor;
                 this.getSubjects();
                 this.user.isTutor = true;
                 this.calendarEvents = this.user.events;
+                this.newPrice = this.user.price;
+                this.newCareer = this.user.career;
+                this.newDescription = this.user.description;
+                this.newGpa = this.user.gpa;
+                this.newLastName = this.user.lastName;
+                this.newName = this.user.name;
+                this.newPhoneNumber = this.user.phoneNumber;
+                this.user.id = tutor.idTutor;
                 this.tutorsService.getTutorSessions(data.id).subscribe((res: Array<SessionModel>) =>{
                   if(res.length>0){
                     for(let i=0;i<res.length;i++){
@@ -171,6 +208,12 @@ export class ProfileComponent implements OnInit {
               this.user.isTutor = false;
               this.user = data;
               this.getSubjects();
+              this.user.isTutor = false;
+              this.newCareer = this.user.career;
+              this.newGpa = this.user.gpa;
+              this.newLastName = this.user.lastName;
+              this.newName = this.user.name;
+              this.newPhoneNumber = this.user.phoneNumber;
             }
           }else{
             this.userId = data.id;
@@ -403,6 +446,52 @@ this.chatService
     });
   }
 
+// Funciones de editar perfil  ---------------------------------------------------------------------------------
+
+  onFileSelected(event){
+    console.log(event);
+    this.isNewImageEmpty = false;
+    this.newProfileImage = <File> event.target.files[0];
+  }
+
+  changeProfileImage(){
+    if(this.isNewImageEmpty){
+      return;
+    }
+    this.tutorsService.changeProfileImage(this.user.id, this.user.email, this.newProfileImage).subscribe(data => {
+      location.reload();
+    });
+  }
+
+  changeStudentInfo(f: NgForm){
+    if(f.invalid){
+      return;
+    }
+    this.tutorsService.updateStudent(this.user.id, this.newName, this.newLastName, this.newCareer, this.newGpa, this.newPhoneNumber.toString()).subscribe(data => {
+      location.reload();
+    });
+  }
+
+  changeTutorInfo(f: NgForm){
+    if(f.invalid){
+      return;
+    }
+    this.tutorsService.updateTutor(this.user.id, this.newName, this.newLastName, this.newCareer, this.newGpa, this.newPhoneNumber.toString(), this.newDescription, this.newPrice).subscribe(data => {
+      location.reload();
+     });
+  }
+
+  clickRateTutor(name: string){
+    this.sessionId = name;
+  }
+
+  sendReport(f: NgForm){
+    if(f.invalid){
+      return;
+    }
+    console.log(this.sessionId);
+    console.log(this.userComment);
+    console.log(this.userRate);
   //Solicitar tutoría
 
   request(course){
