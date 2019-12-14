@@ -16,6 +16,7 @@ import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: "app-profile",
@@ -50,8 +51,8 @@ export class ProfileComponent implements OnInit {
   newName: string;
   newLastName: string;
   newCareer: string;
-  newPhoneNumber: string;
-  newGpa: string;
+  newPhoneNumber: number;
+  newGpa: number;
 
   //Calendario
 
@@ -107,7 +108,7 @@ export class ProfileComponent implements OnInit {
       this.tutorsService.getUser().subscribe(
         (data: any) => {
           if (data.isTutor) {
-            this.tutorsService.getTutor("this").subscribe((tutor: TutorModel) => {            
+            this.tutorsService.getTutor("this").subscribe((tutor: any) => {            
               this.user = tutor;
               this.getSubjects();
               this.user.isTutor = true;
@@ -119,6 +120,8 @@ export class ProfileComponent implements OnInit {
               this.newLastName = this.user.lastName;
               this.newName = this.user.name;
               this.newPhoneNumber = this.user.phoneNumber;
+              this.user.id = tutor.idTutor;
+              console.log("1");
             });
           } else {
             this.user.isTutor = false;
@@ -130,6 +133,7 @@ export class ProfileComponent implements OnInit {
             this.newLastName = this.user.lastName;
             this.newName = this.user.name;
             this.newPhoneNumber = this.user.phoneNumber;
+            console.log("2");
           }
         },
         error => {
@@ -144,7 +148,7 @@ export class ProfileComponent implements OnInit {
           if(data.id == this.id){
             this.id="user";
             if (data.isTutor) {
-              this.tutorsService.getTutor("this").subscribe((tutor: TutorModel) => {            
+              this.tutorsService.getTutor("this").subscribe((tutor: any) => {            
                 this.user = tutor;
                 this.getSubjects();
                 this.user.isTutor = true;
@@ -156,6 +160,8 @@ export class ProfileComponent implements OnInit {
                 this.newLastName = this.user.lastName;
                 this.newName = this.user.name;
                 this.newPhoneNumber = this.user.phoneNumber;
+                this.user.id = tutor.idTutor;
+                console.log("3");
               });
             } else {
               this.user.isTutor = false;
@@ -167,6 +173,7 @@ export class ProfileComponent implements OnInit {
               this.newLastName = this.user.lastName;
               this.newName = this.user.name;
               this.newPhoneNumber = this.user.phoneNumber;
+              console.log("4");
             }
           }else{
             this.user = tutor;
@@ -397,14 +404,18 @@ this.chatService
     if(f.invalid){
       return;
     }
-    console.log("Cambiar informacion del estudiante");
+    this.tutorsService.updateStudent(this.user.id, this.newName, this.newLastName, this.newCareer, this.newGpa, this.newPhoneNumber.toString()).subscribe(data => {
+      location.reload();
+    });
   }
 
   changeTutorInfo(f: NgForm){
     if(f.invalid){
       return;
     }
-    console.log("Cambiar informacion del tutor");
+    this.tutorsService.updateTutor(this.user.id, this.newName, this.newLastName, this.newCareer, this.newGpa, this.newPhoneNumber.toString(), this.newDescription, this.newPrice).subscribe(data => {
+      location.reload();
+     });
   }
 
   clickRateTutor(name: string){

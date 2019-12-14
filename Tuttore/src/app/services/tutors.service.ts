@@ -246,4 +246,35 @@ export class TutorsService {
 
     return this.http.post(`${this.url}deleteEventTutor`, data, {headers});
   }
+
+  updateStudent(idStudent: string, name: string, lastName: string, career: string, gpa: number, phoneNumber: string){
+    const headers = new HttpHeaders({
+    });
+    const data = {
+      idStudent: idStudent,
+      name: name,
+      lastName: lastName,
+      career: career,
+      gpa: gpa,
+      phoneNumber: phoneNumber,
+    }
+    return this.http.post(`${this.url}updateStudent`, data, {headers});
+  }
+
+  updateTutor(idTutor: string, name: string, lastName: string, career: string, gpa: number, phoneNumber: string, description: string, price: number){
+    const headers = new HttpHeaders({
+    });
+    const data = {
+      idTutor: idTutor,
+      name: name,
+      lastName: lastName,
+      career: career,
+      gpa: gpa,
+      phoneNumber: phoneNumber,
+      description: description,
+      price: price,
+    }
+    return this.http.post(`${this.url}updateTutor`, data, {headers});
+  }
+
 }
