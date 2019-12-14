@@ -16,7 +16,10 @@ import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { runInThisContext } from 'vm';
+
+import { dateToLocalArray } from '@fullcalendar/core/datelib/marker';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { SessionModel } from '../../models/session.model';
 
 @Component({
   selector: "app-profile",
@@ -44,7 +47,6 @@ export class ProfileComponent implements OnInit {
   id: string;
   username: string;
   newProfileImage: File=null;
-
   isNewImageEmpty: boolean;
   newPrice: number;
   newDescription: string;
@@ -53,6 +55,8 @@ export class ProfileComponent implements OnInit {
   newCareer: string;
   newPhoneNumber: number;
   newGpa: number;
+  userId;
+  tutor:boolean;
 
   //Calendario
 
@@ -75,8 +79,22 @@ export class ProfileComponent implements OnInit {
   thisEvent;
   oppositeEvent;
   oppositeColor;
+  endHours=0;
+  endMinutes=0;
+  availableEvents: EventInput[] = [];
 
   //Fin Calendario
+
+  //Solicitud y respuesta de solitudes
+
+  posibleRequestStart = new Date();
+  posibleRequestEnd = new Date();
+  posibleRequestStartString:string="null";
+  posibleRequestEndString:string="null";
+  requestedCourse;
+  requestedSessions:Array<SessionModel>=[];
+
+  //Fin de solicitud y respuesta de solitudes
 
 
   constructor(
@@ -93,21 +111,24 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0)
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
 
       this.getUserInfo(id);
     });
-    
+    document.getElementById("close").addEventListener("click", () => this.cancel());
   }
   
   getUserInfo(id: string) {
     this.id = id;
+    this.requestedSessions.splice(0,this.requestedSessions.length);
     if (id == "user") {
       this.id="user";
       this.tutorsService.getUser().subscribe(
         (data: any) => {
           if (data.isTutor) {
+            this.tutor=true;
             this.tutorsService.getTutor("this").subscribe((tutor: any) => {            
               this.user = tutor;
               this.getSubjects();
@@ -121,9 +142,20 @@ export class ProfileComponent implements OnInit {
               this.newName = this.user.name;
               this.newPhoneNumber = this.user.phoneNumber;
               this.user.id = tutor.idTutor;
-              console.log("1");
+              this.tutorsService.getTutorSessions(data.id).subscribe((res: Array<SessionModel>) =>{
+                if(res.length>0){
+                  for(let i=0;i<res.length;i++){
+                    if(res[i].status == "0"){
+                      this.requestedSessions = this.requestedSessions.concat(res[i]);
+                    }
+                  }
+                }else{
+                  console.log("no");
+                }
+              })
             });
           } else {
+            this.tutor=false;
             this.user.isTutor = false;
             this.user = data;
             this.getSubjects();
@@ -133,7 +165,6 @@ export class ProfileComponent implements OnInit {
             this.newLastName = this.user.lastName;
             this.newName = this.user.name;
             this.newPhoneNumber = this.user.phoneNumber;
-            console.log("2");
           }
         },
         error => {
@@ -143,7 +174,7 @@ export class ProfileComponent implements OnInit {
       );
     }else{
       this.tutorsService.getTutor(this.id).subscribe((tutor: TutorModel) => {
-
+        this.tutor=true;
   	    this.tutorsService.getUser().subscribe((data:any) => {
           if(data.id == this.id){
             this.id="user";
@@ -161,7 +192,17 @@ export class ProfileComponent implements OnInit {
                 this.newName = this.user.name;
                 this.newPhoneNumber = this.user.phoneNumber;
                 this.user.id = tutor.idTutor;
-                console.log("3");
+                this.tutorsService.getTutorSessions(data.id).subscribe((res: Array<SessionModel>) =>{
+                  if(res.length>0){
+                    for(let i=0;i<res.length;i++){
+                      if(res[i].status == "0"){
+                        this.requestedSessions = this.requestedSessions.concat(res[i]);
+                      }
+                    }
+                  }else{
+                    console.log("no");
+                  }
+                })
               });
             } else {
               this.user.isTutor = false;
@@ -173,10 +214,12 @@ export class ProfileComponent implements OnInit {
               this.newLastName = this.user.lastName;
               this.newName = this.user.name;
               this.newPhoneNumber = this.user.phoneNumber;
-              console.log("4");
             }
           }else{
+            this.userId = data.id;
             this.user = tutor;
+            console.log(this.user);
+            
             this.user.isTutor = true;
             this.username = this.user.email.match(/^([^@]*)@/)[1];
             this.calendarEvents = this.user.events;
@@ -219,9 +262,13 @@ export class ProfileComponent implements OnInit {
   }
 
   private initializeSubjectsData(data: SubjectModel[]) {
+    
     for (let subject of data) {
       this.courses[subject._id] = subject.name;
     }
+    // console.log(this.courses);
+    // console.log(this.user.courses);
+    
 
 
     if(this.user.courses){
@@ -292,7 +339,9 @@ this.chatService
         }
         this.router.navigate(["/chat", `${this.username}`]);
       });
+    
   }
+
 
   // Funciones del calendario  ---------------------------------------------------------------------------------
 
@@ -304,13 +353,25 @@ this.chatService
     document.getElementById("openModalButton").click();
   }
 
-  onSubmit(){
-    if(this.selector!=null){
+  cancel(){
+    this.endHours=0;
+    this.endMinutes=0;
+    this.selector=undefined;
+  }
+
+  onSubmit(form){
+    if(!form.invalid){
+      if((this.endHours==0 && this.endMinutes<15)||(this.endHours==4 && this.endMinutes>0) || (this.endHours>4)){
+        return;
+      }
+
+      let endDate = new Date(this.addingDate.date.getFullYear(), this.addingDate.date.getMonth(), this.addingDate.date.getDate(), this.addingDate.date.getHours()+this.endHours, this.addingDate.date.getMinutes()+this.endMinutes, this.addingDate.date.getSeconds(), this.addingDate.date.getMilliseconds());
 
       let newEvent = {
         id:null,
         title: this.selector,
         start: this.addingDate.date,
+        end: endDate,
         color:null,
         textColor:"white",
         overlap:false,
@@ -325,8 +386,10 @@ this.chatService
 
       this.tutorsService.newEvent(newEvent).subscribe((res)=>{
         newEvent.id = res;
-          this.calendarEvents = this.calendarEvents.concat(newEvent);
-          document.getElementById("close").click(); 
+        this.calendarEvents = this.calendarEvents.concat(newEvent);
+        document.getElementById("close").click();
+        form.submitted = false;
+        this.cancel();
       }, error =>{
         console.log("Hubo un error");
         console.log(error);
@@ -371,7 +434,6 @@ this.chatService
   }
 
   delete(){
-    
     this.tutorsService.deleteEvent(this.singleEvent.id).subscribe( (res)=>{      
       let calendarEvents = this.calendarEvents.slice();
       calendarEvents.splice(this.indexEvent,1);
@@ -430,6 +492,125 @@ this.chatService
     console.log(this.sessionId);
     console.log(this.userComment);
     console.log(this.userRate);
+  //Solicitar tutoría
+
+  request(course){
+    this.availableEvents.splice(0,this.availableEvents.length);
+    for(let i=0;i<this.calendarEvents.length;i++){
+      if(this.calendarEvents[i].title=="Disponible" && !this.availableEvents.includes(this.calendarEvents[i])){
+        this.availableEvents = this.availableEvents.concat(this.calendarEvents[i]);
+      }
+    }
+
+    if(this.calendarEvents.length==0){
+      this.availableEvents.splice(0,this.availableEvents.length);
+      document.getElementById("noAvailable-button").click();
+    }else{
+      this.requestedCourse = course.idCourse;
+      document.getElementById("request-button").click();
+    }
+  }
+
+  posibleRequest(event){
+    this.posibleRequestStart = event.event.start;
+    this.posibleRequestStartString = event.event.start.toISOString().substring(0, 10) + " / " + (parseInt((event.event.start.toISOString().substring(11, 13)))-5).toString() + event.event.start.toISOString().substring(13, 16);
+    this.posibleRequestEnd = event.event.end;
+    this.posibleRequestEndString = event.event.end.toISOString().substring(0, 10)+ " / " + (parseInt((event.event.end.toISOString().substring(11, 13)))-5).toString() + event.event.end.toISOString().substring(13, 16);
+    document.getElementById("accept-button").click();
+
+  }
+
+  confirmRequest(){
+    const data = {
+      idTutor: this.id,
+      idStudent: this.userId,
+      idCourse: this.requestedCourse,
+      dateStart: this.posibleRequestStart,
+      dateEnd: this.posibleRequestEnd
+    }
+    this.tutorsService.requestEvent(data).subscribe( res =>{
+      document.getElementById("cancel-request").click();
+      document.getElementById("cancel-calendar").click();
+    }, error =>{
+      console.log("Hubo un error");
+      console.log(error);
+    })
+  }
+
+  //------------------
+
+  getSessionStartDate(id):string{
+    for(let i=0;i<this.requestedSessions.length;i++){
+      if(this.requestedSessions[i].id == id){
+        return this.requestedSessions[i].event.start.substring(0, 10) + " / " + (parseInt((this.requestedSessions[i].event.start.substring(11, 13)))-5).toString() + this.requestedSessions[i].event.start.substring(13, 16);
+      }
+    }
+    return "hubo un error";
+  }
+
+  getSessionEndDate(id):string{
+    for(let i=0;i<this.requestedSessions.length;i++){
+      if(this.requestedSessions[i].id == id){
+        return (parseInt((this.requestedSessions[i].event.end.substring(11, 13)))-5).toString() + this.requestedSessions[i].event.end.substring(13, 16);
+      }
+    }
+    return "hubo un error";
+  }
+
+  getCourse(id):string{
+    for(let i=0;i<this.user.courses.length;i++){
+      if(id == this.user.courses[i].idCourse){
+        return this.user.courses[i].name;
+      }
+    }
+    return "hubo un error";
+  }
+
+  acceptSession(session){
+    this.tutorsService.acceptSession(session.id).subscribe( res => {
+      for(let i=0;i<this.calendarEvents.length;i++){
+        if(this.calendarEvents[i].start == session.event.start && this.calendarEvents[i].end == session.event.end){
+
+          this.tutorsService.deleteEvent(this.calendarEvents[i].id).subscribe( (res)=>{
+
+            let newEvent = {
+              id:null,
+              title: "Tutoria - " + this.getCourse(session.idCourse),
+              start: session.event.start,
+              end: session.event.end,
+              color:'#096682',
+              textColor:"white",
+              overlap:false,
+              selectable:true,
+            };
+
+            this.calendarEvents = this.calendarEvents.concat(newEvent); 
+            let calendarEvents = this.calendarEvents.slice();
+            calendarEvents.splice(i,1);
+            this.calendarEvents = calendarEvents;
+            let index = this.requestedSessions.indexOf( session );
+            this.requestedSessions.splice(index, 1);
+            return;
+          }, error => {
+            console.log("Hubo un error", error);
+            return;
+          });
+        }
+      }
+    },err => {
+      console.log("Hubo un error", err);
+    });
+  }
+
+  rejectSession(session){
+    this.tutorsService.rejectSession(session.id).subscribe( res => {
+      let i = this.requestedSessions.indexOf( session );
+      this.requestedSessions.splice( i, 1 );
+    },err => {
+      console.log("Hubo un error", err);
+    });
   }
 
 }
+
+

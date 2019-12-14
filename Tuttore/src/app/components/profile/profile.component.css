@@ -13,10 +13,12 @@
     background-repeat: repeat;
     background-position: 0 0;
     background-size: auto 100%;
-  /*adjust s value for speed*/
+    /*adjust s value for speed*/
     animation: animatedBackground 150s linear infinite;
   }
   
+
+
   @keyframes animatedBackground {
     from {
         background-position: 0 0;
@@ -32,6 +34,10 @@
     font-size: 20px;
     margin-bottom: 20px;
     color: #082F47;
+}
+
+.star{
+    color: #FFDC20;
 }
 
 .contact-tutor {
@@ -58,7 +64,6 @@
 
  ::ng-deep .example-full-width {
     width: 100%;
-
 }
 
 .text-color {
@@ -67,4 +72,14 @@
 
 .back{
  color: #38a9ff;
+}
+
+
+
+@media (max-width: 600px) {
+    .hide{
+        display: none;
+    }
+    
+
 }

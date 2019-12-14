@@ -171,7 +171,6 @@ export class TutorsService {
    return this.http.post(`${this.url}addCourseTutor`, data,{headers})
   }
 
-  //Servicio que me indica si el usuario ya está registrado o no
   isRegistered(email:string){
     return false;
   }
@@ -212,6 +211,7 @@ export class TutorsService {
     const data = {
       title: event.title,
       start: event.start,
+      end: event.end,
       color: event.color,
       textColor:event.textColor,
       overlap:event.overlap,
@@ -238,6 +238,7 @@ export class TutorsService {
       id: event.id,
       title: event.title,
       start: event.start,
+      end: event.end,
       color: event.color,
       textColor:event.textColor,
       overlap:event.overlap,
@@ -307,5 +308,45 @@ export class TutorsService {
     return this.http.request(req);
   }
 
+  requestEvent(event){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
 
+    const data = {
+      idTutor: event.idTutor,
+      idStudent: event.idStudent,
+      idCourse: event.idCourse,
+      dateStart: event.dateStart,
+      dateEnd: event.dateEnd
+    }
+
+    return this.http.post(`${this.url}addRequest`, data, {headers});
+
+  }
+
+  getTutorSessions(id){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    return this.http.get(`${this.url}getSessionsTutor/${id}`,{headers});
+  }
+
+  acceptSession(id){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    return this.http.get(`${this.url}acceptRequest/${id}`);
+  }
+
+  
+  rejectSession(id){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    return this.http.get(`${this.url}rejectRequest/${id}`);
+  }
 }
