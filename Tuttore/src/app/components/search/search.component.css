@@ -2,9 +2,9 @@
     margin-top: 100px;
 
 }
-
 .bar {
     display: inline-grid;
+  
 }
 
 .button-form {
@@ -13,6 +13,14 @@
 
 .example-form {
     width: 100%;
+}
+
+.hover-blue:hover{
+    color: #00BBF0;
+}
+
+.cursor{
+    cursor: pointer;
 }
 
 ::ng-deep .example-full-width {

@@ -15,9 +15,11 @@
     background-size: auto 100%;
     /*adjust s value for speed*/
     animation: animatedBackground 150s linear infinite;
-}
+  }
+  
 
-@keyframes animatedBackground {
+
+  @keyframes animatedBackground {
     from {
         background-position: 0 0;
     }
@@ -32,6 +34,10 @@
     font-size: 20px;
     margin-bottom: 20px;
     color: #082F47;
+}
+
+.star{
+    color: #FFDC20;
 }
 
 .contact-tutor {
@@ -64,6 +70,16 @@
     color: #fff;
 }
 
-.back {
-    color: #38a9ff;
+.back{
+ color: #38a9ff;
+}
+
+
+
+@media (max-width: 600px) {
+    .hide{
+        display: none;
+    }
+    
+
 }

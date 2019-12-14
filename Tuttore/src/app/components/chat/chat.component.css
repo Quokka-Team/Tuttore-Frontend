@@ -14,6 +14,8 @@
     padding: 5px;
   }
 
+
+
   .blue{
       color: #082F47;
       margin: 10px 0 10px 25%;
@@ -45,3 +47,10 @@
     background-color:#0B5F77;
     border-radius:5px;
     }
+
+@media (max-width: 1023px){
+  .hide {
+    display: none;
+  }
+  
+}
