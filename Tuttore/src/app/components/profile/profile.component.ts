@@ -56,6 +56,7 @@ export class ProfileComponent implements OnInit {
   newPhoneNumber: number;
   newGpa: number;
   userId;
+  actualId;
   tutor:boolean;
 
   //Calendario
@@ -128,12 +129,16 @@ export class ProfileComponent implements OnInit {
   
   getUserInfo(id: string) {
     this.id = id;
+    this.actualId = id;
     this.requestedSessions.splice(0,this.requestedSessions.length);
     if (id == "user") {
       this.id="user";
       this.tutorsService.getUser().subscribe(
         (data: any) => {
           if (data.isTutor) {
+
+            // Si es tutor y entra a su perfil normal
+
             this.tutor=true;
             this.tutorsService.getTutor("this").subscribe((tutor: any) => {            
               this.user = tutor;
@@ -159,6 +164,9 @@ export class ProfileComponent implements OnInit {
                   console.log("no");
                 }
               });
+
+              this.noFeedBackedSession = [];
+              this.tutorComments = [];           
               this.tutorsService.getNoFeedBackSessionStudent(this.user.id).subscribe( (res: Array<any>) => {
                 for(let i=0;i<res.length;i++){
                     this.noFeedBackedSession.push(res[i]);
@@ -172,6 +180,9 @@ export class ProfileComponent implements OnInit {
               });
             });
           } else {
+
+            // Si es usuario y entra a su perfil normal
+
             this.tutor=false;
             this.user.isTutor = false;
             this.user = data;
@@ -182,13 +193,15 @@ export class ProfileComponent implements OnInit {
             this.newLastName = this.user.lastName;
             this.newName = this.user.name;
             this.newPhoneNumber = this.user.phoneNumber;
+            
+            
             this.tutorsService.getNoFeedBackSessionStudent(this.user.id).subscribe( (res: Array<any>) => {
               for(let i=0;i<res.length;i++){
                   this.noFeedBackedSession.push(res[i]);
               }
               console.log(this.noFeedBackedSession.length);
             });
-            this.tutorsService.getTutorComments(this.user.id).subscribe( (res: Array<any>) => {
+            this.tutorsService.getTutorComments(this.actualId).subscribe( (res: Array<any>) => {
               for(let i=0;i<res.length;i++){
                   this.tutorComments.push(res[i]);
               }
@@ -207,6 +220,9 @@ export class ProfileComponent implements OnInit {
           if(data.id == this.id){
             this.id="user";
             if (data.isTutor) {
+
+              // Cuando un tutor se da click a si mismo 
+
               this.tutorsService.getTutor("this").subscribe((tutor: any) => {            
                 this.user = tutor;
                 this.getSubjects();
@@ -231,19 +247,26 @@ export class ProfileComponent implements OnInit {
                     console.log("no");
                   }
                 });
+                
+                this.noFeedBackedSession = [];
+                this.tutorComments = [];
+                
                 this.tutorsService.getNoFeedBackSessionStudent(this.user.id).subscribe( (res: Array<any>) => {
                   for(let i=0;i<res.length;i++){
                       this.noFeedBackedSession.push(res[i]);
                   }
                   console.log(this.noFeedBackedSession.length);
                 });
-                this.tutorsService.getTutorComments(this.user.id).subscribe( (res: Array<any>) => {
+                this.tutorsService.getTutorComments(this.actualId).subscribe( (res: Array<any>) => {
                   for(let i=0;i<res.length;i++){
                       this.tutorComments.push(res[i]);
                   }
                 });
               });
             } else {
+              
+              // Si no es tutor y se da click a si mismo (Imposiblle)
+
               this.user.isTutor = false;
               this.user = data;
               this.getSubjects();
@@ -253,20 +276,27 @@ export class ProfileComponent implements OnInit {
               this.newLastName = this.user.lastName;
               this.newName = this.user.name;
               this.newPhoneNumber = this.user.phoneNumber;
-              this.tutorsService.getTutorComments(this.user.id).subscribe( (res: Array<any>) => {
+              
+              
+              this.tutorsService.getTutorComments(this.actualId).subscribe( (res: Array<any>) => {
                 for(let i=0;i<res.length;i++){
                     this.tutorComments.push(res[i]);
                 }
               });
             }
           }else{
+
+            // Cuando un usuario ingresa a el perfil de otro usuario distinto del mismo
+
             this.userId = data.id;
             this.user = tutor;
-            
             this.user.isTutor = true;
             this.username = this.user.email.match(/^([^@]*)@/)[1];
             this.calendarEvents = this.user.events;
-            this.tutorsService.getTutorComments(this.user.id).subscribe( (res: Array<any>) => {
+
+            this.noFeedBackedSession = [];
+            this.tutorComments = []; 
+            this.tutorsService.getTutorComments(this.actualId).subscribe( (res: Array<any>) => {
               for(let i=0;i<res.length;i++){
                   this.tutorComments.push(res[i]);
               }
@@ -504,6 +534,7 @@ this.chatService
 
   changeProfileImage(){
     if(this.isNewImageEmpty){
+      console.log(this.user.id);
       return;
     }
     this.tutorsService.changeProfileImage(this.user.id, this.user.email, this.newProfileImage).subscribe(data => {
