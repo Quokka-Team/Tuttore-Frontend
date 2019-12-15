@@ -16,7 +16,7 @@
                             <img class="author-thumb" [src]="user.profilePicture | noiconimage" alt="author" />
                             <div class="author-content">
                                 <a class="h4 author-name">{{ user.name | titlecase }} {{ user.lastName | titlecase }} </a>
-                                <div class="country">{{ user.career }}</div>
+                                <div class="country">{{ user.career }} </div>
                             </div>
                         </div>
                     </div>
@@ -33,19 +33,19 @@
                 <div class="ui-block">
 
                     <div class="ui-block-title">
-                      <h6 class="title">Calificar ultimas tutorias</h6>
+                      <h6 class="title">Calificar tus ultimas tutorias</h6>
                     </div>
                     <!-- W-Action -->
-                    <div class="" *ngIf="!user.isTutor; else noEndedSession">
-                      <div *ngFor="let tutor of newTutors">
+                    <div class="" *ngIf="!(noFeedBackedSession.length == 0); else noEndedSession">
+                      <div *ngFor="let session of noFeedBackedSession">
                       <ul class="widget w-friend-pages-added notification-list friend-requests">
                         <li class="inline-items">
                           <div class="notification-event">
-                              <a class="h6 notification-friend">{{tutor.name}}</a>
+                              <a class="h6 notification-friend">{{session.tutorName}} {{ session.tutorLastName }}</a>
                             <span class="chat-message-item">Tutor</span>
                           </div>
                             
-                                <a class="social-item bg-blue text-white .modal-button" (click) = "clickRateTutor(tutor.name)" data-toggle="modal" data-target="#rate-tutor" >
+                                <a class="social-item bg-blue text-white .modal-button" (click) = "clickRateTutor(session.id)" data-toggle="modal" data-target="#rate-tutor" >
                                   Calificar
                                 </a>
                           </li> 
@@ -306,20 +306,19 @@
                       <h5 class="heading-title ">Comentarios</h5>
                   </div>
                   <ul class="comments-list style-3 ">
-                    <li *ngFor="let course of user.courses" class="comment-item ">
+                    <li *ngFor="let comment of tutorComments" class="comment-item ">
                       <div class="post__author-thumb ">
-                          <img [src]="user.profilePicture | noiconimage" alt="author " />
+                          <img [src]="comment.profilePicture | noiconimage" alt="author " />
                       </div>
-
-
                       <div class="comments-content ">
                         <div class="post__author author vcard ">
                           <div class="author-date ">
                             <a class="h6 post__author-name fn " href="# ">
-                              {{course.name}}
+                              {{comment.studentName}} {{studentLastName}}
                             </a>
                           </div>
                         </div>
+                        <p>{{comment.studentComment}}</p>
                       </div>
                     </li>
                   </ul>
