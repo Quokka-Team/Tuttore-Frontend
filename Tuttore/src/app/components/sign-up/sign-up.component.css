@@ -31,6 +31,11 @@
     overflow-y:scroll;
 }
 
+::ng-deep .mat-form-field-underline {
+    display: none;
+  }
+  
+
 @media only screen and (max-width: 1023px) {
 
     .image-register {

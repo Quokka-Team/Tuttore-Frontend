@@ -1076,10 +1076,9 @@ aria-hidden="true"
                 (ngSubmit)="add_Subject()"
               >
                 <mat-form-field
-                  class="full-width mb-5
-            example-full-width"
-                  style="border: 1px solid rgb(222, 226, 230);
-      padding: 3px 25px 0;
+                  class=""
+                  style="height: 25px;;
+      padding: 0;
       border-radius: 6px;;"
                 >
                   <label style="font: 14px; ">Busca tu Materia:</label>
@@ -1089,6 +1088,7 @@ aria-hidden="true"
                     matInput
                     [formControl]="myControl"
                     [matAutocomplete]="auto"
+                    style="height: 5px;"
                   />
                   <mat-autocomplete
                     #auto="matAutocomplete"
