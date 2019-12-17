@@ -1,6 +1,7 @@
 import { Component, OnInit, NgZone } from "@angular/core";
 import { TutorsService } from "../../../services/tutors.service";
 import { Router } from "@angular/router";
+import { GoogleService } from '../../../services/google.service';
 
 
 @Component({
@@ -8,18 +9,25 @@ import { Router } from "@angular/router";
   templateUrl: "./navbar.component.html",
   styleUrls: ["./navbar.component.css"]
 })
+
 export class NavbarComponent implements OnInit {
   user: any = {};
   username: any;
+  
 
-  constructor(private auth: TutorsService, private route: Router, private zone:NgZone) {
+  constructor(private auth: TutorsService, private route: Router, private zone:NgZone, private googleAuth:GoogleService) {
     this.getUserInfo();
   }
 
   ngOnInit() {}
 
   logOut() {
-    this.auth.logOut();
+    if(this.googleAuth.isUserSignedIn()){
+      this.googleAuth.signOut();
+      this.auth.logOut();
+    }else{
+      this.auth.logOut();
+    }
     this.route.navigateByUrl("/home-page");
   }
 
