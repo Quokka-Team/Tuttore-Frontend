@@ -12,19 +12,19 @@ import { Router } from '@angular/router';
 export class TutorsService {
   
   userToken:string;
-   url = `https://tuttore.tk/`;
+  url = `https://tuttore.tk/`;
     
   constructor(private http: HttpClient, private route:Router) {
     this.readToken();
   }
 
   private saveToken(tokenId){
-    localStorage.setItem('token',tokenId);
+    sessionStorage.setItem('token',tokenId);
 
     let date = new Date();
     date.setSeconds(1296000);
 
-    localStorage.setItem('expires', date.getTime().toString() );
+    sessionStorage.setItem('expires', date.getTime().toString() );
 
     this.readToken();
   }
@@ -61,8 +61,7 @@ export class TutorsService {
   }
 
   signIn(student: StudentModel){
-    let cors = "https://cors-anywhere.herokuapp.com/";
-    return this.http.post( cors +`${this.url}signIn/`, student ).pipe(
+    return this.http.post(`${this.url}signIn/`, student ).pipe(
         map( resp => {
           this.saveToken( resp['token'] );
           return resp;
@@ -114,14 +113,14 @@ export class TutorsService {
   }
 
   logOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expires');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('expires');
     this.readToken();
   }
 
   readToken(){
-    if ( localStorage.getItem('token') ) {
-      this.userToken = localStorage.getItem('token');
+    if ( sessionStorage.getItem('token') ) {
+      this.userToken = sessionStorage.getItem('token');
     } else {
       this.userToken = '';
     }
@@ -133,7 +132,7 @@ export class TutorsService {
       return false;
     }
     
-    const date = Number(localStorage.getItem('expires'));
+    const date = Number(sessionStorage.getItem('expires'));
     const actualDate = new Date();
     actualDate.setTime(date);
 
@@ -171,7 +170,6 @@ export class TutorsService {
     }
    return this.http.post(`${this.url}addCourseTutor`, data,{headers})
   }
-
 
   isRegistered(email:string){
     return false;
@@ -249,7 +247,6 @@ export class TutorsService {
 
     return this.http.post(`${this.url}deleteEventTutor`, data, {headers});
   }
-
 
   updateStudent(idStudent: string, name: string, lastName: string, career: string, gpa: number, phoneNumber: string){
     const headers = new HttpHeaders({
