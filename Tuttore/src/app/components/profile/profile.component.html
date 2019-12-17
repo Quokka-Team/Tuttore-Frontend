@@ -33,39 +33,39 @@
                 <div class="ui-block">
 
                     <div class="ui-block-title">
-                      <h6 class="title">Calificar tus ultimas tutorias</h6>
+                        <h6 class="title">Calificar tus ultimas tutorias</h6>
                     </div>
                     <!-- W-Action -->
                     <div class="" *ngIf="!(noFeedBackedSession.length == 0); else noEndedSession">
-                      <div *ngFor="let session of noFeedBackedSession">
-                      <ul class="widget w-friend-pages-added notification-list friend-requests">
-                        <li class="inline-items">
-                          <div class="notification-event">
-                              <a class="h6 notification-friend">{{session.tutorName}} {{ session.tutorLastName }}</a>
-                            <span class="chat-message-item">Tutor</span>
-                          </div>
-                            
-                                <a class="social-item bg-blue text-white .modal-button" (click) = "clickRateTutor(session.id)" data-toggle="modal" data-target="#rate-tutor" >
+                        <div *ngFor="let session of noFeedBackedSession">
+                            <ul class="widget w-friend-pages-added notification-list friend-requests">
+                                <li class="inline-items">
+                                    <div class="notification-event">
+                                        <a class="h6 notification-friend">{{session.tutorName}} {{ session.tutorLastName }}</a>
+                                        <span class="chat-message-item">Tutor</span>
+                                    </div>
+
+                                    <a class="social-item bg-blue text-white .modal-button" (click)="clickRateTutor(session.id)" data-toggle="modal" data-target="#rate-tutor">
                                   Calificar
                                 </a>
-                          </li> 
-                      </ul>
-                      </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <!-- ... end W-Action -->
                     <ng-template #noEndedSession>
-                      <div class="ui-block-content">
-                        <div class="content text-center">
-                            <div class="author-content">
-                                <h4 class="country">
-                                    No tienes tutores que calificar
-                                </h4>
+                        <div class="ui-block-content">
+                            <div class="content text-center">
+                                <div class="author-content">
+                                    <h4 class="country">
+                                        No tienes tutores que calificar
+                                    </h4>
+                                </div>
                             </div>
                         </div>
-                      </div>
                     </ng-template>
-                  </div>
-              
+                </div>
+
                 <div class="ui-block">
                     <div class="ui-block-title">
                         <h6 class="title">Materias de Tutoria {{ username }}</h6>
@@ -164,7 +164,7 @@
                             <a *ngIf="id !== 'user'" (click)=sendMessage() class="btn btn-sm bg-blue w-100" style="color: #fff; padding-left: 0px; padding-right: 0px; width: 35%;;">Contactar  <i class="fas fa-comments"></i></a>
                         </div>
 
-                        
+
 
 
                         <!-- ... end W-Socials -->
@@ -179,15 +179,15 @@
                     </div>
 
                     <ul class="widget w-friend-pages-added notification-list friend-requests collapse" id="collapseTutors">
-                     
-                      <li *ngFor="let tutor of newTutors" class="inline-items">
-                        
 
-                                  <div class="author-thumb">
-                                      <img class="author-thumb" [src]="tutor.profilePicture | noimage" alt="author" />
-                                  </div>
-                                  <div class="notification-event">
-                                      <a [routerLink]="['/profile', tutor._id]" class="h6 notification-friend">{{ tutor.name }} {{ tutor.lastName }}</a
+                        <li *ngFor="let tutor of newTutors" class="inline-items">
+
+
+                            <div class="author-thumb">
+                                <img class="author-thumb" [src]="tutor.profilePicture | noimage" alt="author" />
+                            </div>
+                            <div class="notification-event">
+                                <a [routerLink]="['/profile', tutor._id]" class="h6 notification-friend">{{ tutor.name }} {{ tutor.lastName }}</a
                       >
                       <span class="chat-message-item">{{ tutor.career }}</span>
                     </div>
@@ -314,826 +314,503 @@
                         <div class="post__author author vcard ">
                           <div class="author-date ">
                             <a class="h6 post__author-name fn " href="# ">
-                              {{comment.studentName}} {{studentLastName}}
+                              {{comment.studentName}} {{comment.studentLastName}}
                             </a>
-                          </div>
-                        </div>
-                        <p>{{comment.studentComment}}</p>
-                      </div>
-                    </li>
-                  </ul>
+                            </div>
                 </div>
-      </div>
+                <p>{{comment.studentComment}}</p>
+            </div>
+            </li>
+            </ul>
+        </div>
     </div>
+</div>
 
-    <!-- ------------------ Modal de creación de evento ------------------ -->
+<!-- ------------------ Modal de creación de evento ------------------ -->
 
-    <div
-      class="modal animated zoomIn faster"
-      id="new-event"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="create-event"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
+<div class="modal animated zoomIn faster" id="new-event" tabindex="-1" role="dialog" aria-labelledby="create-event" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
         <div class="modal-content">
 
-          <div class="modal-header">
-            <h6 style="margin: auto;">
-              Crea un nuevo evento
-            </h6>
-          </div>
+            <div class="modal-header">
+                <h6 style="margin: auto;">
+                    Crea un nuevo evento
+                </h6>
+            </div>
 
-          <div class="modal-body">
-            <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+            <div class="modal-body">
+                <form #form="ngForm" (ngSubmit)="onSubmit(form)">
 
-              <span style="font-weight: 510; line-height: 1.3;">
+                    <span style="font-weight: 510; line-height: 1.3;">
                 ¿Que tipo de evento deseas agregar?<br/>
               </span>
 
-              <span class="text-danger" *ngIf="(form.submitted && form.controls['select'].errors)" >
+                    <span class="text-danger" *ngIf="(form.submitted && form.controls['select'].errors)">
                   Seleccione alguna opción
               </span>
 
-              <select 
-                required
-                ngModel
-                name="select"
-                #select = "ngModel"
-                class="custom-select" 
-                style="margin-bottom: 20px; margin-top: 5px;"
-                id="select"
-                [(ngModel)]="selector"
-                
-              >
+                    <select required ngModel name="select" #select="ngModel" class="custom-select" style="margin-bottom: 20px; margin-top: 5px;" id="select" [(ngModel)]="selector">
                   <option> Disponible </option>
                   <option> Tutoría </option>
               </select>
 
-              <!-- aqui se ponen los campos adicionales -->
+                    <!-- aqui se ponen los campos adicionales -->
 
-              <span style="font-weight: 510; line-height: 1.3;">Duración <br/> </span>
+                    <span style="font-weight: 510; line-height: 1.3;">Duración <br/> </span>
 
-              <span class="text-danger" *ngIf="(form.submitted && ((form.controls['hours'].errors && form.controls['minutes'].errors) || (form.value.minutes < 15 && form.value.hours == 0) || (form.value.minutes > 0 && form.value.hours>3) || (form.value.hours>4)))" >
+                    <span class="text-danger" *ngIf="(form.submitted && ((form.controls['hours'].errors && form.controls['minutes'].errors) || (form.value.minutes < 15 && form.value.hours == 0) || (form.value.minutes > 0 && form.value.hours>3) || (form.value.hours>4)))">
                   Ingrese una duración válida, mínimo 15 minutos y máximo 4 horas
               </span>
-              
-              <div class="row">
-                <div class="col-md-6">
-                  <span class="text-danger" *ngIf="(form.submitted && form.controls['hours'].errors) || (form.value.hours < 0 || form.value.hours > 4)" >
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span class="text-danger" *ngIf="(form.submitted && form.controls['hours'].errors) || (form.value.hours < 0 || form.value.hours > 4)">
                       Ingrese un valor válido, entre 0 y 4
                   </span>
-      
-                  <div>
-                    Horas
-                    <input
-                      required
-                      ngModel
-                      name="hours"
-                      #hours="ngModel"
-                      style="height: 37.19px;"
-                      type="number"
-                      step="1"
-                      id="hours"
-                      [(ngModel)]="endHours"
-                      min="0"
-                      max="4"
-                    />
-                  </div>
-                </div>
 
-                <div class="col-md-6">
-                  <span class="text-danger" *ngIf="(form.submitted && form.controls['minutes'].errors) || (form.value.minutes < 0 || form.value.minutes > 59)" >
+                            <div>
+                                Horas
+                                <input required ngModel name="hours" #hours="ngModel" style="height: 37.19px;" type="number" step="1" id="hours" [(ngModel)]="endHours" min="0" max="4" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <span class="text-danger" *ngIf="(form.submitted && form.controls['minutes'].errors) || (form.value.minutes < 0 || form.value.minutes > 59)">
                       Ingrese un valor válido, entre 0 y 59
                   </span>
-    
-                  <div>
-                    Minutos
-                    <input
-                      required
-                      ngModel
-                      name="minutes"
-                      #minutes="ngModel"
-                      style="height: 37.19px;"
-                      type="number"
-                      step="1"
-                      id="minutes"
-                      [(ngModel)]="endMinutes"
-                      min="0"
-                      max="59"
-                    />
-                  </div>
-                </div>
 
-              </div>
+                            <div>
+                                Minutos
+                                <input required ngModel name="minutes" #minutes="ngModel" style="height: 37.19px;" type="number" step="1" id="minutes" [(ngModel)]="endMinutes" min="0" max="59" />
+                            </div>
+                        </div>
 
-              <!-- Aqui termina -->
+                    </div>
 
-              <div class="row" style="margin-top: 15px;">
-                <button class="btn modal-button" style="margin-left:25%; margin-bottom: 0px; margin-top: 5px;" type="submit">
+                    <!-- Aqui termina -->
+
+                    <div class="row" style="margin-top: 15px;">
+                        <button class="btn modal-button" style="margin-left:25%; margin-bottom: 0px; margin-top: 5px;" type="submit">
                   Aceptar
                 </button>
-                
-                <button id="close" class="btn modal-button" style="margin-left: 33px; margin-bottom: 0px; margin-top: 5px;" data-dismiss="modal">
+
+                        <button id="close" class="btn modal-button" style="margin-left: 33px; margin-bottom: 0px; margin-top: 5px;" data-dismiss="modal">
                   Cancelar
                 </button>
-              </div>
-            </form>   
+                    </div>
+                </form>
 
-            
-          </div>
+
+            </div>
 
         </div>
-      </div>
     </div>
+</div>
 
-    <!-- ------------------Modal de actualización de evento---------------------------- -->
+<!-- ------------------Modal de actualización de evento---------------------------- -->
 
-    <div
-      class="modal  animated zoomIn faster"
-      id="rate-tutor"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="create-event"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-dialog-centered window-popup create-event"
-        role="document"
-      >
+<div class="modal  animated zoomIn faster" id="rate-tutor" tabindex="-1" role="dialog" aria-labelledby="create-event" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h6 class="title">
-              Califica a tu tutor
-            </h6>
-            <div class="cancel-button " data-dismiss="modal">
-              <i class="fas fa-window-close"></i>
+            <div class="modal-header">
+                <h6 class="title">
+                    Califica a tu tutor
+                </h6>
+                <div class="cancel-button " data-dismiss="modal">
+                    <i class="fas fa-window-close"></i>
+                </div>
             </div>
-          </div>
-          <form #rateTutorForm="ngForm" (ngSubmit)="sendReport(rateTutorForm)">
-            <div class="modal-body">       
-              <div class="row">
-                <div class="col-12">
-                  <div class="form-group label-floating">
-                    <div class="form-group label-floating">
-                      <label for="rateTutorField" class="control-label">Calificacion de 0 a 5</label>
-                      <input
-                        required
-                        ngModel
-                        name="rateTutorField"
-                        #rateTutorField="ngModel"
-                        class="form-control"
-                        placeholder=""
-                        type="number"
-                        step="0.1"
-                        [(ngModel)]="userRate"
-                        min="0"
-                        max="5"
-                      />
-                      <div
-                          class="alert alert-danger"
-                          *ngIf="((!rateTutorField.valid) || (userRate < 0 || userRate > 5)) && rateTutorField.touched"
-                        >
-                          La calificacion no es valida
-                      </div>
+            <form #rateTutorForm="ngForm" (ngSubmit)="sendReport(rateTutorForm)">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group label-floating">
+                                <div class="form-group label-floating">
+                                    <label for="rateTutorField" class="control-label">Calificacion de 0 a 5</label>
+                                    <input required ngModel name="rateTutorField" #rateTutorField="ngModel" class="form-control" placeholder="" type="number" step="0.1" [(ngModel)]="userRate" min="0" max="5" />
+                                    <div class="alert alert-danger" *ngIf="((!rateTutorField.valid) || (userRate < 0 || userRate > 5)) && rateTutorField.touched">
+                                        La calificacion no es valida
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </div>
 
-              
 
-              <div class="form-group label-floating">
-                <label for="userCommentField" class="control-label">Ingrese un comentario sobre que tal fue la tutoria</label>
-                <textarea
-                  required
-                  ngModel
-                  name="userCommentField"
-                  #userCommentField="ngModel"
-                  class="form-control"
-                  minlength="10"
-                  [(ngModel)]="userComment"
-                > {{newDescription}} </textarea>
-                <div
-                  class="alert alert-danger"
-                  *ngIf="userCommentField.touched && !userCommentField.valid"
-                >
-                  Tu comentario debe ser de al menos 10 caracteres
-                </div>
-              </div>
 
-              <button class="btn modal-button btn-lg full-width" type="submit">
+                    <div class="form-group label-floating">
+                        <label for="userCommentField" class="control-label">Ingrese un comentario sobre que tal fue la tutoria</label>
+                        <textarea required ngModel name="userCommentField" #userCommentField="ngModel" class="form-control" minlength="10" [(ngModel)]="userComment"> {{newDescription}} </textarea>
+                        <div class="alert alert-danger" *ngIf="userCommentField.touched && !userCommentField.valid">
+                            Tu comentario debe ser de al menos 10 caracteres
+                        </div>
+                    </div>
+
+                    <button class="btn modal-button btn-lg full-width" type="submit">
                 Guardar Cambios
               </button>
-            </div>
-          </form>
+                </div>
+            </form>
         </div>
-      </div>
     </div>
+</div>
 
 
 
-    <div
-    class="modal animated zoomIn faster"
-    id="update-event"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="create-event"
-    aria-hidden="true"
-  >
+<div class="modal animated zoomIn faster" id="update-event" tabindex="-1" role="dialog" aria-labelledby="create-event" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
-      <div class="modal-content">
+        <div class="modal-content">
 
-        <div class="modal-header">
-          <h6 style="margin: auto;">
-            ¿Desea cambiar {{thisEvent}} por {{oppositeEvent}}?
-          </h6>
-        </div>
+            <div class="modal-header">
+                <h6 style="margin: auto;">
+                    ¿Desea cambiar {{thisEvent}} por {{oppositeEvent}}?
+                </h6>
+            </div>
 
-        <div class="modal-body">
-          <div class="row">
-            <button class="btn modal-button" style="margin:auto" (click)="update()">
+            <div class="modal-body">
+                <div class="row">
+                    <button class="btn modal-button" style="margin:auto" (click)="update()">
               Aceptar
             </button>
-                
-            <button id="closeUpdate" class="btn modal-button" style="margin:auto;" data-dismiss="modal">
+
+                    <button id="closeUpdate" class="btn modal-button" style="margin:auto;" data-dismiss="modal">
               Cancelar
             </button>
 
-            <button class="btn modal-button" style="margin:auto; background-color: red;" (click)="delete()">
+                    <button class="btn modal-button" style="margin:auto; background-color: red;" (click)="delete()">
               Eliminar
             </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <div
-      class="modal  animated zoomIn faster"
-      id="edit-photo"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="create-event"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-dialog-centered window-popup create-event"
-        role="document"
-      >
-        <div class="modal-content">
-          <div class="modal-header">
-            <h6 class="title">
-              Edita tu foto perfil
-            </h6>
-            <div class="cancel-button " data-dismiss="modal">
-              <i class="fas fa-window-close"></i>
+                </div>
             </div>
-          </div>
-          <form (ngSubmit)="changeProfileImage()">
-            <div class="modal-body">
-              <div class="row">
 
-                  <span style="font-size: 17px; width: 25%; margin-top: auto; margin-bottom: 30px; margin-left: 0px;">Foto de perfil</span>
+        </div>
+    </div>
+</div>
 
-                  <div class="" style="padding-right: 0px;padding-left: 0px;width: 75%;">
-                      <input id="file-upload" type="file" (change)="onFileSelected($event)" value="like" accept=".jpeg,.jpg,.png">
-                  </div>
-              </div>
+<div class="modal  animated zoomIn faster" id="edit-photo" tabindex="-1" role="dialog" aria-labelledby="create-event" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="title">
+                    Edita tu foto perfil
+                </h6>
+                <div class="cancel-button " data-dismiss="modal">
+                    <i class="fas fa-window-close"></i>
+                </div>
+            </div>
+            <form (ngSubmit)="changeProfileImage()">
+                <div class="modal-body">
+                    <div class="row">
 
-              <button class="btn modal-button btn-lg full-width" type="submit">
+                        <span style="font-size: 17px; width: 25%; margin-top: auto; margin-bottom: 30px; margin-left: 0px;">Foto de perfil</span>
+
+                        <div class="" style="padding-right: 0px;padding-left: 0px;width: 75%;">
+                            <input id="file-upload" type="file" (change)="onFileSelected($event)" value="like" accept=".jpeg,.jpg,.png">
+                        </div>
+                    </div>
+
+                    <button class="btn modal-button btn-lg full-width" type="submit">
                 Guardar Cambios
               </button>
-            </div>
-          </form>
+                </div>
+            </form>
         </div>
-      </div>
     </div>
+</div>
 
 
-  <!--------------------------------------------------------- Modal solicitud de tutoria por parte de un estudiante ---------------------------------------------------------->
-  <div
-  class="modal animated zoomIn faster"
-  id="request-session"
-  tabindex="-1"
-  role="dialog"
-  aria-hidden="true"
-  >
+<!--------------------------------------------------------- Modal solicitud de tutoria por parte de un estudiante ---------------------------------------------------------->
+<div class="modal animated zoomIn faster" id="request-session" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document" style="width: 600px;">
-      <div class="modal-content">
+        <div class="modal-content">
 
-        <div class="modal-header">
-          <h6 style="margin: auto;">
-            Seleccione el periodo de tiempo en el que desea solicitar la tutoría
-          </h6>
-        </div>
+            <div class="modal-header">
+                <h6 style="margin: auto;">
+                    Seleccione el periodo de tiempo en el que desea solicitar la tutoría
+                </h6>
+            </div>
 
-        <div class="modal-body" style="height: auto;">
-            <full-calendar
-            lang="es"
-            id="modal-calendar"
-            defaultView="dayGridMonth"
-            [plugins]="calendarPlugins"
-            [header]="calendarHeader"
-            [events]="availableEvents"
-            selectable = "true" 
-            contentHeight="auto"
-            minTime="06:00:00"
-            maxTime="20:00:00"
-            hiddenDays=[0]
-            (eventClick) = "posibleRequest($event)"
-          ></full-calendar>
-        </div>
+            <div class="modal-body" style="height: auto;">
+                <full-calendar lang="es" id="modal-calendar" defaultView="dayGridMonth" [plugins]="calendarPlugins" [header]="calendarHeader" [events]="availableEvents" selectable="true" contentHeight="auto" minTime="06:00:00" maxTime="20:00:00" hiddenDays=[0] (eventClick)="posibleRequest($event)"></full-calendar>
+            </div>
 
-        <button id="cancel-calendar" data-dismiss="modal">
+            <button id="cancel-calendar" data-dismiss="modal">
         </button>
-      
-      </div>
+
+        </div>
     </div>
-  </div>
+</div>
 
 <!-- *************************************************************************************************************************** -->
 
-<div
-class="modal animated zoomIn faster"
-id="accept-session"
-tabindex="-1"
-role="dialog"
-aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
-    <div class="modal-content">
+<div class="modal animated zoomIn faster" id="accept-session" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
+        <div class="modal-content">
 
-      <div class="modal-header">
-        <h6 style="margin: auto;">
-          ¿Desea solicitar un tutoria entre {{posibleRequestStartString}} y {{posibleRequestEndString}}?
-        </h6>
-      </div>
+            <div class="modal-header">
+                <h6 style="margin: auto;">
+                    ¿Desea solicitar un tutoria entre {{posibleRequestStartString}} y {{posibleRequestEndString}}?
+                </h6>
+            </div>
 
-      <div class="modal-body" style="height: auto;">
-          <div class="row">
-            <button class="btn modal-button" style="margin:auto; background-color: green;" (click)="confirmRequest()">
+            <div class="modal-body" style="height: auto;">
+                <div class="row">
+                    <button class="btn modal-button" style="margin:auto; background-color: green;" (click)="confirmRequest()">
               Aceptar
             </button>
-                  
-            <button id="cancel-request" class="btn modal-button" style="margin:auto; background-color: red;" data-dismiss="modal">
+
+                    <button id="cancel-request" class="btn modal-button" style="margin:auto; background-color: red;" data-dismiss="modal">
               Cancelar
             </button>
-          </div>
-      </div>
-    
+                </div>
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- *************************************************************************************************************************** -->
 
 
-<div
-class="modal animated zoomIn faster"
-id="noAvailable"
-tabindex="-1"
-role="dialog"
-aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
-    <div class="modal-content">
+<div class="modal animated zoomIn faster" id="noAvailable" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
+        <div class="modal-content">
 
-      <div class="modal-header" style="margin: auto; text-align: center;">
-        <h6 style="margin: auto;">
-          
-          Lo sentimos, este tutor no tiene horarios disponibles. Póngase en contacto con el tutor para programar su tutoría.
-        </h6>
-      </div>
+            <div class="modal-header" style="margin: auto; text-align: center;">
+                <h6 style="margin: auto;">
+                    Lo sentimos, este tutor no tiene horarios disponibles. Póngase en contacto con el tutor para programar su tutoría.
+                </h6>
+            </div>
 
-      <button class="btn modal-button" style="margin:auto; margin-top: 15px; margin-bottom: 15px;  background-color: #2C3E50;" data-dismiss="modal">
+            <button class="btn modal-button" style="margin:auto; margin-top: 15px; margin-bottom: 15px;  background-color: #2C3E50;" data-dismiss="modal">
         Aceptar
       </button>
-    
+
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- *************************************************************************************************************************** -->
 
 
-    <div
-      class="modal  animated zoomIn faster"
-      id="edit-profile"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="create-event"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-dialog-centered window-popup create-event"
-        role="document"
-      >
+<div class="modal  animated zoomIn faster" id="edit-profile" tabindex="-1" role="dialog" aria-labelledby="create-event" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
         <div class="modal-content" *ngIf="!user.isTutor; else editTutorProfile">
-          <div class="modal-header">
-            <h6 class="title">
-              Edita tu Perfil
-            </h6>
-            <div class="cancel-button " data-dismiss="modal">
-              <i class="fas fa-window-close"></i>
+            <div class="modal-header">
+                <h6 class="title">
+                    Edita tu Perfil
+                </h6>
+                <div class="cancel-button " data-dismiss="modal">
+                    <i class="fas fa-window-close"></i>
+                </div>
             </div>
-          </div>
-          <form #changeStudentInfoForm="ngForm" (ngSubmit)="changeStudentInfo(changeStudentInfoForm)">
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-6">
-                  <div class="form-group label-floating">
-                      <label for="newNameStudentField" class="control-label">Nombre</label>
-                      <input
-                        required
-                        ngModel
-                        name="newNameStudentField"
-                        #newNameStudentField="ngModel"
-                        class="form-control"
-                        placeholder=""
-                        type="text"
-                        [(ngModel)]="newName"
-                      />
-                      <div
-                        class="alert alert-danger"
-                        *ngIf="newNameStudentField.touched && !newNameStudentField.valid"
-                      >
-                        El nombre es obligatorio
-                      </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group label-floating">
-                    <label for="newLastNameStudentField" class="control-label">Apellido</label>
-                    <input
-                      required
-                      ngModel
-                      name="newLastNameStudentField"
-                      #newLastNameStudentField="ngModel"
-                      class="form-control"
-                      placeholder=""
-                      type="text"
-                      [(ngModel)]="newLastName"
-                    />
-                    <div
-                      class="alert alert-danger"
-                      *ngIf="newLastNameStudentField.touched && !newLastNameStudentField.valid"
-                    >
-                      El apellido es obligatorio
+            <form #changeStudentInfoForm="ngForm" (ngSubmit)="changeStudentInfo(changeStudentInfoForm)">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group label-floating">
+                                <label for="newNameStudentField" class="control-label">Nombre</label>
+                                <input required ngModel name="newNameStudentField" #newNameStudentField="ngModel" class="form-control" placeholder="" type="text" [(ngModel)]="newName" />
+                                <div class="alert alert-danger" *ngIf="newNameStudentField.touched && !newNameStudentField.valid">
+                                    El nombre es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group label-floating">
+                                <label for="newLastNameStudentField" class="control-label">Apellido</label>
+                                <input required ngModel name="newLastNameStudentField" #newLastNameStudentField="ngModel" class="form-control" placeholder="" type="text" [(ngModel)]="newLastName" />
+                                <div class="alert alert-danger" *ngIf="newLastNameStudentField.touched && !newLastNameStudentField.valid">
+                                    El apellido es obligatorio
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="form-group label-floating">
-                    <label for="newCareerStudentField" class="control-label">Carrera</label>
-                    <input
-                      required
-                      ngModel
-                      name="newCareerStudentField"
-                      #newCareerStudentField="ngModel"
-                      class="form-control"
-                      placeholder=""
-                      type="text"
-                      [(ngModel)]="newCareer"
-                    />
-                    <div
-                      class="alert alert-danger"
-                      *ngIf="newCareerStudentField.touched && !newCareerStudentField.valid"
-                    >
-                      La carrera es obligatorio
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group label-floating">
+                                <label for="newCareerStudentField" class="control-label">Carrera</label>
+                                <input required ngModel name="newCareerStudentField" #newCareerStudentField="ngModel" class="form-control" placeholder="" type="text" [(ngModel)]="newCareer" />
+                                <div class="alert alert-danger" *ngIf="newCareerStudentField.touched && !newCareerStudentField.valid">
+                                    La carrera es obligatorio
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <div class="form-group label-floating">
-                      <label for="newPhoneNumberStudentField" class="control-label">Telefono</label>
-                      <input
-                        required
-                        ngModel
-                        name="newPhoneNumberStudentField"
-                        #newPhoneNumberStudentField="ngModel"
-                        class="form-control"
-                        placeholder=""
-                        type="number"
-                        [(ngModel)]="newPhoneNumber"
-                      />
-                      <div
-                        class="alert alert-danger"
-                        *ngIf="newPhoneNumberStudentField.touched && !newPhoneNumberStudentField.valid"
-                      >
-                        Ingrese un telefono valido
-                      </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group label-floating">
-                      <label for="newGpaStudentField" class="control-label">P.A.P.A</label>
-                      <input
-                        required
-                        ngModel
-                        name="newGpaStudentField"
-                        #newGpaStudentField="ngModel"
-                        class="form-control"
-                        placeholder=""
-                        type="number"
-                        step="0.1"
-                        [(ngModel)]="newGpa"
-                        min="0"
-                        max="5"
-                      />
-                      <div
-                          class="alert alert-danger"
-                          *ngIf="(!newGpaStudentField.valid) || (newGpa < 0 || newGpa > 5)"
-                        >
-                          El P.A.P.A debe estar entre 0-5
-                      </div>
-                  </div>
-                </div>
-              </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group label-floating">
+                                <label for="newPhoneNumberStudentField" class="control-label">Telefono</label>
+                                <input required ngModel name="newPhoneNumberStudentField" #newPhoneNumberStudentField="ngModel" class="form-control" placeholder="" type="number" [(ngModel)]="newPhoneNumber" />
+                                <div class="alert alert-danger" *ngIf="newPhoneNumberStudentField.touched && !newPhoneNumberStudentField.valid">
+                                    Ingrese un telefono valido
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group label-floating">
+                                <label for="newGpaStudentField" class="control-label">P.A.P.A</label>
+                                <input required ngModel name="newGpaStudentField" #newGpaStudentField="ngModel" class="form-control" placeholder="" type="number" step="0.1" [(ngModel)]="newGpa" min="0" max="5" />
+                                <div class="alert alert-danger" *ngIf="(!newGpaStudentField.valid) || (newGpa < 0 || newGpa > 5)">
+                                    El P.A.P.A debe estar entre 0-5
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-              <button class="btn modal-button btn-lg full-width" type="submit">
+                    <button class="btn modal-button btn-lg full-width" type="submit">
                 Guardar Cambios
               </button>
-            </div>
-          </form>
+                </div>
+            </form>
         </div>
 
         <ng-template #editTutorProfile>
-        <div class="modal-content" >
-          <div class="modal-header">
-            <h6 class="title">
-              Edita tu Perfil
-            </h6>
-            <div class="cancel-button " data-dismiss="modal">
-              <i class="fas fa-window-close"></i>
-            </div>
-          </div>
-          <form #changeTutorInfoForm="ngForm" (ngSubmit)="changeTutorInfo(changeTutorInfoForm)">
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-6">
-                  <div class="form-group label-floating">
-                    <label for="newNameField" class="control-label">Nombre</label>
-                    <input
-                      required
-                      ngModel
-                      name="newNameField"
-                      #newNameField="ngModel"
-                      class="form-control"
-                      placeholder=""
-                      type="text"
-                      [(ngModel)]="newName"
-                    />
-                    <div
-                      class="alert alert-danger"
-                      *ngIf="newNameField.touched && !newNameField.valid"
-                    >
-                      El nombre es obligatorio
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="title">
+                        Edita tu Perfil
+                    </h6>
+                    <div class="cancel-button " data-dismiss="modal">
+                        <i class="fas fa-window-close"></i>
                     </div>
-                  </div>
                 </div>
-                <div class="col-6">
-                  <div class="form-group label-floating">
-                    <label for="newLastNameField" class="control-label">Apellido</label>
-                    <input
-                      required
-                      ngModel
-                      name="newLastNameField"
-                      #newLastNameField="ngModel"
-                      class="form-control"
-                      placeholder=""
-                      type="text"
-                      [(ngModel)]="newLastName"
-                    />
-                    <div
-                      class="alert alert-danger"
-                      *ngIf="newLastNameField.touched && !newLastNameField.valid"
-                    >
-                      El apellido es obligatorio
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <div class="form-group label-floating">
-                    <label for="newPriceField" class="control-label"
-                      >Precio por tutoria (COP):</label>
-                      <input
-                      required
-                      ngModel
-                      name="newPriceField"
-                      #newPriceField="ngModel"
-                      class="form-control"
-                      placeholder=""
-                      type="number"
-                      step="0.1"
-                      [(ngModel)]="newPrice"
-                    />
-                    <div
-                      class="alert alert-danger"
-                      *ngIf="(newPriceField.touched && !newPriceField.valid) || newPrice < 0"
-                    >
-                      Ingrese un precio valido
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group label-floating">
-                    <label for="newCareerField" class="control-label">Carrera</label>
-                    <input
-                      required
-                      ngModel
-                      name="newCareerField"
-                      #newCareerField="ngModel"
-                      class="form-control"
-                      placeholder=""
-                      type="text"
-                      [(ngModel)]="newCareer"
-                    />
-                    <div
-                      class="alert alert-danger"
-                      *ngIf="newCareerField.touched && !newCareerField.valid"
-                    >
-                      La carrera es obligatorio
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <div class="form-group label-floating">
-                      <label for="newPhoneNumberField" class="control-label">Telefono</label>
-                      <input
-                        required
-                        ngModel
-                        name="newPhoneNumberField"
-                        #newPhoneNumberField="ngModel"
-                        class="form-control"
-                        placeholder=""
-                        type="number"
-                        [(ngModel)]="newPhoneNumber"
-                      />
-                      <div
-                        class="alert alert-danger"
-                        *ngIf="newPhoneNumberField.touched && !newPhoneNumberField.valid"
-                      >
-                        Ingrese un telefono valido
-                      </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group label-floating">
-                    <div class="form-group label-floating">
-                      <label for="newGpaField" class="control-label">P.A.P.A</label>
-                      <input
-                        required
-                        ngModel
-                        name="newGpaField"
-                        #newGpaField="ngModel"
-                        class="form-control"
-                        placeholder=""
-                        type="number"
-                        step="0.1"
-                        [(ngModel)]="newGpa"
-                        min="0"
-                        max="5"
-                      />
-                      <div
-                          class="alert alert-danger"
-                          *ngIf="(!newGpaField.valid) || (newGpa < 0 || newGpa > 5)"
-                        >
-                          El P.A.P.A debe estar entre 0-5
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              
-
-              <div class="form-group label-floating">
-                <label for="newDescriptionField" class="control-label">Descripcion</label>
-                <textarea
-                  required
-                  ngModel
-                  name="newDescriptionField"
-                  #newDescriptionField="ngModel"
-                  class="form-control"
-                  minlength="25"
-                  [(ngModel)]="newDescription"
-                > {{newDescription}} </textarea>
-                <div
-                  class="alert alert-danger"
-                  *ngIf="newDescriptionField.touched && !newDescriptionField.valid"
-                >
-                  Tu descripcion debe tener al menos 25 caracteres
-                </div>
-              </div>
+                <form #changeTutorInfoForm="ngForm" (ngSubmit)="changeTutorInfo(changeTutorInfoForm)">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group label-floating">
+                                    <label for="newNameField" class="control-label">Nombre</label>
+                                    <input required ngModel name="newNameField" #newNameField="ngModel" class="form-control" placeholder="" type="text" [(ngModel)]="newName" />
+                                    <div class="alert alert-danger" *ngIf="newNameField.touched && !newNameField.valid">
+                                        El nombre es obligatorio
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group label-floating">
+                                    <label for="newLastNameField" class="control-label">Apellido</label>
+                                    <input required ngModel name="newLastNameField" #newLastNameField="ngModel" class="form-control" placeholder="" type="text" [(ngModel)]="newLastName" />
+                                    <div class="alert alert-danger" *ngIf="newLastNameField.touched && !newLastNameField.valid">
+                                        El apellido es obligatorio
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group label-floating">
+                                    <label for="newPriceField" class="control-label">Precio por tutoria (COP):</label>
+                                    <input required ngModel name="newPriceField" #newPriceField="ngModel" class="form-control" placeholder="" type="number" step="0.1" [(ngModel)]="newPrice" />
+                                    <div class="alert alert-danger" *ngIf="(newPriceField.touched && !newPriceField.valid) || newPrice < 0">
+                                        Ingrese un precio valido
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group label-floating">
+                                    <label for="newCareerField" class="control-label">Carrera</label>
+                                    <input required ngModel name="newCareerField" #newCareerField="ngModel" class="form-control" placeholder="" type="text" [(ngModel)]="newCareer" />
+                                    <div class="alert alert-danger" *ngIf="newCareerField.touched && !newCareerField.valid">
+                                        La carrera es obligatorio
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group label-floating">
+                                    <label for="newPhoneNumberField" class="control-label">Telefono</label>
+                                    <input required ngModel name="newPhoneNumberField" #newPhoneNumberField="ngModel" class="form-control" placeholder="" type="number" [(ngModel)]="newPhoneNumber" />
+                                    <div class="alert alert-danger" *ngIf="newPhoneNumberField.touched && !newPhoneNumberField.valid">
+                                        Ingrese un telefono valido
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group label-floating">
+                                    <div class="form-group label-floating">
+                                        <label for="newGpaField" class="control-label">P.A.P.A</label>
+                                        <input required ngModel name="newGpaField" #newGpaField="ngModel" class="form-control" placeholder="" type="number" step="0.1" [(ngModel)]="newGpa" min="0" max="5" />
+                                        <div class="alert alert-danger" *ngIf="(!newGpaField.valid) || (newGpa < 0 || newGpa > 5)">
+                                            El P.A.P.A debe estar entre 0-5
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
-              <button class="btn modal-button btn-lg full-width" type="submit">
+
+                        <div class="form-group label-floating">
+                            <label for="newDescriptionField" class="control-label">Descripcion</label>
+                            <textarea required ngModel name="newDescriptionField" #newDescriptionField="ngModel" class="form-control" minlength="25" [(ngModel)]="newDescription"> {{newDescription}} </textarea>
+                            <div class="alert alert-danger" *ngIf="newDescriptionField.touched && !newDescriptionField.valid">
+                                Tu descripcion debe tener al menos 25 caracteres
+                            </div>
+                        </div>
+
+
+                        <button class="btn modal-button btn-lg full-width" type="submit">
                 Guardar Cambios
               </button>
+                    </div>
+                </form>
             </div>
-          </form>
-        </div>
-      </ng-template>
-      </div>
+        </ng-template>
     </div>
+</div>
 
-    <div
-      class="modal animated zoomIn faster"
-      id="create-friend-group-1"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="create-friend-group-1"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-dialog-centered window-popup create-event"
-        role="document"
-      >
+<div class="modal animated zoomIn faster" id="create-friend-group-1" tabindex="-1" role="dialog" aria-labelledby="create-friend-group-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
         <div class="modal-content ">
-          <div *ngIf="user.isTutor" class="modal-body ">
-            <div *ngIf="!fulltutor(); else noAvaliableSubjects">
-              <div class="cancel-button" data-dismiss="modal">
-                <i class="fas fa-window-close"></i>
-              </div>
-              <div class="modal-header justify-content-center">
-                <h6 class="title">
-                  Agregar materia de tutoria
-                </h6>
-              </div>
-              <form
-                class="example-form text-center "
-                (ngSubmit)="add_Subject()"
-              >
-                <mat-form-field
-                  class="full-width mb-5
-            example-full-width"
-                  style="border: 1px solid rgb(222, 226, 230);
+            <div *ngIf="user.isTutor" class="modal-body ">
+                <div *ngIf="!fulltutor(); else noAvaliableSubjects">
+                    <div class="cancel-button" data-dismiss="modal">
+                        <i class="fas fa-window-close"></i>
+                    </div>
+                    <div class="modal-header justify-content-center">
+                        <h6 class="title">
+                            Agregar materia de tutoria
+                        </h6>
+                    </div>
+                    <form class="example-form text-center " (ngSubmit)="add_Subject()">
+                        <mat-form-field class="full-width mb-5
+            example-full-width" style="border: 1px solid rgb(222, 226, 230);
       padding: 3px 25px 0;
-      border-radius: 6px;;"
-                >
-                  <label style="font: 14px; ">Busca tu Materia:</label>
-                  <input
-                    type="text"
-                    aria-label="Number"
-                    matInput
-                    [formControl]="myControl"
-                    [matAutocomplete]="auto"
-                  />
-                  <mat-autocomplete
-                    #auto="matAutocomplete"
-                    (optionSelected)="getData($event.option.value)"
-                  >
-                    <mat-option
-                      *ngFor="let option of filteredOptions | async"
-                      [value]="option"
-                    >
-                      {{ option }}
-                    </mat-option>
-                  </mat-autocomplete>
-                </mat-form-field>
-                <div class="button-form">
-                  <button
-                    class="btn btn-primary btn-md-2 mt-3 modal-button"
-                    type="submit"
-                  >
+      border-radius: 6px;;">
+                            <label style="font: 14px; ">Busca tu Materia:</label>
+                            <input type="text" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" />
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getData($event.option.value)">
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{ option }}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                        <div class="button-form">
+                            <button class="btn btn-primary btn-md-2 mt-3 modal-button" type="submit">
                     Añadir
                   </button>
+                        </div>
+                    </form>
                 </div>
-              </form>
-            </div>
-            <ng-template #noAvaliableSubjects>
-              <div class=" justify-content-center text-center">
-                <h6>
-                  Por el momento ya eres tutor de todas las materias que tenemos
-                  disponibles
-                </h6>
-                <button
-                  class="btn btn-primary btn-md-2 mt-3 modal-button"
-                  data-dismiss="modal"
-                >
+                <ng-template #noAvaliableSubjects>
+                    <div class=" justify-content-center text-center">
+                        <h6>
+                            Por el momento ya eres tutor de todas las materias que tenemos disponibles
+                        </h6>
+                        <button class="btn btn-primary btn-md-2 mt-3 modal-button" data-dismiss="modal">
                   Cerrar
                 </button>
-              </div>
-            </ng-template>
-          </div>
+                    </div>
+                </ng-template>
+            </div>
 
-          <div *ngIf="!user.isTutor" class="modal-body">
-            <h6 class="title">
-              Estas a punto de convertirte en tutor
-            </h6>
-            <label class="control-label"
-              >Escribe una breve descripcion de ti como tutor y elige la primera
+            <div *ngIf="!user.isTutor" class="modal-body">
+                <h6 class="title">
+                    Estas a punto de convertirte en tutor
+                </h6>
+                <label class="control-label">Escribe una breve descripcion de ti como tutor y elige la primera
               materia de la cual quieres ser tutor</label
             >
             <form
@@ -1198,83 +875,44 @@ aria-hidden="true"
                     border-radius: 6px;;"
                   >
                     <label style="font: 14px;">Busca tu Materia:</label>
-                    <input
-                      type="text"
-                      aria-label="Number"
-                      matInput
-                      [formControl]="myControl"
-                      [matAutocomplete]="auto"
-                    />
-                    <mat-autocomplete
-                      #auto="matAutocomplete"
-                      (optionSelected)="getData($event.option.value)"
-                    >
-                      <mat-option
-                        *ngFor="let option of filteredOptions | async"
-                        [value]="option"
-                      >
+                <input type="text" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" />
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getData($event.option.value)">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                         {{ option }}
-                      </mat-option>
-                    </mat-autocomplete>
-                  </mat-form-field>
-                  <button
-                    class="btn btn-lg btn-primary full-width modal-button"
-                    type="submit"
-                  >
+                    </mat-option>
+                </mat-autocomplete>
+                </mat-form-field>
+                <button class="btn btn-lg btn-primary full-width modal-button" type="submit">
                     Añadir
                   </button>
-                </div>
-              </div>
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
+        </form>
     </div>
+</div>
+</div>
+</div>
 
-    <div class="modal  animated zoomIn faster" id="edit-my-poll-popup">
-      <div
-        class="modal-dialog modal-dialog-centered window-popup contact-tutor"
-        role="document"
-      >
+<div class="modal  animated zoomIn faster" id="edit-my-poll-popup">
+    <div class="modal-dialog modal-dialog-centered window-popup contact-tutor" role="document">
         <div class="modal-content">
-          <div class="modal-body">
-            <div class="edit-my-poll-content">
-              <form
-                class="resume-form"
-                #contactForm="ngForm"
-                (ngSubmit)="sendMessage(contactForm)"
-              >
-                <div class="row">
-                  <div
-                    class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                  >
-                    <div class="cancel-button"
-                    id="CloseButton"
-                    data-dismiss="modal">
-                      <i class="fas fa-window-close"></i>
-                    </div>
-                    <h3>Envía un mensaje al tutor para contactarte !</h3>
-                    <p>
-                      Una vez envies el mensajes el tutor aparecerá disponible
-                      en tu chat para una mejor comunicación
-                    </p>
-                    <div class="form-group label-floating is-empty">
-                      <textarea
-                        class="form-control"
-                        placeholder="Tu mensaje"
-                        [(ngModel)]="contactMessage"
-                        name="contactMessage"
-                        
-                      ></textarea>
-                    </div>
-                    
-                    <button
-                      class="btn btn-primary btn-lg full-width modal-button"
-                       
-                      
-                      type="submit"
-                     
-                      >Enviar</button
+            <div class="modal-body">
+                <div class="edit-my-poll-content">
+                    <form class="resume-form" #contactForm="ngForm" (ngSubmit)="sendMessage(contactForm)">
+                        <div class="row">
+                            <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="cancel-button" id="CloseButton" data-dismiss="modal">
+                                    <i class="fas fa-window-close"></i>
+                                </div>
+                                <h3>Envía un mensaje al tutor para contactarte !</h3>
+                                <p>
+                                    Una vez envies el mensajes el tutor aparecerá disponible en tu chat para una mejor comunicación
+                                </p>
+                                <div class="form-group label-floating is-empty">
+                                    <textarea class="form-control" placeholder="Tu mensaje" [(ngModel)]="contactMessage" name="contactMessage"></textarea>
+                                </div>
+
+                                <button class="btn btn-primary btn-lg full-width modal-button" type="submit">Enviar</button
                     >
                   </div>
                 </div>
