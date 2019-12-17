@@ -138,7 +138,7 @@
                 </div>
               </div>
 
-              <div class="col col-12 col-xl-12 col-lg-12 col-md-6 col-sm-12">
+              <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <span
                   class="alert text-danger"
                   *ngIf="
@@ -147,7 +147,7 @@
                 >
                   El email no es válido
                 </span>
-                <div class="form-group label-floating input-group mb-3">
+                <div class="form-group label-floating input-group ">
                   <label for="email" class="control-label"
                     >Correo electrónico</label
                   >
@@ -168,36 +168,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                <span
-                  class="alert text-danger"
-                  *ngIf="
-                    signUpForm.submitted && signUpForm.controls['carrer'].errors
-                  "
-                >
-                  La carrera es requerida
-                </span>
-                <div class="form-group label-floating">
-                  <label for="carrer" class="control-label">Carrera</label>
-                  <input
-                    required
-                    ngModel
-                    name="carrer"
-                    #carrer="ngModel"
-                    class="form-control"
-                    placeholder=""
-                    type="text"
-                    id="carrer"
-                    [(ngModel)]="newStudent.career"
-                  />
-                  <div
-                    class="alert text-danger"
-                    *ngIf="carrer.touched && !carrer.valid"
-                  ></div>
-                </div>
-              </div>
-
-              <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+              <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <div *ngIf="signUpForm.controls['password']">
                   <div *ngIf="signUpForm.controls['password'].errors != null">
                     <span
@@ -241,6 +212,50 @@
                   />
                 </div>
               </div>
+              <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <span
+                  class="alert text-danger"
+                  *ngIf="
+                    signUpForm.submitted && signUpForm.controls['carrer'].errors
+                  "
+                >
+                  La carrera es requerida
+                </span>
+                <div class="form-group label-floating">
+   
+                  <mat-form-field
+                  class="form-control"
+                  style="height:  60px; padding: 0px;"
+                >
+                  <div ><label style="font: 14px; padding-left: 15px; color:#888da8">Carrera</label></div>
+                    <input
+                      type="text"
+                      aria-label="Number"
+                      matInput
+                      [formControl]="myControl"
+                      [matAutocomplete]="auto"
+                      style="margin-top: -42px; padding-left: 70px;"
+                    />
+                  <mat-autocomplete
+                    #auto="matAutocomplete"
+                    (optionSelected)="getData($event.option.value)"
+                  >
+                    <mat-option
+                      *ngFor="let option of filteredOptions | async"
+                      [value]="option"
+                    >
+                      {{ option }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                  <!-- <div
+                    class="alert text-danger"
+                    *ngIf="carrer.touched && !carrer.valid"
+                  ></div> -->
+                </div>
+              </div>
+
+            
 
               <div class="col col-12 col-xl-12 col-lg-12 col-md-6 col-sm-12">
                 <div
