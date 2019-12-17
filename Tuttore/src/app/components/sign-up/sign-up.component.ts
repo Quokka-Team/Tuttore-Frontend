@@ -3,8 +3,7 @@ import { StudentModel } from 'src/app/models/student.model';
 import { Router } from '@angular/router';
 import { TutorsService } from '../../services/tutors.service';
 import Swal from 'sweetalert2';
-import { NgForm } from '@angular/forms';
-import { GoogleService } from '../../services/google.service';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -17,13 +16,23 @@ export class SignUpComponent implements OnInit{
   newStudent: StudentModel;
   careers: any [];
   profileImage: File=null;
+  options;
+  courses = {};
+  subjectSearched;
+  filteredOptions: Observable<string[]>;
+  myControl = new FormControl();
+  
 
-  constructor( private tutorService:TutorsService, private route:Router, private googleService:GoogleService ) { 
+
+
+  constructor( private tutorService:TutorsService,
+
 
   }
 
   ngOnInit() {
     this.newStudent = new StudentModel();
+    this.getCareers();
   }
 
   onSubmit(f: NgForm) {
@@ -41,9 +50,10 @@ export class SignUpComponent implements OnInit{
       text: 'Procesando solicitud'
     })
     Swal.showLoading();
-
+    console.log(this.newStudent)
     this.tutorService.getVerificationCode(this.newStudent.email).subscribe(  res => {
 
+      console.log("code:",res['code']);
       Swal.fire({
         allowOutsideClick: false,
         type: 'info',
@@ -55,6 +65,7 @@ export class SignUpComponent implements OnInit{
       }).then((result) => {
         
         if (result.value) {
+            
             if(result.value == res['code']){
               Swal.fire({
                 allowOutsideClick: false,
@@ -79,7 +90,10 @@ export class SignUpComponent implements OnInit{
   
   getCareers(){
     this.tutorService.getAllCareers().subscribe( (careers:any[]) => {
+     
       this.careers = careers;
+      
+      this.initializeSubjectsData(careers);
     })
   }
 
@@ -95,5 +109,28 @@ export class SignUpComponent implements OnInit{
   onFileSelected(event){
     console.log(event);
     this.profileImage = <File> event.target.files[0];
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option =>
+      option.toLowerCase().includes(filterValue)
+    );
+  }
+
+  getData(value) {   
+    this.newStudent.career = value;
+  }
+
+  private initializeSubjectsData(data: any[]) {
+    for (let subject of data) {
+      this.courses[subject._id] = subject.name;
+    }
+    console.log(this.courses)
+    this.options = Object.values(this.courses);
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(""),
+      map(value => this._filter(value))
+    );
   }
 }
