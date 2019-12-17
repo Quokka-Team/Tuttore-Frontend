@@ -654,7 +654,7 @@ this.chatService
       }
     }
 
-    if(this.calendarEvents.length==0){
+    if(this.availableEvents.length==0){
       this.availableEvents.splice(0,this.availableEvents.length);
       document.getElementById("noAvailable-button").click();
     }else{
