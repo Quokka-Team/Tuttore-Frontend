@@ -16,7 +16,6 @@ import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-
 import { dateToLocalArray } from '@fullcalendar/core/datelib/marker';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { SessionModel } from '../../models/session.model';
@@ -28,11 +27,9 @@ import { SessionModel } from '../../models/session.model';
 })
 export class ProfileComponent implements OnInit {
 
-
   sessionId: string;
   userComment: string;
   userRate: number;
-
   user: any = {};
   newTutors: TutorModel[];
   subjects: any[] = [];
@@ -120,12 +117,9 @@ export class ProfileComponent implements OnInit {
     private zone: NgZone
   ) {
     this.getNewTutors();
-    this.isNewImageEmpty = true;
-    this.sessionId = "";
-  }
+
 
   ngOnInit() {
-    window.scrollTo(0, 0)
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
 
@@ -151,16 +145,7 @@ export class ProfileComponent implements OnInit {
       this.id="user";
       this.tutorsService.getUser().subscribe(
         (data: any) => {
-          this.tutorsService.getStudentSessions(data.id).subscribe((res: Array<SessionModel>)=>{
-            for(let i=0;i<res.length;i++){
-              if(res[i].status == "5" || res[i].status == "6"){
-                this.studentSessions = this.studentSessions.concat(res[i]);
-                this.tutorsService.getTutor(res[i].idTutor).subscribe( (tutor: any) => {
-                  if(!this.allTutorsIds.includes(res[i].idTutor)){
-                    this.allTutorsIds = this.allTutorsIds.concat(res[i].idTutor);
-                    this.allTutors = this.allTutors.concat(tutor.name + " " + tutor.lastName);
-                  }
-                },error=>{
+
                   console.log("Hubo un error", error);    
                 })
               }else if(res[i].status == "1"){
@@ -780,7 +765,6 @@ this.chatService
       console.log("Hubo un error", err);
     });
   }
-
 }
 
 
