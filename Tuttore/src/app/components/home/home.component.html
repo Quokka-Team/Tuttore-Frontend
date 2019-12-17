@@ -13,11 +13,11 @@
             </div>
         </div>
 
-        <div class="row     members-wrap">
+        <div class="row members-wrap">
             <div class="container-fluid">
                 <div data-interval="3000">
                     <div class="row w-100 mx-auto d-flex justify-content-center">
-                        <div *ngFor="let tutor of newTutors" class="col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+                        <div *ngFor="let tutor of newTutors" class="col col-xl-2 col-lg-2 col-md-3 col-sm-4 col-12">
                             <!-- Teammember Item  -->
                             <app-tutor-card-home [tutor]="tutor" [routerLink]="['/profile',tutor._id]"></app-tutor-card-home>
                             <!-- ... end Teammember Item  -->
