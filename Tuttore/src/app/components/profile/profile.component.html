@@ -862,31 +862,52 @@
 <div class="modal animated zoomIn faster" id="create-friend-group-1" tabindex="-1" role="dialog" aria-labelledby="create-friend-group-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered window-popup create-event" role="document">
         <div class="modal-content ">
-            <div *ngIf="user.isTutor" class="modal-body ">
-                <div *ngIf="!fulltutor(); else noAvaliableSubjects">
-                    <div class="cancel-button" data-dismiss="modal">
-                        <i class="fas fa-window-close"></i>
-                    </div>
-                    <div class="modal-header justify-content-center">
-                        <h6 class="title">
-                            Agregar materia de tutoria
-                        </h6>
-                    </div>
-                    <form class="example-form text-center " (ngSubmit)="add_Subject()">
-                        <mat-form-field class="full-width mb-5
-            example-full-width" style="border: 1px solid rgb(222, 226, 230);
-      padding: 3px 25px 0;
-      border-radius: 6px;;">
-                            <label style="font: 14px; ">Busca tu Materia:</label>
-                            <input type="text" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" />
-                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getData($event.option.value)">
-                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                    {{ option }}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
-                        <div class="button-form">
-                            <button class="btn btn-primary btn-md-2 mt-3 modal-button" type="submit">
+          <div *ngIf="user.isTutor" class="modal-body ">
+            <div *ngIf="!fulltutor(); else noAvaliableSubjects">
+              <div class="cancel-button" data-dismiss="modal">
+                <i class="fas fa-window-close"></i>
+              </div>
+              <div class="modal-header justify-content-center">
+                <h6 class="title">
+                  Agregar materia de tutoria
+                </h6>
+              </div>
+              <form
+                class="example-form text-center "
+                (ngSubmit)="add_Subject()"
+              >
+                <mat-form-field
+                  class=""
+                  style="height: 25px;;
+      padding: 0;
+      border-radius: 6px;;"
+                >
+                  <label style="font: 14px; ">Busca tu Materia:</label>
+                  <input
+                    type="text"
+                    aria-label="Number"
+                    matInput
+                    [formControl]="myControl"
+                    [matAutocomplete]="auto"
+                    style="height: 5px;"
+                  />
+                  <mat-autocomplete
+                    #auto="matAutocomplete"
+                    (optionSelected)="getData($event.option.value)"
+                  >
+                    <mat-option
+                      *ngFor="let option of filteredOptions | async"
+                      [value]="option"
+                    >
+                      {{ option }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <div class="button-form">
+                  <button
+                    class="btn btn-primary btn-md-2 mt-3 modal-button"
+                    type="submit"
+                  >
                     Añadir
                   </button>
                         </div>
