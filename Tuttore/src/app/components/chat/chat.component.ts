@@ -17,11 +17,8 @@ export class ChatComponent implements OnInit {
   user2Id: string;
   chats: any[] = [];
   myUser: string;
-  Activated :boolean =false;
 
-
-
- 
+  // user2Id: string = "456";
 
   constructor(
     public chatService: ChatService,
@@ -32,8 +29,6 @@ export class ChatComponent implements OnInit {
     if (this.message.length === 0) {
       return;
     }
-
-    
     this.chatService.addMessage(this.message)
     .then(() => this.message="")
      .catch(err => console.error("No se pudo enviar el mensaje", err));
@@ -45,7 +40,9 @@ export class ChatComponent implements OnInit {
     this.elemento = document.getElementById("app-mensajes");
     this.chatService.getChatList().subscribe(chats => {
 
-      this.chats = chats     
+      this.chats = chats
+      
+     
       
     });
 
@@ -54,7 +51,6 @@ export class ChatComponent implements OnInit {
       
       
       if (routeParams.username) {
-        this.Activated=true;
         this.chatService.getIdChat(this.user2Id).subscribe(idchat => {
          
           this.chatService  .loadMessages(this.user2Id, idchat)
@@ -74,9 +70,4 @@ export class ChatComponent implements OnInit {
       }
     });
   }
-  messagesActivated(){
-    // console.log(this.Activated);
-    return this.Activated
-  }
-
 }

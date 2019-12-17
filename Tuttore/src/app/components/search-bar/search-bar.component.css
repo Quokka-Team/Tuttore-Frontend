@@ -28,7 +28,7 @@
 
 .text {
     color: #fff;
-    padding: 0 10%;
+    padding: 0 15%;
 }
 
 .search {
@@ -55,21 +55,6 @@
     position: relative;
     top: -25px;
     font-size: 80px;
-}
-
-.search input:focus {
-    background: #fff;
-    border-color: #fff;
-}
-
-.search input:focus {
-    background: #fff;
-    border-color: #fff;
-}
-
-.verticalCenter {
-    /* vertical-align: middle; */
-    text-align: center;
 }
 
 @media (max-width: 600px) {
@@ -107,22 +92,23 @@
     }
 }
 
+.search input:focus {
+    background: #fff;
+    border-color: #fff;
+}
 
+.search input:focus {
+    background: #fff;
+    border-color: #fff;
+}
+
+.verticalCenter {
+    vertical-align: middle;
+    text-align: center;
+}
 
 @media (max-width: 600px) {
     .verticalCenter {
         top: 25%;
     }
-
-}
-@media (max-width: 375px) {
-    .paragraph {
-        display: none;
-    }
-
-    .text {
-        color: #fff;
-        padding: 0 5%;
-    }
-    
 }

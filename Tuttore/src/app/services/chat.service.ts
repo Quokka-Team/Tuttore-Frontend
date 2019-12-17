@@ -59,7 +59,6 @@ export class ChatService {
       message: text,
       date: new Date().getTime(),
     };
- 
     
      return this.afs.collection("chats").doc(this.idChat).collection("messages").add(message)
      .then(() => {
@@ -71,7 +70,7 @@ export class ChatService {
   }
 
    async createChat(user2id:string) {
-     let text ="...";
+     let text ="emptyMessage";
     let message: Message = {
       ownerId: localStorage.getItem('mail'),
       message: text,

@@ -10,7 +10,6 @@ export class HomePageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    window.scrollTo(0, 0)
   }
  
   public navigateToSection(section: string) {

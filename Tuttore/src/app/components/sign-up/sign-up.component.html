@@ -1,11 +1,9 @@
-
 <div class="row display-flex">
-
   <div
     class="col col-xl-8 col-lg-6 col-md-12 col-sm-12 col-12 image-register"
   ></div>
 
-
+<<<<<<< HEAD
     <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12" style="padding: 0">
         <!-- Login-Registration Form  -->
         <div class="registration-login-form" style="padding: 0; height: 100vh;">
@@ -20,37 +18,23 @@
                     <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)" novalidate class="content animated bounceInRight">
                         <div class="row">
                             <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-
+                                <span class="alert text-danger" *ngIf="
+=======
   <div
     class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12"
     style="padding: 0"
   >
     <!-- Login-Registration Form  -->
 
-    <div class="registration-login-form" >
-      <!-- Tab panes -->
-
-
     <div class="registration-login-form" style="padding: 0; height: 100vh;">
       <!-- Tab panes -->
-
+      <div class="tab-content">
         <div
           class="tab-pane active"
           id="home"
           role="tabpanel"
           data-mh="log-tab"
         >
-
-          <a class="logo d-flex justify-content-center">
-            <div class="img-wrap">
-              <img
-                class="tuttore-logo-footer"
-                src="assets/img/logo/LogoName.png"
-                alt="Tuttore"
-              />
-            </div>
-          </a>
-
         <a class="logo d-flex justify-content-center">
           <div class="img-wrap">
             <img
@@ -60,7 +44,6 @@
             />
           </div>
         </a>
-
           <form
             #signUpForm="ngForm"
             (ngSubmit)="onSubmit(signUpForm)"
@@ -72,6 +55,7 @@
                 <span
                   class="alert text-danger"
                   *ngIf="
+>>>>>>> master
                     signUpForm.submitted && signUpForm.controls['name'].errors
                   "
                   >El nombre es obligatorio</span
@@ -120,10 +104,7 @@
                 <span
                   class="alert text-danger"
                   *ngIf="
-                    (signUpForm.submitted &&
-                      signUpForm.controls['gpa'].errors) ||
-                    signUpForm.value.gpa < 0 ||
-                    signUpForm.value.gpa > 5
+                    (signUpForm.submitted && signUpForm.controls['gpa'].errors) || (signUpForm.value.gpa < 0 || signUpForm.value.gpa > 5) 
                   "
                   >El P.A.P.A debe estar entre 0-5</span
                 >
@@ -182,7 +163,7 @@
                 >
                   El email no es válido
                 </span>
-                <div class="form-group label-floating input-group ">
+                <div class="form-group label-floating input-group mb-3">
                   <label for="email" class="control-label"
                     >Correo electrónico</label
                   >
@@ -197,57 +178,10 @@
                     [(ngModel)]="newStudent.email"
                   />
                   <div class="input-group-append">
-                    <span class="input-group-text" id="email-company"
-                      >@unal.edu.co</span
-                    >
+                    <span class="input-group-text" id="email-company">@unal.edu.co</span>
                   </div>
                 </div>
-              </div>
-              <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                <div *ngIf="signUpForm.controls['password']">
-                  <div *ngIf="signUpForm.controls['password'].errors != null">
-                    <span
-                      class="alert text-danger"
-                      *ngIf="
-                        signUpForm.submitted &&
-                        signUpForm.controls['password'].errors.required
-                      "
-                    >
-                      La contraseña es requerida
-                    </span>
-                    <span
-                      class="alert text-danger"
-                      *ngIf="
-                        signUpForm.submitted &&
-                        signUpForm.controls['password'].errors.minlength
-                      "
-                    >
-                      La contraseña debe ser de
-                      {{
-                        signUpForm.controls["password"].errors.minlength
-                          .requiredLength
-                      }}
-                      caractéres o más
-                    </span>
-                  </div>
-                </div>
-                <div class="form-group label-floating">
-                  <label for="password" class="control-label">Contraseña</label>
-                  <input
-                    required
-                    minlength="6"
-                    ngModel
-                    name="password"
-                    #password="ngModel"
-                    class="form-control"
-                    placeholder=""
-                    type="password"
-                    id="password"
-                    [(ngModel)]="newStudent.password"
-                  />
-                </div>
-              </div>
-              <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
                 <span
                   class="alert text-danger"
                   *ngIf="
@@ -257,48 +191,12 @@
                   La carrera es requerida
                 </span>
                 <div class="form-group label-floating">
-
-   
-                  <mat-form-field
-                  class="form-control"
-                  style="height:  60px; padding: 0px;"
-                >
-                  <div ><label style="font: 14px; padding-left: 15px; color:#888da8">Carrera</label></div>
-                    <input
-                      type="text"
-                      aria-label="Number"
-                      matInput
-                      [formControl]="myControl"
-                      [matAutocomplete]="auto"
-                      style="margin-top: -42px; padding-left: 70px;"
-                    />
-                  <mat-autocomplete
-                    #auto="matAutocomplete"
-                    (optionSelected)="getData($event.option.value)"
-                  >
-                    <mat-option
-                      *ngFor="let option of filteredOptions | async"
-                      [value]="option"
-                    >
-                      {{ option }}
-                    </mat-option>
-                  </mat-autocomplete>
-                </mat-form-field>
-                  <!-- <div
-                    class="alert text-danger"
-                    *ngIf="carrer.touched && !carrer.valid"
-                  ></div> -->
-                </div>
-              </div>
-
-            
-
                   <label for="carrer" class="control-label">Carrera</label>
-
+<<<<<<< HEAD
                                     <input required ngModel name="carrer" #carrer="ngModel" class="form-control" placeholder="" type="text" id="carrer" [(ngModel)]="newStudent.career" />
                                     <div class="alert text-danger" *ngIf="carrer.touched && !carrer.valid"></div>
                                 </div>
-
+=======
                   <input
                     required
                     ngModel
@@ -315,7 +213,7 @@
                     *ngIf="carrer.touched && !carrer.valid"
                   ></div>
                 </div>
-
+>>>>>>> master
 
               <div *ngIf="signUpForm.controls['password']">
                   <div *ngIf="signUpForm.controls['password'].errors != null">
@@ -362,61 +260,27 @@
                   
                 </div>
 
+<<<<<<< HEAD
+                                <div class="row">
 
+                                    <span style="font-size: 17px; width: 25%; margin-top: auto; margin-bottom: auto; margin-left: 0px;">Foto de perfil</span>
 
-              <div class="col col-12 col-xl-12 col-lg-12 col-md-6 col-sm-12">
-                <div
-                class="form-group label-floating"
+                                    <div class="" style="padding-right: 0px;padding-left: 0px;width: 75%;">
+                                        <input id="file-upload" type="file" (change)="onFileSelected($event)" value="like" accept=".jpeg,.jpg,.png">
+                                    </div>
+                                </div>
 
-                >
-                <label for="text"
-                style="margin-bottom: 0px;;"
-                >Foto de perfil</label>
-                  <input
-                  style="text-align:center; border: none;padding: 5px 5px 7px 70px"
-                  placeholder="Foto de perfil"
-                    id="file-upload"
-                    type="file"
-                    (change)="onFileSelected($event)"
-                    value="like"
-                    accept=".jpeg,.jpg,.png"
-                  />
-                </div>
-              </div>
+                                <button class="btn btn-primary btn-lg full-width " style="background-color: #233D4D; border-color: #233D4D; margin-top: 20px;" type="submit">
+                  Completar Registro
+                </button>
+                            </div>
+                        </div>
+                    </form>
 
-              <button
-                class="btn btn-primary btn-lg full-width "
-                style="background-color: #233D4D; border-color: #233D4D; margin-top: 20px;"
-                type="submit"
-              >
-                Completar Registro
-              </button>
-            </div>
-          </form>
-
-          <div class="content animated bounceInRight pb-5">
-            <button
-              (click)="signIn()"
-              class="btn btn-lg btn-primary full-width"
-              style="background-color: #00BBF0;border-color: #00BBF0"
-            >
-              Iniciar con Google
-            </button>
-
-
-            <p class="pb-5">
-              ¿Ya tienes una cuenta?
-              <a [routerLink]="['/sign-in']">Inicia sesión ahora</a> y
-              ¡Encuentra tutores para las materias que necesites!
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ... end Login-Registration Form  -->
-  </div>
-</div>
+                    <div class="content animated bounceInRight" style="padding-right: 25px; padding-left: 25px;">
+                        <button (click)="signIn()" class="btn btn-lg btn-primary full-width" style="background-color: #00BBF0;border-color: #00BBF0">
+                        Iniciar con Google
+                        </button>
 
                         <p>
                             ¿Ya tienes una cuenta?
@@ -424,7 +288,7 @@
                         </p>
                     </div>
                 </div>
-
+=======
                 <button
                   class="btn btn-primary btn-lg full-width "
                   style="background-color: #233D4D; border-color: #233D4D"
@@ -438,12 +302,18 @@
                   encuentra tutores para las materias que necesites!
                 </p>
               </div>
-
+>>>>>>> master
             </div>
           </form>
         </div>
       </div>
     </div>
+<<<<<<< HEAD
+</div>
+
+=======
+
     <!-- ... end Login-Registration Form  -->
   </div>
 </div>
+>>>>>>> master
