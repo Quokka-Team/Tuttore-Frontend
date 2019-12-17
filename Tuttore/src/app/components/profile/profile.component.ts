@@ -99,7 +99,14 @@ export class ProfileComponent implements OnInit {
   posibleRequestEndString:string="null";
   requestedCourse;
   requestedSessions:Array<SessionModel>=[];
-
+  tutorSessions:Array<SessionModel>=[];
+  studentSessions:Array<SessionModel>=[];
+  allSessions:Array<SessionModel>=[];
+  allSubjects = [];
+  allTutors = []; 
+  allTutorsIds = [];
+  bookedSessions = [];
+  bookedStudentSessions = [];
 
   //Fin de solicitud y respuesta de solitudes
 
@@ -131,14 +138,50 @@ export class ProfileComponent implements OnInit {
     this.id = id;
     this.actualId = id;
     this.requestedSessions.splice(0,this.requestedSessions.length);
+    this.allTutors.splice(0,this.allTutors.length);
+    this.allTutorsIds.splice(0,this.allTutorsIds.length);
+    this.studentSessions.splice(0,this.studentSessions.length);
+    this.allSessions.splice(0,this.allSessions.length);
+    this.tutorSessions.splice(0,this.tutorSessions.length);
+    this.bookedSessions.splice(0,this.bookedSessions.length);
+    this.allSubjects.splice(0,this.allSubjects.length);
+    this.bookedStudentSessions.splice(0,this.bookedStudentSessions.length);
+
     if (id == "user") {
       this.id="user";
       this.tutorsService.getUser().subscribe(
         (data: any) => {
+          this.tutorsService.getStudentSessions(data.id).subscribe((res: Array<SessionModel>)=>{
+            for(let i=0;i<res.length;i++){
+              if(res[i].status == "5" || res[i].status == "6"){
+                this.studentSessions = this.studentSessions.concat(res[i]);
+                this.tutorsService.getTutor(res[i].idTutor).subscribe( (tutor: any) => {
+                  if(!this.allTutorsIds.includes(res[i].idTutor)){
+                    this.allTutorsIds = this.allTutorsIds.concat(res[i].idTutor);
+                    this.allTutors = this.allTutors.concat(tutor.name + " " + tutor.lastName);
+                  }
+                },error=>{
+                  console.log("Hubo un error", error);    
+                })
+              }else if(res[i].status == "1"){
+                this.bookedStudentSessions = this.bookedStudentSessions.concat(res[i]);
+                this.tutorsService.getTutor(res[i].idTutor).subscribe( (tutor: any) => {
+                  if(!this.allTutorsIds.includes(res[i].idTutor)){
+                    this.allTutorsIds = this.allTutorsIds.concat(res[i].idTutor);
+                    this.allTutors = this.allTutors.concat(tutor.name + " " + tutor.lastName);
+                  }
+                },error=>{
+                  console.log("Hubo un error", error);    
+                })
+              }
+              this.allSessions = this.allSessions.concat(res[i]);
+            }
+          }, err =>{
+            console.log("Hubo un error", err);
+          })
+
           if (data.isTutor) {
-
             // Si es tutor y entra a su perfil normal
-
             this.tutor=true;
             this.tutorsService.getTutor("this").subscribe((tutor: any) => {            
               this.user = tutor;
@@ -153,15 +196,20 @@ export class ProfileComponent implements OnInit {
               this.newName = this.user.name;
               this.newPhoneNumber = this.user.phoneNumber;
               this.user.id = tutor.idTutor;
+
               this.tutorsService.getTutorSessions(data.id).subscribe((res: Array<SessionModel>) =>{
                 if(res.length>0){
+                  console.log(res);
                   for(let i=0;i<res.length;i++){
                     if(res[i].status == "0"){
                       this.requestedSessions = this.requestedSessions.concat(res[i]);
+                    }else if(res[i].status == "5" || res[i].status == "6"){
+                      this.tutorSessions = this.tutorSessions.concat(res[i]);
+                    }else if(res[i].status == "1"){
+                      this.bookedSessions = this.bookedSessions.concat(res[i]);
                     }
+                    this.allSessions = this.allSessions.concat(res[i]);
                   }
-                }else{
-                  console.log("no");
                 }
               });
 
@@ -171,7 +219,6 @@ export class ProfileComponent implements OnInit {
                 for(let i=0;i<res.length;i++){
                     this.noFeedBackedSession.push(res[i]);
                 }
-                console.log(this.noFeedBackedSession.length);
               });
               this.tutorsService.getTutorComments(this.user.id).subscribe( (res: Array<any>) => {
                 for(let i=0;i<res.length;i++){
@@ -180,9 +227,7 @@ export class ProfileComponent implements OnInit {
               });
             });
           } else {
-
             // Si es usuario y entra a su perfil normal
-
             this.tutor=false;
             this.user.isTutor = false;
             this.user = data;
@@ -193,7 +238,6 @@ export class ProfileComponent implements OnInit {
             this.newLastName = this.user.lastName;
             this.newName = this.user.name;
             this.newPhoneNumber = this.user.phoneNumber;
-            
             
             this.tutorsService.getNoFeedBackSessionStudent(this.user.id).subscribe( (res: Array<any>) => {
               for(let i=0;i<res.length;i++){
@@ -220,9 +264,7 @@ export class ProfileComponent implements OnInit {
           if(data.id == this.id){
             this.id="user";
             if (data.isTutor) {
-
               // Cuando un tutor se da click a si mismo 
-
               this.tutorsService.getTutor("this").subscribe((tutor: any) => {            
                 this.user = tutor;
                 this.getSubjects();
@@ -236,15 +278,48 @@ export class ProfileComponent implements OnInit {
                 this.newName = this.user.name;
                 this.newPhoneNumber = this.user.phoneNumber;
                 this.user.id = tutor.idTutor;
+
+                this.tutorsService.getStudentSessions(data.id).subscribe((res: Array<SessionModel>)=>{
+                  for(let i=0;i<res.length;i++){
+                    if(res[i].status == "5" || res[i].status == "6"){
+                      this.studentSessions = this.studentSessions.concat(res[i]);
+                      this.tutorsService.getTutor(res[i].idTutor).subscribe( (tutor: any) => {
+                        if(!this.allTutorsIds.includes(res[i].idTutor)){
+                          this.allTutorsIds = this.allTutorsIds.concat(res[i].idTutor);
+                          this.allTutors = this.allTutors.concat(tutor.name + " " + tutor.lastName);
+                        }
+                      },error=>{
+                        console.log("Hubo un error", error);    
+                      })
+                    }else if(res[i].status == "1"){
+                      this.bookedStudentSessions = this.bookedStudentSessions.concat(res[i]);
+                      this.tutorsService.getTutor(res[i].idTutor).subscribe( (tutor: any) => {
+                        if(!this.allTutorsIds.includes(res[i].idTutor)){
+                          this.allTutorsIds = this.allTutorsIds.concat(res[i].idTutor);
+                          this.allTutors = this.allTutors.concat(tutor.name + " " + tutor.lastName);
+                        }
+                      },error=>{
+                        console.log("Hubo un error", error);    
+                      })
+                    }
+                    this.allSessions = this.allSessions.concat(res[i]);
+                  }
+                }, err =>{
+                  console.log("Hubo un error", err);
+                })
+
                 this.tutorsService.getTutorSessions(data.id).subscribe((res: Array<SessionModel>) =>{
                   if(res.length>0){
                     for(let i=0;i<res.length;i++){
                       if(res[i].status == "0"){
                         this.requestedSessions = this.requestedSessions.concat(res[i]);
+                      }else if(res[i].status == "5" || res[i].status == "6"){
+                        this.tutorSessions = this.tutorSessions.concat(res[i]);
+                      }else if(res[i].status == "1"){
+                        this.bookedSessions = this.bookedSessions.concat(res[i]);
                       }
+                      this.allSessions = this.allSessions.concat(res[i]);
                     }
-                  }else{
-                    console.log("no");
                   }
                 });
                 
@@ -265,7 +340,7 @@ export class ProfileComponent implements OnInit {
               });
             } else {
               
-              // Si no es tutor y se da click a si mismo (Imposiblle)
+              // Si no es tutor y se da click a si mismo (Imposible)
 
               this.user.isTutor = false;
               this.user = data;
@@ -344,13 +419,8 @@ export class ProfileComponent implements OnInit {
     for (let subject of data) {
       this.courses[subject._id] = subject.name;
     }
-    // console.log(this.courses);
-    // console.log(this.user.courses);
-    
-
 
     if(this.user.courses){
-      
       for (let course of this.user.courses) {
         if (course.idCourse in this.courses) {
           delete this.courses[course.idCourse];
@@ -370,6 +440,7 @@ export class ProfileComponent implements OnInit {
     this.subjectService.getAllSubjects().subscribe(
       (data: SubjectModel[]) => {
         this.initializeSubjectsData(data);
+        this.allSubjects = data;
       },
       e => {
         console.log(e.error.error.message);
@@ -621,18 +692,18 @@ this.chatService
   //------------------
 
   getSessionStartDate(id):string{
-    for(let i=0;i<this.requestedSessions.length;i++){
-      if(this.requestedSessions[i].id == id){
-        return this.requestedSessions[i].event.start.substring(0, 10) + " / " + (parseInt((this.requestedSessions[i].event.start.substring(11, 13)))-5).toString() + this.requestedSessions[i].event.start.substring(13, 16);
+    for(let i=0;i<this.allSessions.length;i++){
+      if(this.allSessions[i].id == id){
+        return this.allSessions[i].event.start.substring(0, 10) + " / " + (parseInt((this.allSessions[i].event.start.substring(11, 13)))-5).toString() + this.allSessions[i].event.start.substring(13, 16);
       }
     }
     return "hubo un error";
   }
 
   getSessionEndDate(id):string{
-    for(let i=0;i<this.requestedSessions.length;i++){
-      if(this.requestedSessions[i].id == id){
-        return (parseInt((this.requestedSessions[i].event.end.substring(11, 13)))-5).toString() + this.requestedSessions[i].event.end.substring(13, 16);
+    for(let i=0;i<this.allSessions.length;i++){
+      if(this.allSessions[i].id == id){
+        return (parseInt((this.allSessions[i].event.end.substring(11, 13)))-5).toString() + this.allSessions[i].event.end.substring(13, 16);
       }
     }
     return "hubo un error";
@@ -645,6 +716,24 @@ this.chatService
       }
     }
     return "hubo un error";
+  }
+
+  getStudentCourse(id):string{
+    for(let i=0;i<this.allSubjects.length;i++){
+      if(id == this.allSubjects[i]._id){
+        return this.allSubjects[i].name;
+      }
+    }
+    return "hubo un error";
+  }
+
+  getSessionTutor(id):string{
+    for(let i=0;i<this.allTutorsIds.length;i++){
+      if(id == this.allTutorsIds[i]){
+        return this.allTutors[i];
+      }
+    }
+    return "Hubo un error";
   }
 
   acceptSession(session){
