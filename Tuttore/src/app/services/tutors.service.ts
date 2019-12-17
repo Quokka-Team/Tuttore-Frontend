@@ -171,7 +171,6 @@ export class TutorsService {
    return this.http.post(`${this.url}addCourseTutor`, data,{headers})
   }
 
-
   isRegistered(email:string){
     return false;
   }
@@ -249,4 +248,124 @@ export class TutorsService {
     return this.http.post(`${this.url}deleteEventTutor`, data, {headers});
   }
 
+  updateStudent(idStudent: string, name: string, lastName: string, career: string, gpa: number, phoneNumber: string){
+    const headers = new HttpHeaders({
+    });
+    const data = {
+      idStudent: idStudent,
+      name: name,
+      lastName: lastName,
+      career: career,
+      gpa: gpa,
+      phoneNumber: phoneNumber,
+    }
+    return this.http.post(`${this.url}updateStudent`, data, {headers});
+  }
+
+  updateTutor(idTutor: string, name: string, lastName: string, career: string, gpa: number, phoneNumber: string, description: string, price: number){
+    const headers = new HttpHeaders({
+    });
+    const data = {
+      idTutor: idTutor,
+      name: name,
+      lastName: lastName,
+      career: career,
+      gpa: gpa,
+      phoneNumber: phoneNumber,
+      description: description,
+      price: price,
+    }
+    return this.http.post(`${this.url}updateTutor`, data, {headers});
+  }
+
+  changeProfileImage( id: string, email: string, profilePicture: File) {
+  
+    let formData = new FormData();
+    formData.append('id',id);
+    formData.append('email',email);
+    formData.append('profilePicture',profilePicture);
+
+    let params = new HttpParams();
+    
+    const options = {
+      params: params,
+      reportProgress: true,
+      observe:'events'
+    };
+
+    const req = new HttpRequest('POST', "https://tuttore.tk/updateProfilePicture", formData, options);
+    return this.http.request(req);
+  }
+
+
+
+  requestEvent(event){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    const data = {
+      idTutor: event.idTutor,
+      idStudent: event.idStudent,
+      idCourse: event.idCourse,
+      dateStart: event.dateStart,
+      dateEnd: event.dateEnd
+    }
+
+    return this.http.post(`${this.url}addRequest`, data, {headers});
+
+  }
+
+  getTutorSessions(id){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    return this.http.get(`${this.url}getSessionsTutor/${id}`,{headers});
+  }
+
+  getStudentSessions(id){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    return this.http.get(`${this.url}getSessionsStudent/${id}`,{headers});
+  }
+
+  acceptSession(id){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    return this.http.get(`${this.url}acceptRequest/${id}`);
+  }
+
+  
+  rejectSession(id){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    return this.http.get(`${this.url}rejectRequest/${id}`);
+  }
+
+  getTutorComments(idTutor){
+    return this.http.get(`${this.url}getCommentsTutor/${idTutor}`); 
+  }
+
+  getNoFeedBackSessionStudent(idStudent){
+    return this.http.get(`${this.url}getNofeedbackSessionsStudent/${idStudent}`); 
+  }
+
+  commentSession(idSession, studentComment, studentScore){
+    const headers = new HttpHeaders({
+    });
+    const data = {
+      idSession: idSession,
+      studentComment: studentComment,
+      studentScore: studentScore,
+    }
+    return this.http.post(`${this.url}commentSession`, data, {headers});
+  
+  }
 }
