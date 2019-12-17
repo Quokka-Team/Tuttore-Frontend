@@ -15,11 +15,9 @@
     background-size: auto 100%;
     /*adjust s value for speed*/
     animation: animatedBackground 150s linear infinite;
-  }
-  
+}
 
-
-  @keyframes animatedBackground {
+@keyframes animatedBackground {
     from {
         background-position: 0 0;
     }
@@ -36,7 +34,7 @@
     color: #082F47;
 }
 
-.star{
+.star {
     color: #FFDC20;
 }
 
@@ -70,16 +68,16 @@
     color: #fff;
 }
 
-.back{
- color: #38a9ff;
+.back {
+    color: #38a9ff;
 }
 
-
+.scroll::-webkit-scrollbar {
+    display: none;
+}
 
 @media (max-width: 600px) {
-    .hide{
+    .hide {
         display: none;
     }
-    
-
 }

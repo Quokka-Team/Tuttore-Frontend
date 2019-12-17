@@ -324,6 +324,14 @@ export class TutorsService {
     return this.http.get(`${this.url}getSessionsTutor/${id}`,{headers});
   }
 
+  getStudentSessions(id){
+    const headers = new HttpHeaders({
+      'authorization': `bearer ${this.readToken()}`
+    });
+
+    return this.http.get(`${this.url}getSessionsStudent/${id}`,{headers});
+  }
+
   acceptSession(id){
     const headers = new HttpHeaders({
       'authorization': `bearer ${this.readToken()}`
