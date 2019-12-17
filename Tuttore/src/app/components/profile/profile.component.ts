@@ -16,7 +16,6 @@ import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-
 import { dateToLocalArray } from '@fullcalendar/core/datelib/marker';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { SessionModel } from '../../models/session.model';
@@ -45,6 +44,7 @@ export class ProfileComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   subjectId;
   id: string;
+
   username: string;
   newProfileImage: File=null;
   isNewImageEmpty: boolean;
@@ -111,6 +111,7 @@ export class ProfileComponent implements OnInit {
   //Fin de solicitud y respuesta de solitudes
 
 
+  reloaded: boolean = true;
   constructor(
     private tutorsService: TutorsService,
     private subjectService: SubjectsService,
@@ -126,6 +127,11 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0)
+    this.reload();
+  }
+
+  ngOnInit() {
+    //this.loadScript('assets/js/libs/fullcalendar.js');
     this.activatedRoute.params.subscribe(routeParams => {
       const id = routeParams.id;
 
@@ -133,7 +139,16 @@ export class ProfileComponent implements OnInit {
     });
     document.getElementById("close").addEventListener("click", () => this.cancel());
   }
-  
+
+  reload(){
+    if(localStorage.getItem('reloaded')==='true'){
+    this.zone.runOutsideAngular(() => {
+      location.reload();
+    });
+    localStorage.setItem('reloaded','false');
+    }
+  }
+
   getUserInfo(id: string) {
     this.id = id;
     this.actualId = id;
@@ -148,7 +163,6 @@ export class ProfileComponent implements OnInit {
     this.bookedStudentSessions.splice(0,this.bookedStudentSessions.length);
 
     if (id == "user") {
-      this.id="user";
       this.tutorsService.getUser().subscribe(
         (data: any) => {
           this.tutorsService.getStudentSessions(data.id).subscribe((res: Array<SessionModel>)=>{
@@ -181,9 +195,9 @@ export class ProfileComponent implements OnInit {
           })
 
           if (data.isTutor) {
-            // Si es tutor y entra a su perfil normal
-            this.tutor=true;
-            this.tutorsService.getTutor("this").subscribe((tutor: any) => {            
+            this.tutorsService
+            .getTutor("this")
+            .subscribe((tutor: TutorModel) => {
               this.user = tutor;
               this.getSubjects();
               this.user.isTutor = true;
@@ -386,6 +400,10 @@ export class ProfileComponent implements OnInit {
       error => {
         console.log("hubo un error");
         console.log(error);
+    } else {
+      this.tutorsService.getTutor(id).subscribe((tutor: TutorModel) => {
+        this.user = tutor;
+        this.user.isTutor = true;
       });
     }
   }
@@ -421,10 +439,12 @@ export class ProfileComponent implements OnInit {
     }
 
     if(this.user.courses){
+      console.log(this.user.courses);
       for (let course of this.user.courses) {
         if (course.idCourse in this.courses) {
           delete this.courses[course.idCourse];
         }
+        console.log(Object.keys(this.courses).length);
       }
     }
 
@@ -467,8 +487,6 @@ export class ProfileComponent implements OnInit {
   fulltutor() {
     return Object.keys(this.courses).length == 0;
   }
-
-
   // @ViewChild("closeModal", { static: false }) private closeModal: ElementRef;
   public sendMessage() {
     // let message = form.form.value.contactMessage;
@@ -780,7 +798,6 @@ this.chatService
       console.log("Hubo un error", err);
     });
   }
-
 }
 
 

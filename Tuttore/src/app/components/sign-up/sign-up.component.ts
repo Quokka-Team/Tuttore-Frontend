@@ -3,12 +3,14 @@ import { StudentModel } from 'src/app/models/student.model';
 import { Router } from '@angular/router';
 import { TutorsService } from '../../services/tutors.service';
 import Swal from 'sweetalert2';
+
 import { NgForm, FormControl } from '@angular/forms';
 import { GoogleService } from '../../services/google.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 import { SubjectsService } from "src/app/services/subjects.service";
+
 
 @Component({
   selector: 'app-sign-up',
@@ -29,8 +31,11 @@ export class SignUpComponent implements OnInit{
   
 
 
+
   constructor( private tutorService:TutorsService,
     private subjectsService:SubjectsService, private route:Router, private googleService:GoogleService ) { 
+
+
 
   }
 
@@ -67,7 +72,6 @@ export class SignUpComponent implements OnInit{
           maxlength: '6'  
         }
       }).then((result) => {
-        
         if (result.value) {
             
             if(result.value == res['code']){
